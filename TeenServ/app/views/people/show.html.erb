@@ -1,6 +1,27 @@
-<html>
-This is my profile page <br>
+<h1> Welcome <%= @person.name %> </h1>
 
-Name: <%= @person.name %>
+<table>
+  <tr>
+    <th>Your address</th>
+  </tr>
+  <tr>
+    <td><%=@person.address_1%></td>
+  </tr>
+  <tr>
+    <td><%=@person.address_2%></td>
+  </tr>
+  <tr>
+    <td><%=@person.city%></td>
+  </tr>
+  <tr>
+    <td><%=@person.province%></td>
+  </tr>
+  <tr>
+    <td><%=@person.postal_code%></td>
+  </tr>
+  <tr>
+    <td><%=@person.country%></td>
+  </tr>
+</table>
 
-</html>
+
