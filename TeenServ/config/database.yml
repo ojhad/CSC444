@@ -5,6 +5,7 @@ default: &default
   database: teenserv
   username: postgres
   password: postgres
+  host: localhost
   # timeout: 5000
 
 development:
