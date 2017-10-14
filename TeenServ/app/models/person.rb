@@ -1,6 +1,7 @@
 class Person < ApplicationRecord
   has_many :reviews
   belongs_to :user
+
 end
 
 # == Schema Information
