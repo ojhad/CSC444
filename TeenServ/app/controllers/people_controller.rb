@@ -10,6 +10,8 @@ class PeopleController < ApplicationController
 
   def create
     @person = Person.new(person_params)
+    @person.user_id = current_user.id
+    @person.email = current_user.email
     @person.save
     redirect_to @person
   end
