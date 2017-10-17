@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   # Add a root at some point once we have one
   root 'home#index'
 
-  resources :people do
+  resources :users do
     resources :reviews
   end
 end

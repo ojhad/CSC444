@@ -10,39 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171014024918) do
+ActiveRecord::Schema.define(version: 20171016035303) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "people", force: :cascade do |t|
-    t.string "email"
-    t.string "address_1"
-    t.string "address_2"
-    t.string "city"
-    t.string "province"
-    t.string "postal_code"
-    t.string "country"
-    t.text "home_number"
-    t.text "mobile_number"
-    t.integer "age"
-    t.string "profile_pic"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.bigint "user_id"
-    t.string "first_name"
-    t.string "last_name"
-    t.integer "group"
-    t.index ["user_id"], name: "index_people_on_user_id"
-  end
 
   create_table "reviews", force: :cascade do |t|
     t.integer "rating"
     t.text "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "person_id"
-    t.index ["person_id"], name: "index_reviews_on_person_id"
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -58,10 +37,21 @@ ActiveRecord::Schema.define(version: 20171014024918) do
     t.inet "last_sign_in_ip"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "name"
+    t.string "address_1"
+    t.string "address_2"
+    t.string "city"
+    t.string "province"
+    t.string "postal_code"
+    t.string "country"
+    t.integer "home_number"
+    t.integer "mobile_number"
+    t.integer "age"
+    t.string "profile_pic"
+    t.string "type"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "people", "users"
-  add_foreign_key "reviews", "people"
+  add_foreign_key "reviews", "users"
 end

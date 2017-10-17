@@ -1,12 +1,8 @@
 <html>
-<%= form_with scope: :person, url: people_path, local: true do |f| %>
+<%= form_for(@user, url: edit_user_path(@user.id), method: :get) do |f| %>
 <p>
   First Name:<br>
-  <%= f.text_field :first_name %>
-</p>
-<p>
-  Last Name:<br>
-  <%= f.text_field :last_name %>
+  <%= f.text_field :name %>
 </p>
 <p>
   Address line 1:<br>
@@ -47,10 +43,6 @@
 <p>
   Profile Picture:<br>
   <%= f.text_field :profile_pic %>
-</p>
-<p>
-  Group:<br>
-  <%= f.number_field :group %>
 </p>
 <%= f.submit %>
 <% end %>

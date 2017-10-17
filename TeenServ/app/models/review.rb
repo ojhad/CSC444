@@ -1,5 +1,5 @@
 class Review < ApplicationRecord
-  belongs_to :person
+  belongs_to :user
 end
 
 # == Schema Information
@@ -11,5 +11,5 @@ end
 #  body       :text
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  person_id  :integer
+#  user_id  :integer
 #

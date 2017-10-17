@@ -3,7 +3,6 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-  has_one :person, :class_name => 'Person', :foreign_key => 'person_id'
 end
 
 # == Schema Information
@@ -23,5 +22,16 @@ end
 #  last_sign_in_ip        :inet
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
-#
+#  name          		  :string
+#  address_1     		  :string
+#  address_2     		  :string
+#  city          		  :string
+#  province      		  :string
+#  postal_code   	      :string
+#  country       		  :string
+#  home_number   		  :integer
+#  mobile_number 		  :integer
+#  age           		  :integer
+#  profile_pic   		  :string
+#  type          		  :string
 
