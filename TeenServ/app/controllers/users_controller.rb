@@ -12,7 +12,7 @@ class UsersController < ApplicationController
 	def edit
 		@user = User.find(params[:id])
 		@user.update_attributes(user_params)
-	redirect_to @user
+		redirect_to @user
 	end
 
 	private

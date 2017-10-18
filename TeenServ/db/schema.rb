@@ -24,6 +24,16 @@ ActiveRecord::Schema.define(version: 20171016035303) do
     t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
+  create_table "services", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "service_title"
+    t.float "charge_per_hour"
+    t.integer "user_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_services_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -54,4 +64,5 @@ ActiveRecord::Schema.define(version: 20171016035303) do
   end
 
   add_foreign_key "reviews", "users"
+  add_foreign_key "services", "users"
 end
