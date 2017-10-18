@@ -1,9 +1,16 @@
 <h1>Add service</h1>
 
 <%= form_for :service, :url => user_services_path(@user.id) do |f| %>
-
+    <% if @service.errors.any? %>
+        <h2>Errors:</h2>
+        <ul>
+          <% @service.errors.full_messages.each do |message| %>
+            <li><%=message %></li>
+          <% end %>
+        </ul>
+    <% end %>
 	<%= f.hidden_field :user_id , :value=>@user.id %>
-	<div>
+   	<div>
     	<%= f.label :service_title, "Title"%>
     	<%= f.select :service_title, Service::SERVICE_TYPES, {}, :id => "main_category_id"%>
     </div>
@@ -21,22 +28,23 @@
 <% end %>
 
 <script type="text/javascript">
-	let main_category_selection = document.getElementById("main_category_id")
-	let other_category_selection = document.getElementById("other_category_id")
-	let submit = document.getElementById("submit_id")
+	var main_category_selection = document.getElementById("main_category_id")
+	var other_category_selection = document.getElementById("other_category_id")
+	var submit = document.getElementById("submit_id")
 
 	main_category_selection.onchange = () => {
-		let selectedOption = main_category_selection.options[main_category_selection.selectedIndex].text
+		var selectedOption = main_category_selection.options[main_category_selection.selectedIndex].text
 
-		let hiddenTaskField = document.getElementById("other-task-id");
+		var hiddenTaskField = document.getElementById("other-task-id");
 		hiddenTaskField.style.display = (selectedOption == "Other") ? "block" : "none";
    	}
 
-   	submit.onclick = () => {		
-		let selectedOption = main_category_selection.options[main_category_selection.selectedIndex].text
+   	submit.onclick = () =>
+  {
+      var selectedOption = main_category_selection.options[main_category_selection.selectedIndex].text
 
-		if (selectedOption == "Other") { 
-			main_category_selection.options[main_category_selection.selectedIndex].value = other_category_selection.value;	
-		}
-   	}
+      if (selectedOption == "Other") {
+          main_category_selection.options[main_category_selection.selectedIndex].value = other_category_selection.value;
+      }
+  }
 </script>
