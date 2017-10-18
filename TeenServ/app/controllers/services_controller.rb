@@ -11,7 +11,7 @@ class ServicesController < ApplicationController
 		if @service.save
 			redirect_to(user_path(@user.id))
 		else
-			redirect_to(new_user_service_path(@user.id))
+			render :new #(new_user_service_path(@user.id))
 		end
 	end
 
