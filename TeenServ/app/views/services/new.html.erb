@@ -2,12 +2,9 @@
 
 <%= form_for :service, :url => user_services_path(@user.id) do |f| %>
     <% if @service.errors.any? %>
-        <h2>Errors:</h2>
-        <ul>
           <% @service.errors.full_messages.each do |message| %>
-            <li><%=message %></li>
+            <div class = "alert alert-danger"><%=message %></div>
           <% end %>
-        </ul>
     <% end %>
 	<%= f.hidden_field :user_id , :value=>@user.id %>
    	<div>

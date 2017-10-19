@@ -26,8 +26,8 @@
 
 <h2>Your Services:</h2>
 <% @user.services.each do |service| %>
-    <h3>Service: <%= service.service_title %></h3>
-    <h3>Charge: $<%= service.charge_per_hour %></h3>
+    <h4>Service: <%= service.service_title %></h4>
+    <h4>Charge: $<%= service.charge_per_hour %> per hour</h4>
     <%= link_to "Edit/Delete Service", user_services_path(@user.id), :class => 'btn btn-default' %>
 <% end %>
 
