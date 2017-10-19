@@ -5,7 +5,6 @@ class ServicesController < ApplicationController
 	def new
 		 @service = Service.new({:user_id => @user.id})
 	end
-
 	def create
 		@service = Service.new(service_params)
 		if @service.save
