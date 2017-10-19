@@ -39,6 +39,8 @@ gem 'jbuilder', '~> 2.5'
 ##################################################
 gem 'coffee-script-source', '1.8.0'
 gem 'devise', '~> 4.2'
+gem 'jquery-ui-rails'
+gem 'jt-rails-address', '~> 1.0'
 #Needed for Windows 10 machines
 gem 'bcrypt', platforms: :ruby
 
