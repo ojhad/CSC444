@@ -1,5 +1,14 @@
 <html>
-<%= form_for(@user, url: edit_user_path(@user.id), method: :get) do |f| %>
+
+<h1>Please provide the following information to better serve you</h1>
+
+<form>
+  <label> I am signing up as ...</label>
+  <input type="radio" class="GroupSelector" name="group" value="teen"> Teenager
+  <input type="radio" class="GroupSelector" name="group" value="client"> Client
+</form>
+
+<%= form_for(@user, url: edit_user_path(@user.id), method: :get)  do |f| %>
 <p>
   First Name:<br>
   <%= f.text_field :name %>
@@ -36,14 +45,35 @@
   Mobile Number:<br>
   <%= f.text_field :mobile_number %>
 </p>
-<p>
+<p id="age" hidden="true">
   Age:<br>
   <%= f.text_field :age %>
 </p>
-<p>
+<p id="profile_pic" hidden="true">
   Profile Picture:<br>
   <%= f.text_field :profile_pic %>
 </p>
+<%= f.hidden_field :group %>
 <%= f.submit %>
 <% end %>
+
 </html>
+
+<script type="text/javascript">
+
+    $(".GroupSelector").change(function(){
+        switch($(this).val()) {
+            case 'teen' :
+                $('#age').show()
+                $('#profile_pic').show()
+                $('#user_group').val(0)
+                break;
+            case 'client' :
+                $('#age').hide()
+                $('#profile_pic').hide()
+                $('#age').val(null)
+                $('#user_group').val(1)
+                break;
+        }
+    })
+</script>
