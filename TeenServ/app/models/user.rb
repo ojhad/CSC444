@@ -24,16 +24,17 @@ end
 #  last_sign_in_ip        :inet
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
-#  name          		  :string
-#  address_1     		  :string
-#  address_2     		  :string
-#  city          		  :string
-#  province      		  :string
-#  postal_code   	      :string
-#  country       		  :string
-#  home_number   		  :integer
-#  mobile_number 		  :integer
-#  age           		  :integer
-#  profile_pic   		  :string
-#  type          		  :string
-
+#  address_1              :string
+#  address_2              :string
+#  city                   :string
+#  province               :string
+#  postal_code            :string
+#  country                :string
+#  home_number            :integer
+#  mobile_number          :integer
+#  age                    :integer
+#  profile_pic            :string
+#  group                  :integer
+#  first_name             :string
+#  last_name              :string
+#
