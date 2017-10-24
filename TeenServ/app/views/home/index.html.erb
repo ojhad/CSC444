@@ -4,5 +4,9 @@
 <div>
     <% if user_signed_in? %>
     	<%= link_to "View Profile", user_path(current_user)%> 
+    	<br>
+    	<%= link_to "Create New Job", new_user_job_path(current_user)%>
+    	<br> 
+    	<%= link_to "View Job Postings", user_jobs_path(current_user)%>
     <% end %>
 </div>
