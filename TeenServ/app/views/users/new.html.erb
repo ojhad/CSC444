@@ -10,8 +10,12 @@
 
 <%= form_for(@user, url: edit_user_path(@user.id), method: :get)  do |f| %>
 <p>
-  First Name:<br>
-  <%= f.text_field :name %>
+  First name:<br>
+  <%= f.text_field :first_name %>
+</p>
+<p>
+  Last name:<br>
+  <%= f.text_field :last_name %>
 </p>
 <p>
   Address line 1:<br>
