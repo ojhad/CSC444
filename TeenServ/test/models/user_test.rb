@@ -29,6 +29,11 @@
 #  first_name             :string
 #  last_name              :string
 #
+# Indexes
+#
+#  index_users_on_email                 (email) UNIQUE
+#  index_users_on_reset_password_token  (reset_password_token) UNIQUE
+#
 
 require 'test_helper'
 
