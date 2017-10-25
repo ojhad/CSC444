@@ -1,2 +1,9 @@
-<h1> LOOK AT ALL THESE JOBS!!!!! <h1>
-<p> no jobs available <p>
+<h1> LOOK AT ALL THESE JOBS!!!!! </h1>
+<% if @jobs.length == 0 %>
+	<p>No jobs available!</p>
+<% else %>
+	<% @jobs.each do |job| %>
+		<p><%= job.title %></p>
+		<p><%= job.hours %></p>
+	<% end %>
+<% end %>
