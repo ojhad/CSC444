@@ -9,7 +9,6 @@ Rails.application.routes.draw do
   resources :users do
     resources :reviews
   	resources :services
-  	resources :jobs
   end
 
   resources :jobs
