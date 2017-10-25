@@ -2,32 +2,40 @@
 #
 # Table name: users
 #
-#  id                     :integer          not null, primary key
-#  email                  :string           default(""), not null
-#  encrypted_password     :string           default(""), not null
-#  reset_password_token   :string
-#  reset_password_sent_at :datetime
-#  remember_created_at    :datetime
-#  sign_in_count          :integer          default(0), not null
-#  current_sign_in_at     :datetime
-#  last_sign_in_at        :datetime
-#  current_sign_in_ip     :inet
-#  last_sign_in_ip        :inet
-#  created_at             :datetime         not null
-#  updated_at             :datetime         not null
-#  address_1              :string
-#  address_2              :string
-#  city                   :string
-#  province               :string
-#  postal_code            :string
-#  country                :string
-#  home_number            :integer
-#  mobile_number          :integer
-#  age                    :integer
-#  profile_pic            :string
-#  group                  :integer
-#  first_name             :string
-#  last_name              :string
+#  id                           :integer          not null, primary key
+#  email                        :string           default(""), not null
+#  encrypted_password           :string           default(""), not null
+#  reset_password_token         :string
+#  reset_password_sent_at       :datetime
+#  remember_created_at          :datetime
+#  sign_in_count                :integer          default(0), not null
+#  current_sign_in_at           :datetime
+#  last_sign_in_at              :datetime
+#  current_sign_in_ip           :inet
+#  last_sign_in_ip              :inet
+#  created_at                   :datetime         not null
+#  updated_at                   :datetime         not null
+#  address_1                    :string
+#  address_2                    :string
+#  city                         :string
+#  province                     :string
+#  postal_code                  :string
+#  country                      :string
+#  home_number                  :integer
+#  mobile_number                :integer
+#  age                          :integer
+#  profile_pic                  :string
+#  image_file_name              :string
+#  image_content_type           :string
+#  image_file_size              :integer
+#  image_updated_at             :datetime
+#  profile_picture_file_name    :string
+#  profile_picture_content_type :string
+#  profile_picture_file_size    :integer
+#  profile_picture_updated_at   :datetime
+#  group                        :integer
+#  first_name                   :string
+#  last_name                    :string
 #
 # Indexes
 #

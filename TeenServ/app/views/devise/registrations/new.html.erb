@@ -1,10 +1,26 @@
 <h2>Sign up</h2>
 
+<form>
+  <label> I am signing up as ...</label>
+  <input type="radio" class="GroupSelector" name="group" value="teen"> Teenager
+  <input type="radio" class="GroupSelector" name="group" value="client"> Client
+</form>
+
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
 
   <div class="field">
-    <%= f.label :email %><br />
+    <%= f.label :first_name, 'First Name' %>
+    <%= f.text_field :first_name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :last_name, 'Last Name' %>
+    <%= f.text_field :last_name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :email %>
     <%= f.email_field :email, autofocus: true %>
   </div>
 
@@ -17,13 +33,84 @@
   </div>
 
   <div class="field">
-    <%= f.label :password_confirmation %><br />
+    <%= f.label :password_confirmation %>
     <%= f.password_field :password_confirmation, autocomplete: "off" %>
   </div>
+
+  <div class="field">
+    <%= f.label :address_1, 'Address line 1' %>
+    <%= f.text_field :address_1 %>
+  </div>
+
+  <div class="field">
+    <%= f.label :address_2, 'Address line 2' %>
+    <%= f.text_field :address_2 %>
+  </div>
+
+  <div class="field">
+    <%= f.label :city, 'City' %>
+    <%= f.text_field :city %>
+  </div>
+
+  <div class="field">
+    <%= f.label :province, 'Province' %>
+    <%= f.text_field :province %>
+  </div>
+
+  <div class="field">
+    <%= f.label :postal_code, 'Postal Code' %>
+    <%= f.text_field :postal_code %>
+  </div>
+
+  <div class="field">
+    <%= f.label :country, 'Country' %>
+    <%= f.text_field :country %>
+  </div>
+
+  <div class="field">
+    <%= f.label :home_number, 'Home Number' %>
+    <%= f.text_field :home_number %>
+  </div>
+
+  <div class="field">
+    <%= f.label :mobile_number, 'Mobile Number' %>
+    <%= f.text_field :mobile_number %>
+  </div>
+
+  <div class="field" hidden="true">
+    <%= f.label :age, 'Age' %>
+    <%= f.text_field :age %>
+  </div>
+
+  <div class="field" hidden="true">
+    <%= f.label :profile_pic, 'Profile Picture' %>
+    <%= f.text_field :profile_pic %>
+  </div>
+
+  <%= f.hidden_field :group %>
 
   <div class="actions">
     <%= f.submit "Sign up" %>
   </div>
 <% end %>
+
+<script type="text/javascript">
+
+    $(".GroupSelector").change(function(){
+        switch($(this).val()) {
+            case 'teen' :
+                $('#age').show()
+                $('#profile_pic').show()
+                $('#user_group').val(0)
+                break;
+            case 'client' :
+                $('#age').hide()
+                $('#profile_pic').hide()
+                $('#age').val(null)
+                $('#user_group').val(1)
+                break;
+        }
+    })
+</script>
 
 <%= render "devise/shared/links" %>

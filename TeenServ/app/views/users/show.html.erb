@@ -26,17 +26,20 @@
       </table>
 
       <h2>Your Services:</h2>
-      <% @user.services.each do |service| %>
-          <h4>Service: <%= service.service_title %></h4>
-          <h4>Charge: $<%= service.charge_per_hour %> per hour</h4>
-          <%= link_to "Edit/Delete Service", user_services_path(@user.id), :class => 'btn btn-default' %>
-      <% end %>
-
+      <% if @user.services.count != 0 %>
+        <% @user.services.each do |service| %>
+            <h4>Service: <%= service.service_title %></h4>
+            <h4>Charge: $<%= service.charge_per_hour %> per hour</h4>
+            <%= link_to "Edit/Delete Service", user_services_path(@user.id), :class => 'btn btn-default' %>
+        <% end %>
+      <%else%>
+        <h5>You currently do not have any services</h5>
+      <%end%>
       <div>
         <%= link_to "Add service", new_user_service_path(@user.id)%>
       </div>
+
     <%elsif @user.group==1%>
-        <br><br>
         <h3> Your client dashboard</h3>
         <hr>
         <h4> Add new service </h4>
@@ -44,6 +47,7 @@
         <br>
         <h4>Current services:</h4>
     <%end%>
+
 <%else%>
     <h1> Welcome to <%= @user.first_name%>'s profile</h1>
 <%end%>
