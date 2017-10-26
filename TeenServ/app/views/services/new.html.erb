@@ -1,12 +1,12 @@
 <h1>Add service</h1>
 
-<%= form_for :service, :url => user_services_path(@user.id) do |f| %>
+<%= form_for :service, :url => user_services_path(current_user.id) do |f| %>
     <% if @service.errors.any? %>
           <% @service.errors.full_messages.each do |message| %>
             <div class = "alert alert-danger"><%=message %></div>
           <% end %>
     <% end %>
-	<%= f.hidden_field :user_id , :value=>@user.id %>
+	<%= f.hidden_field :user_id , :value=>current_user.id %>
    	<div>
     	<%= f.label :service_title, "Title"%>
     	<%= f.select :service_title, Service::SERVICE_TYPES, {}, :id => "main_category_id"%>
