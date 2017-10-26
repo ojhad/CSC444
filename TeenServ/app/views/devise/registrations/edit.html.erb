@@ -1,10 +1,5 @@
 <h2>Edit <%= resource_name.to_s.humanize %></h2>
 
-<form>
-  <label> I am a</label>
-  <input type="radio" class="GroupSelector" name="group" value="teen"> Teenager
-  <input type="radio" class="GroupSelector" name="group" value="client"> Client
-</form>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= devise_error_messages! %>
@@ -63,7 +58,11 @@
 
   <div class="field">
     <%= f.label :province, 'Province' %>
-    <%= f.text_field :province %>
+    <!--<%= f.text_field :province %>-->
+    <%= f.select :province, [ ['Alberta','AB'],['British Columbia','BC'],['Manitoba','MB'],['New Brunswich','NB'],
+                              ['Newfoundland and Labrador','NL'],['Nova Scotia','NS'],['Ontario','ON'],['Prince Edward Island','PE'],
+                              ['Quebec','QC'],['Saskatchewan','SK'],['Northwest Territories','NT'],
+                              ['Nunavut','NU'],['Yukon','YT']], :prompt => 'Select One' %>
   </div>
 
   <div class="field">
@@ -86,12 +85,14 @@
     <%= f.text_field :mobile_number %>
   </div>
 
-  <div class="field" hidden="true">
-    <%= f.label :age, 'Age' %>
-    <%= f.text_field :age %>
-  </div>
+  <% if @user.group==0 %>
+    <div class="field">
+      <%= f.label :age, 'Age' %>
+      <%= f.text_field :age %>
+    </div>
+  <%end%>
 
-  <div class="field" hidden="true">
+  <div class="field">
     <%= f.label :profile_pic, 'Profile Picture' %>
     <%= f.text_field :profile_pic %>
   </div>
@@ -102,25 +103,6 @@
     <%= f.submit "Update" %>
   </div>
 <% end %>
-
-<script type="text/javascript">
-
-    $(".GroupSelector").change(function(){
-        switch($(this).val()) {
-            case 'teen' :
-                $('#age').show()
-                $('#profile_pic').show()
-                $('#user_group').val(0)
-                break;
-            case 'client' :
-                $('#age').hide()
-                $('#profile_pic').hide()
-                $('#age').val(null)
-                $('#user_group').val(1)
-                break;
-        }
-    })
-</script>
 
 <h3>Cancel my account</h3>
 

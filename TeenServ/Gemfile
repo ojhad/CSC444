@@ -33,8 +33,8 @@ gem 'jbuilder', '~> 2.5'
 gem 'annotate', require: false
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
-
 gem 'jquery-rails'
+gem 'font-awesome-rails'
 
 ##################################################
 # PROJECT SPECIFIC GEMS
