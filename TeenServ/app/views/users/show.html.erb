@@ -111,6 +111,19 @@
         </div>
         <div class="tab-pane fade in" id="reviewsTab">
           <h3>Reviews</h3>
+          <% if @user.reviews.count !=0 %>
+              <% @user.reviews.each do |review| %>
+                  <%= render(:partial => 'review', :locals=>{:review=> review}) %>
+                  <% if review.body.present? %>
+                      <h4>Reivew: <%= review.body %></h4>
+                  <% end %>
+              <% end %>
+          <%else %>
+              <h5> There are no reviews yet </h5>
+          <% end %>
+          <div>
+            <%= link_to "Add Review", new_user_review_path(@user.id)%>
+          </div>
         </div>
         <div class="tab-pane fade in" id="billingTab">
           <h3>Billing and Payment</h3>
