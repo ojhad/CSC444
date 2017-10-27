@@ -16,13 +16,13 @@
     <% if alert %>
       <p class="alert alert-danger"><%= alert %></p>
     <% end %>
-    
+
     <%= link_to "TeenServ", "/" %>
 
     <% if user_signed_in? %>
       <!-- <div class = "container"> -->
         <%= link_to "Logout", destroy_user_session_path, method: :delete %>
-        <%= link_to "View Profile", user_path(current_user)%> 
+        <%= link_to "View Profile", user_path(current_user)%>
         <%= link_to("Edit Profile", edit_user_registration_path) %>
         <%= link_to "Create New Job", new_service_path%>
         <%= link_to "View Job Postings", services_path%>
@@ -33,7 +33,7 @@
         <%= link_to "Sign In", new_user_session_path %>
       <!-- </div> -->
     <% end %>
-    
+
     <%= yield %>
   </body>
 </html>
