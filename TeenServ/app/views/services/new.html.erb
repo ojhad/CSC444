@@ -1,33 +1,53 @@
-<h1>Add service</h1>
+<h1>Create a Job Posting</h1>
 
 <%= form_for :service, :url => user_services_path(current_user.id) do |f| %>
-    <% if @service.errors.any? %>
-          <% @service.errors.full_messages.each do |message| %>
-            <div class = "alert alert-danger"><%=message %></div>
-          <% end %>
-    <% end %>
+  <% if @service.errors.any? %>
+        <% @service.errors.full_messages.each do |message| %>
+          <div class = "alert alert-danger"><%=message %></div>
+        <% end %>
+  <% end %>
 	<%= f.hidden_field :user_id , :value=>current_user.id %>
-   	<div>
-    	<%= f.label :service_title, "Title"%>
-    	<%= f.select :service_title, Service::SERVICE_TYPES, {}, :id => "main_category_id"%>
-    </div>
+ 	<div>
+  	<%= f.label :title, "Title"%>
+  	<%= f.select :title, Service::SERVICE_TYPES, {}, :id => "main_category_id"%>
+  </div>
 
-    <div id = "other-task-id" style = "display:none;">
-    	<input id = "other_category_id" type = "text" >
-    </div>
+  <div id = "other-task-id" style = "display:none;">
+  	<input id = "other_category_id" type = "text" >
+  </div>
 
-    <div>
-    	<%= f.label :charge_per_hour, "Charge per hour in dollars"%>
-    	<%= f.text_field :charge_per_hour %> 
-    </div>
+  <div>
+  	<%= f.label :charge_per_hour, "Charge per hour in dollars"%>
+  	<%= f.text_field :charge_per_hour %> 
+  </div>
 
-    <%= f.submit 'Add', :id => "submit_id", :value => nil %>
+  <input id = "freq_toggle" onclick="frequencyToggle()" type="checkbox"></input>
+
+  <div id = "freq_input" style = "display:none;" >
+    <%= f.label :frequency, "Frequency"%>
+    <%= f.text_field :frequency %> 
+  </div>
+
+  <div>
+  <%= f.submit 'Add', :id => "submit_id", :value => nil %>
+  </div>
 <% end %>
 
 <script type="text/javascript">
 	var main_category_selection = document.getElementById("main_category_id")
 	var other_category_selection = document.getElementById("other_category_id")
 	var submit = document.getElementById("submit_id")
+
+  /* LOGIC FOR FREQUENCY TOGGLE */
+  frequencyToggle = () => {
+    console.log("toggled frequency toggle");
+    var x = document.getElementById("freq_input");
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+    }
+  }
 
 	main_category_selection.onchange = () => {
 		var selectedOption = main_category_selection.options[main_category_selection.selectedIndex].text

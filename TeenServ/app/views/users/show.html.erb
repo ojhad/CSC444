@@ -86,7 +86,7 @@
                 <h4>Services listed</h4>
                 <% if @user.services.count != 0 %>
                     <% @user.services.each do |service| %>
-                        <p>Service: <%= service.service_title %></p>
+                        <p>Service: <%= service.title %></p>
                         <p>Charge: $<%= service.charge_per_hour %> per hour</p>
                         <%= link_to "Edit/Delete Service", user_services_path(@user.id), :class => 'btn btn-default' %>
                     <% end %>
@@ -112,17 +112,19 @@
         <div class="tab-pane fade in" id="reviewsTab">
           <h3>Reviews</h3>
           <% if @user.reviews.count !=0 %>
-              <% @user.reviews.each do |review| %>
-                  <%= render(:partial => 'review', :locals=>{:review=> review}) %>
-                  <% if review.body.present? %>
-                      <h4>Reivew: <%= review.body %></h4>
-                  <% end %>
-              <% end %>
+                <% @user.reviews.each do |review| %>
+                  <div class="review-block">
+                    <%= render(:partial => 'review', :locals => {:review => review}) %>
+                      <% if review.body.present? %>
+                          <h4>Reivew: <%= review.body %></h4>
+                      <% end %>
+                  </div>
+        <% end %>
           <%else %>
               <h5> There are no reviews yet </h5>
           <% end %>
           <div>
-            <%= link_to "Add Review", new_user_review_path(@user.id)%>
+            <%= link_to "Add Review", new_user_review_path(@user.id), :class => 'btn btn-default' %>
           </div>
         </div>
         <div class="tab-pane fade in" id="billingTab">
