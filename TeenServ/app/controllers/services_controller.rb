@@ -3,11 +3,15 @@ class ServicesController < ApplicationController
 	before_action :find_user
 
 	def new
-		puts "CREATING JOB FOR: #{current_user.email}"
-		@service = Service.new({:user_id => current_user.id})
+		puts "CREATING SERVICE FOR: #{current_user.email}"
+		@service = Service.new({:user_id => current_user.id, 
+								:status => Service::UNLISTED})
 	end
 	def edit
+		puts "CREATING SERVICE FOR: #{current_user.email}"
 		@service = Service.find(params[:id])
+		# When user is editing service, we want to remove it from public visibility
+		@service.update({:status => Service::UNLISTED});
 	end
 	def create
 		@service = Service.new(service_params)
@@ -20,7 +24,6 @@ class ServicesController < ApplicationController
 
 	def update
 		@service = Service.find(params[:id])
-
 		if(@service.update(service_params))
 			redirect_to (user_path(@user.id))
 		else
@@ -37,7 +40,7 @@ class ServicesController < ApplicationController
 	private 
 
 	def service_params
-   		params.require(:service).permit(:user_id,:title,:charge_per_hour,:user_type)
+   		params.require(:service).permit(:user_id,:title,:charge_per_hour,:user_type, :frequency).merge(status: Service::UNLISTED)
 	end
 
 	def find_user
@@ -49,5 +52,25 @@ class ServicesController < ApplicationController
 	def show
 
 	end
+
+	# Changes status of the service associated with the passed in 'serviceId'
+	# to LISTED. This makes it visible to other users.
+	def listService(serviceId)
+		@service = Service.find(serviceId)
+		@service.update({:status => Service::LISTED});
+	end
+
+	# Changes status of the service associated with the passed in 'serviceId'
+	# to UNLISTED. This makes it invisible to other users.
+	def unlistService(serviceId)
+		@service = Service.find(serviceId)
+		if(@service.status == Service::LISTED || @service.status == Service::ACCEPTED)
+			@service.update({:status => Service::UNLISTED});
+		else
+			#return an error because user cannot unlist completed services
+			return "ERROR! Cannot change status of COMPLETED services!"
+		end
+	end
+
 
 end

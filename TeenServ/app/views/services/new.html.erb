@@ -21,11 +21,14 @@
   	<%= f.text_field :charge_per_hour %> 
   </div>
 
-  <input id = "freq_toggle" onclick="frequencyToggle()" type="checkbox"></input>
-
-  <div id = "freq_input" style = "display:none;" >
-    <%= f.label :frequency, "Frequency"%>
-    <%= f.text_field :frequency %> 
+  <!-- Frequcy Toggle and Input Field-->
+  <div>
+  Reoccuring service?
+  <input id = "service_freq_toggle" onclick="frequencyToggle()" type="checkbox"/>
+  </div>
+  <div id = "service_freq_input_div" style = "display:none;" >
+    <%= f.label :frequency, "Reoccur every how many days?"%>
+    <%= f.number_field :frequency, :id => "service_freq_input_field",  :value => 0 %> 
   </div>
 
   <div>
@@ -37,16 +40,12 @@
 	var main_category_selection = document.getElementById("main_category_id")
 	var other_category_selection = document.getElementById("other_category_id")
 	var submit = document.getElementById("submit_id")
+  var frequencyInputDiv= document.getElementById("service_freq_input_div");
+  var frequencyInputField = document.getElementById("service_freq_input_field");
 
-  /* LOGIC FOR FREQUENCY TOGGLE */
+  /* Logic for frequency toggle */
   frequencyToggle = () => {
-    console.log("toggled frequency toggle");
-    var x = document.getElementById("freq_input");
-    if (x.style.display === "none") {
-        x.style.display = "block";
-    } else {
-        x.style.display = "none";
-    }
+    frequencyInputDiv.style.display = (frequencyInputDiv.style.display === "none") ? "block" : "none"
   }
 
 	main_category_selection.onchange = () => {
@@ -58,6 +57,11 @@
 
    	submit.onclick = () =>
   {
+    // If the frequency toggle is unselected, send back 0 as its value
+    if (frequencyInputDiv.style.display === "none") {
+      frequencyInputField.value = 0
+    }
+
       var selectedOption = main_category_selection.options[main_category_selection.selectedIndex].text
 
       if (selectedOption == "Other") {
