@@ -21,14 +21,16 @@
 #  province               :string
 #  postal_code            :string
 #  country                :string
-#  home_number            :integer
-#  mobile_number          :integer
+#  home_number            :string
+#  mobile_number          :string
 #  age                    :integer
 #  profile_pic            :string
 #  group                  :integer
 #  first_name             :string
 #  last_name              :string
 #  average_rating         :float
+#  latitude               :float
+#  longitude              :float
 #
 # Indexes
 #

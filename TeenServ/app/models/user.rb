@@ -6,6 +6,17 @@ class User < ApplicationRecord
 
   has_many :services, :dependent => :destroy
   has_many :reviews, :dependent => :destroy
+
+  def get_address
+    self.postal_code
+  end
+
+  #gets lat & long for user
+  geocoded_by :get_address
+
+  after_validation :geocode
+
+
 end
 
 # == Schema Information
@@ -31,14 +42,16 @@ end
 #  province               :string
 #  postal_code            :string
 #  country                :string
-#  home_number            :integer
-#  mobile_number          :integer
+#  home_number            :string
+#  mobile_number          :string
 #  age                    :integer
 #  profile_pic            :string
 #  group                  :integer
 #  first_name             :string
 #  last_name              :string
 #  average_rating         :float
+#  latitude               :float
+#  longitude              :float
 #
 # Indexes
 #

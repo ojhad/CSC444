@@ -35,6 +35,8 @@ gem 'annotate', require: false
 # gem 'capistrano-rails', group: :development
 gem 'jquery-rails'
 gem 'font-awesome-rails'
+gem 'geocoder'
+
 
 ##################################################
 # PROJECT SPECIFIC GEMS
