@@ -78,7 +78,10 @@
                 <%else%>
                     <h4><i class="fa fa-map-marker" aria-hidden="true"></i> Location </h4>
                     <p><%=@user.city.capitalize()%> <%=@user.province%> <%=@user.postal_code.upcase()%></p>
-                    <p><%=@user.country.capitalize()%></p>
+                    <p><%=@user.country.capitalize()%></p><br>
+                    <div style='width: 300px;'>
+                      <div id="map" style='width: 300px; height: 300px;'></div>
+                    </div>
                 <%end%>
               </div>
               <% if @user.id == @current_user.id %>
@@ -170,7 +173,6 @@
       </div>
     </div>
   </div>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDlB3uNOSSFol1SSMbgyLosxY0HwCc1WgY" async defer></script>
 <script>
     $(document).ready(function() {
         $(".btn-pref .btn").click(function () {
@@ -192,5 +194,20 @@
                     break;
             }
         });
+    });
+
+    handler = Gmaps.build('Google');
+    handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+        markers = handler.addMarkers([
+            {
+                "lat": <%= @user.latitude%>,
+                "lng": <%=@user.longitude%>,
+
+            }
+        ]);
+        handler.bounds.extendWith(markers);
+        handler.fitMapToBounds();
+        handler.getMap().setZoom(16);
+
     });
 </script>
