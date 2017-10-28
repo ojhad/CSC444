@@ -1,4 +1,3 @@
-<% if @user.id==@current_user.id%>
   <div class="container">
     <div class="card picBar">
       <div class="card-background">
@@ -26,11 +25,13 @@
           <div class="hidden-xs">Reviews</div>
         </button>
       </div>
+      <% if @user.id==@current_user.id%>
       <div class="btn-group" role="group">
         <button type="button" id="billing" class="btn btn-default" data-toggle="tab"><span class="fa fa-dollar" aria-hidden="true"></span>
           <div class="hidden-xs">Billing & Payments</div>
         </button>
       </div>
+      <%end%>
     </div>
 
     <div class="well">
@@ -38,42 +39,53 @@
         <div class="tab-pane fade in active" id="aboutTab">
           <div class="container">
             <div class="row">
+              <%if @user.id == @current_user.id%>
               <div class="col-md-4">
+              <%else%>
+              <div class="col-md-6">
+              <%end%>
+                <h4> <i class="fa fa-user" aria-hidden="true"></i> Account type</h4>
                 <% if @user.group==0 %>
-                    <h4> Account type</h4>
                     <p>Teenager</p>
                 <% elsif @user.group==1 %>
-                    <h4> Account type</h4>
                     <p>Client</p>
                 <%end%>
                 <br>
-                <h4> Email</h4>
-                <p><%=@user.email%></p>
+                <h4 style=""><i class="fa fa-address-book" aria-hidden="true"></i> Contact Information</h4>
+                <p><i class="fa fa-envelope" aria-hidden="true"></i> <%=@user.email%></p>
+                <p><i class="fa fa-phone" aria-hidden="true"></i> <%=@user.mobile_number%></p>
               </div>
               <div class="col-md-4">
-                <h4> Address </h4>
-                <table>
-                  <tr>
-                    <td><b><%=@user.first_name%> <%=@user.last_name%></b></td>
-                  </tr>
-                  <tr>
-                    <td><%=@user.address_1%></td>
-                  </tr>
-                  <tr>
-                    <td><%=@user.address_2%></td>
-                  </tr>
-                  <tr>
-                    <td><%=@user.city%> <%=@user.province%> <%=@user.postal_code%></td>
-                  </tr>
-                  <tr>
-                    <td><%=@user.country%></td>
-                  </tr>
-                </table>
-                <br>
+                <% if @user.id == @current_user.id %>
+                <h4><i class="fa fa-building-o" aria-hidden="true"></i> Address </h4>
+                  <table>
+                    <tr>
+                      <td><b><%=@user.first_name%> <%=@user.last_name%></b></td>
+                    </tr>
+                    <tr>
+                      <td><%=@user.address_1.capitalize()%></td>
+                    </tr>
+                    <tr>
+                      <td><%=@user.address_2.capitalize()%></td>
+                    </tr>
+                    <tr>
+                      <td><%=@user.city.capitalize()%> <%=@user.province%> <%=@user.postal_code.upcase()%></td>
+                    </tr>
+                    <tr>
+                      <td><%=@user.country.capitalize()%></td>
+                    </tr>
+                  </table>
+                <%else%>
+                    <h4><i class="fa fa-map-marker" aria-hidden="true"></i> Location </h4>
+                    <p><%=@user.city.capitalize()%> <%=@user.province%> <%=@user.postal_code.upcase()%></p>
+                    <p><%=@user.country.capitalize()%></p>
+                <%end%>
               </div>
-              <div class="col-md-4">
-                <%= link_to "Edit Profile", edit_user_registration_path , :class => 'btn btn-default' %>
-              </div>
+              <% if @user.id == @current_user.id %>
+                <div class="col-md-4">
+                  <%= link_to "Edit Profile", edit_user_registration_path , :class => 'btn btn-default' %>
+                </div>
+              <%end%>
             </div>
           <div class="row">
           </div>
@@ -83,29 +95,41 @@
           <div class="container">
             <div class="row">
               <div class="col-md-4">
-                <h4>Services listed</h4>
+                <h4><i class="fa fa-cogs" aria-hidden="true"></i> Services listed</h4>
                 <% if @user.services.count != 0 %>
                     <% @user.services.each do |service| %>
                         <p>Service: <%= service.title %></p>
                         <p>Charge: $<%= service.charge_per_hour %> per hour</p>
-                        <%= link_to "Edit/Delete Service", user_services_path(@user.id), :class => 'btn btn-default' %>
-                    <% end %>
+                        <% if @user.id == @current_user.id %>
+                          <%= link_to "Edit/Delete Service", user_services_path(@user.id), :class => 'btn btn-default' %>
+                        <% else %>
+                          <%= link_to "View Service", service_path(service.id), :class => 'btn btn-default' %>
+                        <% end %>
+                    <%end%>
                 <%else%>
-                    <h5>You currently do not have any services</h5>
+                    <% if @user.id==@current_user.id%>
+                      <h5>You currently do not have any services</h5>
+                    <%else%>
+                      <h5>No services listed by this user at the moment.</h5>
+                    <%end%>
                 <%end%>
               </div>
               <div class="col-md-4">
-                <h4>Services undergoing</h4>
-                <p> Name of Service</p>
-                <% if @user.group==1 %>
-                    <ul> Teen undergoing service</ul>
-                    <ul> Due date </ul>
+                <% if @user.id == @current_user.id %>
+                  <h4><i class="fa fa-cog fa-spin" aria-hidden="true"></i> Services undergoing</h4>
+                  <p> Name of Service</p>
+                  <% if @user.group==1 %>
+                      <ul> Teen undergoing service</ul>
+                      <ul> Due date </ul>
+                  <%end%>
                 <%end%>
               </div>
-              <div class="col-md-4">
-                <%= link_to "Add service", new_user_service_path(@user.id) , :class => 'btn btn-default' ,:style => 'margin-bottom:4px'%><br>
-                <%= link_to "Past services" ,'#', :class => 'btn btn-default'%>
-              </div>
+              <% if @user.id ==  @current_user.id%>
+                <div class="col-md-4">
+                  <%= link_to "Add service", new_user_service_path(@user.id) , :class => 'btn btn-default' ,:style => 'margin-bottom:4px'%><br>
+                  <%= link_to "Past services" ,'#', :class => 'btn btn-default'%>
+                </div>
+              <%end%>
             </div>
           </div>
         </div>
@@ -133,9 +157,6 @@
       </div>
     </div>
   </div>
-<%else%>
-    <p> This is not your profile! get out</p>
-<%end%>
 <script>
     $(document).ready(function() {
         $(".btn-pref .btn").click(function () {
