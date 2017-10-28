@@ -11,7 +11,7 @@
     <% end %>
     <%= f.hidden_field :user_id , :value=>@user.id %>
     <div>
-      <%= f.label :title, "Title"%>
+      <%= f.label :title, "Service"%>
       <%= f.select :title, Service::SERVICE_TYPES, {}, :id => "main_category_id"%>
     </div>
 
