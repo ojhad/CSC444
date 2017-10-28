@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171028173530) do
+ActiveRecord::Schema.define(version: 20171028200505) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -59,19 +59,14 @@ ActiveRecord::Schema.define(version: 20171028173530) do
     t.string "home_number"
     t.string "mobile_number"
     t.integer "age"
-    t.string "profile_pic"
-    t.string "image_file_name"
-    t.string "image_content_type"
-    t.integer "image_file_size"
-    t.datetime "image_updated_at"
-    t.string "profile_picture_file_name"
-    t.string "profile_picture_content_type"
-    t.integer "profile_picture_file_size"
-    t.datetime "profile_picture_updated_at"
     t.integer "group"
     t.string "first_name"
     t.string "last_name"
     t.float "average_rating"
+    t.string "profile_pic_file_name"
+    t.string "profile_pic_content_type"
+    t.integer "profile_pic_file_size"
+    t.datetime "profile_pic_updated_at"
     t.float "latitude"
     t.float "longitude"
     t.index ["email"], name: "index_users_on_email", unique: true
