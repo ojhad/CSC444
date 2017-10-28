@@ -23,6 +23,7 @@
         <!-- Menu Items -->
         <div class="collapse navbar-collapse">
 
+          <!-- Items to the right side of the navbar -->
           <ul class="nav navbar-nav navbar-right">
             <% if user_signed_in? %>
               <li class="dropdown">
@@ -56,5 +57,14 @@
 
     <%= yield %>
   </body>
+
+  <script>
+  //Show dropdown on hover and hide otherwise
+    $('ul.nav li.dropdown').hover(function() {
+      $('.dropdown-menu').show();
+    }, function() {
+      $('.dropdown-menu').hide();
+    });
+  </script>
 
 </html>
