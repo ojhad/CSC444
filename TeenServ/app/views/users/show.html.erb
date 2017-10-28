@@ -134,17 +134,27 @@
           </div>
         </div>
         <div class="tab-pane fade in" id="reviewsTab">
-          <h3>Reviews</h3>
-          <% if @user.reviews.count !=0 %>
-                <% @user.reviews.each do |review| %>
-                  <div class="review-block">
-                    <%= render(:partial => 'review', :locals => {:review => review}) %>
-                      <% if review.body.present? %>
-                          <h4>Reivew: <%= review.body %></h4>
-                      <% end %>
-                      <h4>Author: <%=review.author.try(:first_name) %></h4>
-                  </div>
-        <% end %>
+          <h3 class="average-review">Reviews</h3>
+          <div class="average-review">
+            <% if @user.average_rating.present? %>
+              <h4>Average Rating:</h4>
+              <%= render(:partial => 'review', :locals => {:rating => @user.average_rating}) %>
+            <% end %>
+          </div>
+          <% if @user.reviews.count != 0 %>
+            <% @user.reviews.each do |review| %>
+              <div class="review-block">
+                <%= render(:partial => 'review', :locals => {:rating => review.rating}) %>
+                  <% if review.body.present? %>
+                      <h4>Reivew: <%= review.body %></h4>
+                  <% end %>
+                <h4>Author:
+                  <%= link_to user_path(review.author_id) do %>
+                    <%=review.author.try(:first_name) %>
+                  <% end %>
+                </h4>
+              </div>
+            <% end %>
           <%else %>
               <h5> There are no reviews yet </h5>
           <% end %>

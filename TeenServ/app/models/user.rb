@@ -38,6 +38,7 @@ end
 #  group                  :integer
 #  first_name             :string
 #  last_name              :string
+#  average_rating         :float
 #
 # Indexes
 #
