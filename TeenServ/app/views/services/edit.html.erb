@@ -11,8 +11,8 @@
     <% end %>
     <%= f.hidden_field :user_id , :value=>@user.id %>
     <div>
-      <%= f.label :service_title, "Title"%>
-      <%= f.select :service_title, Service::SERVICE_TYPES, {}, :id => "main_category_id"%>
+      <%= f.label :title, "Title"%>
+      <%= f.select :title, Service::SERVICE_TYPES, {}, :id => "main_category_id"%>
     </div>
 
     <div id = "other-task-id" style = "display:none;">

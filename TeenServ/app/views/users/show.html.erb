@@ -101,8 +101,8 @@
                         <p>Service: <%= service.title %></p>
                         <p>Charge: $<%= service.charge_per_hour %> per hour</p>
                         <% if @user.id == @current_user.id %>
-                          <%= link_to "Edit/Delete Service", user_services_path(@user.id), :class => 'btn btn-default' %>
-                        <% else %>
+                            <%= link_to "Edit", edit_user_service_path(@user.id, service), :class => 'btn btn-default' %>
+                            <%= link_to "Delete",user_service_path(@user.id, service), method: :delete, data: {confirm: 'Are you sure?'}, :class => 'btn btn-danger' %>                        <% else %>
                           <%= link_to "View Service", service_path(service.id), :class => 'btn btn-default' %>
                         <% end %>
                     <%end%>
