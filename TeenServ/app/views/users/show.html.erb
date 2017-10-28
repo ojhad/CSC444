@@ -26,9 +26,13 @@
 
 <h2>Your Services:</h2>
 <% @user.services.each do |service| %>
-    <h3>Service: <%= service.service_title %></h3>
-    <h3>Charge: $<%= service.charge_per_hour %></h3>
+    <h4>Service: <%= service.service_title %></h4>
+    <h4>Charge: $<%= service.charge_per_hour %></h4>
     <%= link_to "Edit", edit_user_service_path(@user.id, service), :class => 'btn btn-default' %>
-    <%= link_to "Delete",user_service_path(@user.id), method: :delete, data: {confirm: 'Are you sure?'}, :class => 'btn btn-danger' %>
-
+    <%= link_to "Delete",user_service_path(@user.id, service), method: :delete, data: {confirm: 'Are you sure?'}, :class => 'btn btn-danger' %>
 <% end %>
+
+<div>
+  <%= link_to "Add service", new_user_service_path(@user.id)%>
+</div>
+

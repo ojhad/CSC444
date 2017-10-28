@@ -1,6 +1,6 @@
 <h1>Edit service</h1>
 
-<%= form_for :service, :url => user_services_path(@user.id, @user.services), method: :patch  do |f| %>
+<%= form_for :service, :url => user_service_path(@user.id, @service), method: :patch  do |f| %>
     <% if @service.errors.any? %>
         <h2>Errors:</h2>
         <ul>

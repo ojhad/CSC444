@@ -16,20 +16,21 @@ class ServicesController < ApplicationController
 			render :new #(new_user_service_path(@user.id))
 		end
 	end
+
 	def update
 		@service = Service.find(params[:id])
 
 		if(@service.update(service_params))
-			redirect_to user_path(@user.id)
+			redirect_to (user_path(@user.id))
 		else
 			render 'edit'
 		end
 	end
 
 	def destroy
-		@service = current_user.services.find(params[:id])
+		@service = Service.find(params[:id])
 		@service.destroy
-
+		redirect_to (user_path(@user.id))
 	end
 
 	private 
