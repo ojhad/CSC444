@@ -4,7 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :services
+  has_many :services, :dependent => :destroy
+  has_many :reviews, :dependent => :destroy
 end
 
 # == Schema Information
@@ -24,16 +25,23 @@ end
 #  last_sign_in_ip        :inet
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
-#  name          		  :string
-#  address_1     		  :string
-#  address_2     		  :string
-#  city          		  :string
-#  province      		  :string
-#  postal_code   	      :string
-#  country       		  :string
-#  home_number   		  :integer
-#  mobile_number 		  :integer
-#  age           		  :integer
-#  profile_pic   		  :string
-#  type          		  :string
-
+#  address_1              :string
+#  address_2              :string
+#  city                   :string
+#  province               :string
+#  postal_code            :string
+#  country                :string
+#  home_number            :integer
+#  mobile_number          :integer
+#  age                    :integer
+#  profile_pic            :string
+#  group                  :integer
+#  first_name             :string
+#  last_name              :string
+#  average_rating         :float
+#
+# Indexes
+#
+#  index_users_on_email                 (email) UNIQUE
+#  index_users_on_reset_password_token  (reset_password_token) UNIQUE
+#

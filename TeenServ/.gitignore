@@ -11,6 +11,15 @@
 /db/*.sqlite3
 /db/*.sqlite3-journal
 
+# Ignore all binaries
+Gemfile.lock
+.DS_Store
+.idea/
+bin/.DS_Store
+config/.DS_Store
+db/.DS_Store
+db/migrate/.DS_Store
+
 # Ignore all logfiles and tempfiles.
 /log/*
 /tmp/*

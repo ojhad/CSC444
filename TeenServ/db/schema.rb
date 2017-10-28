@@ -10,27 +10,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171016035303) do
+ActiveRecord::Schema.define(version: 20171028054925) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "reviews", force: :cascade do |t|
-    t.integer "rating"
     t.text "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
+    t.float "rating", default: 5.0
+    t.integer "author_id"
     t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
   create_table "services", force: :cascade do |t|
     t.bigint "user_id"
-    t.string "service_title"
+    t.string "title"
     t.float "charge_per_hour"
     t.integer "user_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "status"
+    t.integer "frequency"
     t.index ["user_id"], name: "index_services_on_user_id"
   end
 
@@ -47,7 +50,6 @@ ActiveRecord::Schema.define(version: 20171016035303) do
     t.inet "last_sign_in_ip"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "name"
     t.string "address_1"
     t.string "address_2"
     t.string "city"
@@ -58,7 +60,10 @@ ActiveRecord::Schema.define(version: 20171016035303) do
     t.integer "mobile_number"
     t.integer "age"
     t.string "profile_pic"
-    t.string "type"
+    t.integer "group"
+    t.string "first_name"
+    t.string "last_name"
+    t.float "average_rating"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

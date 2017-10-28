@@ -1,3 +1,95 @@
 // Place all the styles related to the users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+/* USER PROFILE PAGE */
+.card {
+  margin-top: 20px;
+  padding: 30px;
+  background-color: rgba(214, 224, 226, 0.2);
+  -webkit-border-top-left-radius:5px;
+  -moz-border-top-left-radius:5px;
+  border-top-left-radius:5px;
+  -webkit-border-top-right-radius:5px;
+  -moz-border-top-right-radius:5px;
+  border-top-right-radius:5px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.card.picBar {
+  position: relative;
+  padding-top: 0;
+  overflow: hidden;
+  text-align: center;
+  background-color: white;
+}
+.card.picBar .card-background {
+  height: 130px;
+}
+.card-background img {
+  -webkit-filter: blur(25px);
+  -moz-filter: blur(25px);
+  -o-filter: blur(25px);
+  -ms-filter: blur(25px);
+  filter: blur(25px);
+  margin-left: -100px;
+  margin-top: -200px;
+  min-width: 130%;
+}
+.card.picBar .profiePic {
+  position: absolute;
+  top: 15px;
+  left: 0;
+  right: 0;
+}
+.card.picBar .profiePic img {
+  width: 1000px;
+  height: 100px;
+  max-width: 100px;
+  max-height: 100px;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+}
+.card.picBar .card-info {
+  position: absolute;
+  bottom: 14px;
+  left: 0;
+  right: 0;
+}
+.card.picBar.card-info .card-title {
+  padding:0 5px;
+  font-size: 20px;
+  line-height: 1;
+  color: black;
+  background-color: rgba(255, 255, 255, 0.1);
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+}
+.card.picBar .card-info {
+  overflow: hidden;
+  font-size: 12px;
+  line-height: 20px;
+  color: black;
+  text-overflow: ellipsis;
+}
+.card.picBar .bottom {
+  padding: 0 20px;
+  margin-bottom: 17px;
+}
+.btn-pref .btn {
+  -webkit-border-radius:0 !important;
+}
+
+.review-block{
+  padding-top: 5px;
+  border-top: 1px solid #ccc;
+}
+
+.average-review {
+  padding-bottom: 10px;
+}
+

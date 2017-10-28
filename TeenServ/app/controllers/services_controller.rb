@@ -3,7 +3,8 @@ class ServicesController < ApplicationController
 	before_action :find_user
 
 	def new
-		 @service = Service.new({:user_id => @user.id})
+		puts "CREATING JOB FOR: #{current_user.email}"
+		@service = Service.new({:user_id => current_user.id})
 	end
 	def edit
 		@service = Service.find(params[:id])
@@ -11,7 +12,7 @@ class ServicesController < ApplicationController
 	def create
 		@service = Service.new(service_params)
 		if @service.save
-			redirect_to(user_path(@user.id))
+			redirect_to(user_path(current_user.id))
 		else
 			render :new #(new_user_service_path(@user.id))
 		end
@@ -36,13 +37,17 @@ class ServicesController < ApplicationController
 	private 
 
 	def service_params
-   		params.require(:service).permit(:user_id,:service_title,:charge_per_hour,:user_type)
+   		params.require(:service).permit(:user_id,:title,:charge_per_hour,:user_type)
 	end
 
 	def find_user
 		if params[:user_id]
 			@user = User.find(params[:user_id])
 		end
+	end
+
+	def show
+
 	end
 
 end
