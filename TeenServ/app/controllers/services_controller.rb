@@ -3,8 +3,8 @@ class ServicesController < ApplicationController
 	before_action :find_user
 
 	def new
-		puts @user
-		 @service = Service.new({:user_id => current_user.id})
+		puts "CREATING JOB FOR: #{current_user.email}"
+		@service = Service.new({:user_id => current_user.id})
 	end
 	def create
 		@service = Service.new(service_params)
@@ -18,7 +18,7 @@ class ServicesController < ApplicationController
 	private 
 
 	def service_params
-   		params.require(:service).permit(:user_id,:service_title,:charge_per_hour,:user_type)
+   		params.require(:service).permit(:user_id,:title,:charge_per_hour,:user_type)
 	end
 
 	def find_user

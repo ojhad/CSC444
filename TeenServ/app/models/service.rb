@@ -7,7 +7,7 @@ class Service < ApplicationRecord
 	belongs_to :user
 
 	validates :user_id, presence: true
-	validates :service_title, presence: true
+	validates :title, presence: true
 	validates :charge_per_hour, presence: true
 end
 
@@ -17,11 +17,13 @@ end
 #
 #  id              :integer          not null, primary key
 #  user_id         :integer
-#  service_title   :string
+#  title           :string
 #  charge_per_hour :float
 #  user_type       :integer
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
+#  status          :integer
+#  frequency       :integer
 #
 # Indexes
 #
