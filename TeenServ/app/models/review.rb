@@ -1,5 +1,8 @@
 class Review < ApplicationRecord
   belongs_to :user
+  def author
+    User.find_by_id(self.author_id)
+  end
 end
 
 # == Schema Information
@@ -12,6 +15,7 @@ end
 #  updated_at :datetime         not null
 #  user_id    :integer
 #  rating     :float            default(5.0)
+#  author_id  :integer
 #
 # Indexes
 #

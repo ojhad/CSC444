@@ -142,13 +142,16 @@
                       <% if review.body.present? %>
                           <h4>Reivew: <%= review.body %></h4>
                       <% end %>
+                      <h4>Author: <%=review.author.try(:first_name) %></h4>
                   </div>
         <% end %>
           <%else %>
               <h5> There are no reviews yet </h5>
           <% end %>
           <div>
-            <%= link_to "Add Review", new_user_review_path(@user.id), :class => 'btn btn-default' %>
+            <% if @user.id !=  @current_user.id %>
+              <%= link_to "Add Review", new_user_review_path(@user.id), :class => 'btn btn-default' %>
+            <% end %>
           </div>
         </div>
         <div class="tab-pane fade in" id="billingTab">

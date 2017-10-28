@@ -8,6 +8,7 @@
 #  updated_at :datetime         not null
 #  user_id    :integer
 #  rating     :float            default(5.0)
+#  author_id  :integer
 #
 # Indexes
 #

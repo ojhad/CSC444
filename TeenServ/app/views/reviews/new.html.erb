@@ -17,6 +17,7 @@
 <%= form_for :review, :url => user_reviews_path(@user.id) do |f| %>
   <div class="form-group">
     <%= f.hidden_field :user_id , :value=> @user.id %>
+    <%= f.hidden_field :author_id , :value=> current_user.id %>
     <label class="control-label col-sm-2" for="review">Rating:</label>
     <div class="stars">
       <%= f.radio_button(:rating, 1, class: 'star-1') %>
