@@ -7,32 +7,43 @@
         <% end %>
   <% end %>
 	<%= f.hidden_field :user_id , :value=>current_user.id %>
- 	<div>
-  	<%= f.label :title, "Title"%>
-  	<%= f.select :title, Service::SERVICE_TYPES, {}, :id => "main_category_id"%>
+ 	<div class="form-group">
+  	<%= f.label :title, "Title", class: 'control-label col-sm-3'%>
+    <div class="col-sm-9">
+    <%= f.select :title, Service::SERVICE_TYPES, {}, :id => "main_category_id", class: 'form-control'%>
+    </div>
   </div>
 
-  <div id = "other-task-id" style = "display:none;">
-  	<input id = "other_category_id" type = "text" >
+  <div id = "other-div" class="form-group" style = "display:none;">
+    <div class = "control-label col-sm-3">Describe the service</div>
+    <div id = "other-task-id"  class= "col-sm-9" >
+      <input id = "other_category_id" type = "text" class = "form-control">
+    </div>
   </div>
 
-  <div>
-  	<%= f.label :charge_per_hour, "Charge per hour in dollars"%>
-  	<%= f.text_field :charge_per_hour %> 
+  <div class="form-group">
+    <%= f.label :charge_per_hour, "Charge per hour in dollars", class: 'control-label col-sm-3'%>
+    <div class="col-sm-9">
+      <%= f.text_field :charge_per_hour , class: 'form-control' %>
+    </div>
   </div>
 
   <!-- Frequcy Toggle and Input Field-->
-  <div>
-  Reoccuring service?
-  <input id = "service_freq_toggle" onclick="frequencyToggle()" type="checkbox"/>
+  <div class="form-group">
+    <div class = "control-label col-sm-3">Reoccuring service?</div>
+    <input class = "checkbox-inline" id = "service_freq_toggle" onclick="frequencyToggle()" type="checkbox"/>
   </div>
-  <div id = "service_freq_input_div" style = "display:none;" >
-    <%= f.label :frequency, "Reoccur every how many days?"%>
-    <%= f.number_field :frequency, :id => "service_freq_input_field",  :value => 0 %> 
+  <div class="form-group" id = "service_freq_input_div" style = "display:none;" >
+    <%= f.label :frequency, "Reoccur every how many days?", class: 'control-label col-sm-3'%>
+    <div class="col-sm-9">
+      <%= f.number_field :frequency, :id => "service_freq_input_field", :value => 0, class: 'form-control'%>
+    </div>
   </div>
 
-  <div>
-  <%= f.submit 'Add', :id => "submit_id", :value => nil %>
+  <div class="form-group">
+    <div class="col-sm-9 col-sm-offset-3">
+      <%= f.submit 'Add', :id => "submit_id", :value => nil, class: "btn btn-default btn-primary"%>
+    </div>
   </div>
 <% end %>
 
@@ -51,7 +62,7 @@
 	main_category_selection.onchange = () => {
 		var selectedOption = main_category_selection.options[main_category_selection.selectedIndex].text
 
-		var hiddenTaskField = document.getElementById("other-task-id");
+		var hiddenTaskField = document.getElementById("other-div");
 		hiddenTaskField.style.display = (selectedOption == "Other") ? "block" : "none";
    	}
 

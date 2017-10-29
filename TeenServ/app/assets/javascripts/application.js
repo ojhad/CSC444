@@ -18,4 +18,5 @@
 //= require turbolinks
 //= require underscore
 //= require gmaps/google
+//= require data-confirm-modal
 //= require_tree .
