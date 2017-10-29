@@ -14,12 +14,10 @@
 #  index_user_skills_on_user_id   (user_id)
 #
 
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+require 'test_helper'
 
-one:
-  user_id: 
-  skill_id: 
-
-two:
-  user_id: 
-  skill_id: 
+class UserSkillsControllerTest < ActionDispatch::IntegrationTest
+  # test "the truth" do
+  #   assert true
+  # end
+end

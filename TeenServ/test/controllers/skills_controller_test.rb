@@ -1,7 +1,3 @@
-class Skill < ApplicationRecord
-  has_and_belongs_to_many :users
-end
-
 # == Schema Information
 #
 # Table name: skills
@@ -11,3 +7,11 @@ end
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
+
+require 'test_helper'
+
+class SkillsControllerTest < ActionDispatch::IntegrationTest
+  # test "the truth" do
+  #   assert true
+  # end
+end
