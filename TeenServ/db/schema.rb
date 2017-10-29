@@ -63,12 +63,12 @@ ActiveRecord::Schema.define(version: 20171028200505) do
     t.string "first_name"
     t.string "last_name"
     t.float "average_rating"
+    t.float "latitude"
+    t.float "longitude"
     t.string "profile_pic_file_name"
     t.string "profile_pic_content_type"
     t.integer "profile_pic_file_size"
     t.datetime "profile_pic_updated_at"
-    t.float "latitude"
-    t.float "longitude"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
