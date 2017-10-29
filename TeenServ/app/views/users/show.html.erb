@@ -166,7 +166,6 @@
           </div>
         </div>
         <div class="tab-pane fade in" id="reviewsTab">
-          <h3 class="average-review">Reviews</h3>
           <div class="average-review">
             <% if @user.average_rating.present? %>
               <h4>Average Rating:</h4>
@@ -197,7 +196,29 @@
           </div>
         </div>
         <div class="tab-pane fade in" id="billingTab">
-          <h3>Billing and Payment</h3>
+          <div class="container">
+            <div class="row">
+              <div class="col-md-4">
+                <h4> Transactions </h4>
+                <%= link_to "View Transactions", '#', :class => 'btn btn-default' %>
+              </div>
+              <div class="col-md-4">
+                <h4>Billing</h4>
+                <% if @user.group==1%>
+                    <%= link_to "View Credit Cards", '#', :class => 'btn btn-default' %>
+                <%else%>
+                    <%= link_to "Deposit information", '#', :class => 'btn btn-default' %>
+                <%end%>
+              </div>
+              <div class="col-md-4">
+                <% if @user.group==0%>
+                    <h4> Account Balance</h4>
+                    <p> Money earned goes here</p>
+                    <%= link_to "Withdraw balance", '#', :class => 'btn btn-default' %>
+                <%else%>
+                <%end%>
+              </div>
+          </div>
         </div>
       </div>
     </div>
