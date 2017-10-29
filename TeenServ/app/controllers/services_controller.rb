@@ -2,6 +2,10 @@ class ServicesController < ApplicationController
 
 	before_action :find_user
 
+	def index
+		@services = Service.all()
+	end
+
 	def new
 		puts "CREATING SERVICE FOR: #{current_user.email}"
 		@service = Service.new({:user_id => current_user.id, 
