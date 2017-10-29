@@ -1,101 +1,105 @@
 <h2>Sign up</h2>
+<div class="row">
+  <div class="col-md-5 col-md-offset-2">
+    <div class = "field">
+      <label> I am signing up as ...</label>
+      <input type="radio" class="passradio" name="group" value="teen"> Teenager
+      <input type="radio" class="passradio" name="group" value="client"> Client
+    </div>
 
-<form>
-  <label> I am signing up as ...</label>
-  <input type="radio" class="GroupSelector" name="group" value="teen"> Teenager
-  <input type="radio" class="GroupSelector" name="group" value="client"> Client
-</form>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <%= devise_error_messages! %>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= devise_error_messages! %>
+      <div class="field">
+        <%= f.label :first_name, 'First Name:' %>
+        <%= f.text_field :first_name , class: 'form-control'%>
+      </div>
 
-  <div class="field">
-    <%= f.label :first_name, 'First Name' %>
-    <%= f.text_field :first_name %>
+      <div class="field">
+        <%= f.label :last_name, 'Last Name:' %>
+        <%= f.text_field :last_name , class: 'form-control'%>
+      </div>
+
+      <div class="field">
+        <%= f.label :email, 'Email:'%>
+        <%= f.email_field :email, autofocus: true , class: 'form-control'%>
+      </div>
+
+      <div class="field">
+        <%= f.label :password %>
+        <% if @minimum_password_length %>
+        <em>(<%= @minimum_password_length %> characters minimum):</em>
+        <% end %><br />
+        <%= f.password_field :password, autocomplete: "off" , class: 'form-control'%>
+      </div>
+
+      <div class="field">
+        <%= f.label :password_confirmation, 'Password Confirmation:' %>
+        <%= f.password_field :password_confirmation, autocomplete: "off" , class: 'form-control'%>
+      </div>
+
+      <div class="field">
+        <%= f.label :address_1, 'Address line 1:' %>
+        <%= f.text_field :address_1 , class: 'form-control'%>
+      </div>
+
+      <div class="field">
+        <%= f.label :address_2, 'Address line 2:' %>
+        <%= f.text_field :address_2 , class: 'form-control'%>
+      </div>
+
+      <div class="field">
+        <%= f.label :city, 'City:' %>
+        <%= f.text_field :city , class: 'form-control'%>
+      </div>
+
+      <div class="field">
+        <%= f.label :province, 'Province:' %>
+          <%= f.select :province, [ ['Alberta','AB'],['British Columbia','BC'],['Manitoba','MB'],['New Brunswich','NB'],
+                                    ['Newfoundland and Labrador','NL'],['Nova Scotia','NS'],['Ontario','ON'],['Prince Edward Island','PE'],
+                                    ['Quebec','QC'],['Saskatchewan','SK'],['Northwest Territories','NT'],
+          ['Nunavut','NU'],['Yukon','YT']], {:prompt => 'Select One'} , {:class => "form-control"}%>
+      </div>
+
+      <div class="field">
+        <%= f.label :postal_code, 'Postal Code:' %>
+        <%= f.text_field :postal_code , class: 'form-control'%>
+      </div>
+
+      <div class="field">
+        <%= f.label :country, 'Country:' %>
+        <%= f.text_field :country, class: 'form-control' %>
+      </div>
+
+      <div class="field">
+        <%= f.label :home_number, 'Home Number:' %>
+        <%= f.text_field :home_number, class: 'form-control'%>
+      </div>
+
+      <div class="field">
+        <%= f.label :mobile_number, 'Mobile Number:' %>
+        <%= f.text_field :mobile_number , class: 'form-control'%>
+      </div>
+
+      <div class="field" hidden="true">
+        <%= f.label :age, 'Age' %>
+        <%= f.text_field :age , class: 'form-control'%>
+      </div>
+
+      <div class="field">
+        <%= f.label :profile_pic, 'Profile Picture:' %>
+        <%= f.file_field :profile_pic , class: 'form-control'%>
+      </div>
+
+      <%= f.hidden_field :group , class: 'form-control'%>
+
+      <div class="actions">
+        <%= f.submit "Sign up", class: "btn btn-primary" %>
+      </div>
+    <% end %>
   </div>
+</div>
 
-  <div class="field">
-    <%= f.label :last_name, 'Last Name' %>
-    <%= f.text_field :last_name %>
-  </div>
-
-  <div class="field">
-    <%= f.label :email %>
-    <%= f.email_field :email, autofocus: true %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %>
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :address_1, 'Address line 1' %>
-    <%= f.text_field :address_1 %>
-  </div>
-
-  <div class="field">
-    <%= f.label :address_2, 'Address line 2' %>
-    <%= f.text_field :address_2 %>
-  </div>
-
-  <div class="field">
-    <%= f.label :city, 'City' %>
-    <%= f.text_field :city %>
-  </div>
-
-  <div class="field">
-    <%= f.label :province, 'Province' %>
-    <%= f.select :province, [ ['Alberta','AB'],['British Columbia','BC'],['Manitoba','MB'],['New Brunswich','NB'],
-                              ['Newfoundland and Labrador','NL'],['Nova Scotia','NS'],['Ontario','ON'],['Prince Edward Island','PE'],
-                              ['Quebec','QC'],['Saskatchewan','SK'],['Northwest Territories','NT'],
-    ['Nunavut','NU'],['Yukon','YT']], :prompt => 'Select One' %>
-  </div>
-
-  <div class="field">
-    <%= f.label :postal_code, 'Postal Code' %>
-    <%= f.text_field :postal_code %>
-  </div>
-
-  <div class="field">
-    <%= f.label :country, 'Country' %>
-    <%= f.text_field :country %>
-  </div>
-
-  <div class="field">
-    <%= f.label :home_number, 'Home Number' %>
-    <%= f.text_field :home_number %>
-  </div>
-
-  <div class="field">
-    <%= f.label :mobile_number, 'Mobile Number' %>
-    <%= f.text_field :mobile_number %>
-  </div>
-
-  <div class="field" hidden="true">
-    <%= f.label :age, 'Age' %>
-    <%= f.text_field :age %>
-  </div>
-
-  <div class="field">
-    <%= f.label :profile_pic, 'Profile Picture' %>
-    <%= f.file_field :profile_pic %>
-  </div>
-
-  <%= f.hidden_field :group %>
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
 
 <script type="text/javascript">
 
