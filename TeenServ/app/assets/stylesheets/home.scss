@@ -2,6 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+//Footer css
 #myFooter {
 	background-color: #66717D;
 	color:white;
@@ -72,6 +73,40 @@
 		text-align: center;
 	}
 }
+
+//End of Footer css
+//Home page css
+
+#welcome-tag {
+	text-align: center;
+	font-family: 'Rajdhani', sans-serif;
+  	margin: 0;
+  	white-space: nowrap;
+  	font-size:3.5em;
+}
+
+.welcome-description {
+	text-align: center;
+	font-family: 'Roboto', sans-serif;
+}
+
+#how-it-works {
+	text-align: center;
+	font-family: 'Rajdhani', sans-serif;
+	font-size:2.5em;
+}
+
+.col-heading {
+	font-family: 'Rajdhani', sans-serif;
+	font-size:1.75em;
+}
+
+.col-paragraph {
+	font-family: 'Roboto', sans-serif;
+}
+
+//End of Home page css
+//To keep footer stuck to bottom of screen
 
 html{
 	height: 100% !important;
