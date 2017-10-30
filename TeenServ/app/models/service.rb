@@ -19,6 +19,14 @@ class Service < ApplicationRecord
 	validates :status, presence: true, inclusion: { in: [UNLISTED, LISTED, ACCEPTED, COMPLETED], 
 													message: "-- Oops something went wrong! Please try again or contact customer support." }
 
+	def self.search(search_term)
+		if search_term
+			where("title ILIKE ?", "%#{search_term}%").order("created_at DESC")
+		else
+			order("created_at DESC")
+		end
+	end
+
 end
 
 # == Schema Information
