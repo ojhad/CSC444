@@ -12,6 +12,7 @@ class Service < ApplicationRecord
 					"Tutoring", "Reading", "Other"]
 
 	belongs_to :user
+	has_many :services_users
 
 	validates :user_id, presence: true
 	validates :title, presence: true
@@ -42,6 +43,8 @@ end
 #  updated_at      :datetime         not null
 #  status          :integer
 #  frequency       :integer
+#  min_age         :integer
+#  max_age         :integer
 #
 # Indexes
 #

@@ -19,6 +19,8 @@ end
 #  updated_at      :datetime         not null
 #  status          :integer
 #  frequency       :integer
+#  min_age         :integer
+#  max_age         :integer
 #
 # Indexes
 #
