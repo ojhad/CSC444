@@ -13,7 +13,14 @@ Rails.application.routes.draw do
     resources :reviews
   end
 
-  resources :services
+  resources :services do
+    member do
+      get 'list'
+      get 'unlist'
+      get 'add_request'
+    end
+  end
+
   resources :user_skills
 
 end

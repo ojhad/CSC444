@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171030052738) do
+ActiveRecord::Schema.define(version: 20171030210607) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,15 @@ ActiveRecord::Schema.define(version: 20171030052738) do
     t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
+  create_table "service_users", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "service_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["service_id"], name: "index_service_users_on_service_id"
+    t.index ["user_id"], name: "index_service_users_on_user_id"
+  end
+
   create_table "services", force: :cascade do |t|
     t.bigint "user_id"
     t.string "title"
@@ -37,13 +46,6 @@ ActiveRecord::Schema.define(version: 20171030052738) do
     t.integer "min_age"
     t.integer "max_age"
     t.index ["user_id"], name: "index_services_on_user_id"
-  end
-
-  create_table "services_users", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "service_id", null: false
-    t.index ["service_id"], name: "index_services_users_on_service_id"
-    t.index ["user_id"], name: "index_services_users_on_user_id"
   end
 
   create_table "skills", force: :cascade do |t|
@@ -96,7 +98,7 @@ ActiveRecord::Schema.define(version: 20171030052738) do
   end
 
   add_foreign_key "reviews", "users"
+  add_foreign_key "service_users", "services"
+  add_foreign_key "service_users", "users"
   add_foreign_key "services", "users"
-  add_foreign_key "services_users", "services"
-  add_foreign_key "services_users", "users"
 end

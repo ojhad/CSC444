@@ -45,6 +45,40 @@ class ServicesController < ApplicationController
 		redirect_to (user_path(userId))
 	end
 
+	# Changes status of the service associated with the passed in 'serviceId'
+	# to LISTED. This makes it visible to other users.
+	def list(serviceId)
+		@service = Service.find(serviceId)
+		@service.update({:status => Service::LISTED});
+	end
+
+	# Changes status of the service associated with the passed in 'serviceId'
+	# to UNLISTED. This makes it invisible to other users.
+	def unlist(serviceId)
+		@service = Service.find(serviceId)
+		if(@service.status == Service::LISTED || @service.status == Service::ACCEPTED)
+			@service.update({:status => Service::UNLISTED});
+		else
+			#return an error because user cannot unlist completed services
+			return "ERROR! Cannot change status of COMPLETED services!"
+		end
+	end
+
+	# User has requeseted to be considered for this service.
+	def add_request
+		@service = Service.find(params[:id])
+		# A user cannot place a request on a service that they created
+		if(@service.user_id == current_user.id)
+			#TODO: Return error if somehow user is trying to request their own service
+			puts "ERROR! Trying to request own service!"
+			redirect_to (services_path)
+		else
+			@service.service_users.create service_id: @service.id, user_id: current_user.id
+			redirect_to (services_path)
+		end
+	end
+
+	# PRIVATE METHODS BEGIN HERE
 	private 
 
 	def service_params
@@ -57,32 +91,5 @@ class ServicesController < ApplicationController
 			@user = User.find(params[:user_id])
 		end
 	end
-
-	# Changes status of the service associated with the passed in 'serviceId'
-	# to LISTED. This makes it visible to other users.
-	def listService(serviceId)
-		@service = Service.find(serviceId)
-		@service.update({:status => Service::LISTED});
-	end
-
-	# Changes status of the service associated with the passed in 'serviceId'
-	# to UNLISTED. This makes it invisible to other users.
-	def unlistService(serviceId)
-		@service = Service.find(serviceId)
-		if(@service.status == Service::LISTED || @service.status == Service::ACCEPTED)
-			@service.update({:status => Service::UNLISTED});
-		else
-			#return an error because user cannot unlist completed services
-			return "ERROR! Cannot change status of COMPLETED services!"
-		end
-	end
-
-	# User has requeseted to be considered for this service.
-	def requestService
-		puts "Calling request service controller method"
-		#requesting_user = User.find(userId)
-		#@service.services_users.create service: @service user: requesting_user
-	end
-
 
 end

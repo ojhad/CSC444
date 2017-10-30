@@ -12,7 +12,7 @@ class Service < ApplicationRecord
 					"Tutoring", "Reading", "Other"]
 
 	belongs_to :user
-	has_many :services_users
+	has_many :service_users
 
 	validates :user_id, presence: true
 	validates :title, presence: true

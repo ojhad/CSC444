@@ -4,4 +4,4 @@
 <p>Posted By: <%= @service.user.first_name + ' ' + @service.user.last_name %></p>
 <br>
 <p>Cost: <%= @service.charge_per_hour %>/hour</p>
-
+<%= button_to 'Request Service', add_request_service_path, method: :get %>

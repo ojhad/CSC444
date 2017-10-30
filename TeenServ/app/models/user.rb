@@ -7,7 +7,7 @@ class User < ApplicationRecord
   has_many :services, :dependent => :destroy
   has_many :reviews, :dependent => :destroy
   has_and_belongs_to_many :skills
-  has_many :services_users
+  has_many :service_users
 
   def get_address
     self.postal_code
