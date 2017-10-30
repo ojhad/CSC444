@@ -132,8 +132,8 @@
                         <p>Service: <%= service.title %></p>
                         <p>Charge: $<%= service.charge_per_hour %> per hour</p>
                         <% if @user.id == @current_user.id %>
-                            <%= link_to "Edit", edit_user_service_path(@user.id, service), :class => 'btn btn-primary' %>
-                            <%= link_to "Delete",user_service_path(@user.id, service), method: :delete, data: {title: 'Delete Listed Service' , confirm: 'Are you sure? Item will not appear under listed services'}, :class => 'btn btn-danger' %>
+                            <%= link_to "Edit", edit_service_path(service), :class => 'btn btn-primary' %>
+                            <%= link_to "Delete",service_path(service), method: :delete, data: {title: 'Delete Listed Service' , confirm: 'Are you sure? Item will not appear under listed services'}, :class => 'btn btn-danger' %>
                         <% else %>
                           <%= link_to "View Service", service_path(service.id), :class => 'btn btn-primary' %>
                         <% end %>
@@ -158,8 +158,8 @@
               </div>
               <% if @user.id ==  @current_user.id%>
                 <div class="col-md-4">
-                  <%= link_to "Add service", new_user_service_path(@user.id) , :class => 'btn btn-primary' ,:style => 'margin-bottom:4px'%><br>
-                  <%= link_to "Past services" ,user_services_path(@user.id), :class => 'btn btn-primary'%>
+                  <%= link_to "Add service", new_service_path(@user.id) , :class => 'btn btn-primary' ,:style => 'margin-bottom:4px'%><br>
+                  <%= link_to "Past services" ,services_path(@user.id), :class => 'btn btn-primary'%>
                 </div>
               <%end%>
             </div>

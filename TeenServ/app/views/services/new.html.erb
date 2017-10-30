@@ -1,6 +1,6 @@
 <h1>Create a Job Posting</h1>
 
-<%= form_for :service, :url => user_services_path(current_user.id) do |f| %>
+<%= form_for :service, :url => services_path(current_user.id) do |f| %>
   <% if @service.errors.any? %>
         <% @service.errors.full_messages.each do |message| %>
           <div class = "alert alert-danger"><%=message %></div>

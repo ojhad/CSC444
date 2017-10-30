@@ -16,7 +16,6 @@ class ServicesController < ApplicationController
 								:status => Service::UNLISTED})
 	end
 	def edit
-		puts "CREATING SERVICE FOR: #{current_user.email}"
 		@service = Service.find(params[:id])
 		# When user is editing service, we want to remove it from public visibility
 		@service.update({:status => Service::UNLISTED});
@@ -33,7 +32,7 @@ class ServicesController < ApplicationController
 	def update
 		@service = Service.find(params[:id])
 		if(@service.update(service_params))
-			redirect_to (user_path(@user.id))
+			redirect_to (user_path(@service.user_id))
 		else
 			render 'edit'
 		end
@@ -41,8 +40,9 @@ class ServicesController < ApplicationController
 
 	def destroy
 		@service = Service.find(params[:id])
+		userId = @service.user_id
 		@service.destroy
-		redirect_to (user_path(@user.id))
+		redirect_to (user_path(userId))
 	end
 
 	private 
@@ -75,6 +75,13 @@ class ServicesController < ApplicationController
 			#return an error because user cannot unlist completed services
 			return "ERROR! Cannot change status of COMPLETED services!"
 		end
+	end
+
+	# User has requeseted to be considered for this service.
+	def requestService
+		puts "Calling request service controller method"
+		#requesting_user = User.find(userId)
+		#@service.services_users.create service: @service user: requesting_user
 	end
 
 
