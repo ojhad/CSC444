@@ -105,6 +105,11 @@
 	font-family: 'Roboto', sans-serif;
 }
 
+.navbar {
+	border-radius: 0px;
+	margin-bottom: 0px;
+}
+
 //End of Home page css
 //To keep footer stuck to bottom of screen
 
@@ -120,7 +125,7 @@ body{
     height: 100%;
 }
 
-.content{
+.blank-content{
 	flex: 1 0 auto;
 	-webkit-flex: 1 0 auto;
 	min-height: 200px;
