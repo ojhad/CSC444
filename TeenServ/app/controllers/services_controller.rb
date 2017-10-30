@@ -6,6 +6,10 @@ class ServicesController < ApplicationController
 		@services = Service.all()
 	end
 
+	def show
+		@service = Service.find(params[:id])
+	end
+
 	def new
 		puts "CREATING SERVICE FOR: #{current_user.email}"
 		@service = Service.new({:user_id => current_user.id, 
@@ -51,10 +55,6 @@ class ServicesController < ApplicationController
 		if params[:user_id]
 			@user = User.find(params[:user_id])
 		end
-	end
-
-	def show
-
 	end
 
 	# Changes status of the service associated with the passed in 'serviceId'
