@@ -30,12 +30,11 @@
         <!-- Menu Items -->
         <div class="collapse navbar-collapse" id = "navbar-collapse">
 	        <ul class = "nav navbar-nav">
-            <%= form_for :search, :url => url_for(:controller => 'search', :action => 'search'), :method => :get, :html => {:class => "form-inline my-2 my-lg-0"} do |f| %>
-  		        <input class="form-control mr-sm-2" name="search_term" type="search" placeholder="Search" aria-label="Search">
-  		        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-  	        <% end %>
+		        <form action="/search/search" method="get" class="form-inline my-2 my-lg-0">
+			        <input class="form-control mr-sm-2" name="search_term" type="search" placeholder="Search" aria-label="Search">
+			        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+		        </form>
           </ul>
-
           <!-- Items to the right side of the navbar -->
           <ul class="nav navbar-nav navbar-right">
             <% if user_signed_in? %>
