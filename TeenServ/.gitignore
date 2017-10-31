@@ -19,6 +19,7 @@ bin/.DS_Store
 config/.DS_Store
 db/.DS_Store
 db/migrate/.DS_Store
+public/system/users/profile_pics
 
 # Ignore all logfiles and tempfiles.
 /log/*
