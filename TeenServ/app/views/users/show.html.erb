@@ -204,9 +204,30 @@
               </div>
               <div class="col-md-4">
                 <h4>Billing</h4>
-                <% if @user.group==1%>
-                    <%= link_to "View Credit Cards", '#', :class => 'btn btn-default' %>
+                <% if @user.group==1 && @user.stripe_id.blank?%>
+                    <%= form_tag cards_path do %>
+                        <article>
+                          <% if flash[:error].present? %>
+                              <div id="error_explanation">
+                                <p><%= flash[:error] %></p>
+                              </div>
+                          <% end %>
+                        </article>
+
+                        <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                                data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+                                data-description="Add a credit card"
+                                data-locale="auto"
+                                data-email="<%=@user.email%>"
+                                data-allow-remember-me='false'
+                                data-panel-label="Add New Card"
+                                data-label="Add New Card">
+                        </script>
+                    <% end %>
                 <%else%>
+                    <%= link_to "View Credit Cards", '#', :class => 'btn btn-default' %>
+                <%end%>
+                <%if @user.group==0%>
                     <%= link_to "Deposit information", '#', :class => 'btn btn-default' %>
                 <%end%>
               </div>

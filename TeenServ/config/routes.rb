@@ -23,4 +23,6 @@ Rails.application.routes.draw do
 
   resources :user_skills
 
+  resources :cards
+
 end

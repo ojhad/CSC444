@@ -34,6 +34,7 @@
 #  profile_pic_content_type :string
 #  profile_pic_file_size    :integer
 #  profile_pic_updated_at   :datetime
+#  stripe_id                :string
 #
 # Indexes
 #
