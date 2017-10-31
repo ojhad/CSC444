@@ -3,8 +3,8 @@
   <div class="col-md-5 col-md-offset-2">
     <div class = "field">
       <label> I am signing up as ...</label>
-      <input type="radio" class="passradio" name="group" value="teen"> Teenager
-      <input type="radio" class="passradio" name="group" value="client"> Client
+      <input type="radio" class="GroupSelector" name="group" value="teen"> Teenager
+      <input type="radio" class="GroupSelector" name="group" value="client"> Client
     </div>
 
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
@@ -81,12 +81,12 @@
         <%= f.text_field :mobile_number , class: 'form-control'%>
       </div>
 
-      <div class="field" hidden="true">
+      <div class="field" id='age' hidden="true">
         <%= f.label :age, 'Age' %>
         <%= f.text_field :age , class: 'form-control'%>
       </div>
 
-      <div class="field">
+      <div class="field" id="profile_pic">
         <%= f.label :profile_pic, 'Profile Picture:' %>
         <%= f.file_field :profile_pic , class: 'form-control'%>
       </div>

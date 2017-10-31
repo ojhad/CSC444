@@ -11,6 +11,7 @@ Rails.application.routes.draw do
 
   resources :users do
     resources :reviews
+    resources :services
   end
 
   resources :services do
