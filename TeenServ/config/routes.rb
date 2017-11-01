@@ -11,7 +11,8 @@ Rails.application.routes.draw do
 
   resources :users do
     resources :reviews
-    resources :services
+    #resources :services
+    resources :cards
   end
 
   resources :services do
@@ -24,6 +25,6 @@ Rails.application.routes.draw do
 
   resources :user_skills
 
-  resources :cards
+
 
 end
