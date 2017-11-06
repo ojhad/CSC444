@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     resources :reviews
     #resources :services
     resources :cards
+    resources :payouts
   end
 
   resources :services do
@@ -24,6 +25,8 @@ Rails.application.routes.draw do
   end
 
   resources :user_skills
+
+
 
 
 

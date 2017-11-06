@@ -225,11 +225,14 @@
                                   data-label="Add New Card">
                           </script>
                       <% end %>
-                  <%else%>
+                  <%elsif @user.group==1%>
                       <%= link_to "View credit card on file", user_cards_path(@user.id), :class => 'btn btn-default' %>
                   <%end%>
                   <%if @user.group==0%>
                       <%= link_to "Deposit information", '#', :class => 'btn btn-default' %>
+                      <%= form_tag user_payouts_path(@user.id) do %>
+                          <%= submit_tag "PAYPAL PAYOUT TEST", class: "btn btn-large btn-primary" %>
+                <%end%>
                   <%end%>
                 </div>
                 <div class="col-md-4">
