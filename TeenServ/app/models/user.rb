@@ -8,6 +8,8 @@ class User < ApplicationRecord
   has_many :reviews, :dependent => :destroy
   has_and_belongs_to_many :skills
   has_many :service_users
+  has_many :payouts
+
 
   def get_address
     self.postal_code

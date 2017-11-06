@@ -1,3 +1,8 @@
+class Payout < ApplicationRecord
+
+  belongs_to :user
+end
+
 # == Schema Information
 #
 # Table name: payouts
@@ -8,11 +13,3 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
-
-require 'test_helper'
-
-class PayoutsControllerTest < ActionDispatch::IntegrationTest
-  # test "the truth" do
-  #   assert true
-  # end
-end

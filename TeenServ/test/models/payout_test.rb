@@ -11,7 +11,7 @@
 
 require 'test_helper'
 
-class PayoutsControllerTest < ActionDispatch::IntegrationTest
+class PayoutTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

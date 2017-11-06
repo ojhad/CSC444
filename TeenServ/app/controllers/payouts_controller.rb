@@ -5,23 +5,23 @@ class PayoutsController < ApplicationController
     @payout = PayPal::SDK::REST::Payout.new({
                              :sender_batch_header => {
                                  :sender_batch_id => SecureRandom.hex(8),
-                                 :email_subject => 'You have a Payout!'
+                                 :email_subject => 'You have a Payout from Teenserv!'
                              },
                              :items => [
                                  {
                                      :recipient_type => 'EMAIL',
                                      :amount => {
-                                         :value => '10.0',
+                                         :value => '1.0',
                                          :currency => 'CAD'
                                      },
-                                     :note => 'Thanks for your patronage!',
+                                     :note => 'Thanks for your services!',
                                      :sender_item_id => '2014031400023',
                                      :receiver => 'teenserv444-buyer@gmail.com'
                                  }
                              ]
                          })
     begin
-      @payout_batch = @payout.create
+      @payout_batch = @payout.create(true)
       logger.info "Created Payout with [#{@payout_batch.batch_header.payout_batch_id}]"
     rescue PayPal::SDK::REST::ResourceNotFound => err
       logger.error @payout.error.inspect

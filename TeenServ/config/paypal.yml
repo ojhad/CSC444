@@ -1,8 +1,8 @@
 test: &default
 
   # Credentials for REST APIs
-  client_id: AaUlnPBTww3xJyQ9fcicrg9eJ7xlDg-FNmGzUCRRE5JK2pIlSOmXg8cs8gJ2LOmzUU8fIuvGVJGMrwwu
-  client_secret: EP8A6VGdjFdAcd2Uz4woi7AWC86d85U6_SVV08HHKtknta59D0thAyvMHOQBesoMv-e35d_y_kskz3oz
+  client_id: AW-605PfJMxPhNPctmPUgJLPfHOQIT_zU-m7VMRpj3BJGI0b3NzJSoXCZbk9ehluSBfwksf2RO8FFftF
+  client_secret: EMXXzvoUDzO6bgGfhm8imU8aMpyZ_Ht3pELajWkjzh85Pi1o-8UkVib_mc9agvLFi-hyYASjyMms5yJY
 
   # Mode can be 'live' or 'sandbox'
   mode: sandbox
