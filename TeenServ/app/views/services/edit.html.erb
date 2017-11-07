@@ -5,7 +5,7 @@
         <h2>Errors:</h2>
         <ul>
           <% @service.errors.full_messages.each do |message| %>s
-              <li><%=message %></li>
+              <div class = "alert alert-danger"><%=message %></div>
           <% end %>
         </ul>
     <% end %>

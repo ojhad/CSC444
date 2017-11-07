@@ -25,6 +25,7 @@ class ServicesController < ApplicationController
 		if @service.save
 			redirect_to(user_path(current_user.id))
 		else
+			#redirect_back(fallback_location: root_path)
 			render :new #(new_user_service_path(@user.id))
 		end
 	end
