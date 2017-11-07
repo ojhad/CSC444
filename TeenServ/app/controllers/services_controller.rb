@@ -65,7 +65,7 @@ class ServicesController < ApplicationController
 		end
 	end
 
-	# User has requeseted to be considered for this service.
+	# User has requested to be considered for this service.
 	def add_request
 		@service = Service.find(params[:id])
 
@@ -81,6 +81,26 @@ class ServicesController < ApplicationController
 			redirect_to (services_path)
 		else
 			@service.service_users.create service_id: @service.id, user_id: current_user.id
+			redirect_to (services_path)
+		end
+	end
+
+	# User wants their request for this service to me removed
+	def remove_request
+		@service = Service.find(params[:id])
+
+		# Make sure request exists before removing request
+		if @service.service_users.exists?(:user_id => current_user.id) 
+			deleteRecord = @service.service_users.where(user_id: current_user.id)
+			if(deleteRecord)
+				deleteRecordId = deleteRecord[0].id
+				@service.service_users.destroy(deleteRecordId)
+			end
+			redirect_to (services_path)
+		else
+			# Do nothing because user is trying to remove themselves from 
+			# a service which they are not requested for
+			puts "TRYING TO DELETE A NON-EXISTENT RELATION"
 			redirect_to (services_path)
 		end
 	end
