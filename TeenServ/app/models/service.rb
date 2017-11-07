@@ -17,8 +17,9 @@ class Service < ApplicationRecord
 	validates :user_id, presence: true
 	validates :title, presence: true
 	validates :charge_per_hour, presence: true
-	validates :min_age, presence: true, numericality: { greater_than_or_equal_to: 13, less_than_or_equal_to: :max_age }
-	validates :max_age, presence: true, numericality: { less_than_or_equal_to: 19 }
+	validates :min_age, presence: true, numericality: { greater_than_or_equal_to: 13 }
+	validates :min_age, presence: true, :numericality => {less_than_or_equal_to: :max_age, :message => "can't be greater than Max Age"}
+	validates :max_age, presence: true, numericality: { greater_than_or_equal_to: 13, less_than_or_equal_to: 19 }
 	validates :status, presence: true, inclusion: { in: [UNLISTED, LISTED, ACCEPTED, COMPLETED], 
 													message: "-- Oops something went wrong! Please try again or contact customer support." }
 

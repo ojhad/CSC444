@@ -2,7 +2,11 @@
   <div class="container">
       <div class="card picBar">
         <div class="profilePic">
-          <%= image_tag @user.profile_pic.url %>
+          <% if @user.profile_pic_file_name != nil %>
+            <%= image_tag @user.profile_pic.url %>
+          <% else %>
+            <img alt="" src="http://gazettereview.com/wp-content/uploads/2016/03/facebook-avatar.jpg">
+          <% end %>
         </div>
         <div class="card-info"> <span class="card-title"><%= @user.first_name%> <%= @user.last_name%></span>
 
