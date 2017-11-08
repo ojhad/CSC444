@@ -1,105 +1,152 @@
-<h2>Sign up</h2>
-<div class="row">
-  <div class="col-md-5 col-md-offset-2">
-    <div class = "field">
+<div class = "form-horizontal">
+  
+  <div class = "form-group">
+    <div class="col-sm-offset-4 col-sm-10">
+      <h2>Sign up</h2>
+    </div>
+  </div>
+  
+  <div class = "form-group">
+    <div class="col-sm-offset-4 col-sm-10">
       <label> I am signing up as ...</label>
       <input type="radio" class="GroupSelector" name="group" value="teen"> Teenager
       <input type="radio" class="GroupSelector" name="group" value="client"> Client
     </div>
+  </div>
 
-    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-      <%= devise_error_messages! %>
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    <%= devise_error_messages! %>
 
-      <div class="field">
-        <%= f.label :first_name, 'First Name:' %>
+    <div class="form-group">
+      <%= f.label :first_name, 'First Name:', :class => "control-label col-sm-4" %>
+      <div class="col-sm-5">
         <%= f.text_field :first_name , class: 'form-control'%>
-      </div>
+      </div>    
+    </div>
 
-      <div class="field">
-        <%= f.label :last_name, 'Last Name:' %>
+    <div class="form-group">
+      <%= f.label :last_name, 'Last Name:', :class => "control-label col-sm-4" %>
+      <div class="col-sm-5">
         <%= f.text_field :last_name , class: 'form-control'%>
-      </div>
+      </div>    
+    </div>
 
-      <div class="field">
-        <%= f.label :email, 'Email:'%>
+    <div class="form-group">
+      <%= f.label :email, 'Email:', :class => "control-label col-sm-4" %>
+      <div class="col-sm-5">
         <%= f.email_field :email, autofocus: true , class: 'form-control'%>
-      </div>
+      </div>    
+    </div>
 
-      <div class="field">
-        <%= f.label :password %>
+    <div class="form-group">
+      <%= f.label :password, :class => "control-label col-sm-4" %>
+      <div class="col-sm-5">
         <% if @minimum_password_length %>
-        <em>(<%= @minimum_password_length %> characters minimum):</em>
+          <em>(<%= @minimum_password_length %> characters minimum):</em>
         <% end %><br />
         <%= f.password_field :password, autocomplete: "off" , class: 'form-control'%>
-      </div>
+      </div>    
+    </div>
 
-      <div class="field">
-        <%= f.label :password_confirmation, 'Password Confirmation:' %>
+    <div class="form-group">
+      <%= f.label :password_confirmation, :class => "control-label col-sm-4" %>
+      <div class="col-sm-5">
         <%= f.password_field :password_confirmation, autocomplete: "off" , class: 'form-control'%>
-      </div>
+      </div>    
+    </div>
 
-      <div class="field">
-        <%= f.label :address_1, 'Address line 1:' %>
+    <div class="form-group">
+      <%= f.label :address_1, 'Address line 1:', :class => "control-label col-sm-4" %>
+      <div class="col-sm-5">
         <%= f.text_field :address_1 , class: 'form-control'%>
-      </div>
+      </div>    
+    </div>
 
-      <div class="field">
-        <%= f.label :address_2, 'Address line 2:' %>
+    <div class="form-group">
+      <%= f.label :address_2, 'Address line 2:', :class => "control-label col-sm-4" %>
+      <div class="col-sm-5">
         <%= f.text_field :address_2 , class: 'form-control'%>
-      </div>
+      </div>    
+    </div>
 
-      <div class="field">
-        <%= f.label :city, 'City:' %>
+    <div class="form-group">
+      <%= f.label :city, 'City:', :class => "control-label col-sm-4" %>
+      <div class="col-sm-5">
         <%= f.text_field :city , class: 'form-control'%>
-      </div>
+      </div>    
+    </div>
 
-      <div class="field">
-        <%= f.label :province, 'Province:' %>
-          <%= f.select :province, [ ['Alberta','AB'],['British Columbia','BC'],['Manitoba','MB'],['New Brunswich','NB'],
-                                    ['Newfoundland and Labrador','NL'],['Nova Scotia','NS'],['Ontario','ON'],['Prince Edward Island','PE'],
-                                    ['Quebec','QC'],['Saskatchewan','SK'],['Northwest Territories','NT'],
-          ['Nunavut','NU'],['Yukon','YT']], {:prompt => 'Select One'} , {:class => "form-control"}%>
-      </div>
+    <div class="form-group">
+      <%= f.label :province, 'Province:', :class => "control-label col-sm-4" %>
+      <div class="col-sm-5">
+        <%= f.select :province, [ ['Alberta','AB'],['British Columbia','BC'],['Manitoba','MB'],['New Brunswich','NB'],
+                                  ['Newfoundland and Labrador','NL'],['Nova Scotia','NS'],['Ontario','ON'],['Prince Edward Island','PE'],
+                                  ['Quebec','QC'],['Saskatchewan','SK'],['Northwest Territories','NT'],
+        ['Nunavut','NU'],['Yukon','YT']], {:prompt => 'Select One'} , {:class => "form-control"}%>
+      </div>    
+    </div>
 
-      <div class="field">
-        <%= f.label :postal_code, 'Postal Code:' %>
+    <div class="form-group">
+      <%= f.label :postal_code, 'Postal Code:', :class => "control-label col-sm-4" %>
+      <div class="col-sm-5">
         <%= f.text_field :postal_code , class: 'form-control'%>
-      </div>
+      </div>    
+    </div>
 
-      <div class="field">
-        <%= f.label :country, 'Country:' %>
+    <div class="form-group">
+      <%= f.label :country, 'Country:', :class => "control-label col-sm-4" %>
+      <div class="col-sm-5">
         <%= f.text_field :country, class: 'form-control' %>
-      </div>
+      </div>    
+    </div>
 
-      <div class="field">
-        <%= f.label :home_number, 'Home Number:' %>
+    <div class="form-group">
+      <%= f.label :home_number, 'Home Number:', :class => "control-label col-sm-4" %>
+      <div class="col-sm-5">
         <%= f.text_field :home_number, class: 'form-control'%>
-      </div>
+      </div>    
+    </div>
 
-      <div class="field">
-        <%= f.label :mobile_number, 'Mobile Number:' %>
+    <div class="form-group">
+      <%= f.label :mobile_number, 'Mobile Number:', :class => "control-label col-sm-4" %>
+      <div class="col-sm-5">
         <%= f.text_field :mobile_number , class: 'form-control'%>
-      </div>
+      </div>    
+    </div>
 
-      <div class="field" id='age' hidden="true">
-        <%= f.label :age, 'Age' %>
+    <div class="form-group" id='age' hidden="true">
+      <%= f.label :age, 'Age', :class => "control-label col-sm-4" %>
+      <div class="col-sm-5">
         <%= f.text_field :age , class: 'form-control'%>
-      </div>
+      </div>    
+    </div>
 
-      <div class="field" id="profile_pic">
-        <%= f.label :profile_pic, 'Profile Picture:' %>
+    <div class="form-group" id="profile_pic">
+      <%= f.label :profile_pic, 'Profile Picture:', :class => "control-label col-sm-4" %>
+      <div class="col-sm-5">
         <%= f.file_field :profile_pic , class: 'form-control'%>
-      </div>
+      </div>    
+    </div>
 
-      <%= f.hidden_field :group , class: 'form-control'%>
+    <%= f.hidden_field :group , class: 'form-control'%>
 
-      <div class="actions">
-        <%= f.submit "Sign up", class: "btn btn-primary" %>
+    <div class = "form-group">
+      <div class="col-sm-offset-4 col-sm-10">
+        <div class="actions">
+          <%= f.submit "Sign up", class: "btn btn-primary" %>
+        </div>
       </div>
-    <% end %>
+    </div>
+
+  <% end %>
+
+  <div class = "form-group">
+    <div class="col-sm-offset-4 col-sm-10">
+      <%= render "devise/shared/links" %>
+    </div>
   </div>
-</div>
 
+</div>
 
 <script type="text/javascript">
 
@@ -119,5 +166,3 @@
         }
     })
 </script>
-
-<%= render "devise/shared/links" %>

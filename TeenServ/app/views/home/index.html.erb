@@ -1,27 +1,52 @@
-
-<div class = "jumbotron">
-	<div class = "container">
-		<h1 id = "welcome-tag">Welcome to TeenServ!</h1>
-		<h3 class = "welcome-description">A fast and easy way to get tasks done</h3>
-		<h4 class = "welcome-description">Simply post what you need to get done and get in touch with TeenServers to get help</h4>
-	</div>
+<div class = "header-div">
+    <header class="header-intro">
+        <div class="container-intro">
+			<h1 id = "welcome-tag">Welcome to TeenServ!</h1>
+			<h3 id = "welcome-description-1">A fast and easy way to get tasks done</h3>
+			<h4 id = "welcome-description-2">Simply post what you need to get done and get in touch with TeenServers to get help</h4>
+		</div>
+		<div class = "container-svg">
+				<%= image_tag "001-gardening-shovel-tool-shape.svg", :size => "80x80", :class => "shovel-svg"%>
+				<%= image_tag "002-wheelbarrow.svg", :size => "65x65", :class => "wheel-barrow-svg"%>
+				<%= image_tag "003-study.svg", :size => "65x65", :class => "study-svg"%>
+				<%= image_tag "004-dog-with-belt-walking-with-a-man.svg", :size => "65x65", :class => "dog-walk-svg"%>
+				<%= image_tag "005-lawn-mower.svg", :size => "65x65", :class => "lawn-mower-svg"%>
+				<%= image_tag "006-vacuum.svg", :size => "65x65", :class => "vacuum-svg"%>
+				<%= image_tag "007-mop-tool-to-clean-floors.svg", :size => "65x65", :class => "mop-svg"%>
+		</div>
+    </header>
 </div>
 
-<div>
-	<h3 id = "how-it-works">How it works</h3>
+<div class = "container-how-it-works">
+	<h3 id = "title-how-it-works">How it works</h3>
 
-	<div class = "col-md-4 how-it-works">
-		<h4 class = "col-heading">1. Sign up with us</h4>
-		<p class = "col-paragraph">We promise it's really simple. If you're a teenager, customize your profile by adding what tasks you would like to do.</p>
+	<div class = "how-it-works-1">
+		<div class = "col-md-6">
+			<%= image_tag "008-sign-up.svg", :size => "200x200", :class => "sign-up-svg"%>
+		</div>
+		<div class = "col-md-6">
+			<h4 class = "col-heading">1. Sign up with us</h4>
+			<p class = "col-paragraph">We promise it's really simple. If you're a teenager, customize your profile by adding what tasks you would like to do.</p>
+		</div>
 	</div>
 
-	<div class = "col-md-4 how-it-works">
-		<h4 class = "col-heading">2. Describe what you want to get done</h4>
-		<p class = "col-paragraph">If you're a client, simply list details about what you want to get done and get automatically contacted by a teenager who is interested.</p>
+	<div class = "how-it-works-2">
+		<div class = "col-md-6">
+			<%= image_tag "009-calendar.svg", :size => "200x200", :class => "calendar-svg"%>
+		</div>
+		<div class = "col-md-6">
+			<h4 class = "col-heading">2. Describe what you want to get done</h4>
+			<p class = "col-paragraph">If you're a client, simply list details about what you want to get done and get automatically contacted by a teenager who is interested.</p>
+		</div>
 	</div>
 
-	<div class = "col-md-4 how-it-works">
-		<h4 class = "col-heading">3. Get the task done</h4>
-		<p class = "col-paragraph">The TeenServer will arrive at your location and get the task done. Payments are carried out through our app. Don't forget to leave a review!</p>
+	<div class = "how-it-works-3">
+		<div class = "col-md-6">
+			<%= image_tag "010-checklist-done.svg", :size => "200x200", :class => "checklist-done-svg"%>
+		</div>
+		<div class = "col-md-6">
+			<h4 class = "col-heading">3. Get the task done</h4>
+			<p class = "col-paragraph">The TeenServer will arrive at your location and get the task done. Payments are carried out through our app. Don't forget to leave a review!</p>
+		</div>
 	</div>
 </div>
