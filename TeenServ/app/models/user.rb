@@ -16,6 +16,10 @@ class User < ApplicationRecord
     self.postal_code
   end
 
+  def is_teen?
+    self.group == 0
+  end
+  
   #gets lat & long for user
   geocoded_by :get_address
 
