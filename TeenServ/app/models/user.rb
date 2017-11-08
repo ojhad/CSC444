@@ -19,7 +19,7 @@ class User < ApplicationRecord
   def is_teen?
     self.group == 0
   end
-  
+
   #gets lat & long for user
   geocoded_by :get_address
 
