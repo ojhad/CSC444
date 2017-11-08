@@ -1,5 +1,10 @@
 class PayoutsController < ApplicationController
 
+  def new
+    @user = User.find(current_user.id)
+  end
+
+
   def create
 
     @payout = PayPal::SDK::REST::Payout.new({
@@ -11,7 +16,7 @@ class PayoutsController < ApplicationController
                                  {
                                      :recipient_type => 'EMAIL',
                                      :amount => {
-                                         :value => '1.0',
+                                         :value => '0.5',
                                          :currency => 'CAD'
                                      },
                                      :note => 'Thanks for your services!',
@@ -29,9 +34,18 @@ class PayoutsController < ApplicationController
 
     @user = User.find(current_user.id)
 
+    #@user.balance = 10.0
+
+    @new_payout = Payout.new({:user_id => @user.id, :batch_id => @payout_batch.batch_header.payout_batch_id,
+                             :amount => @user.balance})
+
+    @new_payout.save
+
+    @user.balance = 0.0
+
     flash.notice = "Payout successful"
 
-    redirect_to user_path(@user.id)
+    redirect_to user_payouts_path(@user.id)
 
 
   end
