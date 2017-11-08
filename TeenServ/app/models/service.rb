@@ -13,6 +13,7 @@ class Service < ApplicationRecord
 
 	belongs_to :user
 	has_many :service_users
+  has_many :transactions
 
 	validates :user_id, presence: true
 	validates :title, presence: true

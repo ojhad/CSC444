@@ -9,7 +9,8 @@ class User < ApplicationRecord
   has_and_belongs_to_many :skills
   has_many :service_users
   has_many :payouts
-
+  has_many :teen_transactions, :class_name => 'Transaction', :foreign_key => :teen_id
+  has_many :client_transactions, :class_name => 'Transaction', :foreign_key => :client_id
 
   def get_address
     self.postal_code

@@ -206,6 +206,10 @@
                 <div class="col-md-4">
                   <h4> Transactions </h4>
                   <%= link_to "Payouts", user_payouts_path(@user.id), :class => 'btn btn-default' %>
+                  <%= link_to "View Transactions", user_transactions_path(@user.id), :class => 'btn btn-default' %>
+                  <% if @user.group==0 %>
+                    <%= link_to "New Transaction", new_user_transaction_path(@user.id), :class => 'btn btn-default' %>
+                  <% end %>
                 </div>
                 <div class="col-md-4">
                   <h4>Billing</h4>

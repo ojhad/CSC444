@@ -1,0 +1,15 @@
+<h1>Transaction Details</h1>
+
+<h3><%= @transaction.service_title %></h3>
+<br>
+<p>Cost per hour: <%= @transaction.charge_per_hour %>/hour</p>
+<br>
+<p>Number of hours: <%= @transaction.number_of_hours %> hours</p>
+<br>
+<p>Total cost: <%= @transaction.total_amount %></p>
+<br>
+<h4>Client:
+  <%= link_to user_path(@transaction.client_id) do %>
+      <%=@transaction.client.try(:first_name) %>
+  <% end %>
+</h4>
