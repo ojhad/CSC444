@@ -1,23 +1,86 @@
 <div class="container" style="padding-top: 4em">
   <p>In order to get paid, you will need to have an active PayPal Account. If you haven't already, please provide the PayPal email address
   that you want us to send your earnings to.</p>
+  <p> Alternatively, we can mail you a check. If you would like to be mailed a check, please indicate so below.
+  By default, we will send the check to the address on your profile. If this is not your mailing address, please indicate
+  below as well.</p>
   <br>
 
-  <% if !@user.paypal.blank?%>
-      <p> Your current PayPal address is <b><%=@user.paypal%></b></p>
-      <br>
-      <p> If you want to set a new PayPal address, please fill and submit the form below.</p>
-      <br>
-  <%end%>
-  <div class="col-lg-6">
+  <form>
+    <div class = "form-group">
+        <label> Deposit Method</label>
+        <input type="radio" class="DepositInfo" name="deposit" value="paypal"> PayPal
+        <input type="radio" class="DepositInfo" name="deposit" value="check"> Check
+    </div>
+  </form>
+
+  <div id="paypal" hidden="">
+    <% if !@user.paypal.blank?%>
+        <p> Your current PayPal address is <b><%=@user.paypal%></b></p>
+        <br>
+        <p> If you want to set a new PayPal address, please fill and submit the form below.</p>
+        <br>
+    <%end%>
+    <div class="col-lg-6">
+      <%= form_tag user_deposits_path(@user.id) do %>
+          <div class="form-group">
+            <%= label_tag 'paypal', 'PayPal Address', class: 'control-label col-sm-3'%>
+            <%= email_field_tag 'paypal', nil , class: 'form-control'%>
+          </div>
+          <div class="form-group">
+            <%= submit_tag 'Submit', class: 'btn btn-primary' %>
+          </div>
+      <%end%>
+    </div>
+  </div>
+
+  <div id="check" hidden>
+    <p>Current Mailing Address</p>
+    <table>
+      <tr>
+        <td><b><%=@user.first_name%> <%=@user.last_name%></b></td>
+      </tr>
+      <tr>
+        <td><%=@user_deposit_info.address_1.capitalize()%></td>
+      </tr>
+      <tr>
+        <td><%=@user_deposit_info.address_2.capitalize()%></td>
+      </tr>
+      <tr>
+        <td><%=@user_deposit_info.city.capitalize()%> <%=@user_deposit_info.province%> <%=@user_deposit_info.postal_code.upcase()%></td>
+      </tr>
+      <tr>
+        <td><%=@user_deposit_info.country.capitalize()%></td>
+      </tr>
+    </table>
+    <br>
+    <p> Complete the form below to update your mailing address</p>
+    <br>
     <%= form_tag user_deposits_path(@user.id) do %>
         <div class="form-group">
           <%= label_tag 'paypal', 'PayPal Address', class: 'control-label col-sm-3'%>
           <%= email_field_tag 'paypal', nil , class: 'form-control'%>
         </div>
         <div class="form-group">
-        <%= submit_tag 'Submit', class: 'btn btn-primary' %>
+          <%= submit_tag 'Submit', class: 'btn btn-primary' %>
         </div>
     <%end%>
   </div>
+
 </div>
+
+<script type="text/javascript">
+
+    $(".DepositInfo").change(function(){
+        switch($(this).val()) {
+            case 'paypal' :
+                $('#paypal').show()
+                $('#check').hide()
+                break;
+            case 'check' :
+                $('#check').show()
+                $('#paypal').hide()
+                break;
+        }
+    })
+</script>

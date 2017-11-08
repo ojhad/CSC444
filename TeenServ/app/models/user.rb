@@ -9,6 +9,7 @@ class User < ApplicationRecord
   has_and_belongs_to_many :skills
   has_many :service_users
   has_many :payouts
+  has_one :deposit
 
 
   def is_teen?

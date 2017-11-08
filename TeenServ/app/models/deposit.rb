@@ -1,3 +1,16 @@
+class Deposit < ApplicationRecord
+  belongs_to :user
+
+  def has_paypal?
+    if self.paypal
+      1
+    else
+      0
+    end
+  end
+
+end
+
 # == Schema Information
 #
 # Table name: deposits
@@ -18,11 +31,3 @@
 #
 #  index_deposits_on_user_id  (user_id)
 #
-
-require 'test_helper'
-
-class DepositsControllerTest < ActionDispatch::IntegrationTest
-  # test "the truth" do
-  #   assert true
-  # end
-end

@@ -1,17 +1,22 @@
 # == Schema Information
 #
-# Table name: payouts
+# Table name: deposits
 #
-#  id         :integer          not null, primary key
-#  amount     :float
-#  batch_id   :string
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  user_id    :integer
+#  id          :integer          not null, primary key
+#  paypal      :string
+#  address_1   :string
+#  address_2   :string
+#  city        :string
+#  province    :string
+#  postal_code :string
+#  country     :string
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  user_id     :integer
 #
 # Indexes
 #
-#  index_payouts_on_user_id  (user_id)
+#  index_deposits_on_user_id  (user_id)
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
