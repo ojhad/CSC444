@@ -109,6 +109,26 @@
 	border-radius: 0px;
 	margin-bottom: 0px;
 }
+//for navbar expand in mobile screens
+@media only screen and (max-width: 767px) {
+	.navbar .navbar-collapse {
+		border-color: white;
+		background-color: #333;
+		height: 245px;
+		z-index: 1000;
+		position: relative;
+	}
+	input[name="search_term"]{
+		display: inline-block;
+		width: 80%;
+	}
+	button[id="register-button"]{
+		width: 10%;
+		display: inline-block;
+		overflow: hidden;
+	}
+}
+
 
 //End of Home page css
 //To keep footer stuck to bottom of screen

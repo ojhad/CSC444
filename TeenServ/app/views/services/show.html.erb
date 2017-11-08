@@ -4,4 +4,29 @@
 <p>Posted By: <%= @service.user.first_name + ' ' + @service.user.last_name %></p>
 <br>
 <p>Cost: <%= @service.charge_per_hour %>/hour</p>
-<%= button_to 'Request Service', add_request_service_path, method: :get %>
+
+
+<!-- If the creator is viewing the service, show list of people that requested  -->
+<% if @service.user_id == current_user.id %>
+	<p style="color:red"> List of users requesting this service </p>
+	<table style="width:25%;text-align:center;background-color:#D3D3D3">
+		<tr>
+			<th>User ID</th>
+		</tr>
+		<% @service.service_users.each do |relation| %>
+			<tr>
+				<td><%= relation.user_id %></p>
+			</tr>
+		<% end %>
+	</table>
+<% end %>
+
+
+<!-- Only render the request button if user is not of same group -->
+<% if @service.user.group != current_user.group %>
+	<% if @service.service_users.exists?(:user_id => current_user.id) %>
+		<%= button_to 'Remove Request', remove_request_service_path, method: :get %>
+	<% else %>
+		<%= button_to 'Request Service', add_request_service_path, method: :get %>
+	<% end %>
+<% end %>

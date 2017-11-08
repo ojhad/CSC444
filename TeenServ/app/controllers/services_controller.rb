@@ -25,6 +25,7 @@ class ServicesController < ApplicationController
 		if @service.save
 			redirect_to(user_path(current_user.id))
 		else
+			#redirect_back(fallback_location: root_path)
 			render :new #(new_user_service_path(@user.id))
 		end
 	end
@@ -64,16 +65,42 @@ class ServicesController < ApplicationController
 		end
 	end
 
-	# User has requeseted to be considered for this service.
+	# User has requested to be considered for this service.
 	def add_request
 		@service = Service.find(params[:id])
+
+		# Validation booleans to make sure user can be considered for this service
 		# A user cannot place a request on a service that they created
-		if(@service.user_id == current_user.id)
+		serviceUserIsCurrentUser = @service.user_id == current_user.id;
+		# A user cannot place a request on a service that is created by another user of the same group
+		serviceUserIsSameTypeAsServiceCreator = @service.user.group == current_user.group;
+
+		if(serviceUserIsCurrentUser || serviceUserIsSameTypeAsServiceCreator)
 			#TODO: Return error if somehow user is trying to request their own service
-			puts "ERROR! Trying to request own service!"
+			puts "ERROR! Unexpected Service Behaviour!"
 			redirect_to (services_path)
 		else
 			@service.service_users.create service_id: @service.id, user_id: current_user.id
+			redirect_to (services_path)
+		end
+	end
+
+	# User wants their request for this service to me removed
+	def remove_request
+		@service = Service.find(params[:id])
+
+		# Make sure request exists before removing request
+		if @service.service_users.exists?(:user_id => current_user.id) 
+			deleteRecord = @service.service_users.where(user_id: current_user.id)
+			if(deleteRecord)
+				deleteRecordId = deleteRecord[0].id
+				@service.service_users.destroy(deleteRecordId)
+			end
+			redirect_to (services_path)
+		else
+			# Do nothing because user is trying to remove themselves from 
+			# a service which they are not requested for
+			puts "TRYING TO DELETE A NON-EXISTENT RELATION"
 			redirect_to (services_path)
 		end
 	end
