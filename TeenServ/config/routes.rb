@@ -24,6 +24,7 @@ Rails.application.routes.draw do
       get 'unlist'
       get 'add_request'
       get 'remove_request'
+      get 'select_request'
     end
   end
 

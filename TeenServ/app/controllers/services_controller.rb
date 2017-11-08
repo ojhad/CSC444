@@ -74,6 +74,7 @@ class ServicesController < ApplicationController
 		serviceUserIsCurrentUser = @service.user_id == current_user.id;
 		# A user cannot place a request on a service that is created by another user of the same group
 		serviceUserIsSameTypeAsServiceCreator = @service.user.group == current_user.group;
+		#TODO: Add a validation check for Service::LISTED
 
 		if(serviceUserIsCurrentUser || serviceUserIsSameTypeAsServiceCreator)
 			#TODO: Return error if somehow user is trying to request their own service
@@ -103,6 +104,28 @@ class ServicesController < ApplicationController
 			puts "TRYING TO DELETE A NON-EXISTENT RELATION"
 			redirect_to (services_path)
 		end
+	end
+
+	# User has accepted a specific request
+	def select_request
+		@service = Service.find(params[:id])
+		selectedUserId = params[:userId]
+
+		# logic validation checks
+		serviceUserIsCurrentUser = @service.user_id == current_user.id;
+		selectedUserExistsInServiceRequests = @service.service_users.exists?(:user_id => selectedUserId)
+		#TODO: Remove UNLISTED check once listing logic is up 
+		serviceIsListed = @service.status == Service::LISTED || Service::UNLISTED
+		if serviceUserIsCurrentUser && selectedUserExistsInServiceRequests && serviceIsListed
+			# delete all the other requests
+			@service.service_users.each do |relation|
+				if(relation.user_id != selectedUserId)
+					@service.service_users.destroy(relation)
+				end
+			end
+			@service.update({:status => Service::ACCEPTED});
+		end
+		redirect_to (@service)
 	end
 
 	# PRIVATE METHODS BEGIN HERE
