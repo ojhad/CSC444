@@ -1,6 +1,5 @@
 class CreateTransactions < ActiveRecord::Migration[5.1]
   def change
-    drop_table :transactions, force: :cascade
     create_table :transactions do |t|
       t.float :total_amount
       t.float :number_of_hours
