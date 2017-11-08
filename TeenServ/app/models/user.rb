@@ -61,6 +61,8 @@ end
 #  profile_pic_file_size    :integer
 #  profile_pic_updated_at   :datetime
 #  stripe_id                :string
+#  balance                  :float            default(0.0)
+#  paypal                   :string
 #
 # Indexes
 #

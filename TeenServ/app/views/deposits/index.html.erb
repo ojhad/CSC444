@@ -1,0 +1,23 @@
+<div class="container" style="padding-top: 4em">
+  <p>In order to get paid, you will need to have an active PayPal Account. If you haven't already, please provide the PayPal email address
+  that you want us to send your earnings to.</p>
+  <br>
+
+  <% if !@user.paypal.blank?%>
+      <p> Your current PayPal address is <b><%=@user.paypal%></b></p>
+      <br>
+      <p> If you want to set a new PayPal address, please fill and submit the form below.</p>
+      <br>
+  <%end%>
+  <div class="col-lg-6">
+    <%= form_tag user_deposits_path(@user.id) do %>
+        <div class="form-group">
+          <%= label_tag 'paypal', 'PayPal Address', class: 'control-label col-sm-3'%>
+          <%= email_field_tag 'paypal', nil , class: 'form-control'%>
+        </div>
+        <div class="form-group">
+        <%= submit_tag 'Submit', class: 'btn btn-primary' %>
+        </div>
+    <%end%>
+  </div>
+</div>

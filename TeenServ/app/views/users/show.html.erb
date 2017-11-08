@@ -201,7 +201,7 @@
               <div class="row">
                 <div class="col-md-4">
                   <h4> Transactions </h4>
-                  <%= link_to "View Transactions", '#', :class => 'btn btn-default' %>
+                  <%= link_to "Payouts", user_payouts_path(@user.id), :class => 'btn btn-default' %>
                 </div>
                 <div class="col-md-4">
                   <h4>Billing</h4>
@@ -229,17 +229,16 @@
                       <%= link_to "View credit card on file", user_cards_path(@user.id), :class => 'btn btn-default' %>
                   <%end%>
                   <%if @user.group==0%>
-                      <%= link_to "Deposit information", '#', :class => 'btn btn-default' %>
-                      <%= form_tag user_payouts_path(@user.id) do %>
-                          <%= submit_tag "PAYPAL PAYOUT TEST", class: "btn btn-large btn-primary" %>
-                <%end%>
+                      <%= link_to "Deposit information", user_deposits_path(@user.id), :class => 'deposit btn btn-default' %><br>
                   <%end%>
                 </div>
                 <div class="col-md-4">
                   <% if @user.group==0%>
                       <h4> Account Balance</h4>
-                      <p> Money earned goes here</p>
-                      <%= link_to "Withdraw balance", '#', :class => 'btn btn-default' %>
+                      <p> CAD $<%=@user.balance%></p>
+                      <%= form_tag user_payouts_path(@user.id) do %>
+                          <%= submit_tag "Withdraw balance", class: "btn btn-default" %>
+                      <%end%>
                   <%else%>
                   <%end%>
                 </div>
@@ -277,6 +276,10 @@
                 location.reload(true);
             },1000);
         });
+
+        $(".deposit").click(function(){
+            $("#deposit_info").show();
+        })
     });
 
     handler = Gmaps.build('Google');
