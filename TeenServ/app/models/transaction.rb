@@ -2,6 +2,13 @@ class Transaction < ApplicationRecord
   belongs_to :teen, :class_name => 'User'
   belongs_to :client, :class_name => 'User'
   belongs_to :service
+  before_save :compute_total
+
+  private
+
+  def compute_total
+    self.total_amount = self.charge_per_hour * self.number_of_hours
+  end
 end
 
 # == Schema Information
