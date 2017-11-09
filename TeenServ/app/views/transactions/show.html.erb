@@ -4,7 +4,7 @@
 <br>
 <p>Cost per hour: <%= @transaction.charge_per_hour %>/hour</p>
 <br>
-<p>Number of hours: <%= @transaction.number_of_hours %> hours</p>
+<p>Total Time: <%= @transaction.number_of_hours %> hour(s)</p>
 <br>
 <p>Total cost: <%= @transaction.total_amount %></p>
 <br>
@@ -13,3 +13,4 @@
       <%=@transaction.client.try(:first_name) %>
   <% end %>
 </h4>
+<%= link_to "Edit Transaction", edit_user_transaction_path(@user.id, @transaction.id), :class => 'btn btn-default'  %>

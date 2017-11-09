@@ -17,7 +17,6 @@ class TransactionsController < ApplicationController
   def create
     @transaction = Transaction.new(transaction_params)
     @transaction.update_attributes(:teen_id => @user.id)
-    @transaction.update_attributes(:total_amount => (@transaction.charge_per_hour * @transaction.number_of_hours))
     service_user = Service.find_by_id(@transaction.service_id).service_users.first
     @transaction.update_attributes(:client_id => service_user.user_id)
     if @transaction.save
@@ -30,6 +29,22 @@ class TransactionsController < ApplicationController
 
   def show
     @transaction = Transaction.find(params[:id])
+  end
+
+  def edit
+    @services = @user.services.select{ |s| s.service_users.any?}
+    @transaction = Transaction.find(params[:id])
+  end
+
+  def update
+    @transaction = Transaction.find(params[:id])
+    @transaction.update_attributes(transaction_params)
+    if @transaction.save
+      redirect_to(user_transaction_path(@user.id, @transaction.id))
+    else
+      flash.error = @transaction.errors
+      render :edit
+    end
   end
 
   def find_user

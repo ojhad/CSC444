@@ -2,7 +2,7 @@
     <div class="card" style="width: 20rem;">
       <div class="card-body">
         <h4 class="card-title"><%= t.service_title %></h4>
-        <p class="card-text">Number of hours: <%= t.number_of_hours %> hours</p>
+        <p class="card-text">Total time: <%= t.number_of_hours %> hour(s)</p>
         <p class="card-text">Cost per hours: <%= t.charge_per_hour %>/hour</p>
         <p class="card-text">Total amount: $<%= t.total_amount %></p>
         <%= link_to "View details", user_transaction_path(@user.id, t.id), :class => 'btn btn-default' %>
