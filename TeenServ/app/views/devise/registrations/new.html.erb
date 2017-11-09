@@ -18,20 +18,6 @@
     <%= devise_error_messages! %>
 
     <div class="form-group">
-      <%= f.label :first_name, 'First Name:', :class => "control-label col-sm-4" %>
-      <div class="col-sm-5">
-        <%= f.text_field :first_name , class: 'form-control'%>
-      </div>    
-    </div>
-
-    <div class="form-group">
-      <%= f.label :last_name, 'Last Name:', :class => "control-label col-sm-4" %>
-      <div class="col-sm-5">
-        <%= f.text_field :last_name , class: 'form-control'%>
-      </div>    
-    </div>
-
-    <div class="form-group">
       <%= f.label :email, 'Email:', :class => "control-label col-sm-4" %>
       <div class="col-sm-5">
         <%= f.email_field :email, autofocus: true , class: 'form-control'%>
@@ -55,85 +41,10 @@
       </div>    
     </div>
 
-    <div class="form-group">
-      <%= f.label :address_1, 'Address line 1:', :class => "control-label col-sm-4" %>
-      <div class="col-sm-5">
-        <%= f.text_field :address_1 , class: 'form-control'%>
-      </div>    
-    </div>
-
-    <div class="form-group">
-      <%= f.label :address_2, 'Address line 2:', :class => "control-label col-sm-4" %>
-      <div class="col-sm-5">
-        <%= f.text_field :address_2 , class: 'form-control'%>
-      </div>    
-    </div>
-
-    <div class="form-group">
-      <%= f.label :city, 'City:', :class => "control-label col-sm-4" %>
-      <div class="col-sm-5">
-        <%= f.text_field :city , class: 'form-control'%>
-      </div>    
-    </div>
-
-    <div class="form-group">
-      <%= f.label :province, 'Province:', :class => "control-label col-sm-4" %>
-      <div class="col-sm-5">
-        <%= f.select :province, [ ['Alberta','AB'],['British Columbia','BC'],['Manitoba','MB'],['New Brunswich','NB'],
-                                  ['Newfoundland and Labrador','NL'],['Nova Scotia','NS'],['Ontario','ON'],['Prince Edward Island','PE'],
-                                  ['Quebec','QC'],['Saskatchewan','SK'],['Northwest Territories','NT'],
-        ['Nunavut','NU'],['Yukon','YT']], {:prompt => 'Select One'} , {:class => "form-control"}%>
-      </div>    
-    </div>
-
-    <div class="form-group">
-      <%= f.label :postal_code, 'Postal Code:', :class => "control-label col-sm-4" %>
-      <div class="col-sm-5">
-        <%= f.text_field :postal_code , class: 'form-control'%>
-      </div>    
-    </div>
-
-    <div class="form-group">
-      <%= f.label :country, 'Country:', :class => "control-label col-sm-4" %>
-      <div class="col-sm-5">
-        <%= f.text_field :country, class: 'form-control' %>
-      </div>    
-    </div>
-
-    <div class="form-group">
-      <%= f.label :home_number, 'Home Number:', :class => "control-label col-sm-4" %>
-      <div class="col-sm-5">
-        <%= f.text_field :home_number, class: 'form-control'%>
-      </div>    
-    </div>
-
-    <div class="form-group">
-      <%= f.label :mobile_number, 'Mobile Number:', :class => "control-label col-sm-4" %>
-      <div class="col-sm-5">
-        <%= f.text_field :mobile_number , class: 'form-control'%>
-      </div>    
-    </div>
-
-    <div class="form-group" id='age' hidden="true">
-      <%= f.label :age, 'Age', :class => "control-label col-sm-4" %>
-      <div class="col-sm-5">
-        <%= f.text_field :age , class: 'form-control'%>
-      </div>    
-    </div>
-
-    <div class="form-group" id="profile_pic">
-      <%= f.label :profile_pic, 'Profile Picture:', :class => "control-label col-sm-4" %>
-      <div class="col-sm-5">
-        <%= f.file_field :profile_pic , class: 'form-control'%>
-      </div>    
-    </div>
-
-    <%= f.hidden_field :group , class: 'form-control'%>
-
     <div class = "form-group">
       <div class="col-sm-offset-4 col-sm-10">
         <div class="actions">
-          <%= f.submit "Sign up", class: "btn btn-primary" %>
+          <%= f.submit "Next", class: "btn btn-primary" %>
         </div>
       </div>
     </div>
