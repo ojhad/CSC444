@@ -1,47 +1,45 @@
-<div class = "form-horizontal">
+<div class="container">
+  <div class="row">
 
-  <div class = "form-group">
-    <div class="col-sm-offset-4 col-sm-10">
-      <h2>Log in</h2>
-    </div>
-  </div>
+    <!-- Pen Title-->
+    <div class="container">
+      <div class="card"></div>
+      <div class="card">
+        <h1 class="title">Login</h1>
+          <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+              <div class="input-container">
+                <%= f.email_field :email, autofocus: true%>
+                <label for="Username">Username</label>
+                <div class="bar"></div>
+              </div>
+              <div class="input-container">
+                <%= f.password_field :password, autocomplete: "off"%>
+                <label for="Password">Password</label>
+                <div class="bar"></div>
+              </div>
 
-  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-    <div class="form-group">
-      <%= f.label :email, :class => "control-label col-sm-4" %>
-      <div class="col-sm-5">
-        <%= f.email_field :email, autofocus: true , :class => "form-control"%>
-      </div>    
-    </div>
 
-    <div class="form-group">
-      <%= f.label :password , :class => "control-label col-sm-4"%>
-      <div class="col-sm-5">
-        <%= f.password_field :password, autocomplete: "off", :class => "form-control" %>
+              <div class="button-container">
+                <!--%= f.submit "Log In", :class => "login-btn" %>-->
+                <%= button_tag(type: 'submit', class: "login-btn") do %>
+                    <span class="span"></span>GO
+                <% end %>
+              </div>
+
+              <% if devise_mapping.rememberable? -%>
+                  <div class="footer">
+                    <a><%= f.check_box :remember_me,  :class => 'save-checkbox' %></a>
+                    <a><%= f.label :remember_me,  :class => 'save-label'%></a>
+                  </div>
+              <% end -%>
+              <div class = "other">
+                  <%= render "devise/shared/links" %>
+              </div>
+
+          <% end %>
       </div>
+
     </div>
-
-    <% if devise_mapping.rememberable? -%>
-      <div class="form-group">
-        <div class="col-sm-offset-4 col-sm-10">
-          <%= f.check_box :remember_me %>
-          <%= f.label :remember_me %>
-        </div>
-      </div>
-    <% end -%>
-
-    <div class="form-group">
-      <div class="col-sm-offset-4 col-sm-10">
-        <div class="form-actions">
-          <%= f.submit "Log in",:class => "btn btn-primary"  %>
-        </div>
-      </div>
-    </div>
-  <% end %>
-
-  <div class = "form-group">
-    <div class="col-sm-offset-4 col-sm-10">
-      <%= render "devise/shared/links" %>
     </div>
   </div>
 </div>
