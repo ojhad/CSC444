@@ -46,22 +46,26 @@ class ServicesController < ApplicationController
 		redirect_to (user_path(userId))
 	end
 
-	# Changes status of the service associated with the passed in 'serviceId'
+	# Changes status of the service associated with the passed in service id
 	# to LISTED. This makes it visible to other users.
-	def list(serviceId)
-		@service = Service.find(serviceId)
+	def list
+		@service = Service.find(params[:id])
 		@service.update({:status => Service::LISTED});
+		redirect_to (@service)
 	end
 
-	# Changes status of the service associated with the passed in 'serviceId'
+	# Changes status of the service associated with the passed in service id
 	# to UNLISTED. This makes it invisible to other users.
-	def unlist(serviceId)
-		@service = Service.find(serviceId)
+	def unlist
+		@service = Service.find(params[:id])
 		if(@service.status == Service::LISTED || @service.status == Service::ACCEPTED)
+			@service.service_users.destroy_all
 			@service.update({:status => Service::UNLISTED});
+			redirect_to (@service)
 		else
 			#return an error because user cannot unlist completed services
-			return "ERROR! Cannot change status of COMPLETED services!"
+			puts "ERROR! Cannot change status of COMPLETED services!"
+			redirect_to (@service)
 		end
 	end
 
@@ -114,8 +118,7 @@ class ServicesController < ApplicationController
 		# logic validation checks
 		serviceUserIsCurrentUser = @service.user_id == current_user.id;
 		selectedUserExistsInServiceRequests = @service.service_users.exists?(:user_id => selectedUserId)
-		#TODO: Remove UNLISTED check once listing logic is up 
-		serviceIsListed = @service.status == Service::LISTED || Service::UNLISTED
+		serviceIsListed = @service.status == Service::LISTED
 		if serviceUserIsCurrentUser && selectedUserExistsInServiceRequests && serviceIsListed
 			# delete all the other requests
 			@service.service_users.each do |relation|
