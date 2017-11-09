@@ -1,64 +1,54 @@
 <div class = "form-horizontal">
-  
-  <div class = "form-group">
-    <div class="col-sm-offset-4 col-sm-10">
-      <h2>Sign up</h2>
-    </div>
-  </div>
-  
-  <div class = "form-group">
-    <div class="col-sm-offset-4 col-sm-10">
-      <label> I am signing up as ...</label>
-      <input type="radio" class="GroupSelector" name="group" value="teen"> Teenager
-      <input type="radio" class="GroupSelector" name="group" value="client"> Client
-    </div>
-  </div>
+  <%= devise_error_messages! %>
+  <div class="sign-in-container">
 
-  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-    <%= devise_error_messages! %>
+    <div class = "sign-in-back">
+      <div class="sign-in-container">
+        <div class="card-signIn"></div>
+        <div class="card-signIn">
+          <h1 class="title">Sign Up</h1>
+          <div class = "radio-container">
+            <label > I am signing up as ...</label>
+            <input type="radio" class="GroupSelector" name="group" value="teen"> Teenager
+            <input type="radio" class="GroupSelector" name="group" value="client"> Client
+          </div>
+          <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
 
-    <div class="form-group">
-      <%= f.label :email, 'Email:', :class => "control-label col-sm-4" %>
-      <div class="col-sm-5">
-        <%= f.email_field :email, autofocus: true , class: 'form-control'%>
-      </div>    
-    </div>
 
-    <div class="form-group">
-      <%= f.label :password, :class => "control-label col-sm-4" %>
-      <div class="col-sm-5">
-        <% if @minimum_password_length %>
-          <em>(<%= @minimum_password_length %> characters minimum):</em>
-        <% end %><br />
-        <%= f.password_field :password, autocomplete: "off" , class: 'form-control'%>
-      </div>    
-    </div>
+            <div class="input-container">
+                <%= f.email_field :email, autofocus: true%>
+                <label for="Username">Email</label>
+                <div class="bar"></div>
+            </div>
 
-    <div class="form-group">
-      <%= f.label :password_confirmation, :class => "control-label col-sm-4" %>
-      <div class="col-sm-5">
-        <%= f.password_field :password_confirmation, autocomplete: "off" , class: 'form-control'%>
-      </div>    
-    </div>
+            <div class="input-container">
+                <% if @minimum_password_length %>
+                  <em>(<%= @minimum_password_length %> characters minimum):</em>
+                <% end %><br />
+                <%= f.password_field :password, autocomplete: "off" %>
+                <label for="Password">Password</label>
+                <div class="bar"></div>
+            </div>
 
-    <div class = "form-group">
-      <div class="col-sm-offset-4 col-sm-10">
-        <div class="actions">
-          <%= f.submit "Next", class: "btn btn-primary" %>
+            <div class="input-container">
+              <%= f.password_field :password_confirmation, autocomplete: "off"%>
+              <label for="Password">Password</label>
+              <div class="bar"></div>
+            </div>
+
+            <div class = "button-container">
+              <%= button_tag(type: 'submit', class: "login-btn") do %>
+                  <span class="span"></span>NEXT ->
+              <% end %>
+            </div>
+
+          <% end %>
         </div>
       </div>
     </div>
 
-  <% end %>
-
-  <div class = "form-group">
-    <div class="col-sm-offset-4 col-sm-10">
-      <%= render "devise/shared/links" %>
-    </div>
   </div>
-
 </div>
-
 <script type="text/javascript">
 
     $(".GroupSelector").change(function(){
