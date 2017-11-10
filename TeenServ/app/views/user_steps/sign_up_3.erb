@@ -1,3 +1,4 @@
+<div class = "signup-back">
 <div class = "form-horizontal">
   <div class="sign-in-container">
     <div class = "sign-in-back">
@@ -70,18 +71,15 @@
                     <span class="span"></span>COMPLETE
                 <% end %>
               </div>
-              <div class = "form-group">
-                <div class="col-sm-offset-4 col-sm-10">
-                  <div class="actions">
-                    <%= link_to "Previous", previous_wizard_path%>
-                  </div>
-                </div>
+              <div class = "signup-control-links">
+                 or <%= link_to "go back", previous_wizard_path%>
               </div>
           <% end %>
         </div>
       </div>
     </div>
   </div>
+</div>
 </div>
 <script type="text/javascript">
 

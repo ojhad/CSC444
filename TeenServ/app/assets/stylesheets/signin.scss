@@ -1,5 +1,6 @@
 
-
+.signup-back{
+}
 .sign-in-back{
   font-family: 'Roboto', sans-serif;
   font-size: 14px;
@@ -89,7 +90,7 @@
 /* Container */
 .sign-in-container {
   position: relative;
-  max-width: 650px;
+  max-width: 500px;
   width: 100%;
   margin: 0 auto 100px;
 }
@@ -186,14 +187,14 @@
   margin: 0 0 35px;
   padding: 10px 0 10px 50px;
   color:#3A539B;
-  font-size: 32px;
+  font-size: 25px;
   font-weight: 600;
   text-transform: uppercase;
   bottom: 30px;
 }
 .card-signIn .input-container {
   position: relative;
-  margin: 0 60px 50px;
+  margin: 0 60px 33px;
 }
 .card-signIn .input-container .form-control{
   font-weight: bold;
@@ -302,6 +303,9 @@
   margin: 0 60px;
   text-align: center;
 }
+.card-signIn .signup-control-links{
+  text-align: center;
+}
 .login-btn{
   outline: 0;
   cursor: pointer;
@@ -374,7 +378,7 @@
   color: #3A539B;
 }
 .card-signIn .other {
-  margin: 40px 0 0;
+  margin: 1px 0 0;
   color: #bababa;
   font-size: 18px;
   font-weight: 300;

@@ -1,3 +1,4 @@
+<div class = "signup-back">
 <div class = "form-horizontal">
   <div class="sign-in-container">
     <div class = "sign-in-back">
@@ -24,15 +25,19 @@
 
               <div class = "button-container">
                 <%= button_tag(type: 'submit', class: "login-btn") do %>
-                    <span class="span"></span>NEXT STEP
+                    <span class="span"></span>NEXT
                 <% end %>
-                or <%= link_to "skip this step", next_wizard_path %>
+              </div>
+              <div class = "signup-control-links">
+              or <%= link_to "skip this step", next_wizard_path %>
               </div>
 
-          <% end %>
+
+        <% end %>
         </div>
       </div>
     </div>
+  </div>
   </div>
 </div>
 <script type="text/javascript">

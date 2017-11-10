@@ -10,7 +10,7 @@
 #  teen_id         :integer
 #  client_id       :integer
 #  service_id      :integer
-#  status          :integer          default(0), not null
+#  status          :integer          default("not_approved"), not null
 #
 # Indexes
 #

@@ -1,3 +1,4 @@
+<div class = "signup-back">
 <div class = "form-horizontal">
   <%= devise_error_messages! %>
   <div class="sign-in-container">
@@ -8,10 +9,10 @@
           <h1 class="title">Sign Up</h1>
           <div class = "radio-container">
             <label class = "radio-label"> Sign up as </label>
-            <input type="radio" class="GroupSelector" name="group" value="teen" checked="checked">
-            <label class = "radio-label">Teenager</label>
-            <input type="radio" class="GroupSelector" name="group" value="client">
-            <div class = "radio-label">Client</div>
+            <input type="radio" class="GroupSelector" id = "teen" name="group" value="teen" checked="checked">
+            <label for = "teen" class = "radio-label">Teenager</label>
+            <input type="radio" class="GroupSelector" name = "group" id = "client" value="client">
+            <label for = "client" class = "radio-label">Client</label>
           </div>
           <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
 
@@ -39,7 +40,7 @@
 
             <div class = "button-container">
               <%= button_tag(type: 'submit', class: "login-btn") do %>
-                  <span class="span"></span>NEXT ->
+                  <span class="span"></span>NEXT
               <% end %>
             </div>
 
@@ -47,6 +48,7 @@
         </div>
       </div>
     </div>
+  </div>
   </div>
 </div>
 <script type="text/javascript">
