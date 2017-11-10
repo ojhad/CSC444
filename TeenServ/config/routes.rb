@@ -29,7 +29,7 @@ Rails.application.routes.draw do
   end
 
   resources :user_skills
-
+  resources :user_steps
 
 
 
