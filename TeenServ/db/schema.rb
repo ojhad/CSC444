@@ -34,8 +34,6 @@ ActiveRecord::Schema.define(version: 20171110003445) do
     t.string "batch_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "user_id"
-    t.index ["user_id"], name: "index_payouts_on_user_id"
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -118,6 +116,14 @@ ActiveRecord::Schema.define(version: 20171110003445) do
     t.string "home_number"
     t.string "mobile_number"
     t.integer "age"
+    t.string "image_file_name"
+    t.string "image_content_type"
+    t.integer "image_file_size"
+    t.datetime "image_updated_at"
+    t.string "profile_picture_file_name"
+    t.string "profile_picture_content_type"
+    t.integer "profile_picture_file_size"
+    t.datetime "profile_picture_updated_at"
     t.integer "group"
     t.string "first_name"
     t.string "last_name"
@@ -135,7 +141,6 @@ ActiveRecord::Schema.define(version: 20171110003445) do
   end
 
   add_foreign_key "deposits", "users"
-  add_foreign_key "payouts", "users"
   add_foreign_key "reviews", "users"
   add_foreign_key "service_users", "services"
   add_foreign_key "service_users", "users"
