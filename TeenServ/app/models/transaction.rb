@@ -3,6 +3,8 @@ class Transaction < ApplicationRecord
   belongs_to :client, :class_name => 'User'
   belongs_to :service
   before_save :compute_total
+  enum status: [ :not_approved, :teen_approved, :client_approved, :completed ]
+
 
   private
 
@@ -23,6 +25,7 @@ end
 #  teen_id         :integer
 #  client_id       :integer
 #  service_id      :integer
+#  status          :integer          default(0), not null
 #
 # Indexes
 #

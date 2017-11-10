@@ -10,6 +10,8 @@ class User < ApplicationRecord
   has_many :service_users
   has_many :payouts
   has_one :deposit
+  has_many :client_transactions, :class_name => 'Transaction', :foreign_key => 'client_id'
+  has_many :teen_transactions, :class_name => 'Transaction', :foreign_key => 'teen_id'
 
 
   def is_teen?

@@ -2,10 +2,10 @@ class TransactionsController < ApplicationController
   before_action :find_user
 
   def index
-    if @user.group == 1
-      @transactions = Transaction.where(:client_id => @user.id)
+    if @user.is_teen?
+     @transactions = @user.teen_transactions
     else
-      @transactions = Transaction.where(:teen_id => @user.id)
+      @transactions = @user.client_transactions
     end
   end
 
