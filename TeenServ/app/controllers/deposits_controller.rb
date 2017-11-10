@@ -15,12 +15,31 @@ class DepositsController < ApplicationController
   def create
 
     @user = User.find(current_user.id)
+    @user_deposit_info = Deposit.find_by_user_id(@user.id)
 
-    @user.paypal = params[:paypal]
+    @form = params[:which_form]
 
-    @user.save!
+    if @form=='address'
+      @user_deposit_info.address_1 = params[:address_1]
+      @user_deposit_info.address_2 = params[:address_2]
+      @user_deposit_info.city = params[:city]
+      @user_deposit_info.country = params[:country]
+      @user_deposit_info.province = params[:province]
+      @user_deposit_info.postal_code = params[:postal_code]
+      @user_deposit_info.save
+      
+      flash.notice = "Mailing address updated!"
+    elsif @form=='paypal'
+      @user_deposit_info.paypal = params[:paypal]
 
-    redirect_to users_path(@user.id)
+      @user_deposit_info.save!
+
+      flash.notice = "PayPal Address updated!"
+    else
+      flash.alert = "ERROR!"
+    end
+
+    redirect_to user_deposits_path(@user.id)
 
   end
 

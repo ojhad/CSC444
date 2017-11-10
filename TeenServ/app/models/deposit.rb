@@ -2,11 +2,8 @@ class Deposit < ApplicationRecord
   belongs_to :user
 
   def has_paypal?
-    if self.paypal
-      1
-    else
-      0
-    end
+    self.paypal.blank?
+
   end
 
 end
