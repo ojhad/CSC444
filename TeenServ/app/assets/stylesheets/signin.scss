@@ -1,7 +1,7 @@
 
 
 .sign-in-back{
-  font-family: 'RobotoDraft', 'Roboto', sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-size: 14px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -189,10 +189,21 @@
   font-size: 32px;
   font-weight: 600;
   text-transform: uppercase;
+  bottom: 30px;
 }
 .card-signIn .input-container {
   position: relative;
   margin: 0 60px 50px;
+}
+.card-signIn .input-container .form-control{
+  font-weight: bold;
+  position: relative;
+  top: 10px;
+}
+.card-signIn .input-container .form-control:focus ~ label{
+  color: #3A539B;
+  -webkit-transform: translate(-12%, -50%) scale(0.75);
+  transform: translate(-12%, -50%) scale(0.75);
 }
 .card-signIn .input-container input:not([type=checkbox]) {
   outline: none;
@@ -224,29 +235,45 @@
   position: absolute;
   top: -12px;
   left: 0;
-  color: black;
-  font-size: 24px;
+  //comment back if want big label
+  /*color: black;
   font-weight: 300;
+  -webkit-transition: 0.2s ease;*/
+  font-size: 24px;
   line-height: 60px;
-  -webkit-transition: 0.2s ease;
   transition: 0.2s ease;
+  color: black;
+  font-weight: bold;
+  -webkit-transform: translate(-12%, -50%) scale(0.75);
+  transform: translate(-12%, -50%) scale(0.75);
 }
-.radio-container{
+.card-signIn .radio-container{
   position: relative;
   margin: 0 60px 50px;
 }
-.radio-label {
-  position: absolute;
+.card-signIn .radio-container .GroupSelector {
+  float: left;
+  clear: none;
+  margin: 2px 0 0 2px;
+  position:relative;
+  top:-42px;
+}
+.card-signIn .radio-label {
+  float: left;
+  clear: none;
+  color: black;
+  display: block;
+  padding: 2px 1em 0 0;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 18px;
   float: left;
   clear: none;
   display: block;
   padding: 2px 1em 0 0;
-  color: black;
-  font-size: 24px;
-  font-weight: 300;
-  line-height: 60px;
-  -webkit-transition: 0.2s ease;
-  transition: 0.2s ease;
+  position:relative;
+  top:-45px;
+  bottom: -500px;
 }
 .card-signIn .input-container .bar {
   position: absolute;
