@@ -18,7 +18,7 @@
 }
 
 //iPhone (5, 5C, 5S, SE) in portrait mode
-@media screen and (max-width: 320px){
+@media screen and (min-width: 320px) and (max-width: 568px) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 2){
 	#myFooter {
 		text-align: center;
 	}
@@ -119,7 +119,7 @@
 }
 
 //iPhone 5, 5C, 5S, SE in landscape
-@media screen and (max-width: 568px) and (orientation: landscape){
+@media screen and (min-width: 320px) and (max-width: 568px) and (orientation: landscape) and (-webkit-min-device-pixel-ratio: 2){
 	.mynav {
 		min-height: 50px !important;
 	}
@@ -235,10 +235,11 @@
 	}
 }
 
-//iPhone (6, 6S, 7, 8) and (6+, 7+, 8+) in portrait mode
-@media screen and (min-width: 321px) and (max-width: 414px){
+//iPhone (6, 6S, 7, 8) in portrait mode
+@media screen and (min-width: 375px) and (max-width: 667px) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 2){
 	#myFooter {
 		text-align: center;
+		height: 600px;
 	}
 
 	.container-intro {
@@ -333,7 +334,7 @@
 }
 
 //iPhone 6, 6S, 7, 8 in landscape
-@media screen and (min-width: 569px) and (max-width: 667px) and (orientation: landscape){
+@media screen and (min-width: 375px) and (max-width: 667px) and (orientation: landscape) and (-webkit-min-device-pixel-ratio: 2){
 	.mynav {
 		min-height: 50px !important;
 	}
@@ -449,8 +450,111 @@
 	}
 }
 
+//iPhone (6+, 7+, 8+) in portrait mode, note left min device pixel ratio as 2 
+//(to test on browser) but ideally should be 3 for actual device
+@media screen and (min-width: 414px) and (max-width: 736px) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 3){
+	#myFooter {
+		text-align: center;
+		height: 736px;
+	}
+
+	.header-intro {
+		height: 670px;
+	}
+
+	.container-intro {
+		top:22%;
+		left:25%;
+		width: 50%;
+	}
+
+	#welcome-tag {
+	  	font-size:3.6em;
+	  	font-weight:bolder;
+	}
+
+	#welcome-description-1 {
+		font-size: 2.1em;
+	}
+
+	#welcome-description-2 {
+		font-size: 1.5em;
+	}
+
+	.shovel-svg {
+		top:45%;
+		left:3%;
+		transform: rotate(-15deg);
+	}
+
+	.wheel-barrow-svg {
+		top:50%;
+		right: 4%;
+		transform: rotate(-10deg);
+	}
+
+	.vacuum-svg {
+		bottom:5%;
+		left:17%;
+	}
+
+	.mop-svg {
+		bottom:5%;
+		right:13%;
+	}
+
+	.study-svg {
+		top:8%;
+		left:19%;
+	}
+
+	.dog-walk-svg {
+		bottom:5%;
+		left:48%;
+	}
+
+	.lawn-mower-svg {
+		top:8%;
+		right:19%;
+	}
+
+	.shovel-svg {
+		height: 65px;
+		width: 65px;
+	}
+
+	.wheel-barrow-svg, .vacuum-svg, .mop-svg, .study-svg, .dog-walk-svg, .lawn-mower-svg {
+		height: 50px;
+		width: 50px;
+	}
+
+	#title-how-it-works {
+		font-size: 2.7em;
+	}
+
+	.col-heading {
+		font-size: 1.7em;
+	}
+
+	.col-paragraph {
+		font-size: 1.2em;
+	}
+
+	.how-it-works-1 {
+		margin: 5% auto;
+	}
+
+	.how-it-works-2 {
+		margin: 30% auto;
+	}
+
+	.how-it-works-3 {
+		margin: 30% auto;
+	}
+}
+
 //iPhone 6+, 7+, 8+ in landscape
-@media screen and (min-width: 668px) and (max-width: 736px) and (orientation: landscape){
+@media screen and (min-width: 414px) and (max-width: 736px) and (orientation: landscape) and (-webkit-min-device-pixel-ratio: 3){
 	.mynav {
 		min-height: 50px !important;
 	}
@@ -465,6 +569,7 @@
 
 	#myFooter {
 		text-align: center;
+		height: 500px;
 	}
 
 	.header-intro {
@@ -563,6 +668,269 @@
 
 	#myFooter {
     	margin-top: 10%;
+	}
+}
+
+/* ----------- iPad 3, 4 ----------- */
+/* Portrait */
+@media only screen and (min-width: 768px) and (max-width: 1023px) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 2) {
+	#myFooter {
+		text-align: center;
+		height: 400px;
+	}
+
+	#myFooter h5{
+		font-size: 26px;
+	    margin-top: 60px;
+	}
+
+	#myFooter a{
+		font-size: 20px;
+	}
+
+	#myFooter .social-networks{
+		text-align: center;
+		padding-top: 30px;
+		padding-bottom: 38px;
+	}
+
+	#myFooter .social-networks a{
+	    font-size: 40px;
+	    margin-right: 5px;
+	    margin-left: 5px;
+	}
+
+	.header-intro {
+		height: 720px;
+	}
+
+	.container-intro {
+		top:35%;
+		left:15%;
+		width: 70%;
+	}
+
+	#welcome-tag {
+	  	font-size:3.8em;
+	  	font-weight:bolder;
+	}
+
+	#welcome-description-1 {
+		font-size: 2.2em;
+	}
+
+	#welcome-description-2 {
+		font-size: 1.7em;
+	}
+
+	.shovel-svg {
+		top:45%;
+		left:2%;
+		transform: rotate(-15deg);
+	}
+
+	.wheel-barrow-svg {
+		top:50%;
+		right: 4%;
+		transform: rotate(-10deg);
+	}
+
+	.vacuum-svg {
+		bottom:10%;
+		left:17%;
+	}
+
+	.mop-svg {
+		bottom:10%;
+		right:13%;
+	}
+
+	.study-svg {
+		top:8%;
+		left:19%;
+	}
+
+	.dog-walk-svg {
+		bottom:10%;
+		left:48%;
+	}
+
+	.lawn-mower-svg {
+		top:8%;
+		right:19%;
+	}
+
+	.shovel-svg {
+		height: 80px;
+		width: 80px;
+	}
+
+	.wheel-barrow-svg, .vacuum-svg, .mop-svg, .study-svg, .dog-walk-svg, .lawn-mower-svg {
+		height: 65px;
+		width: 65px;
+	}
+
+	#title-how-it-works {
+		font-size: 3.2em;
+	}
+
+	.col-heading {
+		font-size: 2.2em;
+	}
+
+	.col-paragraph {
+		font-size: 1.6em;
+	}
+
+	.how-it-works-1 {
+		margin: 5% auto;
+	}
+
+	.how-it-works-2 {
+		margin: 20% auto;
+	}
+
+	.how-it-works-3 {
+		margin: 20% auto;
+	}
+}
+
+//iPad 3,4 Landscape
+@media only screen and (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) and (-webkit-min-device-pixel-ratio: 2) {
+	#myFooter {
+		text-align: center;
+		height: 370px;
+	}
+
+	#myFooter h5{
+		font-size: 24px;
+	    margin-top: 60px;
+	}
+
+	#myFooter a{
+		font-size: 18px;
+	}
+
+	#myFooter .social-networks{
+		text-align: center;
+		padding-top: 30px;
+		padding-bottom: 38px;
+	}
+
+	#myFooter .social-networks a{
+	    font-size: 40px;
+	    margin-right: 5px;
+	    margin-left: 5px;
+	}
+
+	.mynav {
+		min-height: 50px !important;
+	}
+
+	.container-fluid {
+		margin-top: 0px;
+	}
+
+	.navbar-brand {
+		font-size: 1.5em;
+	}
+
+	.header-intro {
+		height: 600px;
+	}
+
+	.container-intro {
+		top:35%;
+		left:15%;
+		width: 70%;
+	}
+
+	#welcome-tag {
+	  	font-size:4em;
+	  	font-weight:bolder;
+	}
+
+	#welcome-description-1 {
+		font-size: 2em;
+	}
+
+	#welcome-description-2 {
+		font-size: 1.5em;
+	}
+
+	.shovel-svg {
+		top:45%;
+		left:3%;
+		transform: rotate(-15deg);
+	}
+
+	.wheel-barrow-svg {
+		top:50%;
+		right: 4%;
+		transform: rotate(-10deg);
+	}
+
+	.vacuum-svg {
+		bottom:10%;
+		left:17%;
+	}
+
+	.mop-svg {
+		bottom:10%;
+		right:13%;
+	}
+
+	.study-svg {
+		top:8%;
+		left:19%;
+	}
+
+	.dog-walk-svg {
+		bottom:10%;
+		left:48%;
+	}
+
+	.lawn-mower-svg {
+		top:8%;
+		right:19%;
+	}
+
+	.shovel-svg {
+		height: 65px;
+		width: 65px;
+	}
+
+	.wheel-barrow-svg, .vacuum-svg, .mop-svg, .study-svg, .dog-walk-svg, .lawn-mower-svg {
+		height: 50px;
+		width: 50px;
+	}
+
+	#title-how-it-works {
+		font-size: 2.9em;
+	}
+
+	.col-heading {
+		font-size: 1.8em;
+	}
+
+	.col-paragraph {
+		font-size: 1.4em;
+	}
+
+	.how-it-works-1 {
+		margin: 5% auto;
+	}
+
+	.how-it-works-2 {
+		margin: 35% auto;
+	}
+
+	.how-it-works-3 {
+		margin: 65% auto;
+	}
+
+	#myFooter {
+    	margin-top: 20%;
 	}
 }
 
@@ -678,7 +1046,7 @@
 	}
 
 }
- 
+
 /* Large screens ----------- */
 @media only screen and (min-width : 1824px) {
 /* STYLES GO HERE */
@@ -782,56 +1150,4 @@
 		font-size: 1.8em;
 	}
 
-}
-
-//Note: Below is sample template for media queries
- 
-/* Smartphones (portrait and landscape) ----------- */
-@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
-/* STYLES GO HERE */
-}
- 
-/* Smartphones (landscape) ----------- */
-@media only screen and (min-width : 321px) {
-/* STYLES GO HERE */
-}
- 
-/* Smartphones (portrait) ----------- */
-@media only screen and (max-width : 320px) {
-/* STYLES GO HERE */
-}
- 
-/* iPads (portrait and landscape) ----------- */
-@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
-/* STYLES GO HERE */
-}
- 
-/* iPads (landscape) ----------- */
-@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) {
-/* STYLES GO HERE */
-}
- 
-/* iPads (portrait) ----------- */
-@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) {
-/* STYLES GO HERE */
-}
- 
-/* Desktops and laptops ----------- */
-@media only screen and (min-width : 1224px) {
-/* STYLES GO HERE */
-}
-
-/* iPhone 5 (portrait &amp; landscape)----------- */
-@media only screen and (min-device-width : 320px) and (max-device-width : 568px) {
-/* STYLES GO HERE */
-}
- 
-/* iPhone 5 (landscape)----------- */
-@media only screen and (min-device-width : 320px) and (max-device-width : 568px) and (orientation : landscape) {
-/* STYLES GO HERE */
-}
- 
-/* iPhone 5 (portrait)----------- */
-@media only screen and (min-device-width : 320px) and (max-device-width : 568px) and (orientation : portrait) {
-/* STYLES GO HERE */
 }

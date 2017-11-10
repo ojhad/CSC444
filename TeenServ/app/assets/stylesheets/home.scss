@@ -8,6 +8,7 @@ html,body
     height: 100%;
     overflow-x: hidden;
 }
+
 //fade in of welcome page
 #header {
 	animation: fadein 2s;
@@ -222,25 +223,26 @@ html,body
 	background-color: #3A539B;
 	color:white;
 	flex: 0 0 auto;
-    -webkit-flex: 0 0 auto;
-    margin-top: 20%;
+  -webkit-flex: 0 0 auto;
+  margin-top: 20%;
 }
 
 #myFooter ul{
 	list-style-type: none;
-    padding-left: 0;
-    line-height: 1.7;
-
+  padding-left: 0;
+  line-height: 1.7;
 }
 
 #myFooter h5{
+  font-family: 'Roboto', sans-serif;
 	font-size: 18px;
-    color: white;
-    font-weight: bold;
-    margin-top: 30px;
+  color: white;
+  font-weight: bolder;
+  margin-top: 30px;
 }
 
 #myFooter a{
+  font-family: 'Roboto', sans-serif; 
 	color:white;
 	text-decoration: none;
 }
