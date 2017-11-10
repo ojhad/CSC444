@@ -1,0 +1,103 @@
+<div class = "form-horizontal">
+  <div class="sign-in-container">
+    <div class = "sign-in-back">
+      <div class="sign-in-container">
+        <div class="card-signIn"></div>
+        <div class="card-signIn">
+          <h1 class="title">Address Information</h1>
+          <%= form_for current_user, url: wizard_path do |f| %>
+              <div class="input-container">
+                <%= f.text_field :address_1%>
+                <label for="Address">Address 1:</label>
+                <div class="bar"></div>
+              </div>
+
+              <div class="input-container">
+                <%= f.text_field :address_2%>
+                <label for="Address">Address 2:</label>
+                <div class="bar"></div>
+              </div>
+
+              <div class="input-container">
+                <%= f.text_field :city%>
+                <label for="Address">City:</label>
+                <div class="bar"></div>
+              </div>
+
+              <div class="input-container">
+                <%= f.select :province, [ ['Alberta','AB'],['British Columbia','BC'],['Manitoba','MB'],['New Brunswich','NB'],
+                                          ['Newfoundland and Labrador','NL'],['Nova Scotia','NS'],['Ontario','ON'],['Prince Edward Island','PE'],
+                                          ['Quebec','QC'],['Saskatchewan','SK'],['Northwest Territories','NT'],
+                                          ['Nunavut','NU'],['Yukon','YT']], {:prompt => 'Select One'} , {:class => "form-control"}%>
+                <label for="Username">Province:</label>
+              </div>
+
+              <div class="input-container">
+                <%= f.text_field :postal_code%>
+                <label for="Username">ZIP/Postal Code:</label>
+                <div class="bar"></div>
+              </div>
+
+              <div class="input-container">
+                <%= f.text_field :country%>
+                <label for="Username">Country:</label>
+                <div class="bar"></div>
+              </div>
+              <div class="input-container">
+                <%= f.text_field :home_number%>
+                <label for="Username">Home Phone:</label>
+                <div class="bar"></div>
+              </div>
+
+              <div class="input-container">
+                <%= f.text_field :mobile_number%>
+                <label for="Username">Mobile Phone:</label>
+                <div class="bar"></div>
+              </div>
+
+              <div class="form-group" id='age' hidden="true">
+                <%= f.label :age, 'Age', :class => "control-label col-sm-4" %>
+                <div class="col-sm-5">
+                  <%= f.text_field :age , class: 'form-control'%>
+                </div>
+              </div>
+
+
+              <%= f.hidden_field :group , class: 'form-control'%>
+
+              <div class = "button-container">
+                <%= button_tag(type: 'submit', class: "login-btn") do %>
+                    <span class="span"></span>COMPLETE
+                <% end %>
+              </div>
+              <div class = "form-group">
+                <div class="col-sm-offset-4 col-sm-10">
+                  <div class="actions">
+                    <%= link_to "Previous", previous_wizard_path%>
+                  </div>
+                </div>
+              </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+
+    $(".GroupSelector").change(function(){
+        switch($(this).val()) {
+            case 'teen' :
+                $('#age').show()
+                $('#profile_pic').show()
+                $('#user_group').val(0)
+                break;
+            case 'client' :
+                $('#age').hide()
+                $('#profile_pic').hide()
+                $('#age').val(null)
+                $('#user_group').val(1)
+                break;
+        }
+    })
+</script>
