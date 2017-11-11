@@ -1,5 +1,10 @@
 class Service < ApplicationRecord
 
+	#Scopes
+	scope :viewable_services, ->(user) {
+		joins(:user).where('users.group' => user.type_of_services_to_view)
+	}
+
 	# Status Options Constants Start
 	UNLISTED = 0 # service not yet publicly visible
 	LISTED = 1 # service posted, publicly visisble, and accepting user requests

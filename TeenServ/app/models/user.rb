@@ -22,6 +22,10 @@ class User < ApplicationRecord
     self.postal_code
   end
 
+  def type_of_services_to_view
+    self.is_teen? ? 1 : 0
+  end
+
   #gets lat & long for user
   geocoded_by :get_address
 
