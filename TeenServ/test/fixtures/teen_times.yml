@@ -1,0 +1,26 @@
+# == Schema Information
+#
+# Table name: teen_times
+#
+#  id         :integer          not null, primary key
+#  user_id    :integer
+#  day        :string
+#  start_time :time
+#  end_time   :time
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 1
+  day: MyString
+  start_time: 2017-11-11 12:04:31
+  end_time: 2017-11-11 12:04:31
+
+two:
+  user_id: 1
+  day: MyString
+  start_time: 2017-11-11 12:04:31
+  end_time: 2017-11-11 12:04:31
