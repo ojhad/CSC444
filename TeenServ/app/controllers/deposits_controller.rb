@@ -1,8 +1,11 @@
 class DepositsController < ApplicationController
+
   def index
     @user = User.find(current_user.id)
     @user_deposit_info = Deposit.find_by_user_id(@user.id)
 
+    # EACH USER SHOULD HAVE AN ENTRY IN DEPOSITS TABLE, SO IF ITS THE FIRST TIME FOR THE USER TO VISIT THIS PAGE
+    # CREATE AN ENTRY FOR HIM/HER IN THE TABLE AND PRE-POPULATE THE TABLE WITH THEIR PROVIDED ADDRESS
     if @user_deposit_info.blank?
       @new_entry = Deposit.new(:address_1=>@user.address_1,:address_2=>@user.address_2,:city=>@user.city,
       :country=>@user.country,:postal_code=>@user.postal_code,:province=>@user.province,:user_id=>@user.id)
@@ -11,6 +14,10 @@ class DepositsController < ApplicationController
     end
 
   end
+
+  # IF THE CHECK FORM WAS FILLED, THEN TEEN WANTS TO UPDATE MAILING ADDRESS
+  # ELSE TEEN PROVIDED NEW PAYPAL ADDRESS
+  # TODO: CREATE A DB COLUMN IN DEPOSITS TABLE TO INDICATE WHICH DEPOSIT METHOD THEY CHOSE. REFLECT THIS ON FRONT-END
 
   def create
 
