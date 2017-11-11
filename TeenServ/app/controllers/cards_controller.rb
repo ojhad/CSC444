@@ -4,6 +4,9 @@ class CardsController < ApplicationController
     @user = User.find(current_user.id)
   end
 
+  # IF USER ALREADY HAS STRIPE ACCOUNT, THEN JUST MAKE THE ADDED CARD THE DEFAULT PAYMENT AND DELETE
+  # ALL PREVIOUS CARDS ON STRIPE SYSTEM
+  # ELSE CREATE A NEW STRIPE ACCOUNT FOR THE USER AND ADD THE CREDIT CARD DETAILS
   def create
 
     @user = User.find(current_user.id)
@@ -57,29 +60,7 @@ class CardsController < ApplicationController
 
     end
 
-
-
   end
-
-
 
 end
-
-
-=begin
-    charge = Stripe::Charge.create(
-        :customer    => customer.id,
-        :amount      => @amount,
-        :description => 'Rails Stripe customer',
-        :currency    => 'usd'
-
-    )
-
-
-  rescue Stripe::CardError => e
-    flash[:error] = e.message
-  end
-
-=end
-
 

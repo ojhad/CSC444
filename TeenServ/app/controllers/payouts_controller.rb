@@ -4,7 +4,13 @@ class PayoutsController < ApplicationController
     @user = User.find(current_user.id)
   end
 
+  # CREATE NEW PAYPAL PAYOUT FROM TEENSERV TO THE CLIENT
+  # THE EMAIL BELOW IS THE SAME FOR ALL CLIENTS FOR TESTING DEMONSTRATION PURPOSES
+  # PAYOUT AMOUNT IS ALSO A SET AMOUNT SINCE THE PAYPAL TEST ACCOUNT DOESN'T HAVE UNLIMITED FUNDS AND IT
+  # TAKES AGES TO ADD FUNDS TO A TEST PAYPAL ACCOUNT. THEIR API SUCKS
 
+  # TODO : CHECK WHETHER DEPOSIT METHOD IS PAYPAL/CHECK. IF IT IS CHECK, JUST DISPLAY FLASH MESSAGE
+  # TODO (CONT): THAT THE CHECK WILL BE MAILED TO THE ADDRESS. IF PAYPAL, EXECUTE CODE BELOW.
   def create
 
     @payout = PayPal::SDK::REST::Payout.new({
@@ -33,8 +39,6 @@ class PayoutsController < ApplicationController
     end
 
     @user = User.find(current_user.id)
-
-    #@user.balance = 10.0
 
     @new_payout = Payout.new({:user_id => @user.id, :batch_id => @payout_batch.batch_header.payout_batch_id,
                              :amount => @user.balance})
