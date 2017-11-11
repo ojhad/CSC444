@@ -3,7 +3,7 @@ class ServicesController < ApplicationController
 	before_action :find_user
 
 	def index
-		@services = Service.all()
+		@services = Service.viewable_services(current_user)
 	end
 
 	def show
