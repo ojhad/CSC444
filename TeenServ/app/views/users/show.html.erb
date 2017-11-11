@@ -97,7 +97,7 @@
               </div>
             <% if @user.group == 0 %>
               <div class="row">
-                <div class="col-md-8 skills">
+                <div class="col-md-8">
                   <h4><i class="fa fa-star" aria-hidden="true"></i> Skills</h4>
                   <% @userSkills = UserSkill.where(:user_id => @user.id) %>
                   <% @userSkills.each do |skill| %>
@@ -110,8 +110,17 @@
                   </div>
                 <% end %>
               </div>
+              <div class = "row">
+                <div class="col-md-8">
+                  <h4><i class="fa fa-clock-o" aria-hidden="true"></i> Availability</h4>
+                </div>
+                <div class="col-md-4">
+                  <%= link_to "Edit Availability", edit_teen_time_path , :class => 'btn btn-primary',:style => 'margin-bottom:4px' %><br>
+                </div>
+              </div>
             <% end %>
            </div>
+
           </div>
           <div class="tab-pane fade in" id="servicesTab">
             <div class="container">
