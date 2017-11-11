@@ -62,10 +62,6 @@
                   <%= f.text_field :age , class: 'form-control'%>
                 </div>
               </div>
-
-
-              <%= f.hidden_field :group , class: 'form-control'%>
-
               <div class = "button-container">
                 <%= button_tag(type: 'submit', class: "login-btn") do %>
                     <span class="span"></span>COMPLETE
@@ -82,20 +78,4 @@
 </div>
 </div>
 <script type="text/javascript">
-
-    $(".GroupSelector").change(function(){
-        switch($(this).val()) {
-            case 'teen' :
-                $('#age').show()
-                $('#profile_pic').show()
-                $('#user_group').val(0)
-                break;
-            case 'client' :
-                $('#age').hide()
-                $('#profile_pic').hide()
-                $('#age').val(null)
-                $('#user_group').val(1)
-                break;
-        }
-    })
 </script>

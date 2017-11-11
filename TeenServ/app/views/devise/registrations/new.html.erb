@@ -37,8 +37,9 @@
               <label for="Password">Confirm Password:</label>
               <div class="bar"></div>
             </div>
+              <%= f.hidden_field :group , class: 'form-control'%>
 
-            <div class = "button-container">
+              <div class = "button-container">
               <%= button_tag(type: 'submit', class: "login-btn") do %>
                   <span class="span"></span>NEXT
               <% end %>
