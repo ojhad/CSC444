@@ -21,11 +21,11 @@ Rails.application.routes.draw do
 
   resources :services do
     member do
-      get 'list'
-      get 'unlist'
-      get 'add_request'
-      get 'remove_request'
-      get 'select_request'
+      post 'list'
+      post 'unlist'
+      post 'add_request'
+      post 'remove_request'
+      post 'select_request'
     end
   end
 
