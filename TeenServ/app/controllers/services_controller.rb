@@ -3,7 +3,7 @@ class ServicesController < ApplicationController
 	before_action :find_user
 
 	def index
-		@services = Service.viewable_services(current_user)
+		@services = Service.status(Service::UNLISTED).viewable_services(current_user)
 	end
 
 	def show

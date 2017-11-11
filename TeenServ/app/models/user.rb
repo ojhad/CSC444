@@ -14,6 +14,10 @@ class User < ApplicationRecord
   has_many :teen_transactions, :class_name => 'Transaction', :foreign_key => 'teen_id'
 
 
+  def full_name
+    self.first_name + ' ' + self.last_name
+  end
+
   def is_teen?
      self.group == 0
   end

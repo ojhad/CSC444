@@ -1,6 +1,7 @@
 class Service < ApplicationRecord
 
 	#Scopes
+	scope :status, ->(status) { where('services.status = ?', status) }
 	scope :viewable_services, ->(user) {
 		joins(:user).where('users.group' => user.type_of_services_to_view)
 	}
