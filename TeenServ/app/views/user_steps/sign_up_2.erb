@@ -18,6 +18,11 @@
                 <label for="Username">Last Name:</label>
                 <div class="bar"></div>
               </div>
+              <div class="input-container" id='age' hidden="true">
+                <%= f.text_field :age %>
+                <label for="Age">Age:</label>
+                <div class="bar"></div>
+              </div>
               <div class="input-container" id="profile_pic">
                 <%= f.file_field :profile_pic , class: 'form-control'%>
                 <label for="ProfilePic">Profile Picture:</label>
@@ -41,19 +46,18 @@
   </div>
 </div>
 <script type="text/javascript">
-
-    $(".GroupSelector").change(function(){
-        switch($(this).val()) {
-            case 'teen' :
-                $('#age').show()
+    $(document).ready(function() {
+        var pp = <%= @current_user.group %>;
+        console.log(pp);
+        switch(pp){
+            case 0 :
                 $('#profile_pic').show()
-                $('#user_group').val(0)
+                $('#age').show()
                 break;
-            case 'client' :
+            case 1 :
                 $('#age').hide()
                 $('#profile_pic').hide()
                 $('#age').val(null)
-                $('#user_group').val(1)
                 break;
         }
     })
