@@ -44,7 +44,13 @@ class DepositsController < ApplicationController
 
       flash.notice = "PayPal Address updated!"
     elsif @form=='method'
+
       @user_deposit_info.method = params[:deposit]
+
+      if @user_deposit_info.paypal.blank? && @user_deposit_info.method=='paypal'
+        @user_deposit_info.paypal = @user.email
+      end
+      
       @user_deposit_info.save!
 
       flash.notice = "Deposit Method updated!"
