@@ -33,15 +33,21 @@ class DepositsController < ApplicationController
       @user_deposit_info.country = params[:country]
       @user_deposit_info.province = params[:province]
       @user_deposit_info.postal_code = params[:postal_code]
+      @user_deposit_info.method = 'check'
       @user_deposit_info.save
       
       flash.notice = "Mailing address updated!"
     elsif @form=='paypal'
       @user_deposit_info.paypal = params[:paypal]
-
+      @user_deposit_info.method = 'paypal'
       @user_deposit_info.save!
 
       flash.notice = "PayPal Address updated!"
+    elsif @form=='method'
+      @user_deposit_info.method = params[:deposit]
+      @user_deposit_info.save!
+
+      flash.notice = "Deposit Method updated!"
     else
       flash.alert = "ERROR!"
     end
