@@ -30,6 +30,10 @@ class User < ApplicationRecord
     self.is_teen? ? 1 : 0
   end
 
+  def show_rating?
+    self.reviews.count > 5
+  end
+
   #gets lat & long for user
   geocoded_by :get_address
 
