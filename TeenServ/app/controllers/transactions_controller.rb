@@ -16,7 +16,7 @@ class TransactionsController < ApplicationController
 
   def create
     @transaction = Transaction.new(transaction_params)
-    @transaction.update_attributes(:teen_id => @user.id)
+    @transaction.update_attributes(:teen_id => @user.id, :status => :teen_approved)
     service_user = Service.find_by_id(@transaction.service_id).service_users.first
     @transaction.update_attributes(:client_id => service_user.user_id)
     if @transaction.save
@@ -55,7 +55,7 @@ class TransactionsController < ApplicationController
 
   def transaction_params
     params.require(:transaction).permit(:charge_per_hour, :total_amount, :number_of_hours, :service_title,
-                                        :service_id, :client_id, :teen_id )
+                                        :service_id, :client_id, :teen_id, :status )
   end
 
 end

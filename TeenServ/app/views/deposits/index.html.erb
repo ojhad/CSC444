@@ -5,117 +5,141 @@
   By default, we will send the check to the address on your profile. If this is not your mailing address, please indicate
   below as well.</p>
   <br>
-
-  <form>
+  <% if @user_deposit_info.method == 'check'%>
+  <p> Your current deposit method is set to Check by Mail </p>
+  <% else %>
+  <p> Your current deposit method is set to PayPal</p>
+  <%end%>
+  <br>
+  <%= form_tag user_deposits_path(@user.id) do %>
     <div class = "form-group">
-        <label> Deposit Method</label>
+        <label> Update Deposit Method</label>
         <input type="radio" class="DepositInfo" name="deposit" value="paypal"> PayPal
         <input type="radio" class="DepositInfo" name="deposit" value="check"> Check
     </div>
-  </form>
+    <%=hidden_field_tag 'which_form' , 'method'%>
+    <div class="form-group">
+      <%= submit_tag 'Submit', class: 'btn btn-primary' %>
+    </div>
+  <%end%>
+  <hr>
 
-  <div id="paypal" hidden="">
-    <% if !@user_deposit_info.has_paypal?%>
-        <p> Your current PayPal address is <b><%=@user_deposit_info.paypal%></b></p>
-        <br>
-        <p> If you want to set a new PayPal address, please fill and submit the form below.</p>
-        <br>
-    <%end%>
-    <div class="col-lg-6">
-      <%= form_tag user_deposits_path(@user.id) do %>
-          <div class="form-group">
-            <%= label_tag 'paypal', 'PayPal Address', class: 'control-label col-sm-3'%>
-            <%= email_field_tag 'paypal', nil , class: 'form-control',required:'true'%>
-          </div>
-          <%=hidden_field_tag 'which_form' , 'paypal'%>
-          <div class="form-group">
-            <%= submit_tag 'Submit', class: 'btn btn-primary' %>
-          </div>
-      <%end%>
+
+  <div id="paypal" hidden>
+    <div class="row">
+      <div class="col-lg-6">
+        <% if !@user_deposit_info.has_paypal?%>
+            <p> Your current PayPal address is <b><%=@user_deposit_info.paypal%></b></p>
+            <br>
+            <p> If you want to set a new PayPal address, please fill and submit the form below.</p>
+            <br>
+        <%end%>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-6">
+        <%= form_tag user_deposits_path(@user.id) do %>
+            <div class="form-group">
+              <%= label_tag 'paypal', 'PayPal Address', class: 'control-label col-sm-3'%>
+              <%= email_field_tag 'paypal', nil , class: 'form-control',required:'true'%>
+            </div>
+            <%=hidden_field_tag 'which_form' , 'paypal'%>
+            <div class="form-group">
+              <%= submit_tag 'Submit', class: 'btn btn-primary' %>
+            </div>
+        <%end%>
+      </div>
     </div>
   </div>
+  <br>
 
   <div id="check" hidden>
-    <p>Current Mailing Address</p>
-    <table>
-      <tr>
-        <td><b><%=@user.first_name%> <%=@user.last_name%></b></td>
-      </tr>
-      <tr>
-        <td><%=@user_deposit_info.address_1.capitalize()%></td>
-      </tr>
-      <tr>
-        <td><%=@user_deposit_info.address_2.capitalize()%></td>
-      </tr>
-      <tr>
-        <td><%=@user_deposit_info.city.capitalize()%> <%=@user_deposit_info.province%> <%=@user_deposit_info.postal_code.upcase()%></td>
-      </tr>
-      <tr>
-        <td><%=@user_deposit_info.country.capitalize()%></td>
-      </tr>
-    </table>
-    <br>
-    <p> Complete the form below to update your mailing address</p>
-    <br>
-    <%= form_tag user_deposits_path(@user.id) do %>
-        <div class="form-group">
-          <%= label_tag :address_1, 'Address line 1:', class: "control-label col-sm-4" %>
-          <div class="col-sm-5">
-            <%= text_field_tag :address_1 , nil, class: 'form-control',required:'true'%>
-          </div>
-        </div>
+    <div class="row">
+      <div class="col-lg-6">
+        <p>Current Mailing Address</p>
+        <table>
+          <tr>
+            <td><b><%=@user.first_name.capitalize%> <%=@user.last_name.capitalize%></b></td>
+          </tr>
+          <tr>
+            <td><%=@user_deposit_info.address_1.capitalize()%></td>
+          </tr>
+          <tr>
+            <td><%=@user_deposit_info.address_2.capitalize()%></td>
+          </tr>
+          <tr>
+            <td><%=@user_deposit_info.city.capitalize()%> <%=@user_deposit_info.province%> <%=@user_deposit_info.postal_code.upcase()%></td>
+          </tr>
+          <tr>
+            <td><%=@user_deposit_info.country.capitalize()%></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-lg-6">
+        <p> Complete the form below to update your mailing address</p>
+        <br>
+        <%= form_tag user_deposits_path(@user.id) do %>
+            <div class="form-group">
+              <%= label_tag :address_1, 'Address line 1:', class: "control-label col-sm-4" %>
+              <div class="col-sm-5">
+                <%= text_field_tag :address_1 , nil, class: 'form-control',required:'true'%>
+              </div>
+            </div>
 
-        <div class="form-group">
-          <%= label_tag :address_2, 'Address line 2:', class: "control-label col-sm-4" %>
-          <div class="col-sm-5">
-            <%= text_field_tag :address_2 , nil, class: 'form-control',required:'true'%>
-          </div>
-        </div>
+            <div class="form-group">
+              <%= label_tag :address_2, 'Address line 2:', class: "control-label col-sm-4" %>
+              <div class="col-sm-5">
+                <%= text_field_tag :address_2 , nil, class: 'form-control',required:'true'%>
+              </div>
+            </div>
 
-        <div class="form-group">
-          <%= label_tag :city, 'City:', class: "control-label col-sm-4" %>
-          <div class="col-sm-5">
-            <%= text_field_tag :city , nil, class: 'form-control',required:'true'%>
-          </div>
-        </div>
+            <div class="form-group">
+              <%= label_tag :city, 'City:', class: "control-label col-sm-4" %>
+              <div class="col-sm-5">
+                <%= text_field_tag :city , nil, class: 'form-control',required:'true'%>
+              </div>
+            </div>
 
-        <div class="form-group">
-          <%= label_tag :province, 'Province:', class: "control-label col-sm-4" %>
-          <div class="col-sm-5">
-            <%= select_tag "province","<option value='AB'>Alberta</option><option value='BC'>British Columbia</option>
+            <div class="form-group">
+              <%= label_tag :province, 'Province:', class: "control-label col-sm-4" %>
+              <div class="col-sm-5">
+                <%= select_tag "province","<option value='AB'>Alberta</option><option value='BC'>British Columbia</option>
             <option value='MB'>Manitoba</option><option value='NB'>New Brunswich</option>
 <option value='NL'>Newfoundland and Labrador</option><option value='NS'>Nova Scotia</option><option value='ON'>Ontario</option>
 <option value='PE'>Prince Edward Island</option><option value='QC'>Quebec</option><option value='SK'>Saskatchewan</option>
 <option value='NT'>Northwest Territories</option><option value='NU'>Nunavut</option>
 <option value='YT'>Yukon</option>", prompt: 'Select One', class: "form-control",required:'true'%>
-          </div>
-        </div>
+              </div>
+            </div>
 
-        <div class="form-group">
-          <%= label_tag :postal_code, 'Postal Code:', :class => "control-label col-sm-4" %>
-          <div class="col-sm-5">
-            <%= text_field_tag :postal_code ,nil, class: 'form-control',required:'true'%>
-          </div>
-        </div>
+            <div class="form-group">
+              <%= label_tag :postal_code, 'Postal Code:', :class => "control-label col-sm-4" %>
+              <div class="col-sm-5">
+                <%= text_field_tag :postal_code ,nil, class: 'form-control',required:'true'%>
+              </div>
+            </div>
 
-        <div class="form-group">
-          <%= label_tag :country, 'Country:', class: "control-label col-sm-4" %>
-          <div class="col-sm-5">
-            <%= text_field_tag :country, nil,class: 'form-control',required:'true' %>
-          </div>
-        </div>
+            <div class="form-group">
+              <%= label_tag :country, 'Country:', class: "control-label col-sm-4" %>
+              <div class="col-sm-5">
+                <%= text_field_tag :country, nil,class: 'form-control',required:'true' %>
+              </div>
+            </div>
 
-        <div class="form-group">
-          <div class="col-sm-5">
-            <%= submit_tag 'Submit', class: 'btn btn-primary' %>
-          </div>
-        </div>
+            <div class="form-group">
+              <div class="col-sm-5">
+                <%= submit_tag 'Submit', class: 'btn btn-primary' %>
+              </div>
+            </div>
 
-        <%=hidden_field_tag 'which_form', 'address'%>
-    <%end%>
+            <%=hidden_field_tag 'which_form', 'address'%>
+        <%end%>
+      </div>
+    </div>
   </div>
-
-</div>
 
 <script type="text/javascript">
 

@@ -1,11 +1,99 @@
-<% @transactions.each do |t| %>
-    <div class="card" style="width: 20rem;">
-      <div class="card-body">
-        <h4 class="card-title"><%= t.service_title %></h4>
-        <p class="card-text">Total time: <%= t.number_of_hours %> hour(s)</p>
-        <p class="card-text">Cost per hours: <%= t.charge_per_hour %>/hour</p>
-        <p class="card-text">Total amount: $<%= t.total_amount %></p>
-        <%= link_to "View details", user_transaction_path(@user.id, t.id), :class => 'btn btn-default' %>
-      </div>
-    </div>
-<% end %>
+<div class="btn-pref btn-group btn-group-justified btn-group-lg" role="group" aria-label="...">
+  <div class="btn-group" role="group">
+    <button type="button" id="action" class="btn btn-primary topBar" data-toggle="tab">
+      <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+      <div class="hidden-xs">Transactions Requiring Action</div>
+    </button>
+  </div>
+  <div class="btn-group" role="group">
+    <button type="button" id="pending" class="btn btn-default topBar" data-toggle="tab">
+      <i class="glyphicon glyphicon-list-alt"></i>
+      <div class="hidden-xs">Pending Transactions</div>
+    </button>
+  </div>
+  <div class="btn-group" role="group">
+    <button type="button" id="completed" class="btn btn-default topBar" data-toggle="tab">
+      <i class="fa fa-history" aria-hidden="true"></i>
+      <div class="hidden-xs">Complete History</div>
+    </button>
+  </div>
+</div>
+
+<div class="tab-content">
+  <div class="tab-pane fade in active" id="actionTab">
+    <%if @user.is_teen? %>
+        <% transactions = @transactions.not_approved %>
+  <% else %>
+        <% transactions = @transactions.teen_approved %>
+  <% end %>
+    <% transactions.where(:status => :not_approved).each do |t| %>
+        <div class="card-container">
+          <div class="card transaction-card">
+            <div class="card-body">
+              <h4 class="card-title"><%= t.service_title %></h4>
+              <p class="card-text">Total time: <%= t.number_of_hours %> hour(s)</p>
+              <p class="card-text">Cost per hours: <%= t.charge_per_hour %>/hour</p>
+              <p class="card-text">Total amount: $<%= t.total_amount %></p>
+              <%= link_to "View details", user_transaction_path(@user.id, t.id), :class => 'btn btn-default' %>
+            </div>
+          </div>
+        </div>
+    <% end %>
+  </div>
+  <div class="tab-pane fade in" id="pendingTab">
+    <%if @user.is_teen? %>
+        <% transactions = @transactions.teen_approved %>
+    <% else %>
+        <% transactions = @transactions.not_approved %>
+    <% end %>
+    <% transactions.each do |t| %>
+        <div class="card-container">
+          <div class="card transaction-card">
+            <div class="card-body">
+              <h4 class="card-title"><%= t.service_title %></h4>
+              <p class="card-text">Total time: <%= t.number_of_hours %> hour(s)</p>
+              <p class="card-text">Cost per hours: <%= t.charge_per_hour %>/hour</p>
+              <p class="card-text">Total amount: $<%= t.total_amount %></p>
+              <%= link_to "View details", user_transaction_path(@user.id, t.id), :class => 'btn btn-default' %>
+            </div>
+          </div>
+        </div>
+    <% end %>
+  </div>
+  <div class="tab-pane fade in" id="completedTab">
+    <% @transactions.completed.each do |t| %>
+        <div class="card-container">
+          <div class="card transaction-card">
+            <div class="card-body">
+              <h4 class="card-title"><%= t.service_title %></h4>
+              <p class="card-text">Total time: <%= t.number_of_hours %> hour(s)</p>
+              <p class="card-text">Cost per hours: <%= t.charge_per_hour %>/hour</p>
+              <p class="card-text">Total amount: $<%= t.total_amount %></p>
+              <%= link_to "View details", user_transaction_path(@user.id, t.id), :class => 'btn btn-default' %>
+            </div>
+          </div>
+        </div>
+    <% end %>
+  </div>
+</div>
+
+  <script>
+    $(document).ready(function() {
+        $(".btn-pref .btn").click(function () {
+            $(".btn-pref .btn").removeClass("btn-primary").addClass("btn-default");
+            $(this).removeClass("btn-default").addClass("btn-primary");
+            $('.tab-pane').removeClass('active');
+            switch($(this)[0].id){
+                case 'action':
+                    $('#actionTab').addClass('active');
+                    break;
+                case 'completed':
+                    $('#completedTab').addClass('active');
+                    break;
+                case 'pending':
+                    $('#pendingTab').addClass('active');
+                    break;
+            }
+        });
+    });
+</script>
