@@ -6,7 +6,7 @@ class TeenTimesController < ApplicationController
   end
 
   def create
-    @teenTime = TeenTime.new(user_id: @user, day: params[:day], start_time: param[:start_time], end_time: param[:end_time])
+    @teenTime = TeenTime.new(user_id: @user.id, day: params[:day], start_time: params[:start_time], end_time: params[:end_time])
     @teenTime.save
   end
 
@@ -15,9 +15,7 @@ class TeenTimesController < ApplicationController
   end
 
   def find_user
-    if params[:user_id]
-      @user = User.find(curren_user.id)
-    end
+      @user = User.find(current_user.id)
   end
 
 end

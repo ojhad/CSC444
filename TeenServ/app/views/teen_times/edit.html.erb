@@ -1,1 +1,31 @@
-Edit Availability
+<div class="time">
+  <%= form_for :teen_time, :url => url_for(:controller => 'teen_times', :action => 'create'), :html => {class: 'addTimeForm'} do |f| %>
+    <div class="col-md-1">
+      <h5>Day</h5>
+      <select id="day" name="day">
+        <option value="Monday">Monday</option>
+        <option value="Tuesday">Tuesday</option>
+        <option value="Wednesday">Wednesday</option>
+        <option value="Thursday">Thursday</option>
+        <option value="Friday">Friday</option>
+        <option value="Saturday">Saturday</option>
+        <option value="Sunday">Sunday</option>
+      </select>
+    </div>
+
+    <div class="col-md-1">
+      <h5>Start time</h5>
+      <input type="time" name="start_time" >
+    </div>
+
+    <div class="col-md-1">
+      <h5>End time</h5>
+      <input type="time" name="end_time" >
+    </div>
+
+    <div class="col-md-1">
+      <button type="submit" class="btn btn-default submitTime">Add time</button>
+    </div>
+  <% end %>
+
+</div>

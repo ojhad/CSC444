@@ -118,6 +118,8 @@
                   <%= link_to "Edit Availability", edit_teen_time_path , :class => 'btn btn-primary',:style => 'margin-bottom:4px' %><br>
                 </div>
               </div>
+              <div class = "row schedule">
+              </div>
             <% end %>
            </div>
 
@@ -256,6 +258,15 @@
 <% end %>
 <script>
     $(document).ready(function() {
+        displaySchedule();
+        function displaySchedule(){
+          <% @teenDays.each do |day| %>
+            $(".schedule").append("<div class='col-md-2 <%= day.day %>'><%= day.day %> <br></div>");
+          <% end %>
+          <% @teenTime.each do |time| %>
+            $(".<%= time.day %>").append("<%= time.start_time.strftime("%I:%M %p") %> - <%= time.end_time.strftime("%I:%M %p") %><br>");
+          <% end %>
+        }
         $(".btn-pref .btn").click(function () {
             $(".btn-pref .btn").removeClass("btn-primary").addClass("btn-default");
             $(this).removeClass("btn-default").addClass("btn-primary");
