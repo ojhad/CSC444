@@ -255,7 +255,9 @@
                   <%end%>
                   <%= link_to "View Transactions", user_transactions_path(@user.id), :class => 'btn btn-default' %>
                   <% if @user.is_teen? %>
-                    <%= link_to "New Transaction", new_user_transaction_path(@user.id), :class => 'btn btn-default' %>
+                    <%= link_to  new_user_transaction_path(@user.id), :class => 'btn btn-primary' do %>
+                          <i class="fa fa-plus"></i>
+                      <% end %>
                   <% end %>
                 </div>
                 <div class="col-md-4">
