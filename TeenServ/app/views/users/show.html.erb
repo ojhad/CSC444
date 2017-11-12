@@ -128,34 +128,79 @@
             <div class="container">
               <div class="row">
                 <div class="col-md-4">
-                  <h4><i class="fa fa-cogs" aria-hidden="true"></i> Services listed</h4>
-                  <% if @user.services.count != 0 %>
-                      <% @user.services.each do |service| %>
+                  <% if @user.id == @current_user.id %>
+                      <h4><i class="fa fa-cogs" aria-hidden="true"></i> Unlisted Services </h4>
+                      <% if @user.services.status(Service::UNLISTED).count != 0 %>
+                          <% @user.services.status(Service::UNLISTED).each do |service| %>
+                              <p>Service: <%= service.title %></p>
+                              <p>Charge: $<%= service.charge_per_hour %> per hour</p>
+                              <%= link_to "List", list_service_path(service), method: :post, :class => 'btn btn-success' %>
+                              <%= link_to "Edit", edit_service_path(service), :class => 'btn btn-primary' %>
+                              <%= link_to "Delete", service_path(service), method: :delete, data: {title: 'Delete Listed Service' , confirm: 'Are you sure? Item will not appear under listed services'}, :class => 'btn btn-danger' %>
+                          <%end%>
+                      <%else%>
+                          <h5> You have no unlisted services </h5>
+                      <%end%>
+                  <% end %>
+                  <h4><i class="fa fa-cogs" aria-hidden="true"></i> Listed Services </h4>
+                  <% if @user.services.status(Service::LISTED).count != 0 %>
+                      <% @user.services.status(Service::LISTED).each do |service| %>
                           <p>Service: <%= service.title %></p>
                           <p>Charge: $<%= service.charge_per_hour %> per hour</p>
                           <% if @user.id == @current_user.id %>
-                              <%= link_to "Edit", edit_service_path(service), :class => 'btn btn-primary' %>
-                              <%= link_to "Delete",service_path(service), method: :delete, data: {title: 'Delete Listed Service' , confirm: 'Are you sure? Item will not appear under listed services'}, :class => 'btn btn-danger' %>
+                              <%= link_to "View", service_path(service), :class => 'btn btn-success' %>
+                              <%= link_to "Edit", edit_service_path(service),
+                                          data: {title: 'Edit Service' ,
+                                                 confirm: 'Are you sure you want to edit this service? Performing this action will unlist the service and delete all current requests.'},
+                                          :class => 'btn btn-primary' %>
+                              <%= link_to 'Unlist', unlist_service_path(service), method: :post,
+                                          data: {title: 'Unlist Service' ,
+                                                 confirm: 'Are you sure you want to unlist this service? Performing this action will delete all current requests.'},
+                                          :class => 'btn btn-danger' %>
                           <% else %>
-                            <%= link_to "View Service", service_path(service.id), :class => 'btn btn-primary' %>
+                              <%= link_to "View Service", service_path(service.id), :class => 'btn btn-primary' %>
                           <% end %>
                       <%end%>
                   <%else%>
                       <% if @user.id==@current_user.id%>
-                        <h5>You currently do not have any services</h5>
+                          <h5> You have no listed services </h5>
                       <%else%>
-                        <h5>No services listed by this user at the moment.</h5>
+                          <h5>No services listed by this user at the moment.</h5>
                       <%end%>
+                  <%end%>
+                  <% if @user.id == @current_user.id %>
+                    <h4><i class="fa fa-cogs" aria-hidden="true"></i> Completed Services</h4>
+                    <% if @user.services.status(Service::COMPLETED).count != 0 %>
+                        <% @user.services.status(Service::COMPLETED).each do |service| %>
+                            <p>Service: <%= service.title %></p>
+                            <p>Charge: $<%= service.charge_per_hour %> per hour</p>
+                            <%= link_to "View", service_path(service), :class => 'btn btn-success' %>
+                        <%end%>
+                    <%else%>
+                        <h5> You do not have any completed services </h5>
+                    <%end%>
                   <%end%>
                 </div>
                 <div class="col-md-4">
                   <% if @user.id == @current_user.id %>
-                    <h4><i class="fa fa-cog fa-spin" aria-hidden="true"></i> Services undergoing</h4>
-                    <p> Name of Service</p>
-                    <% if @user.group==1 %>
-                        <ul> Teen undergoing service</ul>
-                        <ul> Due date </ul>
-                    <%end%>
+                      <h4><i class="fa fa-cog fa-spin" aria-hidden="true"></i> Accepted Services</h4>
+                      <% if @user.services.status(Service::ACCEPTED).count != 0 %>
+                          <% @user.services.status(Service::ACCEPTED).each do |service| %>
+                              <p>Service: <%= service.title %></p>
+                              <p>Charge: $<%= service.charge_per_hour %> per hour</p>
+                              <%= link_to "View", service_path(service), :class => 'btn btn-success' %>
+                              <%= link_to "Edit", edit_service_path(service),
+                                          data: {title: 'Edit Service' ,
+                                                 confirm: 'Are you sure you want to edit this service? Performing this action will unlist the service and delete all current requests.'},
+                                          :class => 'btn btn-primary' %>
+                              <%= link_to 'Unlist', unlist_service_path(service), method: :post,
+                                          data: {title: 'Unlist Service',
+                                                 confirm: 'Are you sure you want to unlist this service? Performing this action will delete all current requests.'},
+                                          :class => 'btn btn-danger' %>
+                          <%end%>
+                      <%else%>
+                          <h5> None of your services have been accepted yet </h5>
+                      <%end%>
                   <%end%>
                 </div>
                 <% if @user.id ==  @current_user.id%>
@@ -202,7 +247,9 @@
               <div class="row">
                 <div class="col-md-4">
                   <h4> Transactions </h4>
-                  <%= link_to "Payouts", user_payouts_path(@user.id), :class => 'btn btn-default' %>
+                  <% if @user.is_teen?%>
+                      <%= link_to "Payouts", user_payouts_path(@user.id), :class => 'btn btn-default' %>
+                  <%end%>
                   <%= link_to "View Transactions", user_transactions_path(@user.id), :class => 'btn btn-default' %>
                   <% if @user.is_teen? %>
                     <%= link_to "New Transaction", new_user_transaction_path(@user.id), :class => 'btn btn-default' %>
@@ -232,6 +279,7 @@
                       <% end %>
                   <%elsif @user.group==1%>
                       <%= link_to "View credit card on file", user_cards_path(@user.id), :class => 'btn btn-default' %>
+                      <%= link_to "View charges", '#', :class => 'btn btn-default' %>
                   <%end%>
                   <%if @user.group==0%>
                       <%= link_to "Deposit information", user_deposits_path(@user.id), :class => 'deposit btn btn-default' %><br>

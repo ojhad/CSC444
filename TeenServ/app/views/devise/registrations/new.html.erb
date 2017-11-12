@@ -38,7 +38,9 @@
               <div class="bar"></div>
             </div>
 
-            <div class = "button-container">
+            <%= f.hidden_field :group , class: 'form-control'%>
+
+              <div class = "button-container">
               <%= button_tag(type: 'submit', class: "login-btn") do %>
                   <span class="span"></span>NEXT
               <% end %>
@@ -52,18 +54,22 @@
   </div>
 </div>
 <script type="text/javascript">
-
-    $(".GroupSelector").change(function(){
-        switch($(this).val()) {
+    $(document).ready(function() {
+        switch($(".GroupSelector").val()){
             case 'teen' :
-                $('#age').show()
-                $('#profile_pic').show()
                 $('#user_group').val(0)
                 break;
             case 'client' :
-                $('#age').hide()
-                $('#profile_pic').hide()
-                $('#age').val(null)
+                $('#user_group').val(1)
+                break;
+        }
+    })
+    $(".GroupSelector").change(function(){
+        switch($(this).val()) {
+            case 'teen' :
+                $('#user_group').val(0)
+                break;
+            case 'client' :
                 $('#user_group').val(1)
                 break;
         }

@@ -3,7 +3,7 @@ class ServicesController < ApplicationController
 	before_action :find_user
 
 	def index
-		@services = Service.all()
+		@services = Service.status(Service::LISTED).viewable_services(current_user)
 	end
 
 	def show
@@ -11,14 +11,13 @@ class ServicesController < ApplicationController
 	end
 
 	def new
-		puts "CREATING SERVICE FOR: #{current_user.email}"
-		@service = Service.new({:user_id => current_user.id, 
+		@service = Service.new({:user_id => current_user.id,
 								:status => Service::UNLISTED})
 	end
 	def edit
 		@service = Service.find(params[:id])
-		# When user is editing service, we want to remove it from public visibility
-		@service.update({:status => Service::UNLISTED});
+		# When user is editing service, we want to unlist it first
+		unlist_service(@service)
 	end
 	def create
 		@service = Service.new(service_params)
@@ -32,7 +31,7 @@ class ServicesController < ApplicationController
 
 	def update
 		@service = Service.find(params[:id])
-		if(@service.update(service_params))
+		if @service.update(service_params)
 			redirect_to (user_path(@service.user_id))
 		else
 			render 'edit'
@@ -41,9 +40,9 @@ class ServicesController < ApplicationController
 
 	def destroy
 		@service = Service.find(params[:id])
-		userId = @service.user_id
+		user_id = @service.user_id
 		@service.destroy
-		redirect_to (user_path(userId))
+		redirect_to (user_path(user_id))
 	end
 
 	# Changes status of the service associated with the passed in service id
@@ -58,15 +57,8 @@ class ServicesController < ApplicationController
 	# to UNLISTED. This makes it invisible to other users.
 	def unlist
 		@service = Service.find(params[:id])
-		if(@service.status == Service::LISTED || @service.status == Service::ACCEPTED)
-			@service.service_users.destroy_all
-			@service.update({:status => Service::UNLISTED});
-			redirect_to (@service)
-		else
-			#return an error because user cannot unlist completed services
-			puts "ERROR! Cannot change status of COMPLETED services!"
-			redirect_to (@service)
-		end
+		unlist_service(@service)
+		redirect_to (@service)
 	end
 
 	# User has requested to be considered for this service.
@@ -75,12 +67,12 @@ class ServicesController < ApplicationController
 
 		# Validation booleans to make sure user can be considered for this service
 		# A user cannot place a request on a service that they created
-		serviceUserIsCurrentUser = @service.user_id == current_user.id;
+		service_is_current_user = @service.user_id == current_user.id;
 		# A user cannot place a request on a service that is created by another user of the same group
-		serviceUserIsSameTypeAsServiceCreator = @service.user.group == current_user.group;
+		service_same_user = @service.user.group == current_user.group;
 		#TODO: Add a validation check for Service::LISTED
 
-		if(serviceUserIsCurrentUser || serviceUserIsSameTypeAsServiceCreator)
+		if service_is_current_user || service_same_user
 			#TODO: Return error if somehow user is trying to request their own service
 			puts "ERROR! Unexpected Service Behaviour!"
 			redirect_to (services_path)
@@ -96,10 +88,10 @@ class ServicesController < ApplicationController
 
 		# Make sure request exists before removing request
 		if @service.service_users.exists?(:user_id => current_user.id) 
-			deleteRecord = @service.service_users.where(user_id: current_user.id)
-			if(deleteRecord)
-				deleteRecordId = deleteRecord[0].id
-				@service.service_users.destroy(deleteRecordId)
+			delete_record = @service.service_users.where(user_id: current_user.id)
+			if delete_record
+				delete_record_id = delete_record[0].id
+				@service.service_users.destroy(delete_record_id)
 			end
 			redirect_to (services_path)
 		else
@@ -113,16 +105,17 @@ class ServicesController < ApplicationController
 	# User has accepted a specific request
 	def select_request
 		@service = Service.find(params[:id])
-		selectedUserId = params[:userId]
+		sel_user_id = params[:userId]
 
 		# logic validation checks
-		serviceUserIsCurrentUser = @service.user_id == current_user.id;
-		selectedUserExistsInServiceRequests = @service.service_users.exists?(:user_id => selectedUserId)
-		serviceIsListed = @service.status == Service::LISTED
-		if serviceUserIsCurrentUser && selectedUserExistsInServiceRequests && serviceIsListed
+		serv_user_is_current_user = @service.user_id == current_user.id;
+		sel_user_is_in_serv_req = @service.service_users.exists?(:user_id => selectedUserId)
+		serv_is_listed = @service.status == Service::LISTED
+
+		if serv_user_is_current_user && sel_user_is_in_serv_req && serv_is_listed
 			# delete all the other requests
 			@service.service_users.each do |relation|
-				if(relation.user_id != selectedUserId)
+				if relation.user_id != sel_user_id
 					@service.service_users.destroy(relation)
 				end
 			end
@@ -142,6 +135,18 @@ class ServicesController < ApplicationController
 	def find_user
 		if params[:user_id]
 			@user = User.find(params[:user_id])
+		end
+	end
+
+	def unlist_service(service)
+		if @service.status == Service::LISTED || @service.status == Service::ACCEPTED
+			@service.service_users.destroy_all
+			@service.update({:status => Service::UNLISTED});
+			return true
+		else
+			#return an error because user cannot unlist completed services
+			puts "ERROR! Cannot change status of COMPLETED services!"
+			return false
 		end
 	end
 

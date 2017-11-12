@@ -7,7 +7,7 @@
 
 <% if @service.status == Service::UNLISTED && @service.user_id == current_user.id%>
 	<div class="bottom_action_buttons_container">
-		<%= button_to 'List Service', list_service_path, method: :get, :class => 'btn btn-success' %>
+		<%= button_to 'List Service', list_service_path, method: :post, :class => 'btn btn-success' %>
 	</div>
 <% elsif @service.status == Service::LISTED %>
 	<!-- If the creator is viewing the service, show list of people that requested  -->
@@ -32,22 +32,22 @@
 						<td><%= button_to 'View User Info', user_path(@requestingUser),
 								:class => 'btn btn-default', method: :get %></td>
 						<td>
-							<%= link_to "Select User", select_request_service_path({:service => @service, :userId => @requestingUser.id}), method: :get, data: {title: 'Select User to Perform Service' , confirm: 'Are you sure you want to select this user?'}, :class => 'btn btn-success' %>
+							<%= link_to "Select User", select_request_service_path({:service => @service, :userId => @requestingUser.id}), method: :post, data: {title: 'Select User to Perform Service' , confirm: 'Are you sure you want to select this user?'}, :class => 'btn btn-success' %>
 						</td>
 					</tr>
 				<% end %>
 			<% end %>
 		</table>
 		<div class="bottom_action_buttons_container">
-		<%= button_to 'Unlist Service', unlist_service_path, method: :get,
+		<%= button_to 'Unlist Service', unlist_service_path, method: :post,
 			data: {title: 'Unlist Service' , confirm: 'Are you sure you want to unlist this service? Performing this action will delete all current requests.'}, :class => 'btn btn-danger' %>
 		</div>
 	<!-- Only render the request button if user is not of same group -->
 	<% elsif @service.user.group != current_user.group %>
 		<% if @service.service_users.exists?(:user_id => current_user.id) %>
-			<%= button_to 'Remove Request', remove_request_service_path, method: :get, :class => 'btn btn-danger' %>
+			<%= button_to 'Remove Request', remove_request_service_path, method: :post, :class => 'btn btn-danger' %>
 		<% else %>
-			<%= button_to 'Request Service', add_request_service_path, method: :get, :class => 'btn btn-success'%>
+			<%= button_to 'Request Service', add_request_service_path, method: :post, :class => 'btn btn-success'%>
 		<% end %>
 	<% end %>
 <% elsif @service.status == Service::ACCEPTED %>
@@ -58,7 +58,7 @@
 		<p> Congratulations! You have succesfully connected with <%= @service.user.email %><p>
 	<% end %>
 	<div class="bottom_action_buttons_container">
-		<%= button_to 'Unlist Service', unlist_service_path, method: :get,
+		<%= button_to 'Unlist Service', unlist_service_path, method: :post,
 			data: {title: 'Unlist Service' , confirm: 'Are you sure you want to unlist this service? Performing this action will delete all current requests.'}, :class => 'btn btn-danger' %>
 	</div>
 <% end %>

@@ -14,12 +14,20 @@ class User < ApplicationRecord
   has_many :teen_transactions, :class_name => 'Transaction', :foreign_key => 'teen_id'
 
 
+  def full_name
+    self.first_name + ' ' + self.last_name
+  end
+
   def is_teen?
      self.group == 0
   end
 
   def get_address
     self.postal_code
+  end
+
+  def type_of_services_to_view
+    self.is_teen? ? 1 : 0
   end
 
   #gets lat & long for user
