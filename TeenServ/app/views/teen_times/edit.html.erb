@@ -1,3 +1,8 @@
+<div class="sched">
+  <h4><i class="fa fa-clock-o" aria-hidden="true"></i> Availability</h4>
+  <div class = "row schedule">
+  </div>
+</div>
 <div class="time">
   <%= form_for :teen_time, :url => url_for(:controller => 'teen_times', :action => 'create'), :html => {class: 'addTimeForm'} do |f| %>
     <div class="col-md-1">
@@ -29,3 +34,46 @@
   <% end %>
 
 </div>
+
+<script>
+    $(document).ready(function() {
+        displaySchedule();
+        function displaySchedule(){
+            <% @teenDays.each do |day| %>
+              $(".schedule").append("<div class='col-md-2 <%= day.day %>'><%= day.day %>  <i class=\"fa fa-times removeDay\" aria-hidden=\"true\"></i> <br></div>");
+            <% end %>
+            <% @teenTime.each do |time| %>
+              $(".<%= time.day %>").append("<div class='timeEntry'><div class='startTime'><%= time.start_time.strftime("%I:%M %p") %></div> - <div class='endTime'><%= time.end_time.strftime("%I:%M %p") %></div>  <i class=\"fa fa-times removeTime\" aria-hidden=\"true\"></i></div>");
+            <% end %>
+        }
+
+        $(".addTimeForm").submit(function () {
+            $(".submitTime").attr("disabled", true);
+            setTimeout(function () {
+                location.reload(true);
+            }, 1000);
+        });
+
+        $(".removeDay").on("click", function(){
+            $.ajax({
+                url: '.',
+                type: 'DELETE',
+                data: { day: $(this).parent().attr('class').split(" ")[1] }
+            });
+            setTimeout(function () {
+                location.reload(true);
+            }, 1000);
+        });
+
+        $(".removeTime").on("click", function(){
+            $.ajax({
+                url: '.',
+                type: 'DELETE',
+                data: { day: $(this).parent().parent().attr('class').split(" ")[1], start_time: $(this).siblings('.startTime').text(), end_time: $(this).siblings('.endTime').text() }
+            });
+            setTimeout(function () {
+                location.reload(true);
+            }, 1000);
+        });
+    });
+</script>

@@ -11,3 +11,21 @@
   height: 26px;
   padding: 0px 7px 0px 7px;
 }
+
+.sched{
+  margin-left: 15px;
+}
+
+.time{
+  margin-top: 30px;
+}
+
+.removeDay, .removeTime{
+  color: red;
+  cursor: pointer;
+}
+
+
+.startTime, .endTime{
+  display: inline;
+}
