@@ -4,8 +4,10 @@ class Transaction < ApplicationRecord
   belongs_to :service
   before_save :compute_total
   enum status: [ :not_approved, :teen_approved, :client_approved, :completed ]
-
-
+  scope :completed, -> { where(status: :completed) }
+  scope :not_approved, -> { where(status: :not_approved) }
+  scope :teen_approved, -> { where(status: :teen_approved) }
+  scope :client_approved, -> { where(status: :client_approved) }
   private
 
   def compute_total

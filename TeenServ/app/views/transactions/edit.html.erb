@@ -36,6 +36,12 @@
       </div>
     </div>
 
+    <% if @user.is_teen? %>
+        <%= f.hidden_field :status , :value=> :teen_approved %>
+    <% else %>
+        <%= f.hidden_field :status , :value=> :not_approved %>
+    <% end %>
+
     <div class="form-group">
       <div class="col-sm-9 col-sm-offset-3">
         <%= f.submit 'Send Transaction', :id => "submit_id", :value => nil, class: "btn btn-default btn-primary"%>
