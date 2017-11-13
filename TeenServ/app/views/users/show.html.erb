@@ -47,9 +47,9 @@
               <div class="col-md-6">
               <%end%>
                 <h4> <i class="fa fa-user" aria-hidden="true"></i> Account type</h4>
-                <% if @user.group==0 %>
+                <% if @user.is_teen? %>
                     <p>Teenager</p>
-                <% elsif @user.group==1 %>
+                <% elsif @user.is_client? %>
                     <p>Client</p>
                 <%end%>
                 <br>
@@ -94,7 +94,7 @@
                 </div>
               <%end%>
             </div>
-          <% if @user.group == 0 %>
+          <% if @user.is_teen? %>
             <div class="row">
               <div class="col-md-8">
                 <h4><i class="fa fa-star" aria-hidden="true"></i> Skills</h4>
@@ -241,7 +241,7 @@
               </div>
               <div class="col-md-4">
                 <h4>Billing</h4>
-                <% if @user.group==1 && @user.stripe_id.blank?%>
+                <% if @user.is_client? && @user.stripe_id.blank?%>
                     <%= form_tag user_cards_path(@user.id) do %>
                         <article>
                           <% if flash[:error].present? %>
@@ -261,7 +261,7 @@
                                 data-label="Add New Card">
                         </script>
                     <% end %>
-                <%elsif @user.group==1%>
+                <%elsif @user.is_client?%>
                     <%= link_to "View credit card on file", user_cards_path(@user.id), :class => 'btn btn-default' %>
                     <%= link_to "View charges", '#', :class => 'btn btn-default' %>
                 <%end%>
@@ -271,7 +271,7 @@
                 <%end%>
               </div>
               <div class="col-md-4">
-                <% if @user.group==0%>
+                <% if @user.is_teen?%>
                     <h4> Account Balance</h4>
                     <p> CAD $<%=@user.balance%></p>
                     <p> Payout method: <%=@user.payout_information.method.upcase%></p>

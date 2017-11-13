@@ -23,6 +23,10 @@ class User < ApplicationRecord
      self.group == 0
   end
 
+  def is_client?
+    self.group == 1
+  end
+
   def get_address
     self.postal_code
   end
