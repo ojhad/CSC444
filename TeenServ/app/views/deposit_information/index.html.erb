@@ -38,7 +38,7 @@
     </div>
     <div class="row">
       <div class="col-lg-6">
-        <%= form_tag user_deposit_information_path(@user.id , @user.deposit_information.id) do %>
+        <%= form_tag user_deposit_information_path(@user.id , @user.deposit_information.id) , :method => :put do %>
             <div class="form-group">
               <%= label_tag 'paypal', 'PayPal Address', class: 'control-label col-sm-3'%>
               <%= email_field_tag 'paypal', nil , class: 'form-control',required:'true'%>
@@ -81,7 +81,7 @@
       <div class="col-lg-6">
         <p> Complete the form below to update your mailing address</p>
         <br>
-        <%= form_tag user_deposit_information_path(@user.id , @user.deposit_information.id) do %>
+        <%= form_tag user_deposit_information_path(@user.id , @user.deposit_information.id) , :method => :put do %>
             <div class="form-group">
               <%= label_tag :address_1, 'Address line 1:', class: "control-label col-sm-4" %>
               <div class="col-sm-5">
