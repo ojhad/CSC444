@@ -84,11 +84,14 @@
   -webkit-border-radius:0 !important;
 }
 
-.review-block{
+#review-tab {
+  padding-top: 0 !important;
+}
+
+.review-block, .endorsement_block{
   padding-top: 5px;
   border-top: 1px solid #ccc;
 }
-
 .average-review {
   padding-bottom: 10px;
 }

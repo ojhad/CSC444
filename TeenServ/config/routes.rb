@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     resources :payouts
     resources :deposits , only:[:index, :create]
     resources :transactions
+    resources :endorsements
   end
 
   resources :services do
