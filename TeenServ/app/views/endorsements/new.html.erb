@@ -1,0 +1,11 @@
+<%= form_for :endorsement, :url => user_endorsements_path(@user.id) do |f| %>
+    <div class="form-group">
+      <%= f.hidden_field :user_id , :value=> @user.id %>
+      <%= f.hidden_field :author_id , :value=> current_user.id %>
+      <label class="control-label col-sm-2" for="review">Endorsement:</label>
+    </div>
+    <div>
+      <%= f.text_area :body, class: 'form-control', placeholder: 'Write an endorsement', rows: "5" ,cols:"50" %>
+    </div>
+    <%= f.submit 'Add', :id => "submit_id", :value => nil ,:class=>"btn btn-default"%>
+<% end %>

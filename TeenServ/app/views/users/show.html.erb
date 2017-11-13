@@ -363,12 +363,17 @@
               <% end %>
               </div>
 
-        <% elsif @user.id == @current_user.id %>
+
+      <% elsif @user.id == @current_user.id %>
               <%= form_for :endorsement_request, :url => user_endorsement_requests_path(@user.id) do |f| %>
                   <div class="add-button data form-group">
-                    <%= f.label :invitee_id, 'User ID'%>
-                    <div class="col-sm-6">
+                  <div class="col-sm-3">
+                    <%= f.label :invitee_id, 'User ID:'%>
+                  </div>
+                    <div class="col-sm-3">
                       <%= f.number_field :invitee_id , { class: 'form-control', id: 'charge_per_hour', maxlength: "4", size: "4" }%>
+                    </div>
+                    <div class="col-sm-2">
                       <%= f.submit 'Invite User', :class => 'btn btn-primary' %>
                     </div>
                   </div>

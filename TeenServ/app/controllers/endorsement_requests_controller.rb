@@ -1,6 +1,6 @@
 class EndorsementRequestsController < ApplicationController
   before_action :find_user
-  
+
   def create
     request_params = endorsement_request_params.merge!(:user_id => @user.id)
     invitee = User.find_by_id(request_params[:invitee_id])
