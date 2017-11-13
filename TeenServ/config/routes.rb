@@ -18,7 +18,7 @@ Rails.application.routes.draw do
     resources :payout_informations , only:[:index, :update]
     resources :transactions
     resources :endorsements
-    resources :charges
+    resources :charges , only: [:index ,:create]
   end
 
   resources :services do
