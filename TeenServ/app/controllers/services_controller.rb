@@ -109,13 +109,13 @@ class ServicesController < ApplicationController
 
 		# logic validation checks
 		serv_user_is_current_user = @service.user_id == current_user.id;
-		sel_user_is_in_serv_req = @service.service_users.exists?(:user_id => selectedUserId)
+		sel_user_is_in_serv_req = @service.service_users.exists?(:user_id => sel_user_id)
 		serv_is_listed = @service.status == Service::LISTED
 
 		if serv_user_is_current_user && sel_user_is_in_serv_req && serv_is_listed
 			# delete all the other requests
 			@service.service_users.each do |relation|
-				if relation.user_id != sel_user_id
+				if relation.user_id != sel_user_id.to_i
 					@service.service_users.destroy(relation)
 				end
 			end

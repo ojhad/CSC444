@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(version: 20171113000157) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "deposit_informations", id: :bigint, default: -> { "nextval('deposit_information_id_seq'::regclass)" }, force: :cascade do |t|
+  create_table "deposit_informations", force: :cascade do |t|
     t.string "paypal"
     t.string "address_1"
     t.string "address_2"
@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 20171113000157) do
     t.datetime "updated_at", null: false
     t.bigint "user_id"
     t.string "method", default: "check"
-    t.index ["user_id"], name: "index_deposit_information_on_user_id"
+    t.index ["user_id"], name: "index_deposit_informations_on_user_id"
   end
 
   create_table "endorsements", force: :cascade do |t|
@@ -44,9 +44,7 @@ ActiveRecord::Schema.define(version: 20171113000157) do
     t.string "batch_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "user_id"
     t.string "method"
-    t.index ["user_id"], name: "index_payouts_on_user_id"
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -115,8 +113,6 @@ ActiveRecord::Schema.define(version: 20171113000157) do
     t.bigint "skill_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["skill_id"], name: "index_user_skills_on_skill_id"
-    t.index ["user_id"], name: "index_user_skills_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -159,7 +155,6 @@ ActiveRecord::Schema.define(version: 20171113000157) do
 
   add_foreign_key "deposit_informations", "users"
   add_foreign_key "endorsements", "users"
-  add_foreign_key "payouts", "users"
   add_foreign_key "reviews", "users"
   add_foreign_key "service_users", "services"
   add_foreign_key "service_users", "users"
