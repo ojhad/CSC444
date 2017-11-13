@@ -39,7 +39,8 @@ class CardsController < ApplicationController
     @user.save
 
     flash.notice = "Card added successfully"
-    redirect_to user_path(@user.id)
+    
+    redirect_to user_cards_path(@user.id)
 
     end
 
