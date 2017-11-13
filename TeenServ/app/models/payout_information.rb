@@ -30,5 +30,5 @@ end
 #
 # Indexes
 #
-#  index_payout_informations_on_user_id  (user_id)
+#  index_deposit_information_on_user_id  (user_id)
 #
