@@ -288,6 +288,14 @@
     </div>
     <div class="tab-content">
       <div class="tab-pane fade in well secondary" id="review_reviewsTab">
+        <div class="add-button">
+          <% if @user.id !=  @current_user.id  %>
+                <%= link_to new_user_review_path(@user.id), :class => 'btn btn-primary' do %>
+                    <i class="fa fa-plus"></i>
+                    <span class="hidden-xs">Add Review</span>
+                <% end %>
+          <% end %>
+        </div>
         <% if @user.show_rating? %>
             <div class="average-review">
               <% if @user.average_rating.present? %>
@@ -300,13 +308,8 @@
                     <div class="review-block">
                       <%= render(:partial => 'review', :locals => {:rating => review.rating}) %>
                       <% if review.body.present? %>
-                          <h4>Reivew: <%= review.body %></h4>
+                          <h4><%= review.body %></h4>
                       <% end %>
-                      <h4>Author:
-                        <%= link_to user_path(review.author_id) do %>
-                            <%=review.author.try(:first_name) %>
-                        <% end %>
-                      </h4>
                     </div>
                 <% end %>
             <% end %>
@@ -314,30 +317,23 @@
         <%else %>
             <h5> There are no reviews yet </h5>
         <% end %>
-        <div>
-          <% if @user.id !=  @current_user.id %>
-              <%= link_to "Add Review", new_user_review_path(@user.id), :class => 'btn btn-default' %>
-          <% end %>
-        </div>
       </div>
       <div class="tab-pane fade in well secondary" id="review_endorsementsTab">
 
         <% if @user.endorsements.any? %>
-            <div class="row">
-              <div class="col-sm-9">
-                <h3> Endorsements: </h3>
-              </div>
-
-              <div class="col-sm-3">
-                <% if @user.id !=  @current_user.id %>
-                    <%= link_to new_user_endorsement_path(@user.id), :class => 'btn btn-primary' do %>
-                        <i class="fa fa-plus"></i>
-                        <span class="hidden-sm">Add Endorsement</span>
-                    <% end %>
+            <div class="add-button">
+            <% if @user.id !=  @current_user.id %>
+                <%= link_to new_user_endorsement_path(@user.id), :class => 'btn btn-primary' do %>
+                    <i class="fa fa-plus"></i>
+                    <span class="hidden-xs">Add Endorsement</span>
                 <% end %>
-              </div>
-                <% @user.endorsements.each do |endorsement| %>
-                  <div class="endorsement_block col-sm-9">
+            <% end %>
+            </div>
+            <div>
+                <h3> Endorsements: </h3>
+            </div>
+              <% @user.endorsements.each do |endorsement| %>
+                  <div class="endorsement_block">
                    <h5> <%= endorsement.body %> </h5>
                     <h4>Author:
                       <%= link_to user_path(endorsement.author_id) do %>
@@ -347,7 +343,6 @@
                   </div>
 
                 <% end %>
-            </div>
         <% else %>
             <h5> There are no endorsements yet </h5>
             <% if @user.id !=  @current_user.id %>
