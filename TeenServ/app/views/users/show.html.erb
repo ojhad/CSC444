@@ -319,16 +319,15 @@
         <% end %>
       </div>
       <div class="tab-pane fade in well secondary" id="review_endorsementsTab">
-
+        <div class="add-button">
+          <% if @user.id !=  @current_user.id %>
+              <%= link_to new_user_endorsement_path(@user.id), :class => 'btn btn-primary' do %>
+                  <i class="fa fa-plus"></i>
+                  <span class="hidden-xs">Add Endorsement</span>
+              <% end %>
+          <% end %>
+        </div>
         <% if @user.endorsements.any? %>
-            <div class="add-button">
-            <% if @user.id !=  @current_user.id %>
-                <%= link_to new_user_endorsement_path(@user.id), :class => 'btn btn-primary' do %>
-                    <i class="fa fa-plus"></i>
-                    <span class="hidden-xs">Add Endorsement</span>
-                <% end %>
-            <% end %>
-            </div>
             <div>
                 <h3> Endorsements: </h3>
             </div>
@@ -345,9 +344,6 @@
                 <% end %>
         <% else %>
             <h5> There are no endorsements yet </h5>
-            <% if @user.id !=  @current_user.id %>
-                <%= link_to "Add Endorsement", new_user_endorsement_path(@user.id), :class => 'btn btn-primary' %>
-            <% end %>
         <% end %>
       </div>
     </div>
