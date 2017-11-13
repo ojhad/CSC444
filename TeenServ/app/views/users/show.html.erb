@@ -307,7 +307,7 @@
                 <% if @user.is_teen?%>
                     <h4> Account Balance</h4>
                     <p> CAD $<%=@user.balance%></p>
-                    <p> Payout method: <%=@user.payout_information.method.upcase%></p>
+                    <p> Payout method: <%=@user.payout_information.method.upcase()%></p>
                     <%= form_tag user_payouts_path(@user.id) do %>
                         <% if @user.balance>0%>
                           <%= submit_tag "Withdraw balance", class: "btn btn-default" %>
