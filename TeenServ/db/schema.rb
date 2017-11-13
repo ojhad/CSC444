@@ -30,6 +30,15 @@ ActiveRecord::Schema.define(version: 20171113000157) do
     t.index ["user_id"], name: "index_deposit_information_on_user_id"
   end
 
+  create_table "endorsements", force: :cascade do |t|
+    t.text "body"
+    t.integer "author_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_endorsements_on_user_id"
+  end
+
   create_table "payouts", force: :cascade do |t|
     t.float "amount"
     t.string "batch_id"
@@ -149,6 +158,7 @@ ActiveRecord::Schema.define(version: 20171113000157) do
   end
 
   add_foreign_key "deposit_informations", "users"
+  add_foreign_key "endorsements", "users"
   add_foreign_key "payouts", "users"
   add_foreign_key "reviews", "users"
   add_foreign_key "service_users", "services"
