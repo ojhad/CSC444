@@ -18,7 +18,7 @@ Rails.application.routes.draw do
     resources :payout_informations , only:[:index, :update]
     resources :transactions
     resources :endorsements
-    resources :endorsement_requests
+    resources :endorsement_requests, only:[:create]
     resources :charges , only: [:index ,:create]
   end
 
