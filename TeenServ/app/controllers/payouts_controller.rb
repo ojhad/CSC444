@@ -9,17 +9,12 @@ class PayoutsController < ApplicationController
   # PAYOUT AMOUNT IS ALSO A SET AMOUNT SINCE THE PAYPAL TEST ACCOUNT DOESN'T HAVE UNLIMITED FUNDS AND IT
   # TAKES AGES TO ADD FUNDS TO A TEST PAYPAL ACCOUNT. THEIR API SUCKS
 
-  # TODO : CHECK WHETHER DEPOSIT METHOD IS PAYPAL/CHECK. IF IT IS CHECK, JUST DISPLAY FLASH MESSAGE
-  # TODO (CONT): THAT THE CHECK WILL BE MAILED TO THE ADDRESS. IF PAYPAL, EXECUTE CODE BELOW.
   def create
 
     @user = User.find(current_user.id)
-    @deposit_info = PayoutInformation.find_by_user_id(@user.id)
+    @payout_info = @user.payout_information
 
-    if @deposit_info.blank?
-      redirect_to user
-
-    elsif @deposit_info.method == 'paypal'
+    if @payout_info.method == 'paypal'
       @payout = PayPal::SDK::REST::Payout.new({
                                                   :sender_batch_header => {
                                                       :sender_batch_id => SecureRandom.hex(8),
@@ -48,7 +43,7 @@ class PayoutsController < ApplicationController
       @new_payout = Payout.new({:user_id => @user.id, :batch_id => @payout_batch.batch_header.payout_batch_id,
                                 :method => 'paypal' , :amount => @user.balance})
 
-      @new_payout.save
+      @new_payout.save!
 
       @user.balance = 0.0
 
@@ -59,7 +54,7 @@ class PayoutsController < ApplicationController
       @new_payout = Payout.new({:user_id => @user.id, :batch_id => nil, :method => 'check',
                                 :amount => @user.balance})
 
-      @new_payout.save
+      @new_payout.save!
 
       @user.balance = 0.0
 
@@ -67,7 +62,7 @@ class PayoutsController < ApplicationController
 
     end
 
-    if(@deposit_info.blank?)
+    if(@payout_info.blank?)
       redirect_to user_path(@user.id)
     else
       redirect_to user_payouts_path(@user.id)
