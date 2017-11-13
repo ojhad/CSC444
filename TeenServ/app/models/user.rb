@@ -9,7 +9,7 @@ class User < ApplicationRecord
   has_and_belongs_to_many :skills
   has_many :service_users
   has_many :payouts
-  has_one :deposit
+  has_one :deposit_information
   has_many :client_transactions, :class_name => 'Transaction', :foreign_key => 'client_id'
   has_many :teen_transactions, :class_name => 'Transaction', :foreign_key => 'teen_id'
 
@@ -34,6 +34,11 @@ class User < ApplicationRecord
     self.reviews.count > 5
   end
 
+  def create_deposit
+    @deposit_entry = DepositInformation.new(:user_id=>self.id)
+    @deposit_entry.save!
+  end
+
   #gets lat & long for user
   geocoded_by :get_address
 
@@ -41,6 +46,10 @@ class User < ApplicationRecord
 
   has_attached_file :profile_pic
   validates_attachment_content_type :profile_pic, content_type: /\Aimage\/.*\z/
+
+  after_create :create_deposit
+
+
 end
 
 # == Schema Information

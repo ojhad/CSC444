@@ -1,28 +1,24 @@
-class DepositsController < ApplicationController
+class DepositInformationController < ApplicationController
 
   def index
     @user = User.find(current_user.id)
-    @user_deposit_info = Deposit.find_by_user_id(@user.id)
+    @user_deposit_info = DepositInformation.find_by_user_id(@user.id)
 
-    # EACH USER SHOULD HAVE AN ENTRY IN DEPOSITS TABLE, SO IF ITS THE FIRST TIME FOR THE USER TO VISIT THIS PAGE
-    # CREATE AN ENTRY FOR HIM/HER IN THE TABLE AND PRE-POPULATE THE TABLE WITH THEIR PROVIDED ADDRESS
-    if @user_deposit_info.blank?
-      @new_entry = Deposit.new(:address_1=>@user.address_1,:address_2=>@user.address_2,:city=>@user.city,
-      :country=>@user.country,:postal_code=>@user.postal_code,:province=>@user.province,:user_id=>@user.id)
-      @new_entry.save
-      @user_deposit_info = @new_entry
+    if @user_deposit_info.no_address?
+      @user_deposit_info.update(address_1: @user.address_1,address_2:@user.address_2,province: @user.province,
+                                city: @user.city, country: @user.country, postal_code: @user.postal_code)
+      @user_deposit_info.save!
     end
 
   end
 
   # IF THE CHECK FORM WAS FILLED, THEN TEEN WANTS TO UPDATE MAILING ADDRESS
   # ELSE TEEN PROVIDED NEW PAYPAL ADDRESS
-  # TODO: CREATE A DB COLUMN IN DEPOSITS TABLE TO INDICATE WHICH DEPOSIT METHOD THEY CHOSE. REFLECT THIS ON FRONT-END
 
-  def create
+  def update
 
     @user = User.find(current_user.id)
-    @user_deposit_info = Deposit.find_by_user_id(@user.id)
+    @user_deposit_info = DepositInformation.find_by_user_id(@user.id)
 
     @form = params[:which_form]
 
@@ -50,7 +46,7 @@ class DepositsController < ApplicationController
       if @user_deposit_info.paypal.blank? && @user_deposit_info.method=='paypal'
         @user_deposit_info.paypal = @user.email
       end
-      
+
       @user_deposit_info.save!
 
       flash.notice = "Deposit Method updated!"
@@ -58,7 +54,7 @@ class DepositsController < ApplicationController
       flash.alert = "ERROR!"
     end
 
-    redirect_to user_deposits_path(@user.id)
+    redirect_to user_deposit_information_index_path(@user.id)
 
   end
 

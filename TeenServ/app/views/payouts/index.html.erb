@@ -8,12 +8,14 @@
         <div class="row">
           <table style="width:100%" >
             <tr>
+              <th>Method</th>
               <th>ID</th>
               <th>Amount (CAD)</th>
               <th>Date</th>
             </tr>
             <tr>
-              <td><%=p.batch_id%></td>
+              <td><%=p.method.upcase()%></td>
+              <td><%=p.id%></td>
               <td>$<%=p.amount%></td>
               <td><%=p.created_at.strftime("%B %d, %Y")%></td>
             </tr>

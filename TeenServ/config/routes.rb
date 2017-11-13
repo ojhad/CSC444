@@ -15,7 +15,7 @@ Rails.application.routes.draw do
     #resources :services
     resources :cards
     resources :payouts
-    resources :deposits , only:[:index, :create]
+    resources :deposit_information , only:[:index, :update]
     resources :transactions
   end
 

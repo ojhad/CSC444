@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: deposits
+# Table name: deposit_informations
 #
 #  id          :integer          not null, primary key
 #  paypal      :string
@@ -17,7 +17,7 @@
 #
 # Indexes
 #
-#  index_deposits_on_user_id  (user_id)
+#  index_deposit_information_on_user_id  (user_id)
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html

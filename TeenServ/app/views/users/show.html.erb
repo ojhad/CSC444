@@ -287,7 +287,7 @@
                       <%= link_to "View charges", '#', :class => 'btn btn-default' %>
                   <%end%>
                   <%if @user.group==0%>
-                      <%= link_to "Deposit information", user_deposits_path(@user.id), :class => 'deposit btn btn-default' %><br>
+                      <%= link_to "Deposit information", user_deposit_information_index_path(@user.id), :class => 'deposit btn btn-default' %><br>
                   <%end%>
                 </div>
                 <div class="col-md-4">
