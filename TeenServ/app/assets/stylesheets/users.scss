@@ -95,6 +95,13 @@
 .add-button {
   float: right;
 }
+
+.add-button {
+  float: right;
+}
+.submit-button {
+  padding: 5px;
+}
 .average-review {
   padding-bottom: 10px;
 }
@@ -110,5 +117,8 @@
 
 .removeSkillButton, .addSkillButton{
   width: 108px;
+}
+#review_endorsementsTab{
+  overflow: hidden;
 }
 

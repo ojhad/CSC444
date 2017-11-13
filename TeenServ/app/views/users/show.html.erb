@@ -355,14 +355,25 @@
         <% end %>
       </div>
       <div class="tab-pane fade in well secondary" id="review_endorsementsTab">
-        <div class="add-button">
-          <% if @user.id !=  @current_user.id %>
-              <%= link_to new_user_endorsement_path(@user.id), :class => 'btn btn-primary' do %>
+          <% if @current_user.endorsement_invites.map(&:user_id).include?(@user.id)  %>
+            <div class="add-button">
+            <%= link_to new_user_endorsement_path(@user.id), :class => 'btn btn-primary' do %>
                   <i class="fa fa-plus"></i>
                   <span class="hidden-xs">Add Endorsement</span>
               <% end %>
+              </div>
+
+        <% elsif @user.id == @current_user.id %>
+              <%= form_for :endorsement_request, :url => user_endorsement_requests_path(@user.id) do |f| %>
+                  <div class="add-button data form-group">
+                    <%= f.label :invitee_id, 'User ID'%>
+                    <div class="col-sm-6">
+                      <%= f.number_field :invitee_id , { class: 'form-control', id: 'charge_per_hour', maxlength: "4", size: "4" }%>
+                      <%= f.submit 'Invite User', :class => 'btn btn-primary' %>
+                    </div>
+                  </div>
+              <% end %>
           <% end %>
-        </div>
         <% if @user.endorsements.any? %>
             <div>
                 <h3> Endorsements: </h3>

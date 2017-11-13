@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171113050016) do
+ActiveRecord::Schema.define(version: 20171113204813) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,15 @@ ActiveRecord::Schema.define(version: 20171113050016) do
     t.datetime "updated_at", null: false
     t.bigint "user_id"
     t.index ["user_id"], name: "index_charges_on_user_id"
+  end
+
+  create_table "endorsement_requests", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "invitee_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["invitee_id"], name: "index_endorsement_requests_on_invitee_id"
+    t.index ["user_id"], name: "index_endorsement_requests_on_user_id"
   end
 
   create_table "endorsements", force: :cascade do |t|
@@ -163,6 +172,8 @@ ActiveRecord::Schema.define(version: 20171113050016) do
   end
 
   add_foreign_key "charges", "users"
+  add_foreign_key "endorsement_requests", "users"
+  add_foreign_key "endorsement_requests", "users", column: "invitee_id"
   add_foreign_key "endorsements", "users"
   add_foreign_key "payout_informations", "users"
   add_foreign_key "reviews", "users"
