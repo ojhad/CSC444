@@ -263,7 +263,7 @@
                     <% end %>
                 <%elsif @user.is_client?%>
                     <%= link_to "View credit card on file", user_cards_path(@user.id), :class => 'btn btn-default' %>
-                    <%= link_to "View charges", '#', :class => 'btn btn-default' %>
+                    <%= link_to "View charges", user_charges_path(@user.id), :class => 'btn btn-default' %>
                 <%end%>
                 <% if @user.is_teen?%>
                         <%= link_to "Payouts", user_payouts_path(@user.id), :class => 'btn btn-default' %>

@@ -29,7 +29,7 @@ class ChargesController < ApplicationController
     # If the charge is implicit, then I don't think a notice or redirect is required
     flash.notice = "Your credit card has been charged successfully."
 
-    redirect_to user_card_path(customer.id)
+    redirect_to user_charges_path(customer.id)
 
   end
 end
