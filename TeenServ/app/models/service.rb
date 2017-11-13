@@ -18,8 +18,8 @@ class Service < ApplicationRecord
 					"Tutoring", "Reading", "Other"]
 
 	belongs_to :user
-	has_many :service_users
-  has_many :transactions
+	has_many :service_users, :dependent => :destroy
+  has_many :transactions, :dependent => :destroy
 
 	validates :user_id, presence: true
 	validates :title, presence: true
