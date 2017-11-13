@@ -1,4 +1,5 @@
 class ServiceUser < ApplicationRecord
+  belongs_to :service
 end
 
 # == Schema Information

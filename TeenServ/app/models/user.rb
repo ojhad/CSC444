@@ -14,6 +14,8 @@ class User < ApplicationRecord
   has_many :client_transactions, :class_name => 'Transaction', :foreign_key => 'client_id'
   has_many :teen_transactions, :class_name => 'Transaction', :foreign_key => 'teen_id'
   has_many :charges
+  has_many :service_jobs, through: :service_users, source: :service
+
 
 
   def full_name

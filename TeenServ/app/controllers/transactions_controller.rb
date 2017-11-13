@@ -11,7 +11,9 @@ class TransactionsController < ApplicationController
 
 
   def new
-    @services = @user.services.select{ |s| s.service_users.any?}
+    service_jobs = @user.service_jobs.where(:status => 3 )
+    services = @user.services.where(:status => 3)
+    @services = services + service_jobs
   end
 
   def create
