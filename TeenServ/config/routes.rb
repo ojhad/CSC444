@@ -35,6 +35,7 @@ Rails.application.routes.draw do
   resources :user_skills
   resources :user_steps
   resources :teen_times
+  resources :finances , only: [:index]
 
 
 
