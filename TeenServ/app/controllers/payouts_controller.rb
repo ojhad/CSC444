@@ -14,7 +14,7 @@ class PayoutsController < ApplicationController
   def create
 
     @user = User.find(current_user.id)
-    @deposit_info = DepositInformation.find_by_user_id(@user.id)
+    @deposit_info = PayoutInformation.find_by_user_id(@user.id)
 
     if @deposit_info.blank?
       redirect_to user

@@ -5,17 +5,17 @@
   By default, we will send the check to the address on your profile. If this is not your mailing address, please indicate
   below as well.</p>
   <br>
-  <% if @user_deposit_info.method == 'check'%>
+  <% if @user_payout_info.method == 'check'%>
       <p> Your current deposit method is set to <b>Check by Mail</b> </p>
   <% else %>
       <p> Your current deposit method is set to <b>PayPal</b></p>
   <%end%>
   <br>
-  <%= form_tag user_deposit_information_path(@user.id , @user.deposit_information.id) , :method => :put do %>
+  <%= form_tag user_payout_information_path(@user.id , @user.payout_information.id) , :method => :put do %>
     <div class = "form-group">
         <label> Update Deposit Method</label>
-        <input type="radio" class="DepositInfo" name="deposit" value="paypal"> PayPal
-        <input type="radio" class="DepositInfo" name="deposit" value="check"> Check
+        <input type="radio" class="PayoutInfo" name="method" value="paypal"> PayPal
+        <input type="radio" class="PayoutInfo" name="method" value="check"> Check
     </div>
     <%=hidden_field_tag 'which_form' , 'method'%>
     <div class="form-group">
@@ -28,8 +28,8 @@
   <div id="paypal" hidden>
     <div class="row">
       <div class="col-lg-6">
-        <% if !@user_deposit_info.has_paypal?%>
-            <p> Your current PayPal address is <b><%=@user_deposit_info.paypal%></b></p>
+        <% if !@user_payout_info.has_paypal?%>
+            <p> Your current PayPal address is <b><%=@user_payout_info.paypal%></b></p>
             <br>
             <p> If you want to set a new PayPal address, please fill and submit the form below.</p>
             <br>
@@ -38,7 +38,7 @@
     </div>
     <div class="row">
       <div class="col-lg-6">
-        <%= form_tag user_deposit_information_path(@user.id , @user.deposit_information.id) , :method => :put do %>
+        <%= form_tag user_payout_information_path(@user.id , @user.payout_information.id) , :method => :put do %>
             <div class="form-group">
               <%= label_tag 'paypal', 'PayPal Address', class: 'control-label col-sm-3'%>
               <%= email_field_tag 'paypal', nil , class: 'form-control',required:'true'%>
@@ -62,16 +62,16 @@
             <td><b><%=@user.first_name.capitalize%> <%=@user.last_name.capitalize%></b></td>
           </tr>
           <tr>
-            <td><%=@user_deposit_info.address_1.capitalize()%></td>
+            <td><%=@user_payout_info.address_1.capitalize()%></td>
           </tr>
           <tr>
-            <td><%=@user_deposit_info.address_2.capitalize()%></td>
+            <td><%=@user_payout_info.address_2.capitalize()%></td>
           </tr>
           <tr>
-            <td><%=@user_deposit_info.city.capitalize()%> <%=@user_deposit_info.province%> <%=@user_deposit_info.postal_code.upcase()%></td>
+            <td><%=@user_payout_info.city.capitalize()%> <%=@user_payout_info.province%> <%=@user_payout_info.postal_code.upcase()%></td>
           </tr>
           <tr>
-            <td><%=@user_deposit_info.country.capitalize()%></td>
+            <td><%=@user_payout_info.country.capitalize()%></td>
           </tr>
         </table>
       </div>
@@ -81,7 +81,7 @@
       <div class="col-lg-6">
         <p> Complete the form below to update your mailing address</p>
         <br>
-        <%= form_tag user_deposit_information_path(@user.id , @user.deposit_information.id) , :method => :put do %>
+        <%= form_tag user_payout_information_path(@user.id , @user.payout_information.id) , :method => :put do %>
             <div class="form-group">
               <%= label_tag :address_1, 'Address line 1:', class: "control-label col-sm-4" %>
               <div class="col-sm-5">
@@ -143,7 +143,7 @@
 
 <script type="text/javascript">
 
-    $(".DepositInfo").change(function(){
+    $(".PayoutInfo").change(function(){
         switch($(this).val()) {
             case 'paypal' :
                 $('#paypal').show()

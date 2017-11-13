@@ -1,4 +1,4 @@
-class DepositInformation < ApplicationRecord
+class PayoutInformation < ApplicationRecord
   belongs_to :user
 
   def has_paypal?
@@ -13,7 +13,7 @@ end
 
 # == Schema Information
 #
-# Table name: deposit_informations
+# Table name: payout_informations
 #
 #  id          :integer          not null, primary key
 #  paypal      :string
@@ -30,5 +30,5 @@ end
 #
 # Indexes
 #
-#  index_deposit_informations_on_user_id  (user_id)
+#  index_deposit_information_on_user_id  (user_id)
 #

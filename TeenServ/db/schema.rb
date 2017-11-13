@@ -10,12 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171113000157) do
+ActiveRecord::Schema.define(version: 20171113040401) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "deposit_informations", force: :cascade do |t|
+  create_table "endorsements", force: :cascade do |t|
+    t.text "body"
+    t.integer "author_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_endorsements_on_user_id"
+  end
+
+  create_table "payout_informations", id: :bigint, default: -> { "nextval('deposit_information_id_seq'::regclass)" }, force: :cascade do |t|
     t.string "paypal"
     t.string "address_1"
     t.string "address_2"
@@ -27,16 +36,7 @@ ActiveRecord::Schema.define(version: 20171113000157) do
     t.datetime "updated_at", null: false
     t.bigint "user_id"
     t.string "method", default: "check"
-    t.index ["user_id"], name: "index_deposit_informations_on_user_id"
-  end
-
-  create_table "endorsements", force: :cascade do |t|
-    t.text "body"
-    t.integer "author_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.bigint "user_id"
-    t.index ["user_id"], name: "index_endorsements_on_user_id"
+    t.index ["user_id"], name: "index_deposit_information_on_user_id"
   end
 
   create_table "payouts", force: :cascade do |t|
@@ -44,7 +44,9 @@ ActiveRecord::Schema.define(version: 20171113000157) do
     t.string "batch_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id"
     t.string "method"
+    t.index ["user_id"], name: "index_payouts_on_user_id"
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -113,6 +115,8 @@ ActiveRecord::Schema.define(version: 20171113000157) do
     t.bigint "skill_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["skill_id"], name: "index_user_skills_on_skill_id"
+    t.index ["user_id"], name: "index_user_skills_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -153,8 +157,9 @@ ActiveRecord::Schema.define(version: 20171113000157) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "deposit_informations", "users"
   add_foreign_key "endorsements", "users"
+  add_foreign_key "payout_informations", "users"
+  add_foreign_key "payouts", "users"
   add_foreign_key "reviews", "users"
   add_foreign_key "service_users", "services"
   add_foreign_key "service_users", "users"

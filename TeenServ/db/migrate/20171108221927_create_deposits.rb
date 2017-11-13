@@ -1,6 +1,6 @@
 class CreateDeposits < ActiveRecord::Migration[5.1]
   def change
-    create_table :deposit_information do |t|
+    create_table :payout_informations do |t|
 
       t.string :paypal
       t.string :address_1
@@ -12,6 +12,6 @@ class CreateDeposits < ActiveRecord::Migration[5.1]
 
       t.timestamps
     end
-    add_reference :deposit_information, :user, foreign_key: true
+    add_reference :payout_informations, :user, foreign_key: true
   end
 end
