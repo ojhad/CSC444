@@ -1,3 +1,8 @@
+class Charge < ApplicationRecord
+
+  belongs_to :user
+end
+
 # == Schema Information
 #
 # Table name: charges
@@ -13,11 +18,3 @@
 #
 #  index_charges_on_user_id  (user_id)
 #
-
-require 'test_helper'
-
-class ChargesControllerTest < ActionDispatch::IntegrationTest
-  # test "the truth" do
-  #   assert true
-  # end
-end
