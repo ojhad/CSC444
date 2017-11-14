@@ -50,7 +50,7 @@ ActiveRecord::Schema.define(version: 20171113224116) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "payout_informations", id: :bigint, default: -> { "nextval('deposit_information_id_seq'::regclass)" }, force: :cascade do |t|
+  create_table "payout_informations", force: :cascade do |t|
     t.string "paypal"
     t.string "address_1"
     t.string "address_2"
@@ -62,7 +62,7 @@ ActiveRecord::Schema.define(version: 20171113224116) do
     t.datetime "updated_at", null: false
     t.bigint "user_id"
     t.string "method", default: "check"
-    t.index ["user_id"], name: "index_deposit_information_on_user_id"
+    t.index ["user_id"], name: "index_payout_informations_on_user_id"
   end
 
   create_table "payouts", force: :cascade do |t|
@@ -70,9 +70,7 @@ ActiveRecord::Schema.define(version: 20171113224116) do
     t.string "batch_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "user_id"
     t.string "method"
-    t.index ["user_id"], name: "index_payouts_on_user_id"
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -171,12 +169,12 @@ ActiveRecord::Schema.define(version: 20171113224116) do
     t.string "first_name"
     t.string "last_name"
     t.float "average_rating"
-    t.float "latitude"
-    t.float "longitude"
     t.string "profile_pic_file_name"
     t.string "profile_pic_content_type"
     t.integer "profile_pic_file_size"
     t.datetime "profile_pic_updated_at"
+    t.float "latitude"
+    t.float "longitude"
     t.string "stripe_id"
     t.float "balance", default: 0.0
     t.index ["email"], name: "index_users_on_email", unique: true
@@ -188,7 +186,6 @@ ActiveRecord::Schema.define(version: 20171113224116) do
   add_foreign_key "endorsement_requests", "users", column: "invitee_id"
   add_foreign_key "endorsements", "users"
   add_foreign_key "payout_informations", "users"
-  add_foreign_key "payouts", "users"
   add_foreign_key "reviews", "users"
   add_foreign_key "service_users", "services"
   add_foreign_key "service_users", "users"
