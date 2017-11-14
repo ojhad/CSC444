@@ -14,4 +14,12 @@ class UsersController < ApplicationController
 					WHEN day = 'Sunday' THEN 7
      END ASC").uniq{|time| time.day }
 	end
+
+	def new
+
+	end
+
+	def add_user
+		User.create(email: params[:user][:email], password: params[:user][:password], password_confirmation: params[:user][:password_confirmation], group: params[:group])
+	end
 end

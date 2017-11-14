@@ -1,0 +1,73 @@
+<%=  form_for :user, :url => url_for(:controller => 'users', :action => 'add_user') do |f| %>
+    Choose User group: <br>
+    <input type="radio" name="group" value="0"> Teen
+    <input type="radio" name="group" value="1"> Client
+    <input type="radio" name="group" value="3"> Admin
+    <input type="radio" name="group" value="4"> CSR
+    <br>
+    <br>
+    <%= f.label :email, 'Email' %>
+    <%= f.email_field :email %>
+    <br>
+    <br>
+    <%= f.label :password, 'Password' %>
+    <%= f.password_field :password %>
+    <br>
+    <br>
+    <%= f.label :password_confirmation, 'Confirm password' %>
+    <%= f.password_field :password_confirmation %>
+    <br>
+    <br>
+    <%= f.label :first_name, 'First Name' %>
+    <%= f.text_field :first_name %>
+    <br>
+    <br>
+    <%= f.label :last_name, 'Last Name' %>
+    <%= f.text_field :last_name%>
+    <br>
+    <br>
+    <%= f.label :address_1, 'Street Address'%>
+    <%= f.text_field :address_1 %>
+    <br>
+    <br>
+    <%= f.label :address_2, 'Apt/Unit/Suite'%>
+    <%= f.text_field :address_2 %>
+    <br>
+    <br>
+    <%= f.label :city, 'City'%>
+    <%= f.text_field :city %>
+    <br>
+    <br>
+    <%= f.label :province, 'Province' %>
+    <%= f.select :province, [ ['Alberta','AB'],['British Columbia','BC'],['Manitoba','MB'],['New Brunswich','NB'],
+                              ['Newfoundland and Labrador','NL'],['Nova Scotia','NS'],['Ontario','ON'],['Prince Edward Island','PE'],
+                              ['Quebec','QC'],['Saskatchewan','SK'],['Northwest Territories','NT'],
+                              ['Nunavut','NU'],['Yukon','YT']], {:prompt => 'Select One'}%>
+    <br>
+    <br>
+    <%= f.label :postal_code, 'Postal Code' %>
+    <%= f.text_field :postal_code %>
+    <br>
+    <br>
+    <%= f.label :country, 'Country' %>
+    <%= f.text_field :country %>
+    <br>
+    <br>
+    <%= f.label :home_number, 'Home Number' %>
+    <%= f.text_field :home_number %>
+    <br>
+    <br>
+    <%= f.label :mobile_number, 'Mobile Number' %>
+    <%= f.text_field :mobile_number %>
+    <br>
+    <br>
+    <%= f.label :age, 'Age' %>
+    <%= f.text_field :age %>
+    <br>
+    <br>
+    <button type="submit" class="btn btn-default">Add User</button>
+
+<% end %>
+<script type="text/javascript">
+
+</script>

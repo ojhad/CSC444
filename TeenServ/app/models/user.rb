@@ -35,6 +35,14 @@ class User < ApplicationRecord
     self.group == 2
   end
 
+  def is_admin?
+    self.group == 3
+  end
+
+  def is_CSR?
+    self.group == 4
+  end
+
   def get_address
     self.postal_code
   end

@@ -11,6 +11,9 @@ Rails.application.routes.draw do
   root 'home#index'
 
   resources :users do
+    collection do
+      post 'add_user'
+    end
     resources :reviews
     #resources :services
     resources :cards
