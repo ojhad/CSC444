@@ -6,11 +6,13 @@ class UserSkillsController < ApplicationController
   def create
     @userSkill = UserSkill.new(user_id: current_user.id, skill_id: params[:skill_id])
     @userSkill.save
+    redirect_to edit_user_skill_path(current_user.id)
   end
 
   def destroy
     @userSkill = UserSkill.find_by_user_id_and_skill_id(current_user.id, params[:skill_id])
     UserSkill.destroy(@userSkill.id)
+    redirect_to edit_user_skill_path(current_user.id)
   end
 
   def edit
