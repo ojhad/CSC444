@@ -48,6 +48,9 @@
                   <li><%= link_to "View Profile", user_path(current_user)%></li>
                   <li><%= link_to "Create New Job", new_service_path%></li>
                   <li><%= link_to "View Job Postings", services_path%></li>
+                  <% if current_user.is_sadmin? %>
+                    <li>Add User</li>
+                  <% end %>
                   <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
                 </ul>
               </li>

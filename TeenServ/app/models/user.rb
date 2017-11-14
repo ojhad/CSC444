@@ -31,6 +31,10 @@ class User < ApplicationRecord
     self.group == 1
   end
 
+  def is_sadmin?
+    self.group == 2
+  end
+
   def get_address
     self.postal_code
   end

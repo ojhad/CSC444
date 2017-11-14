@@ -51,6 +51,8 @@
                     <p>Teenager</p>
                 <% elsif @user.is_client? %>
                     <p>Client</p>
+                <% elsif @user.is_sadmin? %>
+                    <p>Super Admin</p>
                 <%end%>
                 <br>
                 <h4 style=""><i class="fa fa-address-book" aria-hidden="true"></i> Contact Information</h4>
@@ -94,7 +96,7 @@
                 </div>
               <%end%>
             </div>
-          <% if @user.is_teen? %>
+          <% if @user.is_teen? || @user.is_sadmin? %>
             <div class="row">
               <div class="col-md-8">
                 <h4><i class="fa fa-star" aria-hidden="true"></i> Skills</h4>
@@ -117,9 +119,11 @@
               <div class="col-md-8">
                 <h4><i class="fa fa-clock-o" aria-hidden="true"></i> Availability</h4>
               </div>
-              <div class="col-md-4">
-                <%= link_to "Edit Availability", edit_teen_time_path , :class => 'btn btn-primary',:style => 'margin-bottom:4px' %><br>
-              </div>
+              <% if @user.id == @current_user.id %>
+                <div class="col-md-4">
+                  <%= link_to "Edit Availability", edit_teen_time_path , :class => 'btn btn-primary',:style => 'margin-bottom:4px' %><br>
+                </div>
+              <% end %>
             </div>
             <div class = "row schedule">
             </div>
@@ -216,7 +220,7 @@
           </div>
         </div>
         <div class="tab-pane primary fade in" id="reviewsTab">
-          <% if @user.is_teen? %>
+          <% if @user.is_teen? || @user.is_sadmin? %>
           <div class="btn-pref2 btn-group btn-group-justified btn-group-lg" role="group" aria-label="...">
             <div class="btn-group" role="group">
               <button type="button" id="review_reviews" class="btn btn-primary topBar" data-toggle="tab">
