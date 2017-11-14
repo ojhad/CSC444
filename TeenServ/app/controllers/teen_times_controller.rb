@@ -17,7 +17,12 @@ class TeenTimesController < ApplicationController
 
   def create
     @teenTime = TeenTime.new(user_id: @user.id, day: params[:day], start_time: params[:start_time], end_time: params[:end_time])
-    @teenTime.save
+    if @teenTime.save
+      redirect_to edit_teen_time_path(@user.id)
+    else
+      flash[:error] = @teenTime.errors.full_messages
+      redirect_to edit_teen_time_path(@user.id)
+    end
   end
 
   def destroy
@@ -26,10 +31,7 @@ class TeenTimesController < ApplicationController
     else
       TeenTime.where(:user_id => @user.id).where(:day => params[:day]).destroy_all
     end
-  end
-
-  def removeDay
-    TeenTime.where(:user_id => @user.id).where(:day => params[:day]).destroy_all
+    redirect_to edit_teen_time_path(@user.id)
   end
 
   def find_user
