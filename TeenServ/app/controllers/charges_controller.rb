@@ -25,11 +25,24 @@ class ChargesController < ApplicationController
 
     @db_charge.save!
 
+    year = @db_charge.created_at.year
+    month = @db_charge.created_at.month
+
+    @finance = Finance.where(month: month , year: year)
+
+    if @finance.blank?
+      @finance_entry = Finance.new(:month => month , :year => year, :amount => @db_charge.amount)
+      @finance_entry.save!
+    else
+      @finance.amount = @finance.amount + @db_charge.amount
+      @finance.save!
+    end
+
     # If you will explicitly let the customer submit a form before paying then you can use the below for redirecting
     # If the charge is implicit, then I don't think a notice or redirect is required
     flash.notice = "Your credit card has been charged successfully."
 
-    redirect_to user_card_path(customer.id)
+    redirect_to user_charges_path(customer.id)
 
   end
 end

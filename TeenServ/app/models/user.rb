@@ -15,7 +15,9 @@ class User < ApplicationRecord
   has_many :teen_transactions, :class_name => 'Transaction', :foreign_key => 'teen_id'
   has_many :charges
   has_many :teen_times
-
+  has_many :service_jobs, through: :service_users, source: :service
+  has_many :endorsement_requests, :class_name => 'EndorsementRequest', :foreign_key => 'user_id'
+  has_many :endorsement_invites, :class_name => 'EndorsementRequest', :foreign_key => 'invitee_id'
 
   def full_name
     self.first_name + ' ' + self.last_name

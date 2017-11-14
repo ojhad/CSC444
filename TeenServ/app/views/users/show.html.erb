@@ -212,6 +212,7 @@
           </div>
         </div>
         <div class="tab-pane primary fade in" id="reviewsTab">
+          <% if @user.is_teen? %>
           <div class="btn-pref2 btn-group btn-group-justified btn-group-lg" role="group" aria-label="...">
             <div class="btn-group" role="group">
               <button type="button" id="review_reviews" class="btn btn-primary topBar" data-toggle="tab">
@@ -226,6 +227,38 @@
               </button>
             </div>
           </div>
+          <% else %>
+              <div class="add-button">
+                <% if @user.id !=  @current_user.id  %>
+                    <%= link_to new_user_review_path(@user.id), :class => 'btn btn-primary' do %>
+                        <i class="fa fa-plus"></i>
+                        <span class="hidden-xs">Add Review</span>
+                    <% end %>
+                <% end %>
+              </div>
+              <% if @user.show_rating? %>
+                  <div class="average-review">
+                    <% if @user.average_rating.present? %>
+                        <h4>Average Rating:</h4>
+                        <%= render(:partial => 'review', :locals => {:rating => @user.average_rating}) %>
+                    <% end %>
+                  </div>
+                  <% if @user.reviews.count != 0 %>
+                      <% @user.reviews.each do |review| %>
+                          <div class="review-block">
+                            <%= render(:partial => 'review', :locals => {:rating => review.rating}) %>
+                            <% if review.body.present? %>
+                                <h4><%= review.body %></h4>
+                            <% end %>
+                          </div>
+                      <% end %>
+                  <% end %>
+
+              <%else %>
+                  <h5> There are no reviews yet </h5>
+              <% end %>
+
+          <% end %>
         </div>
         <div class="tab-pane primary fade in well" id="billingTab">
           <div class="container">
@@ -263,7 +296,7 @@
                     <% end %>
                 <%elsif @user.is_client?%>
                     <%= link_to "View credit card on file", user_cards_path(@user.id), :class => 'btn btn-default' %>
-                    <%= link_to "View charges", '#', :class => 'btn btn-default' %>
+                    <%= link_to "View charges", user_charges_path(@user.id), :class => 'btn btn-default' %>
                 <%end%>
                 <% if @user.is_teen?%>
                         <%= link_to "Payouts", user_payouts_path(@user.id), :class => 'btn btn-default' %>
@@ -274,7 +307,7 @@
                 <% if @user.is_teen?%>
                     <h4> Account Balance</h4>
                     <p> CAD $<%=@user.balance%></p>
-                    <p> Payout method: <%=@user.payout_information.method.upcase%></p>
+                    <p> Payout method: <%=@user.payout_information.method.upcase()%></p>
                     <%= form_tag user_payouts_path(@user.id) do %>
                         <% if @user.balance>0%>
                           <%= submit_tag "Withdraw balance", class: "btn btn-default" %>
@@ -322,14 +355,30 @@
         <% end %>
       </div>
       <div class="tab-pane fade in well secondary" id="review_endorsementsTab">
-        <div class="add-button">
-          <% if @user.id !=  @current_user.id %>
-              <%= link_to new_user_endorsement_path(@user.id), :class => 'btn btn-primary' do %>
+          <% if @current_user.endorsement_invites.map(&:user_id).include?(@user.id)  %>
+            <div class="add-button">
+            <%= link_to new_user_endorsement_path(@user.id), :class => 'btn btn-primary' do %>
                   <i class="fa fa-plus"></i>
                   <span class="hidden-xs">Add Endorsement</span>
               <% end %>
+              </div>
+
+
+      <% elsif @user.id == @current_user.id %>
+              <%= form_for :endorsement_request, :url => user_endorsement_requests_path(@user.id) do |f| %>
+                  <div class="add-button data form-group">
+                  <div class="col-sm-3">
+                    <%= f.label :invitee_id, 'User ID:'%>
+                  </div>
+                    <div class="col-sm-3">
+                      <%= f.number_field :invitee_id , { class: 'form-control', id: 'charge_per_hour', maxlength: "4", size: "4" }%>
+                    </div>
+                    <div class="col-sm-2">
+                      <%= f.submit 'Invite User', :class => 'btn btn-primary' %>
+                    </div>
+                  </div>
+              <% end %>
           <% end %>
-        </div>
         <% if @user.endorsements.any? %>
             <div>
                 <h3> Endorsements: </h3>
@@ -377,9 +426,11 @@
                     break;
                 case 'reviews':
                     $('#reviewsTab').addClass('active');
-                    $('#review_reviewsTab').addClass('active');
-                    $('#review_reviews').removeClass("btn-default").addClass("btn-primary");
-                    $('#review_endorsements').removeClass("btn-primary").addClass("btn-default");
+                    <% if @user.is_teen? %>
+                      $('#review_reviewsTab').addClass('active');
+                      $('#review_reviews').removeClass("btn-default").addClass("btn-primary");
+                      $('#review_endorsements').removeClass("btn-primary").addClass("btn-default");
+                    <% end %>
                     break;
                 case 'services':
                     $('#servicesTab').addClass('active');
