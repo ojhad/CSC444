@@ -6,6 +6,7 @@
 #  title      :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  viewed     :boolean          default(FALSE), not null
 #
 
 require 'test_helper'
