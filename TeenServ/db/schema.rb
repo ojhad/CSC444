@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171115020554) do
+ActiveRecord::Schema.define(version: 20171115021927) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,6 +55,8 @@ ActiveRecord::Schema.define(version: 20171115020554) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "viewed", default: false, null: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_notifications_on_user_id"
   end
 
   create_table "payout_informations", force: :cascade do |t|
@@ -192,6 +194,7 @@ ActiveRecord::Schema.define(version: 20171115020554) do
   add_foreign_key "endorsement_requests", "users"
   add_foreign_key "endorsement_requests", "users", column: "invitee_id"
   add_foreign_key "endorsements", "users"
+  add_foreign_key "notifications", "users"
   add_foreign_key "payout_informations", "users"
   add_foreign_key "payouts", "users"
   add_foreign_key "reviews", "users"
