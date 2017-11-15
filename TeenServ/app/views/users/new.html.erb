@@ -1,9 +1,13 @@
 <%=  form_for :user, :url => url_for(:controller => 'users', :action => 'add_user') do |f| %>
     Choose User group: <br>
-    <input type="radio" name="group" value="0"> Teen
-    <input type="radio" name="group" value="1"> Client
-    <input type="radio" name="group" value="3"> Admin
-    <input type="radio" name="group" value="4"> CSR
+    <%= f.radio_button :group, 0 %>
+    <%= f.label :group_teen, 'Teen' %>
+    <%= f.radio_button :group, 1 %>
+    <%= f.label :group_client, 'Client' %>
+    <%= f.radio_button :group, 3 %>
+    <%= f.label :group_admin, 'Admin' %>
+    <%= f.radio_button :group, 4 %>
+    <%= f.label :group_CSR, 'CSR' %>
     <br>
     <br>
     <%= f.label :email, 'Email' %>

@@ -20,6 +20,12 @@ class UsersController < ApplicationController
 	end
 
 	def add_user
-		User.create(email: params[:user][:email], password: params[:user][:password], password_confirmation: params[:user][:password_confirmation], group: params[:group])
+		User.create(add_user_params)
+		redirect_to home_index_path
+	end
+
+	def add_user_params
+		params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :address_1, :address_2, :city, :province, :postal_code,
+																 :country, :home_number, :mobile_number, :age, :profile_pic, :user_id, :group)
 	end
 end
