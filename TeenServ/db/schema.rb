@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171115024327) do
+ActiveRecord::Schema.define(version: 20171115025311) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,6 +56,10 @@ ActiveRecord::Schema.define(version: 20171115024327) do
     t.datetime "updated_at", null: false
     t.boolean "read", default: false, null: false
     t.bigint "user_id"
+    t.bigint "reference_user_id"
+    t.bigint "reference_service_id"
+    t.index ["reference_service_id"], name: "index_notifications_on_reference_service_id"
+    t.index ["reference_user_id"], name: "index_notifications_on_reference_user_id"
     t.index ["user_id"], name: "index_notifications_on_user_id"
   end
 
@@ -194,7 +198,9 @@ ActiveRecord::Schema.define(version: 20171115024327) do
   add_foreign_key "endorsement_requests", "users"
   add_foreign_key "endorsement_requests", "users", column: "invitee_id"
   add_foreign_key "endorsements", "users"
+  add_foreign_key "notifications", "services", column: "reference_service_id"
   add_foreign_key "notifications", "users"
+  add_foreign_key "notifications", "users", column: "reference_user_id"
   add_foreign_key "payout_informations", "users"
   add_foreign_key "payouts", "users"
   add_foreign_key "reviews", "users"
