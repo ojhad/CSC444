@@ -6,7 +6,7 @@ class Notification < ApplicationRecord
   end
 
   def self.get_unread_user_notifications(user)
-    Notification.where(user_id: user.id, viewed: false)
+    Notification.where(user_id: user.id, read: false)
   end
 end
 
