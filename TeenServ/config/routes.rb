@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :notifications
   get 'search/search'
 
   get 'home/index'
