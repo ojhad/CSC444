@@ -129,7 +129,7 @@ class ServicesController < ApplicationController
 
 	def service_params
    		params.require(:service).permit(:user_id,:title,:charge_per_hour,:user_type,:frequency, 
-   										:min_age,:max_age).merge(status: Service::UNLISTED)
+   										:min_age,:max_age,:status)
 	end
 
 	def find_user

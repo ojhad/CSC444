@@ -10,6 +10,7 @@
         <% end %>
   <% end %>
 	<%= f.hidden_field :user_id , :value=>current_user.id %>
+  <%= f.hidden_field :status, :id => "serviceStatusHiddenField", :value=>Service::UNLISTED %>
 
  	<div class="form-row col-sm-4 col-sm-offset-4 form-input-group">
     <%= f.label :title, "Please select service type", class: 'control-label'%>
@@ -43,19 +44,20 @@
 
 
   <!-- Frequcy Toggle and Input Field-->
-  <div class="row col-sm-4 col-sm-offset-4 form-input-group">
+  <div class="form-row col-sm-4 col-sm-offset-4 form-input-group">
     <input class = "checkbox-inline" id = "service_freq_toggle" onclick="frequencyToggle()" type="checkbox"/>
     <%= f.label "This is a reoccuring service", class: 'control-label'%>
   </div>
 
-  <div class="row col-sm-4 col-sm-offset-4 form-input-group" id = "service_freq_input_div" style = "display:none;" >
+  <div class="form-row col-sm-4 col-sm-offset-4 form-input-group" id = "service_freq_input_div" style = "display:none;" >
     <%= f.label :frequency, "How often (in days) do you want this service to reoccur?", class: 'control-label'%>
     <%= f.number_field :frequency, :id => "service_freq_input_field", :value => 0, class: 'form-control'%>
   </div>
 
-  <div class="row col-sm-4 col-sm-offset-4 form-input-group">
-      <div class="col-sm-2 col-sm-offset-5">
-      <%= f.submit "Create", :id => "submit_id", class: "btn btn-default btn-primary"%>
+  <div class="form-row col-sm-4 col-sm-offset-4 form-input-group">
+      <div class="col-sm-8 col-sm-offset-2 text-center">
+      <%= f.submit "Create", :id => "submit_create_button", class: "btn btn-default btn-primary"%>
+      <%= f.submit "Create and List", :id => "submit_create_list_button", class: "btn btn-default btn-success"%>
       </div>
   </div>
 <% end %>
@@ -63,7 +65,8 @@
 <script type="text/javascript">
 	var main_category_selection = document.getElementById("main_category_id")
 	var other_category_selection = document.getElementById("other_category_id")
-	var submit = document.getElementById("submit_id")
+	var submit = document.getElementById("submit_create_button")
+  var submitAndList = document.getElementById("submit_create_list_button")
   var frequencyInputDiv= document.getElementById("service_freq_input_div");
   var frequencyInputField = document.getElementById("service_freq_input_field");
 
@@ -81,10 +84,10 @@
 
    	submit.onclick = () =>
   {
-    // If the frequency toggle is unselected, send back 0 as its value
-    if (frequencyInputDiv.style.display === "none") {
-      frequencyInputField.value = 0
-    }
+      // If the frequency toggle is unselected, send back 0 as its value
+      if (frequencyInputDiv.style.display === "none") {
+          frequencyInputField.value = 0
+      }
 
       var selectedOption = main_category_selection.options[main_category_selection.selectedIndex].text
 
@@ -92,4 +95,21 @@
           main_category_selection.options[main_category_selection.selectedIndex].value = other_category_selection.value;
       }
   }
+
+  submitAndList.onclick = () =>
+  {
+      $("#serviceStatusHiddenField").val("<%= Service::LISTED %>")
+      // If the frequency toggle is unselected, send back 0 as its value
+      if (frequencyInputDiv.style.display === "none") {
+          frequencyInputField.value = 0
+      }
+
+      var selectedOption = main_category_selection.options[main_category_selection.selectedIndex].text
+
+      if (selectedOption == "Other") {
+          main_category_selection.options[main_category_selection.selectedIndex].value = other_category_selection.value;
+      }
+  }
+
+
 </script>
