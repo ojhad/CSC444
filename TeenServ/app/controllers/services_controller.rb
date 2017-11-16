@@ -21,7 +21,10 @@ class ServicesController < ApplicationController
 	end
 	def create
 		@service = Service.new(service_params)
-		if @service.save
+		# Check to make sure that user is not trying to feed us invalid data
+		if @service.status != Service::LISTED && @service.status != Service::UNLISTED
+			render :new
+		elsif @service.save
 			redirect_to(user_path(current_user.id))
 		else
 			#redirect_back(fallback_location: root_path)
