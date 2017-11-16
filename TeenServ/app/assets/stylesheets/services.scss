@@ -2,7 +2,12 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.bottom_action_buttons_container {
+
+.form-input-group {
+  padding-top: 10px;
+}
+
+.bottom-action-buttons-container {
 	display: flex;
 	justify-content: center;
 	padding-top: 20px;

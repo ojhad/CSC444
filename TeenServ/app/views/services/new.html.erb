@@ -1,4 +1,7 @@
-<h1>Create a Job Posting</h1>
+<div class="row">
+  <h1 class="col-sm-4 col-sm-offset-4 text-center">Create a Job Posting</h1>
+</div>
+
 
 <%= form_for :service, :url => services_path(current_user.id) do |f| %>
   <% if @service.errors.any? %>
@@ -7,58 +10,53 @@
         <% end %>
   <% end %>
 	<%= f.hidden_field :user_id , :value=>current_user.id %>
- 	<div class="form-group">
-  	<%= f.label :title, "Title", class: 'control-label col-sm-3'%>
-    <div class="col-sm-9">
+
+ 	<div class="form-row col-sm-4 col-sm-offset-4 form-input-group">
+    <%= f.label :title, "Please select service type", class: 'control-label'%>
     <%= f.select :title, Service::SERVICE_TYPES, {}, :id => "main_category_id", class: 'form-control'%>
-    </div>
   </div>
 
-  <div id = "other-div" class="form-group" style = "display:none;">
-    <div class = "control-label col-sm-3">Describe the service</div>
-    <div id = "other-task-id"  class= "col-sm-9" >
+  <div id = "other-div" class="form-row col-sm-4 col-sm-offset-4 form-input-group" style = "display:none;">
+    <%= f.label "Describe the service", class: 'control-label'%>
+    <div id = "other-task-id">
       <input id = "other_category_id" type = "text" class = "form-control">
     </div>
   </div>
 
-  <div class="form-group">
-    <%= f.label :charge_per_hour, "Charge per hour in dollars", class: 'control-label col-sm-3'%>
-    <div class="col-sm-9">
-      <%= f.text_field :charge_per_hour , class: 'form-control' %>
+  <div class="form-row col-sm-4 col-sm-offset-4 form-input-group">
+    <%= f.label :charge_per_hour, "How much do you want to pay per hour?", class: 'control-label'%>
+    <%= f.text_field :charge_per_hour, placeholder: "Charge per hour in dollars" , class: 'form-control' %>
+  </div>
+
+  <!-- Setting the min and max age -->
+  <!-- TODO: Figure out solution to extra padding-left and padding-right problem -->
+  <div class="form-row col-sm-4 col-sm-offset-4 form-input-group">
+    <div class="form-group col-sm-6" style="padding-left: 0px;">
+      <%= f.label :min_age, "Min Age", class: 'control-label'%>
+      <%= f.number_field :min_age, placeholder: "e.g. 13",  class: 'form-control'%>
+    </div>
+    <div class="form-group col-sm-6" style="padding-right: 0px;">
+      <%= f.label :max_age, "Max Age", class: 'control-label'%>
+      <%= f.number_field :max_age, placeholder: "e.g. 18", class: 'form-control'%>
     </div>
   </div>
 
-  <!-- Setting the min age -->
-  <div class="form-group">
-    <%= f.label :min_age, "Min Teenager Age (13-19)", class: 'control-label col-sm-3'%>
-    <div class="col-sm-9">
-      <%= f.number_field :min_age,  class: 'form-control'%>
-    </div>
-  </div> 
-    <!-- Setting the max age -->
-  <div class="form-group">
-    <%= f.label :max_age, "Max Teenager Age (13-19)", class: 'control-label col-sm-3'%>
-    <div class="col-sm-9">
-      <%= f.number_field :max_age, class: 'form-control'%>
-    </div>
-  </div> 
 
   <!-- Frequcy Toggle and Input Field-->
-  <div class="form-group">
-    <div class = "control-label col-sm-3">Reoccuring service?</div>
+  <div class="row col-sm-4 col-sm-offset-4 form-input-group">
     <input class = "checkbox-inline" id = "service_freq_toggle" onclick="frequencyToggle()" type="checkbox"/>
+    <%= f.label "This is a reoccuring service", class: 'control-label'%>
   </div>
-  <div class="form-group" id = "service_freq_input_div" style = "display:none;" >
-    <%= f.label :frequency, "Reoccur every how many days?", class: 'control-label col-sm-3'%>
-    <div class="col-sm-9">
-      <%= f.number_field :frequency, :id => "service_freq_input_field", :value => 0, class: 'form-control'%>
-    </div>
-  </div>  
 
-  <div class="form-group">
-    <div class="col-sm-9 col-sm-offset-3">
-      <%= f.submit 'Add', :id => "submit_id", :value => nil, class: "btn btn-default btn-primary"%>
-    </div>
+  <div class="row col-sm-4 col-sm-offset-4 form-input-group" id = "service_freq_input_div" style = "display:none;" >
+    <%= f.label :frequency, "How often (in days) do you want this service to reoccur?", class: 'control-label'%>
+    <%= f.number_field :frequency, :id => "service_freq_input_field", :value => 0, class: 'form-control'%>
+  </div>
+
+  <div class="row col-sm-4 col-sm-offset-4 form-input-group">
+      <div class="col-sm-2 col-sm-offset-5">
+      <%= f.submit "Create", :id => "submit_id", class: "btn btn-default btn-primary"%>
+      </div>
   </div>
 <% end %>
 
