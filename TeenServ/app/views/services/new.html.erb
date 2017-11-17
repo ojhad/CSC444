@@ -83,8 +83,8 @@
 	main_category_selection.onchange = () => {
 		var selectedOption = main_category_selection.options[main_category_selection.selectedIndex].text
 
-		var hiddenTaskField = document.getElementById("other-div");
-		hiddenTaskField.style.display = (selectedOption == "Other") ? "block" : "none";
+		var hiddenTaskField = document.getElementById("other-div")
+		hiddenTaskField.style.display = (selectedOption == "Other") ? "block" : "none"
    	}
 
    	submit.onclick = () =>

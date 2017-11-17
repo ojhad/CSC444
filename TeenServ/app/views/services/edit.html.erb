@@ -1,4 +1,6 @@
-<h1>Edit service</h1>
+<div class="row">
+  <h1 class="col-sm-4 col-sm-offset-4 text-center">Edit service</h1>
+</div>
 
 <%= form_for :service, :url => service_path(@service), method: :patch  do |f| %>
     <% if @service.errors.any? %>
@@ -10,55 +12,59 @@
         </ul>
     <% end %>
     <%= f.hidden_field :user_id , :value=>@service.user.id %>
-    <div class="form-group">
-      <%= f.label :title, "Service", class: 'control-label col-sm-3'%>
-      <div class="col-sm-9">
-        <%= f.select :title, Service::SERVICE_TYPES, {}, :id => "main_category_id", class: 'form-control'%>
-      </div>
+    <%= f.hidden_field :status, :id => "serviceStatusHiddenField", :value=>Service::UNLISTED %>
+
+    <div class="form-row col-sm-4 col-sm-offset-4 form-input-group">
+      <%= f.label :title, "Please select service type", class: 'control-label'%>
+      <%= f.select :title, Service::SERVICE_TYPES, {}, :id => "main_category_id", class: 'form-control'%>
     </div>
-    <div id = "other-div" class="form-group" style = "display:none;">
-      <div class = "control-label col-sm-3">Describe the service</div>
-      <div id = "other-task-id"  class= "col-sm-9" >
-        <input id = "other_category_id" type = "text" class = "form-control">
+
+    <div id = "other-div" class="form-row col-sm-4 col-sm-offset-4 form-input-group" style = "display:none;">
+      <%= f.label :other_title, "Specify a short title for your service", class: 'control-label'%>
+      <div id = "other-task-id">
+        <%= f.text_field :other_title, placeholder: "One word title for the service" , class: 'form-control' %>
       </div>
     </div>
 
-    <div class="form-group">
-      <%= f.label :charge_per_hour, "Charge per hour in dollars", class: 'control-label col-sm-3'%>
-      <div class="col-sm-9">
-      <%= f.text_field :charge_per_hour , class: 'form-control' %>
+    <div class="form-row col-sm-4 col-sm-offset-4 form-input-group">
+      <%= f.label :description, "Please describe the job in more detail", class: 'control-label'%>
+      <%= f.text_area :description, placeholder: "Job description, extra details, etc." , class: 'form-control service_text_area' %>
+    </div>
+
+    <div class="form-row col-sm-4 col-sm-offset-4 form-input-group">
+      <%= f.label :charge_per_hour, "How much do you want to pay per hour?", class: 'control-label'%>
+      <%= f.text_field :charge_per_hour, placeholder: "Charge per hour in dollars" , class: 'form-control' %>
+    </div>
+
+    <!-- Setting the min and max age -->
+    <!-- TODO: Figure out solution to extra padding-left and padding-right problem -->
+    <div class="form-row col-sm-4 col-sm-offset-4 form-input-group">
+      <div class="form-group col-sm-6" style="padding-left: 0px;">
+        <%= f.label :min_age, "Min Age", class: 'control-label'%>
+        <%= f.number_field :min_age, placeholder: "e.g. 13",  class: 'form-control'%>
+      </div>
+      <div class="form-group col-sm-6" style="padding-right: 0px;">
+        <%= f.label :max_age, "Max Age", class: 'control-label'%>
+        <%= f.number_field :max_age, placeholder: "e.g. 19", class: 'form-control'%>
       </div>
     </div>
 
-    <!-- Setting the min age -->
-    <div class="form-group">
-      <%= f.label :min_age, "Min Teenager Age (13-19)", class: 'control-label col-sm-3'%>
-      <div class="col-sm-9">
-        <%= f.number_field :min_age, class: 'form-control'%>
-      </div>
-    </div> 
-    <!-- Setting the max age -->
-    <div class="form-group">
-      <%= f.label :max_age, "Max Teenager Age (13-19)", class: 'control-label col-sm-3'%>
-      <div class="col-sm-9">
-        <%= f.number_field :max_age, class: 'form-control'%>
-      </div>
-    </div> 
 
     <!-- Frequcy Toggle and Input Field-->
-    <div class="form-group">
-      <div class = "control-label col-sm-3">Reoccuring service?</div>
+    <div class="form-row col-sm-4 col-sm-offset-4 form-input-group">
       <input class = "checkbox-inline" id = "service_freq_toggle" onclick="frequencyToggle()" type="checkbox"/>
+      <%= f.label "This is a reoccuring service", class: 'control-label'%>
     </div>
-    <div class="form-group" id = "service_freq_input_div" style = "display:none;" >
-      <%= f.label :frequency, "Reoccur every how many days?", class: 'control-label col-sm-3'%>
-      <div class="col-sm-9">
-        <%= f.number_field :frequency, :id => "service_freq_input_field", class: 'form-control'%>
-      </div>
+
+    <div class="form-row col-sm-4 col-sm-offset-4 form-input-group" id = "service_freq_input_div" style = "display:none;" >
+      <%= f.label :frequency, "How often (in days) do you want this service to reoccur?", class: 'control-label'%>
+      <%= f.number_field :frequency, :id => "service_freq_input_field", :value => 0, class: 'form-control'%>
     </div>
-    <div class="form-group">
-      <div class="col-sm-9 col-sm-offset-3">
-        <%= f.submit 'Add', :id => "submit_id", :value => nil, class: "btn btn-default btn-primary"%>
+
+    <div class="form-row col-sm-4 col-sm-offset-4 form-input-group">
+      <div class="col-sm-8 col-sm-offset-2 text-center">
+        <%= f.submit "Save", :id => "submit_create_button", class: "btn btn-default btn-primary"%>
+        <%= f.submit "Save and List", :id => "submit_create_list_button", class: "btn btn-default btn-success"%>
       </div>
     </div>
 <% end %>
@@ -66,15 +72,22 @@
 <script type="text/javascript">
     var main_category_selection = document.getElementById("main_category_id")
     var other_category_selection = document.getElementById("other_category_id")
-    var submit = document.getElementById("submit_id")
+    var submit = document.getElementById("submit_create_button")
+    var submitAndList = document.getElementById("submit_create_list_button")
     var frequencyInputDiv= document.getElementById("service_freq_input_div")
     var frequencyInputField = document.getElementById("service_freq_input_field")
+    var hiddenOtherField = document.getElementById("other-div");
 
     /* Initialize the frequency toggle */
-    console.log(frequencyInputField.value);
     if(frequencyInputField.value != 0){
       document.getElementById("service_freq_toggle").checked = "true"
       frequencyInputDiv.style.display = "block"
+    }
+
+    /* Initialize other field */
+    var checkServiceTypeSelectedOption = main_category_selection.options[main_category_selection.selectedIndex].text
+    if(checkServiceTypeSelectedOption == "Other"){
+        hiddenOtherField.style.display = "block";
     }
 
     /* Logic for frequency toggle */
@@ -84,10 +97,6 @@
 
     main_category_selection.onchange = () => {
         var selectedOption = main_category_selection.options[main_category_selection.selectedIndex].text
-
-        //var hiddenTaskField = document.getElementById("other-task-id");
-        var hiddenOtherField = document.getElementById("other-div");
-        //hiddenTaskField.style.display = (selectedOption == "Other") ? "block" : "none";
         hiddenOtherField.style.display = (selectedOption == "Other") ? "block" : "none";
     }
 
@@ -96,6 +105,21 @@
         // If the frequency toggle is unselected, send back 0 as its value
         if (frequencyInputDiv.style.display === "none") {
           frequencyInputField.value = 0
+        }
+
+        var selectedOption = main_category_selection.options[main_category_selection.selectedIndex].text
+
+        if (selectedOption == "Other") {
+            main_category_selection.options[main_category_selection.selectedIndex].value = other_category_selection.value;
+        }
+    }
+
+    submitAndList.onclick = () =>
+    {
+        $("#serviceStatusHiddenField").val("<%= Service::LISTED %>")
+        // If the frequency toggle is unselected, send back 0 as its value
+        if (frequencyInputDiv.style.display === "none") {
+            frequencyInputField.value = 0
         }
 
         var selectedOption = main_category_selection.options[main_category_selection.selectedIndex].text

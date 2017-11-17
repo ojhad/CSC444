@@ -21,6 +21,11 @@ class ServicesController < ApplicationController
 	end
 	def create
 		@service = Service.new(service_params)
+
+		if @service.title != "Other"
+			@service.other_title = ""
+		end
+
 		# Check to make sure that user is not trying to feed us invalid data
 		if @service.status != Service::LISTED && @service.status != Service::UNLISTED
 			render :new
@@ -34,6 +39,11 @@ class ServicesController < ApplicationController
 
 	def update
 		@service = Service.find(params[:id])
+
+		if params[:service][:title] != "Other"
+			params[:service][:other_title] = ""
+		end
+
 		if @service.update(service_params)
 			redirect_to (user_path(@service.user_id))
 		else
