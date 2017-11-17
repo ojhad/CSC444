@@ -20,6 +20,8 @@ end
 #  frequency       :integer
 #  min_age         :integer
 #  max_age         :integer
+#  other_title     :string
+#  description     :string
 #
 # Indexes
 #

@@ -18,10 +18,15 @@
   </div>
 
   <div id = "other-div" class="form-row col-sm-4 col-sm-offset-4 form-input-group" style = "display:none;">
-    <%= f.label "Describe the service", class: 'control-label'%>
+    <%= f.label :other_title, "Specify a short title for your service", class: 'control-label'%>
     <div id = "other-task-id">
-      <input id = "other_category_id" type = "text" class = "form-control">
+      <%= f.text_field :other_title, placeholder: "One word title for the service" , class: 'form-control' %>
     </div>
+  </div>
+
+  <div class="form-row col-sm-4 col-sm-offset-4 form-input-group">
+    <%= f.label :description, "Please describe the job in more detail", class: 'control-label'%>
+    <%= f.text_area :description, placeholder: "Job description, extra details, etc." , class: 'form-control service_text_area' %>
   </div>
 
   <div class="form-row col-sm-4 col-sm-offset-4 form-input-group">
@@ -38,7 +43,7 @@
     </div>
     <div class="form-group col-sm-6" style="padding-right: 0px;">
       <%= f.label :max_age, "Max Age", class: 'control-label'%>
-      <%= f.number_field :max_age, placeholder: "e.g. 18", class: 'form-control'%>
+      <%= f.number_field :max_age, placeholder: "e.g. 19", class: 'form-control'%>
     </div>
   </div>
 
