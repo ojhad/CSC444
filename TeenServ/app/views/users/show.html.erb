@@ -28,7 +28,7 @@
             <div class="hidden-xs">Reviews/Endorsements</div>
           </button>
         </div>
-        <% if @user.id==@current_user.id%>
+        <% if @user.id==@current_user.id || @current_user.is_CSR? %>
         <div class="btn-group" role="group">
           <button type="button" id="billing" class="btn btn-default" data-toggle="tab"><span class="fa fa-dollar" aria-hidden="true"></span>
             <div class="hidden-xs">Billing & Payments</div>
@@ -41,7 +41,7 @@
         <div class="tab-pane primary fade in active well" id="aboutTab">
           <div class="container">
             <div class="row">
-              <%if @user.id == @current_user.id%>
+              <%if @user.id == @current_user.id || @current_user.is_CSR? %>
               <div class="col-md-4">
               <%else%>
               <div class="col-md-6">
@@ -60,7 +60,7 @@
                 <p><i class="fa fa-phone" aria-hidden="true"></i> <%=@user.mobile_number%></p>
               </div>
               <div class="col-md-4">
-                <% if @user.id == @current_user.id %>
+                <% if @user.id == @current_user.id || @current_user.is_CSR? %>
                 <h4><i class="fa fa-building-o" aria-hidden="true"></i> Address </h4>
                   <table>
                     <tr>
@@ -88,7 +88,7 @@
                     </div>
                 <%end%>
               </div>
-              <% if @user.id == @current_user.id %>
+              <% if @user.id == @current_user.id || @current_user.is_admin? %>
                 <div class="col-md-4">
                   <%= link_to "Edit Profile", edit_user_registration_path , :class => 'btn btn-primary',:style => 'margin-bottom:4px' %><br>
                   <%= link_to "Delete Account", user_registration_path, :class => 'btn btn-danger', data: {title: 'Delete Account' ,confirm: "Are you sure you want to delete your account?" }, method: :delete %>
@@ -96,7 +96,7 @@
                 </div>
               <%end%>
             </div>
-          <% if @user.is_teen? || @user.is_sadmin? %>
+          <% if @user.is_teen? || @user.is_CSR? %>
             <div class="row">
               <div class="col-md-8">
                 <h4><i class="fa fa-star" aria-hidden="true"></i> Skills</h4>
@@ -109,7 +109,7 @@
                   <% end %>
                 <% end %>
               </div>
-              <% if @user.id == @current_user.id %>
+              <% if @user.id == @current_user.id || @current_user.is_admin? %>
                 <div class="col-md-4">
                     <%= link_to "Edit Skills", edit_user_skill_path , :class => 'btn btn-primary',:style => 'margin-bottom:4px' %><br>
                 </div>
@@ -119,7 +119,7 @@
               <div class="col-md-8">
                 <h4><i class="fa fa-clock-o" aria-hidden="true"></i> Availability</h4>
               </div>
-              <% if @user.id == @current_user.id %>
+              <% if @user.id == @current_user.id || @current_user.is_admin?%>
                 <div class="col-md-4">
                   <%= link_to "Edit Availability", edit_teen_time_path , :class => 'btn btn-primary',:style => 'margin-bottom:4px' %><br>
                 </div>
@@ -135,7 +135,7 @@
           <div class="container">
             <div class="row">
               <div class="col-md-4">
-                <% if @user.id == @current_user.id %>
+                <% if @user.id == @current_user.id || @current_user.is_CSR? %>
                     <h4><i class="fa fa-cogs" aria-hidden="true"></i> Unlisted Services </h4>
                     <% if @user.services.status(Service::UNLISTED).count != 0 %>
                         <% @user.services.status(Service::UNLISTED).each do |service| %>
@@ -154,7 +154,7 @@
                     <% @user.services.status(Service::LISTED).each do |service| %>
                         <p>Service: <%= service.title %></p>
                         <p>Charge: $<%= service.charge_per_hour %> per hour</p>
-                        <% if @user.id == @current_user.id %>
+                        <% if @user.id == @current_user.id || @current_user.is_admin? %>
                             <%= link_to "View", service_path(service), :class => 'btn btn-success' %>
                             <%= link_to "Edit", edit_service_path(service),
                                         data: {title: 'Edit Service' ,
@@ -175,7 +175,7 @@
                         <h5>No services listed by this user at the moment.</h5>
                     <%end%>
                 <%end%>
-                <% if @user.id == @current_user.id %>
+                <% if @user.id == @current_user.id || @current_user.is_CSR?%>
                   <h4><i class="fa fa-cogs" aria-hidden="true"></i> Completed Services</h4>
                   <% if @user.services.status(Service::COMPLETED).count != 0 %>
                       <% @user.services.status(Service::COMPLETED).each do |service| %>
@@ -189,7 +189,7 @@
                 <%end%>
               </div>
               <div class="col-md-4">
-                <% if @user.id == @current_user.id %>
+                <% if @user.id == @current_user.id || @current_user.is_CSR? %>
                     <h4><i class="fa fa-cog fa-spin" aria-hidden="true"></i> Accepted Services</h4>
                     <% if @user.services.status(Service::ACCEPTED).count != 0 %>
                         <% @user.services.status(Service::ACCEPTED).each do |service| %>
@@ -210,7 +210,7 @@
                     <%end%>
                 <%end%>
               </div>
-              <% if @user.id ==  @current_user.id%>
+              <% if @user.id ==  @current_user.id || @current_user.is_admin?%>
                 <div class="col-md-4">
                   <%= link_to "Add service", new_service_path(@user.id) , :class => 'btn btn-primary' ,:style => 'margin-bottom:4px'%><br>
                   <%= link_to "Past services" ,services_path(@user.id), :class => 'btn btn-primary'%>
@@ -220,7 +220,7 @@
           </div>
         </div>
         <div class="tab-pane primary fade in" id="reviewsTab">
-          <% if @user.is_teen? || @user.is_sadmin? %>
+          <% if @user.is_teen? || @user.is_CSR? %>
           <div class="btn-pref2 btn-group btn-group-justified btn-group-lg" role="group" aria-label="...">
             <div class="btn-group" role="group">
               <button type="button" id="review_reviews" class="btn btn-primary topBar" data-toggle="tab">
@@ -237,7 +237,7 @@
           </div>
           <% else %>
               <div class="add-button">
-                <% if @user.id !=  @current_user.id  %>
+                <% if @user.id !=  @current_user.id || @current_user.is_CSR? %>
                     <%= link_to new_user_review_path(@user.id), :class => 'btn btn-primary' do %>
                         <i class="fa fa-plus"></i>
                         <span class="hidden-xs">Add Review</span>
