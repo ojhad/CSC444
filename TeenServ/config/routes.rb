@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get 'home/index'
   get "about", to: "home#about"
   get "terms_of_service", to: "home#terms_of_service"
+  get "faq", to: "home#faq"
 
   devise_for :users, :controllers => {:registrations => "registrations"}
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
