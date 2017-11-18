@@ -8,12 +8,12 @@ class Service < ApplicationRecord
 
 	# Status Options Constants Start
 	UNLISTED = 0 # service not yet publicly visible
-	LISTED = 1 # service posted, publicly visisble, and accepting user requests
+	LISTED = 1 # service posted, publicly visible, and accepting user requests
 	ACCEPTED = 2 # service accepted by both users and no longer visible to the public
 	COMPLETED = 3 # service has been completed and money has exchanged hands
 	# Status Options Constants End
 
-	SERVICE_TYPES = ["Baby sitting", "Yard work", "Snow shoveling", "Furniture moving",
+	SERVICE_TYPES = ["Babysitting", "Yard work", "Snow shoveling", "Furniture moving",
 					"Simple cleaning tasks", "Vacation services", "Dog walking", "Computer help",
 					"Tutoring", "Reading", "Other"]
 
@@ -46,7 +46,6 @@ end
 #
 #  id              :integer          not null, primary key
 #  user_id         :integer
-#  title           :string
 #  charge_per_hour :float
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
@@ -56,6 +55,8 @@ end
 #  max_age         :integer
 #  other_title     :string
 #  description     :string
+#  title           :string
+#  skill           :integer
 #
 # Indexes
 #
