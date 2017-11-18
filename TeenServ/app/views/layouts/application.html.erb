@@ -39,9 +39,9 @@
 		        </form>
           </ul>
           <% if current_user != true_user %>
-              <ul class = "nav navbar-nav">
+              <ul class = "nav navbar-nav loginAs">
                 You are signed in as <%= current_user.email %>
-                <%= link_to "Back to admin", stop_impersonating_users_path, method: :post %>
+                <%= link_to "Back to your user", stop_impersonating_users_path, method: :post, class: 'btn btn-default userBack' %>
               </ul>
           <% end %>
           <!-- Items to the right side of the navbar -->
