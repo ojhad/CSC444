@@ -24,6 +24,8 @@
     </div>
   </div>
 
+    <%=f.hidden_field :skill ,:value=>'1' %>
+
   <div class="form-row col-sm-4 col-sm-offset-4 form-input-group">
     <%= f.label :description, "Please describe the job in more detail", class: 'control-label'%>
     <%= f.text_area :description, placeholder: "Job description, extra details, etc." , class: 'form-control service_text_area' %>
@@ -59,6 +61,7 @@
     <%= f.number_field :frequency, :id => "service_freq_input_field", :value => 0, class: 'form-control'%>
   </div>
 
+
   <div class="form-row col-sm-4 col-sm-offset-4 form-input-group">
       <div class="col-sm-8 col-sm-offset-2 text-center">
       <%= f.submit "Create", :id => "submit_create_button", class: "btn btn-default btn-primary"%>
@@ -85,6 +88,43 @@
 
 		var hiddenTaskField = document.getElementById("other-div")
 		hiddenTaskField.style.display = (selectedOption == "Other") ? "block" : "none"
+
+      switch($("#main_category_id").val()){
+          case 'Babysitting' :
+              $('#service_skill').val(1)
+              break;
+          case 'Yard work' :
+              $('#service_skill').val(2)
+              break;
+          case 'Snow shoveling' :
+              $('#service_skill').val(3)
+              break;
+          case 'Furniture moving' :
+              $('#service_skill').val(4)
+              break;
+          case 'Simple cleaning tasks' :
+              $('#service_skill').val(5)
+              break;
+          case 'Vacation services' :
+              $('#service_skill').val(6)
+              break;
+          case 'Dog walking' :
+              $('#service_skill').val(7)
+              break;
+          case 'Computer help' :
+              $('#service_skill').val(8)
+              break;
+          case 'Tutoring' :
+              $('#service_skill').val(9)
+              break;
+          case 'Reading' :
+              $('#service_skill').val(10)
+              break;
+          case 'Other' :
+              $('#service_skill').val(0)
+              break;
+      }
+
    	}
 
    	submit.onclick = () =>
@@ -115,6 +155,5 @@
           main_category_selection.options[main_category_selection.selectedIndex].value = other_category_selection.value;
       }
   }
-
 
 </script>

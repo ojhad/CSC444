@@ -8,6 +8,10 @@ class ServicesController < ApplicationController
 
 	def show
 		@service = Service.find(params[:id])
+
+		# Get all teenagers that match the service's skill. Once service duration is added to the service model, I will update
+		# this query to match those with the skill and are available at the given times
+		@teens = User.find_by_sql("SELECT * FROM USERS JOIN (SELECT USER_SKILLS.USER_ID FROM SERVICES JOIN USER_SKILLS ON SERVICES.SKILL=USER_SKILLS.SKILL_ID)a on a.user_id=users.id")
 	end
 
 	def new
@@ -142,7 +146,7 @@ class ServicesController < ApplicationController
 
 	def service_params
    		params.require(:service).permit(:user_id,:title,:other_title,:charge_per_hour,:user_type,:frequency,
-   										:min_age,:max_age,:status,:description)
+   										:min_age,:max_age,:status,:description,:skill)
 	end
 
 	def find_user
