@@ -40,7 +40,7 @@
           </ul>
           <% if current_user != true_user %>
               <ul class = "nav navbar-nav loginAs">
-                You are signed in as <%= current_user.email %>
+                You are signed in as <%= current_user.first_name %> <%= current_user.last_name %>
                 <%= link_to "Back to your user", stop_impersonating_users_path, method: :post, class: 'btn btn-default userBack' %>
               </ul>
           <% end %>

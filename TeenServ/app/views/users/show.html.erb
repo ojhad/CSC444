@@ -53,6 +53,10 @@
                     <p>Client</p>
                 <% elsif @user.is_sadmin? %>
                     <p>Super Admin</p>
+                <% elsif @user.is_admin? %>
+                    <p>Admin</p>
+                <% elsif @user.is_CSR? %>
+                    <p>Customer Service Representative</p>
                 <%end%>
                 <br>
                 <h4 style=""><i class="fa fa-address-book" aria-hidden="true"></i> Contact Information</h4>
@@ -88,7 +92,7 @@
                     </div>
                 <%end%>
               </div>
-              <% if @user.id == @current_user.id || @current_user.is_admin? %>
+              <% if @user.id == @current_user.id %>
                 <div class="col-md-4">
                   <%= link_to "Edit Profile", edit_user_registration_path(@user.id) , :class => 'btn btn-primary',:style => 'margin-bottom:4px' %><br>
                   <%= link_to "Delete Account", user_registration_path, :class => 'btn btn-danger', data: {title: 'Delete Account' ,confirm: "Are you sure you want to delete your account?" }, method: :delete %>
@@ -101,15 +105,17 @@
               <div class="col-md-8">
                 <h4><i class="fa fa-star" aria-hidden="true"></i> Skills</h4>
                 <% @userSkills = UserSkill.where(:user_id => @user.id) %>
-                <% if @userSkills.empty? %>
+                <% if @userSkills.empty? && @user.id != @current_user.id %>
                     This user has no assigned skills
+                <% elsif @userSkills.empty? && @user.id == @current_user.id %>
+                    You have no assigned skills
                 <% else %>
                   <% @userSkills.each do |skill| %>
                       <%= Skill.find(skill.skill_id).skill_name %><br>
                   <% end %>
                 <% end %>
               </div>
-              <% if @user.id == @current_user.id || @current_user.is_admin? %>
+              <% if @user.id == @current_user.id %>
                 <div class="col-md-4">
                     <%= link_to "Edit Skills", edit_user_skill_path , :class => 'btn btn-primary',:style => 'margin-bottom:4px' %><br>
                 </div>
@@ -119,7 +125,7 @@
               <div class="col-md-8">
                 <h4><i class="fa fa-clock-o" aria-hidden="true"></i> Availability</h4>
               </div>
-              <% if @user.id == @current_user.id || @current_user.is_admin?%>
+              <% if @user.id == @current_user.id %>
                 <div class="col-md-4">
                   <%= link_to "Edit Availability", edit_teen_time_path , :class => 'btn btn-primary',:style => 'margin-bottom:4px' %><br>
                 </div>
@@ -210,7 +216,7 @@
                     <%end%>
                 <%end%>
               </div>
-              <% if @user.id ==  @current_user.id || @current_user.is_admin?%>
+              <% if @user.id ==  @current_user.id%>
                 <div class="col-md-4">
                   <%= link_to "Add service", new_service_path(@user.id) , :class => 'btn btn-primary' ,:style => 'margin-bottom:4px'%><br>
                   <%= link_to "Past services" ,services_path(@user.id), :class => 'btn btn-primary'%>
