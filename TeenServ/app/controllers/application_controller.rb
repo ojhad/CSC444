@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
+  impersonates :user
   before_action :get_notifications
   def get_notifications
     if current_user

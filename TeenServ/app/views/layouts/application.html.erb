@@ -38,6 +38,12 @@
               <% end %>
 		        </form>
           </ul>
+          <% if current_user != true_user %>
+              <ul class = "nav navbar-nav">
+                You are signed in as <%= current_user.email %>
+                <%= link_to "Back to admin", stop_impersonating_users_path, method: :post %>
+              </ul>
+          <% end %>
           <!-- Items to the right side of the navbar -->
           <ul class="nav navbar-nav navbar-right">
             <% if user_signed_in? %>
@@ -50,6 +56,7 @@
                   <li><%= link_to "View Job Postings", services_path%></li>
                   <% if current_user.is_sadmin? %>
                     <li><%= link_to "Add User", new_user_path%></li>
+                    <li><%= link_to "Login as", login_as_users_path%></li>
                   <% end %>
                   <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
                 </ul>

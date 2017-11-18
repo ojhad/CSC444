@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   resources :users do
     collection do
       post 'add_user'
+      get 'login_as'
     end
     resources :reviews
     #resources :services
@@ -25,6 +26,8 @@ Rails.application.routes.draw do
     resources :endorsements
     resources :endorsement_requests, only:[:create]
     resources :charges , only: [:index ,:create]
+    post :impersonate, on: :member
+    post :stop_impersonating, on: :collection
   end
 
   resources :services do

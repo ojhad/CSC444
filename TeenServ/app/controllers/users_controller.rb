@@ -27,5 +27,20 @@ class UsersController < ApplicationController
 	def add_user_params
 		params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :address_1, :address_2, :city, :province, :postal_code,
 																 :country, :home_number, :mobile_number, :age, :profile_pic, :user_id, :group)
+  end
+
+  def login_as
+    @users = User.all
+  end
+
+	def impersonate
+	  user = User.find(params[:id])
+		impersonate_user(user)
+		redirect_to root_path
+	end
+
+	def stop_impersonating
+		stop_impersonating_user
+		redirect_to root_path
 	end
 end
