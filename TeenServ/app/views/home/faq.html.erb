@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container-accordion">
   <h1 class="heading-primary">Frequently Asked Questions</h1>
   <div class="accordion">
     <dl>
@@ -59,32 +59,33 @@
         break;
     }
   };
-//function
-switchAccordion = function(e) {
-  console.log("triggered");
-  e.preventDefault();
-  var thisAnswer = e.target.parentNode.nextElementSibling;
-  var thisQuestion = e.target;
-  if(thisAnswer.classList.contains('is-collapsed')) {
-    setAccordionAria(thisQuestion, thisAnswer, 'true');
-  } else {
-    setAccordionAria(thisQuestion, thisAnswer, 'false');
-  }
-    thisQuestion.classList.toggle('is-collapsed');
-    thisQuestion.classList.toggle('is-expanded');
-    thisAnswer.classList.toggle('is-collapsed');
-    thisAnswer.classList.toggle('is-expanded');
-  
-    thisAnswer.classList.toggle('animateIn');
-  };
-  for (var i=0,len=accordionToggles.length; i<len; i++) {
-    if(touchSupported) {
-      accordionToggles[i].addEventListener('touchstart', skipClickDelay, false);
+
+  //function
+  switchAccordion = function(e) {
+    console.log("triggered");
+    e.preventDefault();
+    var thisAnswer = e.target.parentNode.nextElementSibling;
+    var thisQuestion = e.target;
+    if(thisAnswer.classList.contains('is-collapsed')) {
+      setAccordionAria(thisQuestion, thisAnswer, 'true');
+    } else {
+      setAccordionAria(thisQuestion, thisAnswer, 'false');
     }
-    if(pointerSupported){
-      accordionToggles[i].addEventListener('pointerdown', skipClickDelay, false);
+      thisQuestion.classList.toggle('is-collapsed');
+      thisQuestion.classList.toggle('is-expanded');
+      thisAnswer.classList.toggle('is-collapsed');
+      thisAnswer.classList.toggle('is-expanded');
+    
+      thisAnswer.classList.toggle('animateIn');
+    };
+    for (var i=0,len=accordionToggles.length; i<len; i++) {
+      if(touchSupported) {
+        accordionToggles[i].addEventListener('touchstart', skipClickDelay, false);
+      }
+      if(pointerSupported){
+        accordionToggles[i].addEventListener('pointerdown', skipClickDelay, false);
+      }
+      accordionToggles[i].addEventListener('click', switchAccordion, false);
     }
-    accordionToggles[i].addEventListener('click', switchAccordion, false);
-  }
-})();
+  })();
 </script>
