@@ -63,7 +63,7 @@ ActiveRecord::Schema.define(version: 20171117200327) do
     t.index ["user_id"], name: "index_notifications_on_user_id"
   end
 
-  create_table "payout_informations", force: :cascade do |t|
+  create_table "payout_informations", id: :bigint, default: -> { "nextval('deposit_information_id_seq'::regclass)" }, force: :cascade do |t|
     t.string "paypal"
     t.string "address_1"
     t.string "address_2"
@@ -75,7 +75,7 @@ ActiveRecord::Schema.define(version: 20171117200327) do
     t.datetime "updated_at", null: false
     t.bigint "user_id"
     t.string "method", default: "check"
-    t.index ["user_id"], name: "index_payout_informations_on_user_id"
+    t.index ["user_id"], name: "index_deposit_information_on_user_id"
   end
 
   create_table "payouts", force: :cascade do |t|
@@ -156,6 +156,8 @@ ActiveRecord::Schema.define(version: 20171117200327) do
     t.bigint "skill_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["skill_id"], name: "index_user_skills_on_skill_id"
+    t.index ["user_id"], name: "index_user_skills_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
