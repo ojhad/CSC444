@@ -40,6 +40,7 @@ gem 'underscore-rails'
 gem 'gmaps4rails'
 gem 'paypal-sdk-rest'
 gem 'stripe'
+gem "letter_opener", :group => :development
 
 
 ##################################################

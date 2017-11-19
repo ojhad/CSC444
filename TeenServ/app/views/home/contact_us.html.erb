@@ -1,0 +1,30 @@
+<div class = "form-horizontal">
+  <div class="sign-in-container contact-us">
+    <div class="card-signIn contact-us"></div>
+      <div class="card-signIn contact-us">
+      
+        <h1 class="title contact-us">Get in touch with us</h1>
+
+        <%= form_tag send_email_path, :method => 'get' do %>
+          <div class="input-container">
+            <%= label_tag  "request_anonymous_requester_email", "Your email address", class: "control-label" %>
+            <%= text_field_tag "request_anonymous_requester_email"%>
+            <!-- <label class = "control-label" for="request_anonymous_requester_email">Your email address</label> -->
+            <!-- <input type="text" name="request[anonymous_requester_email]" id="request_anonymous_requester_email"/> -->
+            <div class="bar"></div>
+          </div>
+
+          <div class="input-container">
+            <%= label_tag  "request_description", "Description", class: "control-label" %>
+            <%= text_area_tag "request_description", nil, class: "form-control"%>
+            <!-- <label class = "control-label" for="request_description">Description</label> -->
+            <!-- <textarea class = "form-control" name="request[description]" id="request_description"></textarea> -->
+          </div>
+
+          <div class = "button-container">
+            <button class = "btn btn-default btn-primary" name="submit" type="submit" id="contact-submit" data-submit="...Sending">Send</button>
+          </div>
+        <% end %>
+    </div>
+  </div>
+</div>
