@@ -155,8 +155,6 @@ ActiveRecord::Schema.define(version: 20171118025412) do
     t.bigint "skill_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["skill_id"], name: "index_user_skills_on_skill_id"
-    t.index ["user_id"], name: "index_user_skills_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -181,16 +179,24 @@ ActiveRecord::Schema.define(version: 20171118025412) do
     t.string "home_number"
     t.string "mobile_number"
     t.integer "age"
+    t.string "image_file_name"
+    t.string "image_content_type"
+    t.integer "image_file_size"
+    t.datetime "image_updated_at"
+    t.string "profile_picture_file_name"
+    t.string "profile_picture_content_type"
+    t.integer "profile_picture_file_size"
+    t.datetime "profile_picture_updated_at"
     t.integer "group"
     t.string "first_name"
     t.string "last_name"
     t.float "average_rating"
+    t.float "latitude"
+    t.float "longitude"
     t.string "profile_pic_file_name"
     t.string "profile_pic_content_type"
     t.integer "profile_pic_file_size"
     t.datetime "profile_pic_updated_at"
-    t.float "latitude"
-    t.float "longitude"
     t.string "stripe_id"
     t.float "balance", default: 0.0
     t.index ["email"], name: "index_users_on_email", unique: true

@@ -1,0 +1,15 @@
+//iPhone (5, 5C, 5S, SE) in portrait mode, note that this will be applied to larger phone sizes as well
+//as they are not explictly stated in this file. If they were, they would override the first media query
+@media screen and (min-width: 320px) and (max-width: 568px) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 2) {
+	.about-teenserv {
+	  width: 70%;
+	  margin: 0 auto;
+	}
+
+	.aboutus-profilePic img {
+	  width: 150px;
+	  height: 150px;
+	  max-width: 150px;
+	  max-height: 150px;
+	}
+}
