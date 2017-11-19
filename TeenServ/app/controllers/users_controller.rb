@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
 	def show
 		@user = User.find(params[:id])
-		@current_user = current_user
 		@teenTime = TeenTime.find_by_sql("SELECT * FROM teen_times WHERE user_id = #{@user.id}")
 		@teenDays = TeenTime.find_by_sql("SELECT day FROM teen_times WHERE user_id = #{@user.id}  ORDER BY
      CASE
