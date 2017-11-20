@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+
+  get 'user/homepage'
+
   resources :notifications
   get 'search/search'
 
