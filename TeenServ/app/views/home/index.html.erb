@@ -1,3 +1,4 @@
+<% if @user.blank?%>
 <div id = "header" class = "header-div">
     <header class="header-intro">
         <div class="container-intro">
@@ -50,3 +51,31 @@
 		</div>
 	</div>
 </div>
+<%elsif @user.is_teen?%>
+    <div class="container">
+      <div class="row">
+        <p>Welcome <%=@user.first_name.capitalize()%> !</p>
+        <p> Below is the list of recommended services based on your preferences</p>
+        <br>
+        <% @recommended_services.each do |s|%>
+        <div class="col-md-3">
+          <table>
+            <tr>
+              <td>
+                <p>Title: <%=s.title%></p>
+                <p>Description: <%=s.description%></p>
+                <p>Charge: $<%=s.charge_per_hour%> per hour</p>
+              </td>
+              <tr>
+                <td>
+                  <%= link_to "View", service_path(s.id), :class => 'btn btn-primary' %>
+                </td>
+              </tr>
+            </tr>
+          </table>
+        </div>
+        <%end%>
+      </div>
+    </div>
+<%else%>
+<%end%>
