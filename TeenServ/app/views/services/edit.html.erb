@@ -12,7 +12,8 @@
         </ul>
     <% end %>
     <%= f.hidden_field :user_id , :value=>@service.user.id %>
-    <%= f.hidden_field :status, :id => "serviceStatusHiddenField", :value=>Service::UNLISTED %>
+    <%= f.hidden_field :status, :id => "service_status_field_hidden", :value=>Service::UNLISTED %>
+    <%= f.hidden_field :date, :id => "serivce_date_time_field_hidden"%>
 
     <div class="form-row col-sm-4 col-sm-offset-4 form-input-group">
       <%= f.label :title, "Please select service type", class: 'control-label'%>
@@ -47,6 +48,29 @@
         <%= f.label :max_age, "Max Age", class: 'control-label'%>
         <%= f.number_field :max_age, placeholder: "e.g. 19", class: 'form-control'%>
       </div>
+    </div>
+
+    <!-- Set the service start date -->
+    <!-- TODO: Add date format validation -->
+    <div class="form-row col-sm-4 col-sm-offset-4 form-input-group">
+      <%= f.label :charge_per_hour, "What date and time does this service start at?", class: 'control-label'%>
+      <div class='input-group date' id='datetimepicker1'>
+        <input type='text' id="serivce_date_time_field" class="form-control" />
+        <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+      </div>
+      <script type="text/javascript">
+          $(function () {
+              firstDate = $("#serivce_date_time_field_hidden").val()
+              $('#datetimepicker1').datetimepicker({defaultDate: firstDate});
+          });
+      </script>
+    </div>
+
+    <div class="form-row col-sm-4 col-sm-offset-4 form-input-group">
+      <%= f.label :duration, "What is the duration of this service in hours?", class: 'control-label'%>
+      <%= f.number_field :duration, placeholder: "e.g. 1.5" , class: 'form-control' %>
     </div>
 
 
@@ -102,21 +126,21 @@
 
     submit.onclick = () =>
     {
-        // If the frequency toggle is unselected, send back 0 as its value
-        if (frequencyInputDiv.style.display === "none") {
-          frequencyInputField.value = 0
-        }
-
-        var selectedOption = main_category_selection.options[main_category_selection.selectedIndex].text
-
-        if (selectedOption == "Other") {
-            main_category_selection.options[main_category_selection.selectedIndex].value = other_category_selection.value;
-        }
+        submitHelperFunction()
     }
 
     submitAndList.onclick = () =>
     {
-        $("#serviceStatusHiddenField").val("<%= Service::LISTED %>")
+        $("#service_status_field_hidden").val("<%= Service::LISTED %>")
+        submitHelperFunction()
+    }
+
+    submitHelperFunction = () => {
+
+        // Update the date time field value of the form
+        userSetDateTime = $('#datetimepicker1').data("DateTimePicker").date()
+        $("#serivce_date_time_field_hidden").val(userSetDateTime)
+
         // If the frequency toggle is unselected, send back 0 as its value
         if (frequencyInputDiv.style.display === "none") {
             frequencyInputField.value = 0
