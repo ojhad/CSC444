@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   resources :notifications
   get 'search/search'
 
@@ -10,9 +11,10 @@ Rails.application.routes.draw do
   get "send_email", to: "home#send_email"
 
   devise_for :users, :controllers => {:registrations => "registrations"}
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   # Add a root at some point once we have one
-  root 'home#index'
+    root 'home#index'
 
   resources :users do
     collection do
@@ -46,8 +48,5 @@ Rails.application.routes.draw do
   resources :user_steps
   resources :teen_times
   resources :finances , only: [:index]
-
-
-
 
 end

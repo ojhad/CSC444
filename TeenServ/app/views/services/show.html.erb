@@ -67,16 +67,18 @@
           </div>
       <% end %>
     </div>
-    <div class="col-lg-4">
-      <h2>Available teenagers</h2>
-      <br>
-      <% @teens.each do |t|%>
-        <p><%=t.first_name%> <%=t.last_name%></p>
-        <p>Age: <%=t.age%></p>
-        <td><%= button_to 'View Teenager', user_path(t.id), :class => 'btn btn-default', method: :get %></td>
-        <hr>
-      <%end%>
-    </div>
+    <%if @user.is_client?%>
+        <div class="col-lg-4">
+          <h2>Available teenagers</h2>
+          <br>
+          <% @teens.each do |t|%>
+              <p><%=t.first_name%> <%=t.last_name%></p>
+              <p>Age: <%=t.age%></p>
+              <td><%= button_to 'View Teenager', user_path(t.id), :class => 'btn btn-default', method: :get %></td>
+              <hr>
+          <%end%>
+        </div>
+    <%end%>
   </div>
 
 
