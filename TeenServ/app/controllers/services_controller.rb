@@ -14,8 +14,6 @@ class ServicesController < ApplicationController
 		# this query to match those with the skill and are available at the given times
 		@teens = User.find_by_sql("SELECT * FROM USERS JOIN (SELECT USER_SKILLS.USER_ID, SERVICES.MIN_AGE,SERVICES.MAX_AGE FROM SERVICES JOIN USER_SKILLS ON (SERVICES.SKILL=USER_SKILLS.SKILL_ID AND SERVICES.SKILL=#{@service.skill}))A ON (A.USER_ID=USERS.ID AND USERS.AGE >=A.MIN_AGE AND USERS.AGE <= A.MAX_AGE)")
 
-    puts "TEENS LENGTH IS "
-    puts @teens.length
   end
 
 	def new
