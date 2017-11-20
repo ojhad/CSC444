@@ -146,7 +146,7 @@ class ServicesController < ApplicationController
 
 	def service_params
    		params.require(:service).permit(:user_id,:title,:other_title,:charge_per_hour,:user_type,:frequency,
-   										:min_age,:max_age,:status,:description,:skill)
+   										:min_age,:max_age,:status,:description,:skill,:date,:duration)
 	end
 
 	def find_user

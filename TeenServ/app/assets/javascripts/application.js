@@ -19,5 +19,7 @@
 //= require underscore
 //= require gmaps/google
 //= require data-confirm-modal
+//= require moment
+//= require bootstrap-datetimepicker
 //= require_tree .
 
