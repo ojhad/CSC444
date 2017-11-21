@@ -3,7 +3,8 @@ class HomeController < ApplicationController
     if current_user
       @user = User.find(current_user.id)
       if @user.is_teen?
-        @recommended_services = Service.find_by_sql("SELECT * FROM SERVICES JOIN USER_SKILLS ON (SERVICES.SKILL=USER_SKILLS.SKILL_ID AND USER_SKILLS.USER_ID=#{@user.id} AND SERVICES.STATUS=1);")
+        @recommended_services = Service.find_by_sql("SELECT SERVICES.ID,SERVICES.TITLE,SERVICES.CHARGE_PER_HOUR,SERVICES.FREQUENCY,SERVICES.DESCRIPTION
+FROM SERVICES JOIN USER_SKILLS ON (SERVICES.SKILL=USER_SKILLS.SKILL_ID AND USER_SKILLS.USER_ID=#{@user.id} AND SERVICES.STATUS=1);")
       end
     else
       @user = nil

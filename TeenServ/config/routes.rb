@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  
+
   resources :notifications
   get 'search/search'
 
