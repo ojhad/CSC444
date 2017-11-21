@@ -77,5 +77,55 @@
         <%end%>
       </div>
     </div>
-<%else%>
+<%elsif @user.is_client?%>
+    <div class="container">
+      <div clas="row">
+        <h3>Welcome <%=@user.first_name.capitalize%>!</h3>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-md-4">
+          <h3>Latest Job Posted</h3>
+          <hr>
+          <table>
+            <tr>
+              <td>
+                <p>Title: <%=@latest_service[0].title%></p>
+                <p>Description: <%=@latest_service[0].description%></p>
+                <p>Charge: $<%=@latest_service[0].charge_per_hour%> per hour</p>
+              </td>
+            <tr>
+              <td>
+                <%= link_to "View", service_path(@latest_service[0].id), :class => 'btn btn-primary' %>
+              </td>
+            </tr>
+            </tr>
+          </table>
+        </div>
+        <div class="col-md-4">
+          <h3>Current Jobs Active</h3>
+          <hr>
+          <% @current_services.each do |s|%>
+              <table>
+                <tr>
+                  <td>
+                    <p>Title: <%=s.title%></p>
+                    <p>Description: <%=s.description%></p>
+                    <p>Charge: $<%=s.charge_per_hour%> per hour</p>
+                  </td>
+                <tr>
+                  <td>
+                    <%= link_to "View", service_path(s.id), :class => 'btn btn-primary' %>
+                  </td>
+                </tr>
+                </tr>
+              </table>
+              <br>
+          <%end%>
+        </div>
+        <div class="col-md-4">
+          JOBS AWAITING TIMESHEET APPROVAL GO HERE
+        </div>
+      </div>
+    </div>
 <%end%>
