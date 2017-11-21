@@ -3,8 +3,8 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 
-.form-input-group {
-  padding-top: 10px;
+.input-container {
+  padding-bottom: 15px;
 }
 
 .service_text_area {
@@ -15,4 +15,46 @@
 	display: flex;
 	justify-content: center;
 	padding-top: 20px;
+}
+
+.input-container .control-label {
+	font-size: 21px !important;
+}
+
+.card-signIn .input-container .bar.create-job{
+  position: absolute;
+  left: 0;
+  bottom: 20px;
+  background: #757575;
+  width: 100%;
+  height: 1px;
+}
+
+.card-signIn .input-container.create-service input:not([type=checkbox]) {
+  outline: none;
+  z-index: 1;
+  position: relative;
+  background: none;
+  width: auto;
+  height: 40px;
+  color: #212121;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.control-label.reoccur {
+	text-align: left;
+}
+
+.button-container.create-service {
+	margin-top: -15px !important;
+	margin-bottom: 50px !important;
+}
+
+.date-custom{
+	top:0 !important;
+}
+
+.input-group {
+	padding-top: 3%;
 }
