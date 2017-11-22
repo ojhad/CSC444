@@ -53,29 +53,57 @@
 </div>
 <%elsif @user.is_teen?%>
     <div class="container">
-      <div class="row">
-        <p>Welcome <%=@user.first_name.capitalize()%> !</p>
-        <p> Below is the list of recommended services based on your preferences</p>
-        <br>
-        <% @recommended_services.each do |s|%>
-        <div class="col-md-3">
-          <table>
-            <tr>
-              <td>
-                <p>Title: <%=s.title%></p>
-                <p>Description: <%=s.description%></p>
-                <p>Charge: $<%=s.charge_per_hour%> per hour</p>
-              </td>
-              <tr>
-                <td>
-                  <%= link_to "View", service_path(s.id), :class => 'btn btn-primary' %>
-                </td>
-              </tr>
-            </tr>
-          </table>
-        </div>
-        <%end%>
+      <div class="row" style="text-align: center">
+        <h3>Welcome <%=@user.first_name.capitalize()%> !</h3>
       </div>
+      <div class="row" style="margin-top: 5%">
+        <div class="col-lg-9">
+          <p>If you would like to learn how the website works and how you can start earning money, then click below.</p>
+          <%= link_to "How it works", "#", :class => 'btn btn-primary' %>
+        </div>
+      </div>
+      <div class="row" style="margin-top: 3%">
+        <% if @user_skills.blank? || @user_availability.blank?%>
+          <div class="col-lg-9">
+            <p>It seems you don't have a complete profile! In order to enhance your experience, please complete your profile by
+            providing the skills you can perform and ensuring your availability timetable is complete.</p>
+            <%= link_to "My Skills", edit_user_skill_path(@user.id) , :class => 'btn btn-primary' %>
+            <%= link_to "My Availability", edit_teen_time_path(@user.id) , :class => 'btn btn-primary' %>
+          </div>
+      </div>
+        <%else%>
+            <% if @recommended_services.blank?%>
+                <div class="row" style="margin-top: 5%">
+                  <p>Based on your current profile, there are no services that suit you. Please consider updating your profile.</p>
+                  <br>
+                  <p>You can also view all services and request whatever you like. However, not having the skill required for the job
+                    may reduce your chances of getting accepted by the client.</p>
+                </div>
+            <%else%>
+                <div class="row">
+                  <h4> Recommended Services</h4>
+                  <br>
+                  <% @recommended_services.each do |s|%>
+                      <div class="col-md-3">
+                        <table style="border:solid">
+                          <tr>
+                            <td>
+                              <p>Title: <%=s.title%></p>
+                              <p>Description: <%=s.description%></p>
+                              <p>Charge: $<%=s.charge_per_hour%> per hour</p>
+                            </td>
+                          <tr>
+                            <td>
+                              <%= link_to "View", service_path(s.id), :class => 'btn btn-primary' %>
+                            </td>
+                          </tr>
+                          </tr>
+                        </table>
+                      </div>
+                  <%end%>
+                </div>
+            <%end%>
+        <%end%>
     </div>
 <%elsif @user.is_client?%>
     <div class="container">

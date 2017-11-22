@@ -18,7 +18,7 @@ class ServicesController < ApplicationController
 		@end_day = @end_date.strftime("%A")
 		@end_time = @end_date.strftime("%H:%M")
 
-
+		# TODO: take into consideration if start and end days are not the same
 		# Get all teenagers that match the service's skill. Once service duration is added to the service model, I will update
 		# this query to match those with the skill and are available at the given times
 		@teens = User.find_by_sql("SELECT * FROM USERS JOIN (SELECT TEEN_TIMES.USER_ID,DAY,START_TIME,END_TIME FROM TEEN_TIMES JOIN

@@ -5,10 +5,11 @@ class HomeController < ApplicationController
       if @user.is_teen?
         @recommended_services = Service.find_by_sql("SELECT SERVICES.ID,SERVICES.TITLE,SERVICES.CHARGE_PER_HOUR,SERVICES.FREQUENCY,SERVICES.DESCRIPTION
 FROM SERVICES JOIN USER_SKILLS ON (SERVICES.SKILL=USER_SKILLS.SKILL_ID AND USER_SKILLS.USER_ID=#{@user.id} AND SERVICES.STATUS=1);")
+        @user_skills = UserSkill.where(user_id: @user.id)
+        @user_availability =  TeenTime.where(user_id: @user.id)
       elsif @user.is_client?
         @latest_service = Service.where(user_id: @user.id).order('created_at DESC').limit(1)
         @current_services = Service.where(user_id: @user.id , status:2)
-
       end
     else
       @user = nil
