@@ -17,6 +17,9 @@
 #  skill           :integer
 #  date            :datetime
 #  duration        :decimal(, )
+#  start_time      :time
+#  end_time        :time
+#  day             :string
 #
 # Indexes
 #

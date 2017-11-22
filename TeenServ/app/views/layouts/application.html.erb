@@ -63,8 +63,8 @@
                 </ul>
               </li>
               <% else %>
-              <li><%= link_to "Sign Up", new_user_registration_path, :class=>"sign-up" %></li>
-              <li><%= link_to "Sign In", new_user_session_path, :class=>"sign-in" %></li>
+                <li><%= link_to "Sign Up", new_user_registration_path, :class=>"sign-up" %></li>
+                <li><%= link_to "Sign In", new_user_session_path, :class=>"sign-in" %></li>
               <% end %>
           </ul>
 
@@ -94,7 +94,9 @@
                   <h5>Get started</h5>
                   <ul>
                       <li><%= link_to "Home", "/"%></li>
-                      <li><%= link_to "Sign Up", new_user_registration_path %></li>
+                      <% if !user_signed_in? %>
+                        <li><%= link_to "Sign Up", new_user_registration_path %></li>
+                      <% end %>
                   </ul>
               </div>
               <div class="col-sm-4 myCols">
