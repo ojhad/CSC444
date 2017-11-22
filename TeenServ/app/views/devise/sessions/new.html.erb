@@ -8,14 +8,12 @@
         <h1 class="title">Login</h1>
           <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
               <div class="input-container">
-                <%= f.email_field :email, autofocus: true%>
+                <%= f.email_field :email, autofocus: true, class: 'form-control'%>
                 <label for="Username">Email</label>
-                <div class="bar"></div>
               </div>
               <div class="input-container">
-                <%= f.password_field :password, autocomplete: "off"%>
+                <%= f.password_field :password, autocomplete: "off", class: 'form-control'%>
                 <label for="Password">Password</label>
-                <div class="bar"></div>
               </div>
 
 
