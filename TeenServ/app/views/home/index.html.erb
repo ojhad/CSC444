@@ -79,53 +79,67 @@
     </div>
 <%elsif @user.is_client?%>
     <div class="container">
-      <div clas="row">
+      <div class="row" style="text-align: center">
         <h3>Welcome <%=@user.first_name.capitalize%>!</h3>
       </div>
       <br>
       <div class="row">
+        <% if @latest_service.blank?%>
+            <div class="col-lg-9">
+              <p>You haven't posted any service yet. If you're new to the site, make sure to learn how our website works by clicking on the button below</p>
+              <%= link_to "How it works", "#", :class => 'btn btn-primary' %>
+              <br><br>
+              <p>If you are familiar with our website and want to create a new service posting, then click the button below to get started.</p>
+              <%= link_to "Create Service", new_service_path, :class => 'btn btn-primary' %>
+            </div>
+        <%else%>
         <div class="col-md-4">
           <h3>Latest Job Posted</h3>
-          <hr>
-          <table>
-            <tr>
-              <td>
-                <p>Title: <%=@latest_service[0].title%></p>
-                <p>Description: <%=@latest_service[0].description%></p>
-                <p>Charge: $<%=@latest_service[0].charge_per_hour%> per hour</p>
-              </td>
-            <tr>
-              <td>
-                <%= link_to "View", service_path(@latest_service[0].id), :class => 'btn btn-primary' %>
-              </td>
-            </tr>
-            </tr>
-          </table>
+            <hr>
+            <table>
+              <tr>
+                <td>
+                  <p>Title: <%=@latest_service[0].title%></p>
+                  <p>Description: <%=@latest_service[0].description%></p>
+                  <p>Charge: $<%=@latest_service[0].charge_per_hour%> per hour</p>
+                </td>
+              <tr>
+                <td>
+                  <%= link_to "View", service_path(@latest_service[0].id), :class => 'btn btn-primary' %>
+                </td>
+              </tr>
+              </tr>
+            </table>
         </div>
         <div class="col-md-4">
-          <h3>Current Jobs Active</h3>
-          <hr>
-          <% @current_services.each do |s|%>
-              <table>
-                <tr>
-                  <td>
-                    <p>Title: <%=s.title%></p>
-                    <p>Description: <%=s.description%></p>
-                    <p>Charge: $<%=s.charge_per_hour%> per hour</p>
-                  </td>
-                <tr>
-                  <td>
-                    <%= link_to "View", service_path(s.id), :class => 'btn btn-primary' %>
-                  </td>
-                </tr>
-                </tr>
-              </table>
-              <br>
+          <% if @current_services.blank?%>
+              <p> You don't have any undergoing services at the moment. Add a new service or send offers to teenagers to perform your services.</p>
+          <%else%>
+            <h3>Current Jobs Active</h3>
+            <hr>
+            <% @current_services.each do |s|%>
+                <table>
+                  <tr>
+                    <td>
+                      <p>Title: <%=s.title%></p>
+                      <p>Description: <%=s.description%></p>
+                      <p>Charge: $<%=s.charge_per_hour%> per hour</p>
+                    </td>
+                  <tr>
+                    <td>
+                      <%= link_to "View", service_path(s.id), :class => 'btn btn-primary' %>
+                    </td>
+                  </tr>
+                  </tr>
+                </table>
+                <br>
+            <%end%>
           <%end%>
         </div>
         <div class="col-md-4">
           JOBS AWAITING TIMESHEET APPROVAL GO HERE
         </div>
+      <%end%>
       </div>
     </div>
 <%end%>

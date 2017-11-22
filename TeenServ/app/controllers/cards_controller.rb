@@ -11,7 +11,7 @@ class CardsController < ApplicationController
 
     @user = User.find(current_user.id)
 
-    if @user.stripe_id
+    if !@user.stripe_id.blank?
 
       customer = Stripe::Customer.retrieve(@user.stripe_id)
 
