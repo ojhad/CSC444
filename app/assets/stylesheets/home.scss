@@ -1,0 +1,298 @@
+// Place all the styles related to the Home controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+html,body
+{
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+}
+
+//fade in of welcome page
+#header {
+	animation: fadein 2s;
+	-moz-animation: fadein 2s; /* Firefox */
+	-webkit-animation: fadein 2s; /* Safari and Chrome */
+	-o-animation: fadein 2s; /* Opera */
+}
+@keyframes fadein {
+	from {
+		opacity:0.3;
+	}
+	to {
+		opacity:1;
+	}
+}
+@-moz-keyframes fadein { /* Firefox */
+	from {
+		opacity:0.3;
+	}
+	to {
+		opacity:1;
+	}
+}
+@-webkit-keyframes fadein { /* Safari and Chrome */
+	from {
+		opacity:0.3;
+	}
+	to {
+		opacity:1;
+	}
+}
+@-o-keyframes fadein { /* Opera */
+	from {
+		opacity:0.3;
+	}
+	to {
+		opacity: 1;
+	}
+}
+//end fade-in header
+//Home page css
+.navbar {
+	border-radius: 0px;
+	margin-bottom: -1px;
+  margin-left: -1px;
+  margin-right: -1px;
+}
+
+.mynav {
+	min-height: 70px !important;
+	background-color: #DADFE1;
+}
+
+.container-fluid {
+	margin-top: 10px;
+}
+
+.navbar-brand {
+	font-size: 2em;
+}
+
+.dropdown-toggle {
+	font-size: 1.2em;
+}
+
+.header-div {
+	height: 100%;
+}
+
+.sign-up, .sign-in {
+	font-size: 1.5em;
+}
+
+.btn-outline-success {
+  background-color: #3A539B;
+}
+
+.fa-search {
+  color: white;
+}
+
+.header-intro {
+  height: 600px;
+  background-color: #3A539B;
+  position: relative;
+
+  //background-image: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%,rgba(0,0,0,0.3) 100%), url("homepage_background.jpg");
+  //background-size: cover; 
+}
+
+.container-intro {
+	text-align: center;
+	margin: auto;
+	height: 200px;
+	position: absolute;
+	top:35%;
+	left:17%;
+}
+
+.container-svg{
+	-webkit-filter: invert(100%);
+	opacity: 0.7;
+}
+
+.shovel-svg {
+	position: absolute;
+	top:45%;
+	left:5%;
+	transform: rotate(-15deg);
+}
+
+.wheel-barrow-svg {
+	position: absolute;
+	top:40%;
+	right: 4%;
+	transform: rotate(-10deg);
+}
+
+.vacuum-svg {
+	position: absolute;
+	bottom:10%;
+	left:20%;
+}
+
+.mop-svg {
+	position: absolute;
+	bottom:10%;
+	right:11%;
+}
+
+.study-svg {
+	position: absolute;
+	top:11%;
+	left:22%;
+	//transform: rotate(12deg);
+}
+
+.dog-walk-svg {
+	position: absolute;
+	bottom:10%;
+	left:53%;
+}
+
+.lawn-mower-svg {
+	position: absolute;
+	top:11%;
+	right:20%;
+}
+
+#welcome-tag {
+	font-family: 'Roboto', sans-serif;
+  	margin: 0;
+  	font-size:5.0em;
+  	color: #f8f8f8;
+  	font-weight:600;
+}
+
+#welcome-description-1, #welcome-description-2 {
+	font-family: 'Roboto', sans-serif;
+	color: #f8f8f8;
+}
+
+#welcome-description-1 {
+	font-size: 2.0em;
+}
+
+#welcome-description-2 {
+	font-size: 1.75em;
+}
+
+.container-how-it-works {
+	margin-top: 8%; 
+}
+
+#title-how-it-works {
+	text-align: center;
+	font-family: 'Roboto', sans-serif;
+	font-size:3em;
+}
+
+.how-it-works-1, .how-it-works-2, .how-it-works-3 {
+	text-align: center;
+	width: 65%;
+}
+
+.how-it-works-1 {
+	margin: 5% auto;
+}
+
+.how-it-works-2 {
+	margin: 30% auto;
+}
+
+.how-it-works-3 {
+	margin: 55% auto;
+}
+
+.col-heading {
+	font-family: 'Roboto', sans-serif;
+	font-size:2em;
+}
+
+.col-paragraph {
+	font-family: 'Roboto', sans-serif;
+	font-size: 1.23em;
+}
+
+//End of Home page css
+
+//Footer css
+#myFooter {
+	background-color: #3A539B;
+	color:white;
+	flex: 0 0 auto;
+  -webkit-flex: 0 0 auto;
+  margin-top: 20%;
+}
+
+#myFooter ul{
+	list-style-type: none;
+  padding-left: 0;
+  line-height: 1.7;
+}
+
+#myFooter h5{
+  font-family: 'Roboto', sans-serif;
+	font-size: 18px;
+  color: white;
+  font-weight: bolder;
+  margin-top: 30px;
+}
+
+#myFooter a{
+  font-family: 'Roboto', sans-serif; 
+	color:white;
+	text-decoration: none;
+}
+
+#myFooter a:hover, #myFooter a:focus{
+	text-decoration: none;
+	color:#d2d1d1;
+}
+
+#myFooter .myCols{
+	text-align: center;
+}
+
+#myFooter .social-networks{
+	text-align: center;
+	padding-top: 30px;
+	padding-bottom: 38px;
+}
+
+#myFooter .social-networks a{
+    font-size: 32px;
+    margin-right: 5px;
+    margin-left: 5px;
+    color: #f9f9f9;
+    padding: 10px;
+    transition: 0.2s;
+}
+
+#myFooter .social-networks a:hover{
+	text-decoration: none;
+
+}
+
+#myFooter .facebook:hover{
+	color:#0077e2;
+}
+
+#myFooter .google:hover{
+	color:#ef1a1a;
+}
+
+#myFooter .twitter:hover{
+	color: #00aced;
+}
+
+//End of Footer css
+//To keep footer stuck to bottom of screen
+body{
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: column;
+    -webkit-flex-direction: column;
+}

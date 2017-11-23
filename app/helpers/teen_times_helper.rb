@@ -1,0 +1,2 @@
+module TeenTimesHelper
+end

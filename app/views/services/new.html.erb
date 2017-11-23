@@ -1,0 +1,225 @@
+<div class = "form-horizontal">
+  <div class="sign-in-container contact-us">
+    <div class="card-signIn contact-us"></div>
+      <div class="card-signIn contact-us">
+
+      <h1 class="title">Create a Job Posting</h1>
+
+      <%= form_for :service, :url => services_path(current_user.id) do |f| %>
+        <% if @service.errors.any? %>
+              <% @service.errors.full_messages.each do |message| %>
+                <div class = "alert alert-danger"><%=message %></div>
+              <% end %>
+        <% end %>
+      
+      	<%= f.hidden_field :user_id , :value=>current_user.id %>
+        <%= f.hidden_field :status, :id => "service_status_field_hidden", :value=>Service::UNLISTED %>
+        <%= f.hidden_field :day, :id => "service_day_field_hidden"%>
+        <%= f.hidden_field :start_time, :id => "service_start_time_field_hidden"%>
+        <%= f.hidden_field :end_time, :id => "service_end_time_field_hidden"%>
+        <%= f.hidden_field :date, :id => "service_date_time_field_hidden"%>
+      	
+       	<div class="input-container">
+          <%= f.label :title, "Please select service type", class: 'control-label'%>
+          <%= f.select :title, Service::SERVICE_TYPES, {}, :id => "main_category_id", class: 'form-control'%>
+        </div>
+
+        <div id = "other-div" class="input-container" style = "display:none;">
+          <%= f.label :other_title, "Specify a short title for your service", class: 'control-label'%>
+          <div id = "other-task-id">
+            <%= f.text_field :other_title, placeholder: "One word title for the service", class: "form-control"%>
+          </div>
+        </div>
+
+          <%=f.hidden_field :skill ,:value=>'1' %>
+
+        <div class="input-container">
+          <%= f.label :description, "Please describe the job in more detail", class: 'control-label'%>
+          <%= f.text_area :description, placeholder: "Job description, extra details, etc." , class: 'form-control service_text_area' %>
+        </div>
+
+        <div class="input-container">
+          <%= f.label :charge_per_hour, "How much do you want to pay per hour?", class: 'control-label'%>
+          <%= f.text_field :charge_per_hour, placeholder: "Charge per hour in dollars", class: "form-control" %>
+        </div>
+
+        <!-- Setting the min and max age -->
+        <!-- TODO: Figure out solution to extra padding-left and padding-right problem -->
+        <div class="input-container">
+          <%= f.label :min_age, "Min Age", class: 'control-label'%>
+          <%= f.number_field :min_age, placeholder: "e.g. 13", class: "form-control"%>
+        </div>
+
+        <div class="input-container">
+          <%= f.label :max_age, "Max Age", class: 'control-label'%>
+          <%= f.number_field :max_age, placeholder: "e.g. 19", class: "form-control"%>
+        </div>
+
+        <!-- Set the service start date -->
+        <!-- TODO: Add date format validation -->
+        <div class="input-container">
+          <%= f.label :charge_per_hour, "Date and time of this service", class: 'control-label'%>
+          <div class='input-group date' id='datetimepicker1'>
+            <input type='text' id="service_date_time_field" class="form-control date-custom" />
+            <span class="input-group-addon">
+              <span class="glyphicon glyphicon-calendar"></span>
+            </span>
+          </div>
+          <script type="text/javascript">
+              $(function () {
+                  firstDate = $("#service_date_time_field_hidden").val()
+                  $('#datetimepicker1').datetimepicker({defaultDate: firstDate});
+              });
+          </script>
+        </div>
+
+        <div class="input-container">
+          <%= f.label :duration, "Duration of this service in hours", class: 'control-label'%>
+          <%= f.number_field :duration, placeholder: "e.g. 1.5" , class: 'form-control' %>
+        </div>
+
+        <!-- Frequcy Toggle and Input Field-->
+        <div class="input-container">
+          <input class = "checkbox-inline" id = "service_freq_toggle" onclick="frequencyToggle()" type="checkbox"/>
+          <%= f.label "This is a reoccuring service", class: 'control-label'%>
+        </div>
+
+        <div class="input-container" id = "service_freq_input_div" style = "display:none;" >
+          <%= f.label :frequency, "How often (in days) should it reoccur?", class: 'control-label reoccur'%>
+          <%= f.number_field :frequency, :id => "service_freq_input_field", :value => 0, class: "form-control"%>
+        </div>
+
+        <div class="button-container create-service">
+            <div class="col-sm-8 col-sm-offset-2 text-center">
+              <%= f.submit "Create", :id => "submit_create_button", class: "btn btn-default btn-primary"%>
+              <%= f.submit "Create and List", :id => "submit_create_list_button", class: "btn btn-default btn-success"%>
+            </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  var main_category_selection = document.getElementById("main_category_id")
+	var other_category_selection = document.getElementById("other_category_id")
+	var submit = document.getElementById("submit_create_button")
+  var submitAndList = document.getElementById("submit_create_list_button")
+  var frequencyInputDiv= document.getElementById("service_freq_input_div");
+  var frequencyInputField = document.getElementById("service_freq_input_field");
+
+  /* Logic for frequency toggle */
+  frequencyToggle = () => {
+    frequencyInputDiv.style.display = (frequencyInputDiv.style.display === "none") ? "block" : "none"
+  }
+
+	main_category_selection.onchange = () => {
+		var selectedOption = main_category_selection.options[main_category_selection.selectedIndex].text
+
+		var hiddenTaskField = document.getElementById("other-div")
+		hiddenTaskField.style.display = (selectedOption == "Other") ? "block" : "none"
+
+      switch($("#main_category_id").val()){
+          case 'Babysitting' :
+              $('#service_skill').val(1)
+              break;
+          case 'Yard work' :
+              $('#service_skill').val(2)
+              break;
+          case 'Snow shoveling' :
+              $('#service_skill').val(3)
+              break;
+          case 'Furniture moving' :
+              $('#service_skill').val(4)
+              break;
+          case 'Simple cleaning tasks' :
+              $('#service_skill').val(5)
+              break;
+          case 'Vacation services' :
+              $('#service_skill').val(6)
+              break;
+          case 'Dog walking' :
+              $('#service_skill').val(7)
+              break;
+          case 'Computer help' :
+              $('#service_skill').val(8)
+              break;
+          case 'Tutoring' :
+              $('#service_skill').val(9)
+              break;
+          case 'Reading' :
+              $('#service_skill').val(10)
+              break;
+          case 'Other' :
+              $('#service_skill').val(0)
+              break;
+      }
+
+   	}
+
+   	submit.onclick = () =>
+  {
+      submitHelperFunction()
+  }
+
+  submitAndList.onclick = () =>
+  {
+      $("#service_status_field_hidden").val("<%= Service::LISTED %>")
+      submitHelperFunction()
+  }
+
+  submitHelperFunction = () => {
+
+      // Update the date time field value of the form
+      userSetDateTime = $('#datetimepicker1').data("DateTimePicker").date()
+      $("#service_date_time_field_hidden").val(userSetDateTime);
+
+      var time = userSetDateTime.hours()+":"+userSetDateTime.minutes()
+
+      $("#service_start_time_field_hidden").val(time);
+
+      var duration = $('#service_duration').val();
+
+      var end_time = userSetDateTime.add(duration,'h').hours() + ":" + userSetDateTime.add(duration,'h').minutes();
+
+      $("#service_end_time_field_hidden").val(end_time);
+
+      switch(userSetDateTime.day()){
+          case 0 :
+              $("#service_day_field_hidden").val("Sunday");
+              break;
+          case 1 :
+              $("#service_day_field_hidden").val("Monday");
+              break;
+          case 2 :
+              $("#service_day_field_hidden").val("Tuesday");
+              break;
+          case 3 :
+              $("#service_day_field_hidden").val("Wednesday");
+              break;
+          case 4 :
+              $("#service_day_field_hidden").val("Thursday");
+              break;
+          case 5 :
+              $("#service_day_field_hidden").val("Friday");
+              break;
+          case 6 :
+              $("#service_day_field_hidden").val("Saturday");
+              break;
+      }
+
+
+
+      // If the frequency toggle is unselected, send back 0 as its value
+      if (frequencyInputDiv.style.display === "none") {
+          frequencyInputField.value = 0
+      }
+
+      var selectedOption = main_category_selection.options[main_category_selection.selectedIndex].text
+
+      if (selectedOption == "Other") {
+          main_category_selection.options[main_category_selection.selectedIndex].value = other_category_selection.value;
+      }
+  }
+
+</script>

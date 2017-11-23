@@ -1,0 +1,29 @@
+<h1>Services</h1>
+<% if @services.length == 0 %>
+		<p>No services currently available</p>
+<% else %>
+	<div class="container">
+		<% @services.each_with_index do |s, i| %>
+				<% if i != 0 and i % 3 == 0 %>
+						</div>
+				<% end %>
+				<% if i % 3 == 0 %>
+					<div class="row">
+				<% end %>
+					<div class="col-md-4">
+						<div class="card" style="width: 20rem;">
+							<div class="card-body">
+								<h4 class="card-title"><%= s.title %></h4>
+								<h5 class="card-title">Posted By <%= s.user.full_name %></h5>
+								<p class="card-text">Cost <%= s.charge_per_hour %>/hour</p>
+								<p class="card-text">Frequency $<%= s.frequency %>/hour</p>
+								<a href="/services/<%= s.id %>" class="btn btn-primary">More Details</a>
+							</div>
+						</div>
+					</div>
+				<%if i == @services.length - 1%>
+					</div>
+				<% end %>
+		<% end %>
+	</div>
+<% end %>

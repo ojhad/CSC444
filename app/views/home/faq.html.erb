@@ -1,0 +1,91 @@
+<div class="container-accordion">
+  <h1 class="heading-primary">Frequently Asked Questions</h1>
+  <div class="accordion">
+    <dl>
+      <dt>
+        <a href="#accordion1" aria-expanded="false" aria-controls="accordion1" class="accordion-title accordionTitle js-accordionTrigger">How is Ziyad so fashionable?</a>
+      </dt>
+      <dd class="accordion-content accordionItem is-collapsed" id="accordion1" aria-hidden="true">
+        <p>He just is, you can't do anything about that.</p>
+      </dd>
+      <dt>
+        <a href="#accordion2" aria-expanded="false" aria-controls="accordion2" class="accordion-title accordionTitle js-accordionTrigger">
+          Is Dilip more Russian or Nepali?</a>
+      </dt>
+      <dd class="accordion-content accordionItem is-collapsed" id="accordion2" aria-hidden="true">
+        <p>One can never know that.</p>
+      </dd>
+      <dt>
+        <a href="#accordion3" aria-expanded="false" aria-controls="accordion3" class="accordion-title accordionTitle js-accordionTrigger">Who is the best at FIFA?</a>
+      </dt>
+      <dd class="accordion-content accordionItem is-collapsed" id="accordion3" aria-hidden="true">
+        <p>Definitely not Aser.</p>
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<script>
+//uses classList, setAttribute, and querySelectorAll
+//if you want this to work in IE8/9 youll need to polyfill these
+(function(){
+  var d = document,
+  accordionToggles = d.querySelectorAll('.js-accordionTrigger'),
+  setAria,
+  setAccordionAria,
+  switchAccordion,
+  touchSupported = ('ontouchstart' in window),
+  pointerSupported = ('pointerdown' in window);
+  
+  skipClickDelay = function(e){
+    e.preventDefault();
+    e.target.click();
+  }
+
+    setAriaAttr = function(el, ariaType, newProperty){
+    el.setAttribute(ariaType, newProperty);
+  };
+  setAccordionAria = function(el1, el2, expanded){
+    switch(expanded) {
+      case "true":
+        setAriaAttr(el1, 'aria-expanded', 'true');
+        setAriaAttr(el2, 'aria-hidden', 'false');
+        break;
+      case "false":
+        setAriaAttr(el1, 'aria-expanded', 'false');
+        setAriaAttr(el2, 'aria-hidden', 'true');
+        break;
+      default:
+        break;
+    }
+  };
+
+  //function
+  switchAccordion = function(e) {
+    console.log("triggered");
+    e.preventDefault();
+    var thisAnswer = e.target.parentNode.nextElementSibling;
+    var thisQuestion = e.target;
+    if(thisAnswer.classList.contains('is-collapsed')) {
+      setAccordionAria(thisQuestion, thisAnswer, 'true');
+    } else {
+      setAccordionAria(thisQuestion, thisAnswer, 'false');
+    }
+      thisQuestion.classList.toggle('is-collapsed');
+      thisQuestion.classList.toggle('is-expanded');
+      thisAnswer.classList.toggle('is-collapsed');
+      thisAnswer.classList.toggle('is-expanded');
+    
+      thisAnswer.classList.toggle('animateIn');
+    };
+    for (var i=0,len=accordionToggles.length; i<len; i++) {
+      if(touchSupported) {
+        accordionToggles[i].addEventListener('touchstart', skipClickDelay, false);
+      }
+      if(pointerSupported){
+        accordionToggles[i].addEventListener('pointerdown', skipClickDelay, false);
+      }
+      accordionToggles[i].addEventListener('click', switchAccordion, false);
+    }
+  })();
+</script>

@@ -1,0 +1,23 @@
+<%= form_tag new_user_card_path(@user.id) do %>
+    <%= csrf_meta_tags %>
+    <article>
+      <% if flash[:error].present? %>
+          <div id="error_explanation">
+            <p><%= flash[:error] %></p>
+          </div>
+      <% end %>
+      <label class="amount">
+        <span>Amount: $5.00</span>
+      </label>
+    </article>
+
+    <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+            data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+            data-description="Add a credit card"
+            data-locale="auto"
+            data-email="<%=@user.email%>"
+            data-allow-remember-me='false'
+            data-panel-label="Add New Card"
+            data-label="Add New Card">
+    </script>
+<% end %>

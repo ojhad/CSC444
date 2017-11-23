@@ -1,0 +1,1153 @@
+//for navbar expand in mobile screens
+@media only screen and (max-width: 767px) {
+	.navbar .navbar-collapse {
+		border-color: #DADFE1;
+		background-color: #DADFE1;
+		z-index: 1000;
+		position: relative;
+	}
+	input[name="search_term"]{
+		display: inline-block;
+		width: 85%;
+	}
+	button[id="register-button"]{
+		width: 10%;
+		display: inline-block;
+		overflow: hidden;
+	}
+}
+
+//iPhone (5, 5C, 5S, SE) in portrait mode
+@media screen and (min-width: 320px) and (max-width: 568px) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 2){
+	#myFooter {
+		text-align: center;
+	}
+
+	.header-intro {
+		height: 600px;
+	}
+
+	.container-intro {
+		top:22%;
+		left:25%;
+		width: 50%;
+	}
+
+	#welcome-tag {
+	  	font-size:3.0em;
+	  	font-weight:bolder;
+	}
+
+	#welcome-description-1 {
+		font-size: 1.7em;
+	}
+
+	#welcome-description-2 {
+		font-size: 1.1em;
+	}
+
+	.shovel-svg {
+		top:45%;
+		left:3%;
+		transform: rotate(-15deg);
+	}
+
+	.wheel-barrow-svg {
+		top:50%;
+		right: 4%;
+		transform: rotate(-10deg);
+	}
+
+	.vacuum-svg {
+		bottom:10%;
+		left:17%;
+	}
+
+	.mop-svg {
+		bottom:10%;
+		right:13%;
+	}
+
+	.study-svg {
+		top:8%;
+		left:19%;
+	}
+
+	.dog-walk-svg {
+		bottom:10%;
+		left:48%;
+	}
+
+	.lawn-mower-svg {
+		top:8%;
+		right:19%;
+	}
+
+	.shovel-svg {
+		height: 65px;
+		width: 65px;
+	}
+
+	.wheel-barrow-svg, .vacuum-svg, .mop-svg, .study-svg, .dog-walk-svg, .lawn-mower-svg {
+		height: 50px;
+		width: 50px;
+	}
+
+	#title-how-it-works {
+		font-size: 2.3em;
+	}
+
+	.col-heading {
+		font-size: 1.5em;
+	}
+
+	.col-paragraph {
+		font-size: 1.1em;
+	}
+
+	.how-it-works-1 {
+		margin: 5% auto;
+	}
+
+	.how-it-works-2 {
+		margin: 20% auto;
+	}
+
+	.how-it-works-3 {
+		margin: 20% auto;
+	}
+}
+
+//iPhone 5, 5C, 5S, SE in landscape
+@media screen and (min-width: 320px) and (max-width: 568px) and (orientation: landscape) and (-webkit-min-device-pixel-ratio: 2){
+	.mynav {
+		min-height: 50px !important;
+	}
+
+	.container-fluid {
+		margin-top: 0px;
+	}
+
+	.navbar-brand {
+		font-size: 1.5em;
+	}
+
+	#myFooter {
+		text-align: center;
+	}
+
+	.header-intro {
+		height: 375px;
+	}
+
+	.container-intro {
+		top:30%;
+		left:20%;
+		width: 60%;
+	}
+
+	#welcome-tag {
+	  	font-size:2.3em;
+	  	font-weight:bolder;
+	}
+
+	#welcome-description-1 {
+		font-size: 1.45em;
+	}
+
+	#welcome-description-2 {
+		font-size: 1.1em;
+	}
+
+	.shovel-svg {
+		top:45%;
+		left:3%;
+		transform: rotate(-15deg);
+	}
+
+	.wheel-barrow-svg {
+		top:50%;
+		right: 4%;
+		transform: rotate(-10deg);
+	}
+
+	.vacuum-svg {
+		bottom:10%;
+		left:17%;
+	}
+
+	.mop-svg {
+		bottom:10%;
+		right:13%;
+	}
+
+	.study-svg {
+		top:8%;
+		left:19%;
+	}
+
+	.dog-walk-svg {
+		bottom:10%;
+		left:48%;
+	}
+
+	.lawn-mower-svg {
+		top:8%;
+		right:19%;
+	}
+
+	.shovel-svg {
+		height: 65px;
+		width: 65px;
+	}
+
+	.wheel-barrow-svg, .vacuum-svg, .mop-svg, .study-svg, .dog-walk-svg, .lawn-mower-svg {
+		height: 50px;
+		width: 50px;
+	}
+
+	#title-how-it-works {
+		font-size:2.2em;
+	}
+
+	.col-heading {
+		font-size:1.5em;
+	}
+
+	.col-paragraph {
+		font-size: 1.1em;
+	}
+
+	.how-it-works-1 {
+		margin: 5% auto;
+	}
+
+	.how-it-works-2 {
+		margin: 15% auto;
+	}
+
+	.how-it-works-3 {
+		margin: 15% auto;
+	}
+
+	#myFooter {
+    	margin-top: 10%;
+	}
+}
+
+//iPhone (6, 6S, 7, 8) in portrait mode
+@media screen and (min-width: 375px) and (max-width: 667px) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 2){
+	#myFooter {
+		text-align: center;
+		height: 600px;
+	}
+
+	.container-intro {
+		top:22%;
+		left:25%;
+		width: 50%;
+	}
+
+	#welcome-tag {
+	  	font-size:3.4em;
+	  	font-weight:bolder;
+	}
+
+	#welcome-description-1 {
+		font-size: 2em;
+	}
+
+	#welcome-description-2 {
+		font-size: 1.3em;
+	}
+
+	.shovel-svg {
+		top:45%;
+		left:3%;
+		transform: rotate(-15deg);
+	}
+
+	.wheel-barrow-svg {
+		top:50%;
+		right: 4%;
+		transform: rotate(-10deg);
+	}
+
+	.vacuum-svg {
+		bottom:5%;
+		left:17%;
+	}
+
+	.mop-svg {
+		bottom:5%;
+		right:13%;
+	}
+
+	.study-svg {
+		top:8%;
+		left:19%;
+	}
+
+	.dog-walk-svg {
+		bottom:5%;
+		left:48%;
+	}
+
+	.lawn-mower-svg {
+		top:8%;
+		right:19%;
+	}
+
+	.shovel-svg {
+		height: 65px;
+		width: 65px;
+	}
+
+	.wheel-barrow-svg, .vacuum-svg, .mop-svg, .study-svg, .dog-walk-svg, .lawn-mower-svg {
+		height: 50px;
+		width: 50px;
+	}
+
+	#title-how-it-works {
+		font-size: 2.7em;
+	}
+
+	.col-heading {
+		font-size: 1.7em;
+	}
+
+	.col-paragraph {
+		font-size: 1.2em;
+	}
+
+	.how-it-works-1 {
+		margin: 5% auto;
+	}
+
+	.how-it-works-2 {
+		margin: 30% auto;
+	}
+
+	.how-it-works-3 {
+		margin: 30% auto;
+	}
+}
+
+//iPhone 6, 6S, 7, 8 in landscape
+@media screen and (min-width: 375px) and (max-width: 667px) and (orientation: landscape) and (-webkit-min-device-pixel-ratio: 2){
+	.mynav {
+		min-height: 50px !important;
+	}
+
+	.container-fluid {
+		margin-top: 0px;
+	}
+
+	.navbar-brand {
+		font-size: 1.5em;
+	}
+
+	#myFooter {
+		text-align: center;
+	}
+
+	.header-intro {
+		height: 400px;
+	}
+
+	.container-intro {
+		top:22%;
+		left:20%;
+		width: 60%;
+	}
+
+	#welcome-tag {
+	  	font-size:3em;
+	  	font-weight:bolder;
+	}
+
+	#welcome-description-1 {
+		font-size: 1.6em;
+	}
+
+	#welcome-description-2 {
+		font-size: 1.1em;
+	}
+
+	.shovel-svg {
+		top:45%;
+		left:3%;
+		transform: rotate(-15deg);
+	}
+
+	.wheel-barrow-svg {
+		top:50%;
+		right: 4%;
+		transform: rotate(-10deg);
+	}
+
+	.vacuum-svg {
+		bottom:10%;
+		left:17%;
+	}
+
+	.mop-svg {
+		bottom:10%;
+		right:13%;
+	}
+
+	.study-svg {
+		top:8%;
+		left:19%;
+	}
+
+	.dog-walk-svg {
+		bottom:10%;
+		left:48%;
+	}
+
+	.lawn-mower-svg {
+		top:8%;
+		right:19%;
+	}
+
+	.shovel-svg {
+		height: 65px;
+		width: 65px;
+	}
+
+	.wheel-barrow-svg, .vacuum-svg, .mop-svg, .study-svg, .dog-walk-svg, .lawn-mower-svg {
+		height: 50px;
+		width: 50px;
+	}
+
+	#title-how-it-works {
+		font-size:2.3em;
+	}
+
+	.col-heading {
+		font-size:1.5em;
+	}
+
+	.col-paragraph {
+		font-size: 1.1em;
+	}
+
+	.how-it-works-1 {
+		margin: 5% auto;
+	}
+
+	.how-it-works-2 {
+		margin: 10% auto;
+	}
+
+	.how-it-works-3 {
+		margin: 10% auto;
+	}
+
+	#myFooter {
+    	margin-top: 10%;
+	}
+}
+
+//iPhone (6+, 7+, 8+) in portrait mode, note left min device pixel ratio as 2 
+//(to test on browser) but ideally should be 3 for actual device
+@media screen and (min-width: 414px) and (max-width: 736px) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 3){
+	#myFooter {
+		text-align: center;
+		height: 736px;
+	}
+
+	.header-intro {
+		height: 670px;
+	}
+
+	.container-intro {
+		top:22%;
+		left:25%;
+		width: 50%;
+	}
+
+	#welcome-tag {
+	  	font-size:3.6em;
+	  	font-weight:bolder;
+	}
+
+	#welcome-description-1 {
+		font-size: 2.1em;
+	}
+
+	#welcome-description-2 {
+		font-size: 1.5em;
+	}
+
+	.shovel-svg {
+		top:45%;
+		left:3%;
+		transform: rotate(-15deg);
+	}
+
+	.wheel-barrow-svg {
+		top:50%;
+		right: 4%;
+		transform: rotate(-10deg);
+	}
+
+	.vacuum-svg {
+		bottom:5%;
+		left:17%;
+	}
+
+	.mop-svg {
+		bottom:5%;
+		right:13%;
+	}
+
+	.study-svg {
+		top:8%;
+		left:19%;
+	}
+
+	.dog-walk-svg {
+		bottom:5%;
+		left:48%;
+	}
+
+	.lawn-mower-svg {
+		top:8%;
+		right:19%;
+	}
+
+	.shovel-svg {
+		height: 65px;
+		width: 65px;
+	}
+
+	.wheel-barrow-svg, .vacuum-svg, .mop-svg, .study-svg, .dog-walk-svg, .lawn-mower-svg {
+		height: 50px;
+		width: 50px;
+	}
+
+	#title-how-it-works {
+		font-size: 2.7em;
+	}
+
+	.col-heading {
+		font-size: 1.7em;
+	}
+
+	.col-paragraph {
+		font-size: 1.2em;
+	}
+
+	.how-it-works-1 {
+		margin: 5% auto;
+	}
+
+	.how-it-works-2 {
+		margin: 30% auto;
+	}
+
+	.how-it-works-3 {
+		margin: 30% auto;
+	}
+}
+
+//iPhone 6+, 7+, 8+ in landscape
+@media screen and (min-width: 414px) and (max-width: 736px) and (orientation: landscape) and (-webkit-min-device-pixel-ratio: 3){
+	.mynav {
+		min-height: 50px !important;
+	}
+
+	.container-fluid {
+		margin-top: 0px;
+	}
+
+	.navbar-brand {
+		font-size: 1.5em;
+	}
+
+	#myFooter {
+		text-align: center;
+		height: 500px;
+	}
+
+	.header-intro {
+		height: 400px;
+	}
+
+	.container-intro {
+		top:30%;
+		left:20%;
+		width: 60%;
+	}
+
+	#welcome-tag {
+	  	font-size:3em;
+	  	font-weight:bolder;
+	}
+
+	#welcome-description-1 {
+		font-size: 1.6em;
+	}
+
+	#welcome-description-2 {
+		font-size: 1.1em;
+	}
+
+	.shovel-svg {
+		top:45%;
+		left:3%;
+		transform: rotate(-15deg);
+	}
+
+	.wheel-barrow-svg {
+		top:50%;
+		right: 4%;
+		transform: rotate(-10deg);
+	}
+
+	.vacuum-svg {
+		bottom:10%;
+		left:17%;
+	}
+
+	.mop-svg {
+		bottom:10%;
+		right:13%;
+	}
+
+	.study-svg {
+		top:8%;
+		left:19%;
+	}
+
+	.dog-walk-svg {
+		bottom:10%;
+		left:48%;
+	}
+
+	.lawn-mower-svg {
+		top:8%;
+		right:19%;
+	}
+
+	.shovel-svg {
+		height: 65px;
+		width: 65px;
+	}
+
+	.wheel-barrow-svg, .vacuum-svg, .mop-svg, .study-svg, .dog-walk-svg, .lawn-mower-svg {
+		height: 50px;
+		width: 50px;
+	}
+
+	#title-how-it-works {
+		font-size: 2.4em;
+	}
+
+	.col-heading {
+		font-size: 1.5em;
+	}
+
+	.col-paragraph {
+		font-size: 1.1em;
+	}
+
+	.how-it-works-1 {
+		margin: 5% auto;
+	}
+
+	.how-it-works-2 {
+		margin: 10% auto;
+	}
+
+	.how-it-works-3 {
+		margin: 10% auto;
+	}
+
+	#myFooter {
+    	margin-top: 10%;
+	}
+}
+
+/* ----------- iPad 3, 4 ----------- */
+/* Portrait */
+@media only screen and (min-width: 768px) and (max-width: 1023px) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 2) {
+	#myFooter {
+		text-align: center;
+		height: 400px;
+	}
+
+	#myFooter h5{
+		font-size: 26px;
+	    margin-top: 60px;
+	}
+
+	#myFooter a{
+		font-size: 20px;
+	}
+
+	#myFooter .social-networks{
+		text-align: center;
+		padding-top: 30px;
+		padding-bottom: 38px;
+	}
+
+	#myFooter .social-networks a{
+	    font-size: 40px;
+	    margin-right: 5px;
+	    margin-left: 5px;
+	}
+
+	.header-intro {
+		height: 720px;
+	}
+
+	.container-intro {
+		top:35%;
+		left:15%;
+		width: 70%;
+	}
+
+	#welcome-tag {
+	  	font-size:3.8em;
+	  	font-weight:bolder;
+	}
+
+	#welcome-description-1 {
+		font-size: 2.2em;
+	}
+
+	#welcome-description-2 {
+		font-size: 1.7em;
+	}
+
+	.shovel-svg {
+		top:45%;
+		left:2%;
+		transform: rotate(-15deg);
+	}
+
+	.wheel-barrow-svg {
+		top:50%;
+		right: 4%;
+		transform: rotate(-10deg);
+	}
+
+	.vacuum-svg {
+		bottom:10%;
+		left:17%;
+	}
+
+	.mop-svg {
+		bottom:10%;
+		right:13%;
+	}
+
+	.study-svg {
+		top:8%;
+		left:19%;
+	}
+
+	.dog-walk-svg {
+		bottom:10%;
+		left:48%;
+	}
+
+	.lawn-mower-svg {
+		top:8%;
+		right:19%;
+	}
+
+	.shovel-svg {
+		height: 80px;
+		width: 80px;
+	}
+
+	.wheel-barrow-svg, .vacuum-svg, .mop-svg, .study-svg, .dog-walk-svg, .lawn-mower-svg {
+		height: 65px;
+		width: 65px;
+	}
+
+	#title-how-it-works {
+		font-size: 3.2em;
+	}
+
+	.col-heading {
+		font-size: 2.2em;
+	}
+
+	.col-paragraph {
+		font-size: 1.6em;
+	}
+
+	.how-it-works-1 {
+		margin: 5% auto;
+	}
+
+	.how-it-works-2 {
+		margin: 20% auto;
+	}
+
+	.how-it-works-3 {
+		margin: 20% auto;
+	}
+}
+
+//iPad 3,4 Landscape
+@media only screen and (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) and (-webkit-min-device-pixel-ratio: 2) {
+	#myFooter {
+		text-align: center;
+		height: 370px;
+	}
+
+	#myFooter h5{
+		font-size: 24px;
+	    margin-top: 60px;
+	}
+
+	#myFooter a{
+		font-size: 18px;
+	}
+
+	#myFooter .social-networks{
+		text-align: center;
+		padding-top: 30px;
+		padding-bottom: 38px;
+	}
+
+	#myFooter .social-networks a{
+	    font-size: 40px;
+	    margin-right: 5px;
+	    margin-left: 5px;
+	}
+
+	.mynav {
+		min-height: 50px !important;
+	}
+
+	.container-fluid {
+		margin-top: 0px;
+	}
+
+	.navbar-brand {
+		font-size: 1.5em;
+	}
+
+	.header-intro {
+		height: 600px;
+	}
+
+	.container-intro {
+		top:35%;
+		left:15%;
+		width: 70%;
+	}
+
+	#welcome-tag {
+	  	font-size:4em;
+	  	font-weight:bolder;
+	}
+
+	#welcome-description-1 {
+		font-size: 2em;
+	}
+
+	#welcome-description-2 {
+		font-size: 1.5em;
+	}
+
+	.shovel-svg {
+		top:45%;
+		left:3%;
+		transform: rotate(-15deg);
+	}
+
+	.wheel-barrow-svg {
+		top:50%;
+		right: 4%;
+		transform: rotate(-10deg);
+	}
+
+	.vacuum-svg {
+		bottom:10%;
+		left:17%;
+	}
+
+	.mop-svg {
+		bottom:10%;
+		right:13%;
+	}
+
+	.study-svg {
+		top:8%;
+		left:19%;
+	}
+
+	.dog-walk-svg {
+		bottom:10%;
+		left:48%;
+	}
+
+	.lawn-mower-svg {
+		top:8%;
+		right:19%;
+	}
+
+	.shovel-svg {
+		height: 65px;
+		width: 65px;
+	}
+
+	.wheel-barrow-svg, .vacuum-svg, .mop-svg, .study-svg, .dog-walk-svg, .lawn-mower-svg {
+		height: 50px;
+		width: 50px;
+	}
+
+	#title-how-it-works {
+		font-size: 2.9em;
+	}
+
+	.col-heading {
+		font-size: 1.8em;
+	}
+
+	.col-paragraph {
+		font-size: 1.4em;
+	}
+
+	.how-it-works-1 {
+		margin: 5% auto;
+	}
+
+	.how-it-works-2 {
+		margin: 35% auto;
+	}
+
+	.how-it-works-3 {
+		margin: 65% auto;
+	}
+
+	#myFooter {
+    	margin-top: 20%;
+	}
+}
+
+@media only screen and (min-width : 799px) and (max-width : 900px) {
+/* STYLES GO HERE */
+	.mynav {
+		min-height: 65px !important;
+		background-color: #ecf0f1;
+	}
+
+	.container-fluid {
+		margin-top: 7px;
+	}
+
+	.navbar-brand {
+		font-size: 2.2em;
+	}
+
+	.sign-up, .sign-in {
+		font-size: 1.3em;
+	}
+
+	.header-intro {
+		height: 550px;
+	}
+
+	.container-intro {
+		top:35%;
+		left:15%;
+		width: 71%;
+		height: 250px;
+	}
+
+	#welcome-tag {
+	  	font-size:3.9em;
+	  	font-weight:bolder;
+	}
+
+	#welcome-description-1 {
+		font-size: 1.8em;
+	}
+
+	#welcome-description-2 {
+		font-size: 1.5em;
+	}
+
+	.shovel-svg {
+		height: 85px;
+		width: 85px;
+	}
+
+	.wheel-barrow-svg, .vacuum-svg, .mop-svg, .study-svg, .dog-walk-svg, .lawn-mower-svg {
+		height: 60px;
+		width: 60px;
+	}
+
+	.sign-up-svg, .calendar-svg, .checklist-done-svg {
+		height: 180px;
+		width: 180px;
+	}
+
+	#title-how-it-works {
+		text-align: center;
+		font-size:3.5em;
+	}
+
+	.how-it-works-1, .how-it-works-2, .how-it-works-3 {
+		text-align: center;
+		width: 65%;
+	}
+
+	.how-it-works-1 {
+		margin: 5% auto;
+	}
+
+	.how-it-works-2 {
+		margin: 20% auto;
+	}
+
+	.how-it-works-3 {
+		margin: 20% auto;
+	}
+
+	.col-heading {
+		font-size: 2.4em;
+	}
+
+	.col-paragraph {
+		font-size: 1.5em;
+	}
+
+	#myFooter {
+		height: 400px;
+	}
+
+	#myFooter h5{
+		font-size: 24px;
+	    margin-top: 55px;
+	}
+
+	#myFooter a{
+		font-size: 18px;
+	}
+
+    #myFooter .social-networks a{
+		margin-right: 15px;
+    	margin-left: 15px;
+    	padding: 10px;	
+    }
+
+	#myFooter .fa {
+		font-size: 1.1em;
+	}
+
+}
+
+/* Large screens ----------- */
+@media only screen and (min-width : 1824px) {
+/* STYLES GO HERE */
+	.mynav {
+		min-height: 100px !important;
+		background-color: #ecf0f1;
+	}
+
+	.container-fluid {
+		margin-top: 22px;
+	}
+
+	.navbar-brand {
+		font-size: 2.9em;
+	}
+
+	.dropdown-toggle {
+		font-size: 1.8em;
+	}
+
+	.sign-up, .sign-in {
+		font-size: 2.0em;
+	}
+
+	.header-intro {
+		height: 1000px;
+	}
+
+	.container-intro {
+		top:35%;
+		left:17%;
+		height: 400px;
+	}
+
+	#welcome-tag {
+	  	font-size:6.9em;
+	  	font-weight:bolder;
+	}
+
+	#welcome-description-1 {
+		font-size: 3.4em;
+	}
+
+	#welcome-description-2 {
+		font-size: 2.7em;
+	}
+
+	.shovel-svg {
+		height: 120px;
+		width: 120px;
+	}
+
+	.wheel-barrow-svg, .vacuum-svg, .mop-svg, .study-svg, .dog-walk-svg, .lawn-mower-svg {
+		height: 95px;
+		width: 95px;
+	}
+
+	.sign-up-svg, .calendar-svg, .checklist-done-svg {
+		height: 300px;
+		width: 300px;
+	}
+
+	#title-how-it-works {
+		text-align: center;
+		font-size:5.0em;
+	}
+
+	.how-it-works-1, .how-it-works-2, .how-it-works-3 {
+		text-align: center;
+		width: 72%;
+	}
+
+	.col-heading {
+		font-size: 2.9em;
+	}
+
+	.col-paragraph {
+		font-size: 2.2em;
+	}
+
+	#myFooter {
+		height: 500px;
+	}
+
+	#myFooter h5{
+		font-size: 38px;
+	    margin-top: 100px;
+	}
+
+	#myFooter a{
+		font-size: 30px;
+	}
+
+    #myFooter .social-networks a{
+		margin-right: 30px;
+    	margin-left: 30px;
+    	padding: 30px;	
+    }
+
+	#myFooter .fa {
+		font-size: 1.8em;
+	}
+
+}

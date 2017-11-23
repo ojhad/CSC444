@@ -1,0 +1,491 @@
+<% if current_user != nil %>
+  <div class="container">
+      <div class="card picBar">
+        <div class="profilePic">
+          <% if @user.profile_pic_file_name != nil %>
+            <%= image_tag @user.profile_pic.url %>
+          <% else %>
+            <img alt="" src="http://gazettereview.com/wp-content/uploads/2016/03/facebook-avatar.jpg">
+          <% end %>
+        </div>
+        <div class="card-info"> <span class="card-title"><%= @user.first_name%> <%= @user.last_name%></span>
+
+        </div>
+      </div>
+      <div class="btn-pref btn-group btn-group-justified btn-group-lg" role="group" aria-label="...">
+        <div class="btn-group" role="group">
+          <button type="button" id="about" class="btn btn-primary" data-toggle="tab"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+            <div class="hidden-xs">About</div>
+          </button>
+        </div>
+        <div class="btn-group" role="group">
+          <button type="button" id="services" class="btn btn-default" data-toggle="tab"><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
+            <div class="hidden-xs">Services</div>
+          </button>
+        </div>
+        <div class="btn-group" role="group">
+          <button type="button" id="reviews" class="btn btn-default" data-toggle="tab"><span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+            <div class="hidden-xs">Reviews/Endorsements</div>
+          </button>
+        </div>
+        <% if @user.id==current_user.id || current_user.is_CSR? %>
+        <div class="btn-group" role="group">
+          <button type="button" id="billing" class="btn btn-default" data-toggle="tab"><span class="fa fa-dollar" aria-hidden="true"></span>
+            <div class="hidden-xs">Billing & Payments</div>
+          </button>
+        </div>
+        <%end%>
+      </div>
+
+      <div class="tab-content">
+        <div class="tab-pane primary fade in active well" id="aboutTab">
+          <div class="container">
+            <div class="row">
+              <%if @user.id == current_user.id || current_user.is_CSR? %>
+              <div class="col-md-4">
+              <%else%>
+              <div class="col-md-6">
+              <%end%>
+                <h4> <i class="fa fa-user" aria-hidden="true"></i> Account type</h4>
+                <% if @user.is_teen? %>
+                    <p>Teenager</p>
+                <% elsif @user.is_client? %>
+                    <p>Client</p>
+                <% elsif @user.is_sadmin? %>
+                    <p>Super Admin</p>
+                <% elsif @user.is_admin? %>
+                    <p>Admin</p>
+                <% elsif @user.is_CSR? %>
+                    <p>Customer Service Representative</p>
+                <%end%>
+                <br>
+                <h4 style=""><i class="fa fa-address-book" aria-hidden="true"></i> Contact Information</h4>
+                <p><i class="fa fa-envelope" aria-hidden="true"></i> <%=@user.email%></p>
+                <p><i class="fa fa-phone" aria-hidden="true"></i> <%=@user.mobile_number%></p>
+              </div>
+              <div class="col-md-4">
+                <% if @user.id == current_user.id || current_user.is_CSR? %>
+                <h4><i class="fa fa-building-o" aria-hidden="true"></i> Address </h4>
+                  <table>
+                    <tr>
+                      <td><b><%=@user.first_name%> <%=@user.last_name%></b></td>
+                    </tr>
+                    <tr>
+                      <td><%=@user.address_1.capitalize()%></td>
+                    </tr>
+                    <tr>
+                      <td><%=@user.address_2.capitalize()%></td>
+                    </tr>
+                    <tr>
+                      <td><%=@user.city.capitalize()%> <%=@user.province%> <%=@user.postal_code.upcase()%></td>
+                    </tr>
+                    <tr>
+                      <td><%=@user.country.capitalize()%></td>
+                    </tr>
+                  </table>
+                <%else%>
+                    <h4><i class="fa fa-map-marker" aria-hidden="true"></i> Location </h4>
+                    <p><%=@user.city.capitalize()%> <%=@user.province%> <%=@user.postal_code.upcase()%></p>
+                    <p><%=@user.country.capitalize()%></p><br>
+                    <div style='width: 300px;'>
+                      <div id="map" style='width: 300px; height: 300px;'></div>
+                    </div>
+                <%end%>
+              </div>
+              <% if @user.id == current_user.id %>
+                <div class="col-md-4">
+                  <%= link_to "Edit Profile", edit_user_registration_path(@user.id) , :class => 'btn btn-primary',:style => 'margin-bottom:4px' %><br>
+                  <%= link_to "Delete Account", user_registration_path, :class => 'btn btn-danger', data: {title: 'Delete Account' ,confirm: "Are you sure you want to delete your account?" }, method: :delete %>
+
+                </div>
+              <%end%>
+            </div>
+          <% if @user.is_teen? || @user.is_CSR? %>
+            <div class="row">
+              <div class="col-md-8">
+                <h4><i class="fa fa-star" aria-hidden="true"></i> Skills</h4>
+                <% @userSkills = UserSkill.where(:user_id => @user.id) %>
+                <% if @userSkills.empty? && @user.id != current_user.id %>
+                    This user has no assigned skills
+                <% elsif @userSkills.empty? && @user.id == current_user.id %>
+                    You have no assigned skills
+                <% else %>
+                  <% @userSkills.each do |skill| %>
+                      <%= Skill.find(skill.skill_id).skill_name %><br>
+                  <% end %>
+                <% end %>
+              </div>
+              <% if @user.id == current_user.id %>
+                <div class="col-md-4">
+                    <%= link_to "Edit Skills", edit_user_skill_path , :class => 'btn btn-primary',:style => 'margin-bottom:4px' %><br>
+                </div>
+              <% end %>
+            </div>
+            <div class = "row">
+              <div class="col-md-8">
+                <h4><i class="fa fa-clock-o" aria-hidden="true"></i> Availability</h4>
+              </div>
+              <% if @user.id == current_user.id %>
+                <div class="col-md-4">
+                  <%= link_to "Edit Availability", edit_teen_time_path , :class => 'btn btn-primary',:style => 'margin-bottom:4px' %><br>
+                </div>
+              <% end %>
+            </div>
+            <div class = "row schedule">
+            </div>
+          <% end %>
+         </div>
+
+        </div>
+        <div class="tab-pane primary fade in well" id="servicesTab">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-4">
+                <% if @user.id == current_user.id || current_user.is_CSR? %>
+                    <h4><i class="fa fa-cogs" aria-hidden="true"></i> Unlisted Services </h4>
+                    <% if @user.services.status(Service::UNLISTED).count != 0 %>
+                        <% @user.services.status(Service::UNLISTED).each do |service| %>
+                            <p>Service: <%= service.title %></p>
+                            <p>Charge: $<%= service.charge_per_hour %> per hour</p>
+                            <%= link_to "List", list_service_path(service), method: :post, :class => 'btn btn-success' %>
+                            <%= link_to "Edit", edit_service_path(service), :class => 'btn btn-primary' %>
+                            <%= link_to "Delete", service_path(service), method: :delete, data: {title: 'Delete Listed Service' , confirm: 'Are you sure? Item will not appear under listed services'}, :class => 'btn btn-danger' %>
+                        <%end%>
+                    <%else%>
+                        <h5> You have no unlisted services </h5>
+                    <%end%>
+                <% end %>
+                <h4><i class="fa fa-cogs" aria-hidden="true"></i> Listed Services </h4>
+                <% if @user.services.status(Service::LISTED).count != 0 %>
+                    <% @user.services.status(Service::LISTED).each do |service| %>
+                        <p>Service: <%= service.title %></p>
+                        <p>Charge: $<%= service.charge_per_hour %> per hour</p>
+                        <% if @user.id == current_user.id || current_user.is_admin? %>
+                            <%= link_to "View", service_path(service), :class => 'btn btn-success' %>
+                            <%= link_to "Edit", edit_service_path(service),
+                                        data: {title: 'Edit Service' ,
+                                               confirm: 'Are you sure you want to edit this service? Performing this action will unlist the service and delete all current requests.'},
+                                        :class => 'btn btn-primary' %>
+                            <%= link_to 'Unlist', unlist_service_path(service), method: :post,
+                                        data: {title: 'Unlist Service' ,
+                                               confirm: 'Are you sure you want to unlist this service? Performing this action will delete all current requests.'},
+                                        :class => 'btn btn-danger' %>
+                        <% else %>
+                            <%= link_to "View Service", service_path(service.id), :class => 'btn btn-primary' %>
+                        <% end %>
+                    <%end%>
+                <%else%>
+                    <% if @user.id==current_user.id%>
+                        <h5> You have no listed services </h5>
+                    <%else%>
+                        <h5>No services listed by this user at the moment.</h5>
+                    <%end%>
+                <%end%>
+                <% if @user.id == current_user.id || current_user.is_CSR?%>
+                  <h4><i class="fa fa-cogs" aria-hidden="true"></i> Completed Services</h4>
+                  <% if @user.services.status(Service::COMPLETED).count != 0 %>
+                      <% @user.services.status(Service::COMPLETED).each do |service| %>
+                          <p>Service: <%= service.title %></p>
+                          <p>Charge: $<%= service.charge_per_hour %> per hour</p>
+                          <%= link_to "View", service_path(service), :class => 'btn btn-success' %>
+                      <%end%>
+                  <%else%>
+                      <h5> You do not have any completed services </h5>
+                  <%end%>
+                <%end%>
+              </div>
+              <div class="col-md-4">
+                <% if @user.id == current_user.id || current_user.is_CSR? %>
+                    <h4><i class="fa fa-cog fa-spin" aria-hidden="true"></i> Accepted Services</h4>
+                    <% if @user.services.status(Service::ACCEPTED).count != 0 %>
+                        <% @user.services.status(Service::ACCEPTED).each do |service| %>
+                            <p>Service: <%= service.title %></p>
+                            <p>Charge: $<%= service.charge_per_hour %> per hour</p>
+                            <%= link_to "View", service_path(service), :class => 'btn btn-success' %>
+                            <%= link_to "Edit", edit_service_path(service),
+                                        data: {title: 'Edit Service' ,
+                                               confirm: 'Are you sure you want to edit this service? Performing this action will unlist the service and delete all current requests.'},
+                                        :class => 'btn btn-primary' %>
+                            <%= link_to 'Unlist', unlist_service_path(service), method: :post,
+                                        data: {title: 'Unlist Service',
+                                               confirm: 'Are you sure you want to unlist this service? Performing this action will delete all current requests.'},
+                                        :class => 'btn btn-danger' %>
+                        <%end%>
+                    <%else%>
+                        <h5> None of your services have been accepted yet </h5>
+                    <%end%>
+                <%end%>
+              </div>
+              <% if @user.id ==  current_user.id%>
+                <div class="col-md-4">
+                  <%= link_to "Add service", new_service_path(@user.id) , :class => 'btn btn-primary' ,:style => 'margin-bottom:4px'%><br>
+                  <%= link_to "Past services" ,services_path(@user.id), :class => 'btn btn-primary'%>
+                </div>
+              <%end%>
+            </div>
+          </div>
+        </div>
+        <div class="tab-pane primary fade in" id="reviewsTab">
+          <% if @user.is_teen? || @user.is_CSR? %>
+          <div class="btn-pref2 btn-group btn-group-justified btn-group-lg" role="group" aria-label="...">
+            <div class="btn-group" role="group">
+              <button type="button" id="review_reviews" class="btn btn-primary topBar" data-toggle="tab">
+                <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                <div class="hidden-xs">Reviews</div>
+              </button>
+            </div>
+            <div class="btn-group" role="group">
+              <button type="button" id="review_endorsements" class="btn btn-default topBar" data-toggle="tab">
+                <i class="glyphicon glyphicon-list-alt"></i>
+                <div class="hidden-xs">Endorsements</div>
+              </button>
+            </div>
+          </div>
+          <% else %>
+              <div class="add-button">
+                <% if @user.id !=  current_user.id || current_user.is_CSR? %>
+                    <%= link_to new_user_review_path(@user.id), :class => 'btn btn-primary' do %>
+                        <i class="fa fa-plus"></i>
+                        <span class="hidden-xs">Add Review</span>
+                    <% end %>
+                <% end %>
+              </div>
+              <% if @user.show_rating? %>
+                  <div class="average-review">
+                    <% if @user.average_rating.present? %>
+                        <h4>Average Rating:</h4>
+                        <%= render(:partial => 'review', :locals => {:rating => @user.average_rating}) %>
+                    <% end %>
+                  </div>
+                  <% if @user.reviews.count != 0 %>
+                      <% @user.reviews.each do |review| %>
+                          <div class="review-block">
+                            <%= render(:partial => 'review', :locals => {:rating => review.rating}) %>
+                            <% if review.body.present? %>
+                                <h4><%= review.body %></h4>
+                            <% end %>
+                          </div>
+                      <% end %>
+                  <% end %>
+
+              <%else %>
+                  <h5> There are no reviews yet </h5>
+              <% end %>
+
+          <% end %>
+        </div>
+        <div class="tab-pane primary fade in well" id="billingTab">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-4">
+                <h4> Transactions </h4>
+                <%= link_to "View Transactions", user_transactions_path(@user.id), :class => 'btn btn-default' %>
+                <% if @user.is_teen? %>
+                  <%= link_to  new_user_transaction_path(@user.id), :class => 'btn btn-primary' do %>
+                        <i class="fa fa-plus"></i>
+                    <% end %>
+                <% end %>
+              </div>
+              <div class="col-md-4">
+                <h4>Billing</h4>
+                <% if @user.is_client? && @user.stripe_id.blank?%>
+                    <%= form_tag user_cards_path(@user.id) do %>
+                        <article>
+                          <% if flash[:error].present? %>
+                              <div id="error_explanation">
+                                <p><%= flash[:error] %></p>
+                              </div>
+                          <% end %>
+                        </article>
+
+                        <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                                data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+                                data-description="Add a credit card"
+                                data-locale="auto"
+                                data-email="<%=@user.email%>"
+                                data-allow-remember-me='false'
+                                data-panel-label="Add New Card"
+                                data-label="Add New Card">
+                        </script>
+                    <% end %>
+                <%elsif @user.is_client?%>
+                    <%= link_to "View credit card on file", user_cards_path(@user.id), :class => 'btn btn-default' %>
+                    <%= link_to "View charges", user_charges_path(@user.id), :class => 'btn btn-default' %>
+                <%end%>
+                <% if @user.is_teen?%>
+                        <%= link_to "Payouts", user_payouts_path(@user.id), :class => 'btn btn-default' %>
+                        <%= link_to "Payout information", user_payout_informations_path(@user.id), :class => 'btn btn-default' %><br>
+                <%end%>
+              </div>
+              <div class="col-md-4">
+                <% if @user.is_teen?%>
+                    <h4> Account Balance</h4>
+                    <p> CAD $<%=@user.balance%></p>
+                    <p> Payout method: <%=@user.payout_information.method.upcase()%></p>
+                    <%= form_tag user_payouts_path(@user.id) do %>
+                        <% if @user.balance>0%>
+                          <%= submit_tag "Withdraw balance", class: "btn btn-default" %>
+                        <%else%>
+                            <%= submit_tag "Withdraw balance", class: "btn btn-default", disabled: true %>
+                        <%end%>
+                    <%end%>
+                <%else%>
+                <%end%>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tab-content">
+      <div class="tab-pane fade in well secondary" id="review_reviewsTab">
+        <div class="add-button">
+          <% if @user.id !=  current_user.id  %>
+                <%= link_to new_user_review_path(@user.id), :class => 'btn btn-primary' do %>
+                    <i class="fa fa-plus"></i>
+                    <span class="hidden-xs">Add Review</span>
+                <% end %>
+          <% end %>
+        </div>
+        <% if @user.show_rating? %>
+            <div class="average-review">
+              <% if @user.average_rating.present? %>
+                  <h4>Average Rating:</h4>
+                  <%= render(:partial => 'review', :locals => {:rating => @user.average_rating}) %>
+              <% end %>
+            </div>
+            <% if @user.reviews.count != 0 %>
+                <% @user.reviews.each do |review| %>
+                    <div class="review-block">
+                      <%= render(:partial => 'review', :locals => {:rating => review.rating}) %>
+                      <% if review.body.present? %>
+                          <h4><%= review.body %></h4>
+                      <% end %>
+                    </div>
+                <% end %>
+            <% end %>
+
+        <%else %>
+            <h5> There are no reviews yet </h5>
+        <% end %>
+      </div>
+      <div class="tab-pane fade in well secondary" id="review_endorsementsTab">
+          <% if current_user.endorsement_invites.map(&:user_id).include?(@user.id)  %>
+            <div class="add-button">
+            <%= link_to new_user_endorsement_path(@user.id), :class => 'btn btn-primary' do %>
+                  <i class="fa fa-plus"></i>
+                  <span class="hidden-xs">Add Endorsement</span>
+              <% end %>
+              </div>
+
+
+      <% elsif @user.id == current_user.id %>
+              <%= form_for :endorsement_request, :url => user_endorsement_requests_path(@user.id) do |f| %>
+                  <div class="add-button data form-group">
+                  <div class="col-sm-3">
+                    <%= f.label :invitee_id, 'User ID:'%>
+                  </div>
+                    <div class="col-sm-3">
+                      <%= f.number_field :invitee_id , { class: 'form-control', id: 'charge_per_hour', maxlength: "4", size: "4" }%>
+                    </div>
+                    <div class="col-sm-2">
+                      <%= f.submit 'Invite User', :class => 'btn btn-primary' %>
+                    </div>
+                  </div>
+              <% end %>
+          <% end %>
+        <% if @user.endorsements.any? %>
+            <div>
+                <h3> Endorsements: </h3>
+            </div>
+              <% @user.endorsements.each do |endorsement| %>
+                  <div class="endorsement_block">
+                   <h5> <%= endorsement.body %> </h5>
+                    <h4>Author:
+                      <%= link_to user_path(endorsement.author_id) do %>
+                          <%=endorsement.author.try(:first_name) %>
+                      <% end %>
+                    </h4>
+                  </div>
+
+                <% end %>
+        <% else %>
+            <h5> There are no endorsements yet </h5>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+<% else %>
+    <h4>Please sign up or login to view this user's profile</h4>
+<% end %>
+<script>
+    $(document).ready(function() {
+        displaySchedule();
+        function displaySchedule(){
+          <% if @teenDays.empty? %>
+            $(".schedule").append("<div class='noAvaib'>This user didn't add his availability</div>");
+          <% else %>
+            <% @teenDays.each do |day| %>
+              $(".schedule").append("<div class='col-md-2 <%= day.day %>'><%= day.day %> <br></div>");
+            <% end %>
+            <% @teenTime.each do |time| %>
+              $(".<%= time.day %>").append("<%= time.start_time.strftime("%I:%M %p") %> - <%= time.end_time.strftime("%I:%M %p") %><br>");
+            <% end %>
+          <% end %>
+        }
+        $(".btn-pref .btn").click(function () {
+            $(".btn-pref .btn").removeClass("btn-primary").addClass("btn-default");
+            $(this).removeClass("btn-default").addClass("btn-primary");
+            $(".primary").removeClass('active');
+            $(".secondary").removeClass('active');
+            switch($(this)[0].id){
+                case 'about':
+                    $('#aboutTab').addClass('active');
+                    break;
+                case 'reviews':
+                    $('#reviewsTab').addClass('active');
+                    <% if @user.is_teen? %>
+                      $('#review_reviewsTab').addClass('active');
+                      $('#review_reviews').removeClass("btn-default").addClass("btn-primary");
+                      $('#review_endorsements').removeClass("btn-primary").addClass("btn-default");
+                    <% end %>
+                    break;
+                case 'services':
+                    $('#servicesTab').addClass('active');
+                    break;
+                case 'billing':
+                    $('#billingTab').addClass('active');
+                    break;
+            }
+        });
+
+        $(".btn-pref2 .btn").click(function () {
+            $(".btn-pref2 .btn").removeClass("btn-primary").addClass("btn-default");
+            $(this).removeClass("btn-default").addClass("btn-primary");
+            $('.secondary').removeClass('active');
+            switch($(this)[0].id){
+                case 'review_reviews':
+                    $('#review_reviewsTab').addClass('active');
+                    break;
+                case 'review_endorsements':
+                    $('#review_endorsementsTab').addClass('active');
+                    break;
+            }
+        });
+
+    });
+
+    handler = Gmaps.build('Google');
+    handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+        markers = handler.addMarkers([
+            {
+                "lat": <%= @user.latitude ? @user.latitude : 0 %>,
+                "lng": <%= @user.longitude ? @user.longitude : 0 %>,
+            }
+        ]);
+        handler.bounds.extendWith(markers);
+        handler.fitMapToBounds();
+        handler.getMap().setZoom(16);
+
+    });
+</script>

@@ -1,0 +1,48 @@
+<html>
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Profile</title>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+</head>
+
+<body>
+<%= form_for :review, :url => user_reviews_path(@user.id) do |f| %>
+  <div class="form-group">
+    <%= f.hidden_field :user_id , :value=> @user.id %>
+    <%= f.hidden_field :author_id , :value=> current_user.id %>
+    <%= f.hidden_field :rating , :value=> 0 %>
+    <label class="control-label col-sm-2" for="review">Rating:</label>
+    <div class="stars">
+      <%= f.radio_button(:rating, 1, class: 'star-1') %>
+      <%= f.label :rating_1, nil, class: 'star-1'%>
+      <%= f.radio_button(:rating, 2, class: 'star-2') %>
+      <%= f.label :rating_2, nil, class: 'star-2'%>
+      <%= f.radio_button(:rating, 3, class: 'star-3') %>
+      <%= f.label :rating_3, nil, class: 'star-3'%>
+      <%= f.radio_button(:rating, 4, class: 'star-4') %>
+      <%= f.label :rating_4, nil, class: 'star-4'%>
+      <%= f.radio_button(:rating, 5, class: 'star-5') %>
+      <%= f.label :rating_5, nil, class: 'star-5'%>
+      <span></span>
+    </div>
+  </div>
+    <div>
+      <%= f.text_area :body, class: 'form-control', placeholder: 'Write a review', rows: "5" ,cols:"50" %>
+    </div>
+    <%= f.submit 'Add', :id => "submit_id", :value => nil ,:class=>"btn btn-default"%>
+<% end %>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+</body>
+
+</html>
