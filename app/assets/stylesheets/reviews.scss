@@ -2,7 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 .stars {
-  background: url("stars.png") repeat-x 0 0;
+  background: image-url("stars.png") repeat-x 0 0;
   width: 150px;
   margin: 0 left;
 }
@@ -74,7 +74,7 @@ form .stars label.star-1:hover ~ span {
   top: 0;
   left: 0;
   height: 30px;
-  background: url("stars.png") repeat-x 0 -60px;
+  background: image-url("stars.png") repeat-x 0 -60px;
   -webkit-transition: -webkit-width 0.5s;
   -moz-transition: -moz-width 0.5s;
   -ms-transition: -ms-width 0.5s;

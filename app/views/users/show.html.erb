@@ -385,7 +385,7 @@
                     <%= f.label :invitee_id, 'User ID:'%>
                   </div>
                     <div class="col-sm-3">
-                      <%= f.number_field :invitee_id , { class: 'form-control', id: 'charge_per_hour', maxlength: "4", size: "4" }%>
+                      <%= f.number_field :invitee_id , { class: 'form-control', id: 'charge_per_hour', min: 1, maxlength: "4", size: "4" }%>
                     </div>
                     <div class="col-sm-2">
                       <%= f.submit 'Invite User', :class => 'btn btn-primary' %>
