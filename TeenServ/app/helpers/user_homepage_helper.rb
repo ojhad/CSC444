@@ -1,2 +1,0 @@
-module UserHomepageHelper
-end
