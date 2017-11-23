@@ -45,6 +45,7 @@ GEM
       rake (>= 10.4, < 13.0)
     arel (8.0.0)
     bcrypt (3.1.11)
+    bcrypt (3.1.11-x64-mingw32)
     bindex (0.5.0)
     bootstrap3-datetimepicker-rails (4.17.47)
       momentjs-rails (>= 2.8.1)
@@ -85,6 +86,7 @@ GEM
     faraday (0.13.1)
       multipart-post (>= 1.2, < 3)
     ffi (1.9.18)
+    ffi (1.9.18-x64-mingw32)
     font-awesome-rails (4.7.0.2)
       railties (>= 3.2, < 5.2)
     geocoder (1.4.4)
@@ -143,6 +145,8 @@ GEM
     nio4r (2.1.0)
     nokogiri (1.8.1)
       mini_portile2 (~> 2.3.0)
+    nokogiri (1.8.1-x64-mingw32)
+      mini_portile2 (~> 2.3.0)
     nokogiri-happymapper (0.6.0)
       nokogiri (~> 1.5)
     orm_adapter (0.5.0)
@@ -157,6 +161,7 @@ GEM
       multi_json (~> 1.0)
       xml-simple
     pg (0.21.0)
+    pg (0.21.0-x64-mingw32)
     pretender (0.3.1)
       actionpack
     public_suffix (3.0.1)
@@ -236,6 +241,8 @@ GEM
       railties (>= 3.1)
     tzinfo (1.2.4)
       thread_safe (~> 0.1)
+    tzinfo-data (1.2017.3)
+      tzinfo (>= 1.0.0)
     uglifier (3.2.0)
       execjs (>= 0.3.0, < 3)
     underscore-rails (1.8.3)
@@ -257,6 +264,7 @@ GEM
 
 PLATFORMS
   ruby
+  x64-mingw32
 
 DEPENDENCIES
   annotate
