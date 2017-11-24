@@ -2,7 +2,6 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 ready = ->
-  console.log("DOM is ready")
   class Notifications
     constructor: ->
       @currUser = $("[data-behavior='notifications']").attr("id")
@@ -42,8 +41,6 @@ ready = ->
       )
     handleSuccess: (data) =>
       count = 0
-      console.log(data);
-      console.log("RUNNING NOTIFICATIONS\n")
       currUserID = @currUser
       currUserID = $.trim(currUserID)
       items = $.map data, (notification) ->
