@@ -8,16 +8,16 @@ class User < ApplicationRecord
   has_many :reviews, :dependent => :destroy
   has_many :endorsements, :dependent => :destroy
   has_many :notifications, :dependent => :destroy
-  has_many :service_users
+  has_many :service_users, :dependent => :destroy
   has_many :payouts
-  has_one :payout_information
-  has_many :client_transactions, :class_name => 'Transaction', :foreign_key => 'client_id'
-  has_many :teen_transactions, :class_name => 'Transaction', :foreign_key => 'teen_id'
-  has_many :charges
-  has_many :teen_times
-  has_many :service_jobs, through: :service_users, source: :service
-  has_many :endorsement_requests, :class_name => 'EndorsementRequest', :foreign_key => 'user_id'
-  has_many :endorsement_invites, :class_name => 'EndorsementRequest', :foreign_key => 'invitee_id'
+  has_one :payout_information, :dependent => :destroy
+  has_many :client_transactions, :class_name => 'Transaction', :foreign_key => 'client_id', :dependent => :destroy
+  has_many :teen_transactions, :class_name => 'Transaction', :foreign_key => 'teen_id', :dependent => :destroy
+  has_many :charges, :dependent => :destroy
+  has_many :teen_times, :dependent => :destroy
+  has_many :service_jobs, through: :service_users, source: :service, :dependent => :destroy
+  has_many :endorsement_requests, :class_name => 'EndorsementRequest', :foreign_key => 'user_id', :dependent => :destroy
+  has_many :endorsement_invites, :class_name => 'EndorsementRequest', :foreign_key => 'invitee_id', :dependent => :destroy
 
   def full_name
     self.first_name + ' ' + self.last_name

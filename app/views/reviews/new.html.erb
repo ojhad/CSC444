@@ -10,7 +10,6 @@
 
   <title>Profile</title>
 
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 </head>
 
 <body>
@@ -19,7 +18,7 @@
     <%= f.hidden_field :user_id , :value=> @user.id %>
     <%= f.hidden_field :author_id , :value=> current_user.id %>
     <%= f.hidden_field :rating , :value=> 0 %>
-    <label class="control-label col-sm-2" for="review">Rating:</label>
+    <label class="control-label col-sm-2" for="review"><h4>Rating:</h4></label>
     <div class="stars">
       <%= f.radio_button(:rating, 1, class: 'star-1') %>
       <%= f.label :rating_1, nil, class: 'star-1'%>
@@ -40,9 +39,6 @@
     <%= f.submit 'Add', :id => "submit_id", :value => nil ,:class=>"btn btn-default"%>
 <% end %>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
 </body>
 
 </html>
