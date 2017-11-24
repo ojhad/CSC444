@@ -4,7 +4,7 @@ class NotificationsController < ApplicationController
   # GET /notifications
   # GET /notifications.json
   def index
-    @notifications = Notification.all
+    @notifications = Notification.all.order( 'created_at DESC' )
   end
 
   # GET /notifications/1
@@ -25,7 +25,6 @@ class NotificationsController < ApplicationController
   # POST /notifications.json
   def create
     @notification = Notification.new(notification_params)
-
     respond_to do |format|
       if @notification.save
         format.html { redirect_to @notification, notice: 'Notification was successfully created.' }
@@ -36,7 +35,11 @@ class NotificationsController < ApplicationController
       end
     end
   end
-
+  def mark_as_read
+    @notifications = Notification.where(user_id: current_user)
+    @notifications.update_all(updated_at: Time.zone.now, read: true)
+    render json: {success: true}
+  end
   # PATCH/PUT /notifications/1
   # PATCH/PUT /notifications/1.json
   def update

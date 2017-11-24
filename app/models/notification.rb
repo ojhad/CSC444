@@ -11,7 +11,7 @@ class Notification < ApplicationRecord
     Notification.where(user_id: user.id, read: false)
   end
 
-  def self.create_notification(user, title, reference_user=nil, reference_service=nil)
+  def self.create_notification(user, title, reference_user, reference_service)
     Notification.create(user_id: user.id, title: title, reference_user_id: reference_user.id, reference_service_id: reference_service.id)
   end
 end

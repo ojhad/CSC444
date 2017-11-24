@@ -110,7 +110,15 @@ AND B.start_time<='#{@service.start_time}' AND B.END_TIME>='#{@service.end_time}
 			#TODO: Return error if somehow user is trying to request their own service
 			puts "ERROR! Unexpected Service Behaviour!"
 			redirect_to (services_path)
-		else
+    else
+      @service.user.notifications.create title: "#{current_user.first_name} #{current_user.last_name} has requested you for #{@service.title}!",
+                                         reference_user_id: current_user.id,
+                                         reference_service_id: @service.id,
+                                         user_id: @service.user_id,
+                                         read: FALSE
+      #@service.user.notifications.create_notification(@service.user,
+       # "#{current_user.first_name} #{current_user.last_name} has requested you for #{@service.title}!",
+        #current_user, @service)
 			@service.service_users.create service_id: @service.id, user_id: current_user.id
 			redirect_to (services_path)
 		end

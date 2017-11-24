@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
 
 
-  resources :notifications
+  resources :notifications do
+    collection do
+      post :mark_as_read
+    end
+  end
   get 'search/search'
 
   get 'home/index'
