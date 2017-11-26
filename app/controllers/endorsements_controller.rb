@@ -8,8 +8,12 @@ before_action :find_user
   end
 
   def create
-    @review = Endorsement.new(endorsements_params)
-    if @review.save
+    @endorsement = Endorsement.new(endorsements_params)
+    if @endorsement.save
+      @user.notifications.create title: "#{current_user.first_name} #{current_user.last_name} has endorsed you!",
+                                   reference_user_id: current_user.id,
+                                   user_id: @user,
+                                   read: FALSE
       redirect_to(user_path(@user.id))
     else
       render :new

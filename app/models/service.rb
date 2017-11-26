@@ -22,6 +22,9 @@ class Service < ApplicationRecord
 	has_many :service_users, :dependent => :destroy
   has_many :transactions, :dependent => :destroy
 
+  #used for distance filtering purposes
+  attr_accessor :distance
+
 	validates :user_id, presence: true
 	validates :title, presence: true
 	validates :charge_per_hour, presence: true, numericality: { greater_than_or_equal_to: 0 }
@@ -38,6 +41,25 @@ class Service < ApplicationRecord
 			order("created_at DESC")
 		end
 	end
+
+	def get_address
+		self.postal_code
+  end
+
+  def has_other_title?
+    !self.other_title.empty?
+  end
+
+  #gets lat & long for service
+  geocoded_by :get_address
+
+  after_validation :geocode
+
+  acts_as_mappable :default_units => :kms,
+                   :default_formula => :sphere,
+                   :distance_field_name => :distance,
+                   :lat_column_name => :latitude,
+                   :lng_column_name => :longitude
 
 end
 
@@ -63,6 +85,15 @@ end
 #  start_time      :time
 #  end_time        :time
 #  day             :string
+#  address_1       :string
+#  address_2       :string
+#  city            :string
+#  province        :string
+#  postal_code     :string
+#  country         :string
+#  latitude        :float
+#  longitude       :float
+#  main_title      :string
 #
 # Indexes
 #

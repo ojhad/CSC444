@@ -4,10 +4,18 @@
     <div class="col-lg-8">
       <h1>Service Details</h1>
 
-      <h3><%= @service.title %></h3>
-      <p>Posted By: <%= @service.user.first_name + ' ' + @service.user.last_name %></p>
+      <h3><%= @service.main_title %></h3>
+      <hr>
+      <p><b>Posted By:</b> <a href="/users/<%=@service.user.id%>"><%= @service.user.first_name.capitalize + ' ' + @service.user.last_name.capitalize %></a></p>
+      <p><b>Description:</b> <%=@service.description%></p>
+      <p><b>Service skill required:</b> <%=@service.title%></p>
+      <% if @service.has_other_title? %>
+          <p><i>Skill type:</i> <%=@service.other_title%></p>
+      <%end%>
+      <p><b>Cost:</b> $<%= @service.charge_per_hour %>/hour</p>
+      <hr>
+      <p><b>Location:</b> <%=@service.city.upcase%>, <%=@service.province%></p>
       <br>
-      <p>Cost: <%= @service.charge_per_hour %>/hour</p>
 
       <% if @service.status == Service::UNLISTED && @service.user_id == current_user.id%>
           <div class="bottom_action_buttons_container">

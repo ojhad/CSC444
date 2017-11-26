@@ -11,12 +11,16 @@
 					<div class="row">
 				<% end %>
 					<div class="col-md-4">
-						<div class="card" style="width: 20rem;">
+						<div class="card" style="width: 25rem;">
 							<div class="card-body">
-								<h4 class="card-title"><%= s.title %></h4>
-								<h5 class="card-title">Posted By <%= s.user.full_name %></h5>
-								<p class="card-text">Cost <%= s.charge_per_hour %>/hour</p>
-								<p class="card-text">Frequency $<%= s.frequency %>/hour</p>
+								<h4 class="card-title"><%= s.main_title %></h4>
+                <br>
+                <p class="card-title">Posted By: <a href="/users/<%=s.user.id%>"><%= s.user.first_name.capitalize %> <%=s.user.last_name.capitalize%></a></p>
+								<p class="card-text">Cost: $<%= s.charge_per_hour %>/hour</p>
+                <p class="card-text">Skill: <%=s.title%></p>
+                <p class="card-text">Location: <%=s.city.capitalize%></p>
+                <p> Distance from me: <%=s.distance.round(2)%> kms</p>
+                <br>
 								<a href="/services/<%= s.id %>" class="btn btn-primary">More Details</a>
 							</div>
 						</div>

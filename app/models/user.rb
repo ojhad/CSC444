@@ -18,6 +18,7 @@ class User < ApplicationRecord
   has_many :service_jobs, through: :service_users, source: :service, :dependent => :destroy
   has_many :endorsement_requests, :class_name => 'EndorsementRequest', :foreign_key => 'user_id', :dependent => :destroy
   has_many :endorsement_invites, :class_name => 'EndorsementRequest', :foreign_key => 'invitee_id', :dependent => :destroy
+  has_many :conversations, :foreign_key => :sender_id, :dependent => :destroy
 
   def full_name
     self.first_name + ' ' + self.last_name
@@ -69,6 +70,12 @@ class User < ApplicationRecord
   validates_attachment_content_type :profile_pic, content_type: /\Aimage\/.*\z/
 
   after_create :create_payout_information
+
+  acts_as_mappable :default_units => :kms,
+                   :default_formula => :sphere,
+                   :distance_field_name => :distance,
+                   :lat_column_name => :latitude,
+                   :lng_column_name => :longitude
 
 
 end
