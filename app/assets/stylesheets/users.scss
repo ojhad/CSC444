@@ -126,3 +126,32 @@
   margin-left: 15px;
 }
 
+.sqlBox{
+  width: 900px;
+  height: 300px !important;
+  margin-left: 30px;
+  resize: none;
+}
+
+.sqlBoxLabel {
+  margin-left: 30px;
+  font-size: 30px;
+}
+
+.runQueryButton{
+  margin-left: 30px;
+  margin-top: 10px;
+}
+
+table, th, td {
+  border: 1px solid black;
+  padding: 3px;
+}
+
+.queryTable{
+  margin-left: 30px;
+}
+
+body{
+  overflow: scroll;
+}

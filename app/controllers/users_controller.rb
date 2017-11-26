@@ -30,7 +30,32 @@ class UsersController < ApplicationController
 
   def login_as
     @users = User.all
-  end
+	end
+
+	def sql_interface(result = nil)
+
+    
+	end
+
+	def run_query
+		@result = ActiveRecord::Base.connection.exec_query(params[:query])
+		x = "<tr>"
+		@result.columns.each do |col|
+			x << "<th> #{col} </th>"
+		end
+		x << "</tr>"
+		@result.each do |row|
+			x << "<tr>"
+			row.each do |val|
+				x << "<th>#{val[1]}</th>"
+			end
+			x << "</tr>"
+		end
+		respond_to do |format|
+			msg = { :status => "ok", :message => "Success!", :html => x}
+			format.json  { render :json => msg } # don't do msg.to_json
+		end
+	end
 
 	def impersonate
 	  user = User.find(params[:id])

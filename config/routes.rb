@@ -25,6 +25,8 @@ Rails.application.routes.draw do
     collection do
       post 'add_user'
       get 'login_as'
+      get 'sql_interface'
+      post 'run_query'
     end
     resources :reviews
     #resources :services

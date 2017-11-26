@@ -1,0 +1,30 @@
+<div class="form-group">
+    <label class="sqlBoxLabel">Enter SQL Query</label>
+    <textarea class="form-control input-lg sqlBox"></textarea>
+    <button class="btn btn-default runQueryButton">Run Query</button><br><br>
+    <table class="queryTable">
+    </table>
+</div>
+
+<script>
+    $(document).ready(function() {
+      $(".runQueryButton").click(function () {
+        $.ajax({
+            type: "POST",
+            url: "./run_query",
+            data: { query: $('.sqlBox').val() },
+            success: function(data){
+              if(data.html == "<tr></tr>"){
+                  $('.queryTable').html("");
+                  alert("Query ran successfully");
+              }else {
+                  $('.queryTable').html(data.html)
+              }
+            },
+            error: function(data){
+              alert("Error in Query");
+            }
+        });
+      });
+    });
+</script>

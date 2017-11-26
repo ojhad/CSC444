@@ -217,12 +217,12 @@ ActiveRecord::Schema.define(version: 20171126181449) do
     t.string "first_name"
     t.string "last_name"
     t.float "average_rating"
-    t.float "latitude"
-    t.float "longitude"
     t.string "profile_pic_file_name"
     t.string "profile_pic_content_type"
     t.integer "profile_pic_file_size"
     t.datetime "profile_pic_updated_at"
+    t.float "latitude"
+    t.float "longitude"
     t.string "stripe_id"
     t.float "balance", default: 0.0
     t.index ["email"], name: "index_users_on_email", unique: true
