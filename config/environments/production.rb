@@ -29,7 +29,7 @@ Rails.application.configure do
 
   config.cache_classes = true
   config.serve_static_assets = true
-  config.assets.digest = tru
+  config.assets.digest = true
 
   # Do not fallback to assets pipeline if a precompiled asset is missed.
   config.assets.compile = false
