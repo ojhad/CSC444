@@ -32,12 +32,14 @@ class UsersController < ApplicationController
     @users = User.all
 	end
 
-	def sql_interface
-
+	def sql_interface(result = nil)
+		@results = result
+		render sql_interface_users_path
 	end
 
 	def run_query
-
+		@result = ActiveRecord::Base.connection.exec_query(params.require(:user)[:query])
+		sql_interface(@result)
 	end
 
 	def impersonate

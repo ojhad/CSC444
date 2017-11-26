@@ -142,3 +142,16 @@
   margin-left: 30px;
   margin-top: 10px;
 }
+
+table, th, td {
+  border: 1px solid black;
+  padding: 3px;
+}
+
+.queryTable{
+  margin-left: 30px;
+}
+
+body{
+  overflow: scroll;
+}
