@@ -55,4 +55,7 @@ Rails.application.routes.draw do
   resources :teen_times
   resources :finances , only: [:index]
 
+  resources :conversations do
+    resources :messages
+  end
 end
