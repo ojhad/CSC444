@@ -1,7 +1,7 @@
 <div class="form-group">
-    <label class="sqlBoxLabel">Enter SQL Query</label>
+    <label class="sqlBoxLabel"><%= t :enterSqlQuery %></label>
     <textarea class="form-control input-lg sqlBox"></textarea>
-    <button class="btn btn-default runQueryButton">Run Query</button><br><br>
+    <button class="btn btn-default runQueryButton"><%= t :runQuery %></button><br><br>
     <table class="queryTable">
     </table>
 </div>
@@ -16,13 +16,13 @@
             success: function(data){
               if(data.html == "<tr></tr>"){
                   $('.queryTable').html("");
-                  alert("Query ran successfully");
+                  alert("<%= t :querySuccess %>");
               }else {
                   $('.queryTable').html(data.html)
               }
             },
             error: function(data){
-              alert("Error in Query");
+              alert("<%= t :queryError %>");
             }
         });
       });

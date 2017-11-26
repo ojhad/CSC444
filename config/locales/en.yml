@@ -31,3 +31,14 @@
 
 en:
   hello: "Hello world"
+  enterSqlQuery: "Enter SQL Query"
+  runQuery: "Run Query"
+  querySuccess: "Query ran successfully"
+  queryError: "Error in Query"
+
+fr:
+  enterSqlQuery: "Entrer une requête SQL"
+  runQuery: "Exécuter une requête"
+  querySuccess: "Requête exécutée avec succès"
+  queryError: "Erreur dans la requête"
+
