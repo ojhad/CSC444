@@ -34,7 +34,7 @@ class UsersController < ApplicationController
 
 	def sql_interface(result = nil)
 
-    
+
 	end
 
 	def run_query
