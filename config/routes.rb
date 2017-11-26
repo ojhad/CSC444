@@ -46,6 +46,7 @@ Rails.application.routes.draw do
       post 'add_request'
       post 'remove_request'
       post 'select_request'
+      post 'submit_timesheet'
     end
   end
 
