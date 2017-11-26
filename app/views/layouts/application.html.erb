@@ -116,6 +116,9 @@
                   <li><%= link_to "View Job Postings", services_path%></li>
                   <% if current_user.is_sadmin? %>
                     <li><%= link_to "Add User", new_user_path%></li>
+                    <li><%= link_to "SQL Interface", sql_interface_users_path%></li>
+                  <% end %>
+                  <% if current_user.is_admin? %>
                     <li><%= link_to "Login as", login_as_users_path%></li>
                   <% end %>
                   <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>

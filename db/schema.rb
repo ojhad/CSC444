@@ -83,9 +83,7 @@ ActiveRecord::Schema.define(version: 20171122025448) do
     t.string "batch_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "user_id"
     t.string "method"
-    t.index ["user_id"], name: "index_payouts_on_user_id"
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -192,12 +190,12 @@ ActiveRecord::Schema.define(version: 20171122025448) do
     t.string "first_name"
     t.string "last_name"
     t.float "average_rating"
-    t.float "latitude"
-    t.float "longitude"
     t.string "profile_pic_file_name"
     t.string "profile_pic_content_type"
     t.integer "profile_pic_file_size"
     t.datetime "profile_pic_updated_at"
+    t.float "latitude"
+    t.float "longitude"
     t.string "stripe_id"
     t.float "balance", default: 0.0
     t.index ["email"], name: "index_users_on_email", unique: true
@@ -212,7 +210,6 @@ ActiveRecord::Schema.define(version: 20171122025448) do
   add_foreign_key "notifications", "users"
   add_foreign_key "notifications", "users", column: "reference_user_id"
   add_foreign_key "payout_informations", "users"
-  add_foreign_key "payouts", "users"
   add_foreign_key "reviews", "users"
   add_foreign_key "service_users", "services"
   add_foreign_key "service_users", "users"

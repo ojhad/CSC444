@@ -30,7 +30,11 @@ class UsersController < ApplicationController
 
   def login_as
     @users = User.all
-  end
+	end
+
+	def sql_interface
+
+	end
 
 	def impersonate
 	  user = User.find(params[:id])
