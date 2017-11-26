@@ -120,8 +120,8 @@ ActiveRecord::Schema.define(version: 20171125231433) do
     t.string "other_title"
     t.string "description"
     t.integer "skill"
+    t.datetime "date"
     t.decimal "duration"
-    t.time "date"
     t.time "start_time"
     t.time "end_time"
     t.string "day"
@@ -171,8 +171,6 @@ ActiveRecord::Schema.define(version: 20171125231433) do
     t.bigint "skill_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["skill_id"], name: "index_user_skills_on_skill_id"
-    t.index ["user_id"], name: "index_user_skills_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

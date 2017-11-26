@@ -28,6 +28,15 @@ end
 #  start_time      :time
 #  end_time        :time
 #  day             :string
+#  address_1       :string
+#  address_2       :string
+#  city            :string
+#  province        :string
+#  postal_code     :string
+#  country         :string
+#  latitude        :float
+#  longitude       :float
+#  main_title      :string
 #
 # Indexes
 #
