@@ -33,8 +33,8 @@ class UsersController < ApplicationController
 	end
 
 	def sql_interface(result = nil)
-		#@results = result
-		#render sql_interface_users_path
+
+    
 	end
 
 	def run_query

@@ -1,27 +1,3 @@
-<!--<div class="form-group">
-  <%=  form_for :user, :url => url_for(:controller => 'users', :action => 'run_query') do |f| %>
-    <%= f.label :query, 'Enter SQL Query', class: 'sqlBoxLabel' %>
-    <%= f.text_area :query, class: 'form-control input-lg sqlBox' %>
-    <button type="submit" class="btn btn-default runQueryButton">Run Query</button><br><br>
-    <% if @results %>
-      <table class="queryTable">
-        <tr>
-          <% @results.columns.each do |col| %>
-            <th><%= col %></th>
-          <% end %>
-        </tr>
-        <% @results.each do |row| %>
-          <tr>
-            <% row.each do |val| %>
-              <th><%= val[1] %></th>
-            <% end %>
-          </tr>
-        <% end %>
-      </table>
-    <% end %>
-  <% end %>
-</div>-->
-
 <div class="form-group">
     <label class="sqlBoxLabel">Enter SQL Query</label>
     <textarea class="form-control input-lg sqlBox"></textarea>
@@ -38,10 +14,15 @@
             url: "./run_query",
             data: { query: $('.sqlBox').val() },
             success: function(data){
-              $('.queryTable').html(data.html)
+              if(data.html == "<tr></tr>"){
+                  $('.queryTable').html("");
+                  alert("Query ran successfully");
+              }else {
+                  $('.queryTable').html(data.html)
+              }
             },
             error: function(data){
-
+              alert("Error in Query");
             }
         });
       });
