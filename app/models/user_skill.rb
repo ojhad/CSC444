@@ -11,3 +11,8 @@ end
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
+# Indexes
+#
+#  index_user_skills_on_skill_id  (skill_id)
+#  index_user_skills_on_user_id   (user_id)
+#

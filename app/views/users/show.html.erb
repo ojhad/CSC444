@@ -214,6 +214,17 @@
                     <%else%>
                         <h5> None of your services have been accepted yet </h5>
                     <%end%>
+                    <h4><i class="fa fa-cog fa-spin" aria-hidden="true"></i> Pending Completion Services</h4>
+                    <% if @user.services.status(Service::PENDING).count != 0 %>
+                        <% @user.services.status(Service::PENDING).each do |service| %>
+                            <p>Service: <%= service.title %></p>
+                            <p>Charge: $<%= service.charge_per_hour %> per hour</p>
+                            <%= link_to "View", service_path(service), :class => 'btn btn-primary' %>
+                            <%= link_to "Review Timesheet", service_path(service), :class => 'btn btn-success' %>
+                        <%end%>
+                    <%else%>
+                        <h5> There are no services pending completion. </h5>
+                    <%end%>
                 <%end%>
               </div>
               <% if @user.id ==  current_user.id%>

@@ -10,7 +10,8 @@ class Service < ApplicationRecord
 	UNLISTED = 0 # service not yet publicly visible
 	LISTED = 1 # service posted, publicly visible, and accepting user requests
 	ACCEPTED = 2 # service accepted by both users and no longer visible to the public
-	COMPLETED = 3 # service has been completed and money has exchanged hands
+	PENDING = 3 # user has submitted timesheet, waiting on client approval
+	COMPLETED = 4 # service has been completed and money has exchanged hands
 	# Status Options Constants End
 
 	SERVICE_TYPES = ["Babysitting", "Yard work", "Snow shoveling", "Furniture moving",
@@ -30,7 +31,7 @@ class Service < ApplicationRecord
 	validates :min_age, presence: true, numericality: { greater_than_or_equal_to: 13 }
 	validates :min_age, presence: true, :numericality => {less_than_or_equal_to: :max_age, :message => "can't be greater than Max Age"}
 	validates :max_age, presence: true, numericality: { greater_than_or_equal_to: 13, less_than_or_equal_to: 19 }
-	validates :status, presence: true, inclusion: { in: [UNLISTED, LISTED, ACCEPTED, COMPLETED], 
+	validates :status, presence: true, inclusion: { in: [UNLISTED, LISTED, ACCEPTED, PENDING, COMPLETED],
 													message: "-- Oops something went wrong! Please try again or contact customer support." }
 
 	def self.search(search_term)

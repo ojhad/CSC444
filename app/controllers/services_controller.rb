@@ -186,6 +186,14 @@ AND B.start_time<='#{@service.start_time}' AND B.END_TIME>='#{@service.end_time}
 		redirect_to (@service)
 	end
 
+	# User wants to submit timesheet for service
+	# TODO: Make sure timesheet is created and valid before changing service status
+	def submit_timesheet
+		@service = Service.find(params[:id])
+		@service.update({:status => Service::PENDING});
+		redirect_to (@service)
+	end
+
 	# PRIVATE METHODS BEGIN HERE
 	private 
 
