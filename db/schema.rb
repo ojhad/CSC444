@@ -83,7 +83,9 @@ ActiveRecord::Schema.define(version: 20171122025448) do
     t.string "batch_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id"
     t.string "method"
+    t.index ["user_id"], name: "index_payouts_on_user_id"
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -160,6 +162,8 @@ ActiveRecord::Schema.define(version: 20171122025448) do
     t.bigint "skill_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["skill_id"], name: "index_user_skills_on_skill_id"
+    t.index ["user_id"], name: "index_user_skills_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -208,6 +212,7 @@ ActiveRecord::Schema.define(version: 20171122025448) do
   add_foreign_key "notifications", "users"
   add_foreign_key "notifications", "users", column: "reference_user_id"
   add_foreign_key "payout_informations", "users"
+  add_foreign_key "payouts", "users"
   add_foreign_key "reviews", "users"
   add_foreign_key "service_users", "services"
   add_foreign_key "service_users", "users"
