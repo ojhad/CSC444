@@ -85,6 +85,7 @@
   font-size: 14px;
 }
 .dropdown-footer {
+  font-size: 30px;
   padding: 5px 20px;
   border-top: 1px solid #ccc;
   border-top: 1px solid rgba(0, 0, 0, 0.15);
@@ -340,31 +341,6 @@ $primary-font: 'Lato';
         display: inline-block;
         padding: 13px 20px;
         @include list-border;
-      }
-    }
-    .search-box{
-      position: relative;
-      display: inline;
-      .search-icon{
-        position: absolute;
-        top: 2px;
-        left: 8px;
-        font-size: 18px;
-        color: $primary-blue;
-      }
-      input{
-        background: $secondary-blue;
-        box-shadow: none;
-        border: 0;
-        width: 130px;
-        padding: 8px 10px 8px 30px;
-        border-radius: 30px;
-        color: $fg-gray;
-        font-size: 14px;
-        font-weight: bold;
-        &:focus{
-          outline: 0;
-        }
       }
     }
     .dropdowns-wrapper{
