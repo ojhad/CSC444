@@ -10,6 +10,10 @@ class EndorsementRequestsController < ApplicationController
     else
       @request = EndorsementRequest.new(request_params)
       if @request.save
+        invitee.notifications.create title: "#{@user.first_name} #{@user.last_name} has requested you to endorse them!",
+                                           reference_user_id: @user.id,
+                                           user_id: invitee,
+                                           read: FALSE
         redirect_to(user_path(@user.id))
         flash[:notice] = 'Sent Invite'
       else
