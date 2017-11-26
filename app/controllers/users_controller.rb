@@ -36,6 +36,10 @@ class UsersController < ApplicationController
 
 	end
 
+	def run_query
+
+	end
+
 	def impersonate
 	  user = User.find(params[:id])
 		impersonate_user(user)

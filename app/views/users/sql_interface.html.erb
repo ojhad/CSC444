@@ -1,0 +1,7 @@
+<div class="form-group">
+  <%=  form_for :user, :url => url_for(:controller => 'users', :action => 'run_query') do |f| %>
+    <%= f.label :query, 'Enter SQL Query', class: 'sqlBoxLabel' %>
+    <%= f.text_area :query, class: 'form-control input-lg sqlBox' %>
+    <button type="submit" class="btn btn-default runQueryButton">Run Query</button>
+  <% end %>
+</div>
