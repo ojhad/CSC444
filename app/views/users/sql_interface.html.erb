@@ -1,4 +1,4 @@
-<div class="form-group">
+<!--<div class="form-group">
   <%=  form_for :user, :url => url_for(:controller => 'users', :action => 'run_query') do |f| %>
     <%= f.label :query, 'Enter SQL Query', class: 'sqlBoxLabel' %>
     <%= f.text_area :query, class: 'form-control input-lg sqlBox' %>
@@ -20,4 +20,30 @@
       </table>
     <% end %>
   <% end %>
+</div>-->
+
+<div class="form-group">
+    <label class="sqlBoxLabel">Enter SQL Query</label>
+    <textarea class="form-control input-lg sqlBox"></textarea>
+    <button class="btn btn-default runQueryButton">Run Query</button><br><br>
+    <table class="queryTable">
+    </table>
 </div>
+
+<script>
+    $(document).ready(function() {
+      $(".runQueryButton").click(function () {
+        $.ajax({
+            type: "POST",
+            url: "./run_query",
+            data: { query: $('.sqlBox').val() },
+            success: function(data){
+              $('.queryTable').html(data.html)
+            },
+            error: function(data){
+
+            }
+        });
+      });
+    });
+</script>

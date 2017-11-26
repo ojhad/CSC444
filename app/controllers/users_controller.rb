@@ -33,13 +33,28 @@ class UsersController < ApplicationController
 	end
 
 	def sql_interface(result = nil)
-		@results = result
-		render sql_interface_users_path
+		#@results = result
+		#render sql_interface_users_path
 	end
 
 	def run_query
-		@result = ActiveRecord::Base.connection.exec_query(params.require(:user)[:query])
-		sql_interface(@result)
+		@result = ActiveRecord::Base.connection.exec_query(params[:query])
+		x = "<tr>"
+		@result.columns.each do |col|
+			x << "<th> #{col} </th>"
+		end
+		x << "</tr>"
+		@result.each do |row|
+			x << "<tr>"
+			row.each do |val|
+				x << "<th>#{val[1]}</th>"
+			end
+			x << "</tr>"
+		end
+		respond_to do |format|
+			msg = { :status => "ok", :message => "Success!", :html => x}
+			format.json  { render :json => msg } # don't do msg.to_json
+		end
 	end
 
 	def impersonate
