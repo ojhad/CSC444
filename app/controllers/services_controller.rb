@@ -4,7 +4,16 @@ class ServicesController < ApplicationController
 
 	def index
 		@services = Service.status(Service::LISTED).viewable_services(current_user)
-	end
+
+    @user = User.find(current_user.id)
+
+    #Store distance of service to the location of the current user
+    @services.each do |s|
+      distance = s.distance_from(@user, :units=>:kms)
+      s.distance = distance
+    end
+
+  end
 
 	def show
 		@service = Service.find(params[:id])
@@ -42,6 +51,17 @@ AND B.start_time<='#{@service.start_time}' AND B.END_TIME>='#{@service.end_time}
 	end
 	def create
 		@service = Service.new(service_params)
+
+    if @service.address_1.blank?
+      @user = User.find(current_user.id)
+      @service.address_1 = @user.address_1
+      @service.address_2 = @user.address_2
+      @service.city = @user.city
+      @service.country = @user.country
+      @service.province = @user.province
+      @service.postal_code = @user.postal_code
+      @service.save!
+    end
 
 		if @service.title != "Other"
 			@service.other_title = ""
@@ -170,8 +190,9 @@ AND B.start_time<='#{@service.start_time}' AND B.END_TIME>='#{@service.end_time}
 	private 
 
 	def service_params
-   		params.require(:service).permit(:user_id,:title,:other_title,:charge_per_hour,:user_type,:frequency,
-   										:min_age,:max_age,:status,:description,:skill,:date,:day,:duration,:start_time,:end_time)
+   		params.require(:service).permit(:user_id,:main_title,:title,:other_title,:charge_per_hour,:user_type,:frequency,
+   										:min_age,:max_age,:status,:description,:skill,:date,:day,:duration,:start_time,:end_time,:address_1,
+											:address_2,:city,:province,:country,:postal_code)
 	end
 
 	def find_user

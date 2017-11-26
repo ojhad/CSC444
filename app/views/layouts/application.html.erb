@@ -108,12 +108,20 @@
                 </div>
               </li>
               <li class="dropdown">
+                <%= link_to("#", :class=>"dropdown-toggle", "data-toggle" =>"dropdown", :role => "button", "aria-expanded" => "false") do %> Services <span class="caret"></span>
+                <% end %>
+                <ul class="dropdown-menu">
+                  <% if !@user.nil? && @user.is_client?%>
+                      <li><%= link_to "Create New Service", new_service_path%></li>
+                  <%end%>
+                  <li><%= link_to "View Service Postings", services_path%></li>
+                </ul>
+              </li>
+              <li class="dropdown">
                 <%= link_to("#", :class=>"dropdown-toggle", "data-toggle" =>"dropdown", :role => "button", "aria-expanded" => "false") do %> My Account <span class="caret"></span>
                   <% end %>
                 <ul class="dropdown-menu">
                   <li><%= link_to "View Profile", user_path(current_user)%></li>
-                  <li><%= link_to "Create New Job", new_service_path%></li>
-                  <li><%= link_to "View Job Postings", services_path%></li>
                   <% if current_user.is_sadmin? %>
                     <li><%= link_to "Add User", new_user_path%></li>
                     <li><%= link_to "Login as", login_as_users_path%></li>

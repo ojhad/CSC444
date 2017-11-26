@@ -3,7 +3,7 @@
     <div class="card-signIn contact-us"></div>
       <div class="card-signIn contact-us">
 
-      <h1 class="title">Create a Job Posting</h1>
+      <h1 class="title">New Service Posting</h1>
 
       <%= form_for :service, :url => services_path(current_user.id) do |f| %>
         <% if @service.errors.any? %>
@@ -20,26 +20,31 @@
         <%= f.hidden_field :date, :id => "service_date_time_field_hidden"%>
       	
        	<div class="input-container">
+          <%= f.label :main_title, "Title of posting", class: 'control-label'%>
+          <%= f.text_field :main_title, placeholder: 'Catchy title goes here', class: 'form-control'%>
+        </div>
+
+        <div class="input-container">
           <%= f.label :title, "Please select service type", class: 'control-label'%>
           <%= f.select :title, Service::SERVICE_TYPES, {}, :id => "main_category_id", class: 'form-control'%>
         </div>
 
         <div id = "other-div" class="input-container" style = "display:none;">
-          <%= f.label :other_title, "Specify a short title for your service", class: 'control-label'%>
+          <%= f.label :other_title, "Provide service type if not listed", class: 'control-label'%>
           <div id = "other-task-id">
-            <%= f.text_field :other_title, placeholder: "One word title for the service", class: "form-control"%>
+            <%= f.text_field :other_title, placeholder: "One word description for the service type", class: "form-control"%>
           </div>
         </div>
 
           <%=f.hidden_field :skill ,:value=>'1' %>
 
         <div class="input-container">
-          <%= f.label :description, "Please describe the job in more detail", class: 'control-label'%>
-          <%= f.text_area :description, placeholder: "Job description, extra details, etc." , class: 'form-control service_text_area' %>
+          <%= f.label :description, "Please describe the service in more detail", class: 'control-label'%>
+          <%= f.text_area :description, placeholder: "Service description, extra details, etc." , class: 'form-control service_text_area' %>
         </div>
 
         <div class="input-container">
-          <%= f.label :charge_per_hour, "How much do you want to pay per hour?", class: 'control-label'%>
+          <%= f.label :charge_per_hour, "How much do you want to charge per hour?", class: 'control-label'%>
           <%= f.text_field :charge_per_hour, placeholder: "Charge per hour in dollars", class: "form-control" %>
         </div>
 
@@ -55,6 +60,41 @@
           <%= f.number_field :max_age, placeholder: "e.g. 19", class: "form-control"%>
         </div>
 
+        <div class = "input-container">
+          <label> Location of Service</label>
+          Same as my address<input type="radio" class="ServiceAddress" name="address" value="same" id="sameradio">
+          Different <input type="radio" class="ServiceAddress" name="address" value="different" id="differentradio">
+        </div>
+
+        <div id="address" hidden>
+          <div class="input-container">
+            <%= f.label :address_1, "Street Address", class: 'control-label'%>
+            <%= f.text_field :address_1, class: "form-control"%>
+          </div>
+          <div class="input-container">
+            <%= f.label :address_2, "Apt/Unit number", class: 'control-label'%>
+            <%= f.text_field :address_2, class: "form-control"%>
+          </div>
+          <div class="input-container">
+            <%= f.label :city, "City", class: 'control-label'%>
+            <%= f.text_field :city, class: "form-control"%>
+          </div>
+          <div class="input-container">
+            <%= f.label :province, "Province/Territory", class: 'control-label'%>
+            <%= f.select :province, [ ['Alberta','AB'],['British Columbia','BC'],['Manitoba','MB'],['New Brunswich','NB'],
+                                      ['Newfoundland and Labrador','NL'],['Nova Scotia','NS'],['Ontario','ON'],['Prince Edward Island','PE'],
+                                      ['Quebec','QC'],['Saskatchewan','SK'],['Northwest Territories','NT'],
+                                      ['Nunavut','NU'],['Yukon','YT']], {:prompt => 'Select One'} , {:class => "form-control"}%>
+          </div>
+          <div class="input-container">
+            <%= f.label :postal_code, "Postal Code", class: 'control-label'%>
+            <%= f.text_field :postal_code, class: "form-control"%>
+          </div>
+          <div class="input-container">
+            <%= f.label :country, "Country", class: 'control-label'%>
+            <%= f.text_field :country, class: "form-control"%>
+          </div>
+        </div>
         <!-- Set the service start date -->
         <!-- TODO: Add date format validation -->
         <div class="input-container">
@@ -107,6 +147,17 @@
   var submitAndList = document.getElementById("submit_create_list_button")
   var frequencyInputDiv= document.getElementById("service_freq_input_div");
   var frequencyInputField = document.getElementById("service_freq_input_field");
+
+  $(".ServiceAddress").change(function(){
+      switch($(this).val()) {
+          case 'same' :
+              $('#address').hide()
+              break;
+          case 'different' :
+              $('#address').show()
+              break;
+      }
+  })
 
   /* Logic for frequency toggle */
   frequencyToggle = () => {

@@ -76,5 +76,6 @@ gem 'os'
 gem 'wicked'
 gem 'pretender'
 gem 'rails_12factor'
+gem 'geokit-rails'
 
 
