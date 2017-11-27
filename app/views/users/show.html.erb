@@ -364,6 +364,7 @@
 					        <% end %>
 
 					        <%= f.hidden_field :sender_id , :value=>current_user.id %>
+					        <%= f.hidden_field :user_id , :value=>current_user.id %>
 					        <%= f.hidden_field :recipient_id , :value=>@user.id %>
 
 					        <div class="input-container">
