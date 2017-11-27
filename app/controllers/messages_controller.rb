@@ -1,8 +1,8 @@
 class MessagesController < ApplicationController
   before_action do
-    conversation_id = params && params[:conversation_id] || params[:message][:conversation_id]
-    sender_id = params && params[:sender_id] || params[:message][:sender_id]
-    recipient_id = params && params[:recipient_id] || params[:message][:recipient_id]
+    conversation_id = params[:conversation_id] || params[:message] && params[:message][:conversation_id]
+    sender_id = params && params[:sender_id] || params[:message] && params[:message][:sender_id]
+    recipient_id = params && params[:recipient_id] || params[:message] && params[:message][:recipient_id]
     puts sender_id
     puts recipient_id
     if not conversation_id
