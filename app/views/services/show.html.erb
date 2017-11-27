@@ -55,7 +55,7 @@
                               data: {title: 'Unlist Service' , confirm: 'Are you sure you want to unlist this service? Performing this action will delete all current requests.'}, :class => 'btn btn-danger' %>
               </div>
               <!-- Only render the request button if user is not of same group -->
-          <% elsif @service.user.group != current_user.group %>
+          <% elsif @user.is_teen?%>
               <% if @service.service_users.exists?(:user_id => current_user.id) %>
                   <%= button_to 'Remove Request', remove_request_service_path, method: :post, :class => 'btn btn-danger' %>
               <% else %>
@@ -85,7 +85,7 @@
           <% end %>
       <% end %>
     </div>
-    <%if @user.is_client?%>
+    <%if @user.is_client? && @service.user.id==@user.id%>
         <div class="col-lg-4">
           <h2>Available teenagers</h2>
           <br>
