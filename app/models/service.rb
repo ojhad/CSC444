@@ -21,7 +21,7 @@ class Service < ApplicationRecord
 	belongs_to :user
 	has_many :service_users, :dependent => :destroy
   has_many :transactions, :dependent => :destroy
-
+	has_many :notifications, :foreign_key => :reference_service_id, :dependent => :destroy
   #used for distance filtering purposes
   attr_accessor :distance
 
