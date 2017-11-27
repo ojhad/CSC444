@@ -44,7 +44,7 @@
 	      <% else %>
 		      <div class="btn-group" role="group">
 			      <button type="button" id="message" class="btn btn-default" data-toggle="tab"><span class="fa fa-inbox" aria-hidden="true"></span>
-				      <div class="hidden-xs">Send Message</div>
+				      <div class="hidden-xs"><%= t :sendAMessage %></div>
 			      </button>
 		      </div>
         <%end%>
@@ -393,7 +393,7 @@
         <div class="tab-pane primary fade in well" id="messagingTab">
           <div class="container">
             <div class="row">
-              <p>Message <%= @user.first_name%> <%= @user.last_name%></p>
+              <p><%= t :message %> <%= @user.first_name%> <%= @user.last_name%></p>
               <%= form_for @message do |f| %>
                   <% if @message.errors.any? %>
                       <% @message.errors.full_messages.each do |message| %>
@@ -412,7 +412,7 @@
 
                   <div class="button-container create-message">
                     <div class="col-sm-8 col-sm-offset-2 text-center">
-                      <%= f.submit "Send Message", :id => "submit_create_button", class: "btn btn-default btn-primary"%>
+                      <%= f.submit t('send'), :id => "submit_create_button", class: "btn btn-default btn-primary"%>
                     </div>
                   </div>
               <% end %>

@@ -69,6 +69,9 @@ en:
   privacyPolicy: "Privacy Policy"
   createNewService: "Create New Service"
   viewServicePosting: "View Service Postings"
+  message: "Message"
+  send: "Send"
+  sendAMessage: "Send Message"
 
 fr:
   enterSqlQuery: "Entrer une requête SQL"
@@ -109,3 +112,6 @@ fr:
   privacyPolicy: "Politique de confidentialité"
   createNewService: "Créer un nouveau service"
   viewServicePosting: "Afficher les affichages de service"
+  message: "Message"
+  send: "Envoyer"
+  sendAMessage: "Envoyer le Message"
