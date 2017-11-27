@@ -1,6 +1,20 @@
-class ConversationsController < ApplicationController
+class MessagesController < ApplicationController
   before_action do
-    @conversation = Conversation.find(params[:conversation_id])
+    conversation_id = params[:conversation_id] || params[:message][:conversation_id]
+    sender_id = params[:sender_id] || params[:message][:sender_id]
+    recipient_id = params[:recipient_id] || params[:message][:recipient_id]
+    puts sender_id
+    puts recipient_id
+    if not conversation_id
+      conversation = Conversation.between(sender_id, recipient_id)
+      if conversation.present?
+        @conversation = conversation_id.first
+      else
+        @conversation = Conversation.create({sender_id: sender_id, recipient_id: recipient_id})
+      end
+    else
+      @conversation = Conversation.find(params[:conversation_id])
+    end
   end
 
   def index
@@ -22,7 +36,8 @@ class ConversationsController < ApplicationController
   end
 
   def new
-    @message = @conversation.messages.new
+    puts "NIGGA WE MADE IT"
+    # @message = @conversation.messages.new
   end
 
   def create

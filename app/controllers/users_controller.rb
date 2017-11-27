@@ -12,6 +12,7 @@ class UsersController < ApplicationController
           WHEN day = 'Saturday' THEN 6
 					WHEN day = 'Sunday' THEN 7
      END ASC").uniq{|time| time.day }
+		@message = Message.new
 	end
 
 	def new

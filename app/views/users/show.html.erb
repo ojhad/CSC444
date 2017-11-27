@@ -29,11 +29,17 @@
           </button>
         </div>
         <% if @user.id==current_user.id || current_user.is_CSR? %>
-        <div class="btn-group" role="group">
-          <button type="button" id="billing" class="btn btn-default" data-toggle="tab"><span class="fa fa-dollar" aria-hidden="true"></span>
-            <div class="hidden-xs">Billing & Payments</div>
-          </button>
-        </div>
+	        <div class="btn-group" role="group">
+	          <button type="button" id="billing" class="btn btn-default" data-toggle="tab"><span class="fa fa-dollar" aria-hidden="true"></span>
+	            <div class="hidden-xs">Billing & Payments</div>
+	          </button>
+	        </div>
+	      <% else %>
+		      <div class="btn-group" role="group">
+			      <button type="button" id="message" class="btn btn-default" data-toggle="tab"><span class="fa fa-inbox" aria-hidden="true"></span>
+				      <div class="hidden-xs">Send Message</div>
+			      </button>
+		      </div>
         <%end%>
       </div>
 
@@ -343,9 +349,37 @@
                 <%else%>
                 <%end%>
               </div>
+            </div>
           </div>
         </div>
-      </div>
+        <div class="tab-pane primary fade in well" id="messagingTab">
+	        <div class="container">
+		        <div class="row">
+			        <p>Message <%= @user.first_name%> <%= @user.last_name%></p>
+			        <%= form_for @message do |f| %>
+					        <% if @message.errors.any? %>
+							        <% @message.errors.full_messages.each do |message| %>
+									        <div class = "alert alert-danger"><%=message %></div>
+							        <% end %>
+					        <% end %>
+
+					        <%= f.hidden_field :sender_id , :value=>current_user.id %>
+					        <%= f.hidden_field :recipient_id , :value=>@user.id %>
+
+					        <div class="input-container">
+						        <label for="body">Message:</label>
+						        <%= f.text_area :body, class: 'form-control', rows: "6", style: "width: 95%;"%>
+					        </div>
+
+					        <div class="button-container create-message">
+						        <div class="col-sm-8 col-sm-offset-2 text-center">
+							        <%= f.submit "Send Message", :id => "submit_create_button", class: "btn btn-default btn-primary"%>
+						        </div>
+					        </div>
+			        <% end %>
+		        </div>
+	        </div>
+        </div>
     </div>
     <div class="tab-content">
       <div class="tab-pane fade in well secondary" id="review_reviewsTab">
@@ -466,6 +500,9 @@
                     break;
                 case 'billing':
                     $('#billingTab').addClass('active');
+                    break;
+		            case 'message':
+                    $('#messagingTab').addClass('active');
                     break;
             }
         });
