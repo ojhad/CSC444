@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171127003259) do
+ActiveRecord::Schema.define(version: 20171127145915) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -113,6 +113,8 @@ ActiveRecord::Schema.define(version: 20171127003259) do
     t.bigint "user_id"
     t.float "rating", default: 5.0
     t.integer "author_id"
+    t.bigint "skill_id"
+    t.index ["skill_id"], name: "index_reviews_on_skill_id"
     t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
@@ -213,14 +215,6 @@ ActiveRecord::Schema.define(version: 20171127003259) do
     t.string "home_number"
     t.string "mobile_number"
     t.integer "age"
-    t.string "image_file_name"
-    t.string "image_content_type"
-    t.integer "image_file_size"
-    t.datetime "image_updated_at"
-    t.string "profile_picture_file_name"
-    t.string "profile_picture_content_type"
-    t.integer "profile_picture_file_size"
-    t.datetime "profile_picture_updated_at"
     t.integer "group"
     t.string "first_name"
     t.string "last_name"
@@ -247,6 +241,7 @@ ActiveRecord::Schema.define(version: 20171127003259) do
   add_foreign_key "notifications", "users"
   add_foreign_key "notifications", "users", column: "reference_user_id"
   add_foreign_key "payout_informations", "users"
+  add_foreign_key "reviews", "skills"
   add_foreign_key "reviews", "users"
   add_foreign_key "service_users", "services"
   add_foreign_key "service_users", "users"
