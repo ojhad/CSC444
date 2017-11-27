@@ -2,9 +2,9 @@
 <div id = "header" class = "header-div">
     <header class="header-intro">
         <div class="container-intro">
-			<h1 id = "welcome-tag">Welcome to TeenServ!</h1>
-			<h3 id = "welcome-description-1">A fast and easy way to get tasks done</h3>
-			<h4 id = "welcome-description-2">Simply post what you need to get done and get in touch with TeenServers to get help</h4>
+			<h1 id = "welcome-tag"><%= t :welcome %></h1>
+			<h3 id = "welcome-description-1"><%= t :fastTask %></h3>
+			<h4 id = "welcome-description-2"><%= t :fastDes %></h4>
 		</div>
 		<div class = "container-svg">
 				<%= image_tag "001-gardening-shovel-tool-shape.svg", :size => "80x80", :class => "shovel-svg"%>
@@ -19,15 +19,15 @@
 </div>
 
 <div class = "container-how-it-works">
-	<h3 id = "title-how-it-works">How it works</h3>
+	<h3 id = "title-how-it-works"><%= t :howItWorks %></h3>
 
 	<div class = "how-it-works-1">
 		<div class = "col-md-6">
 			<%= image_tag "008-sign-up.svg", :size => "200x200", :class => "sign-up-svg"%>
 		</div>
 		<div class = "col-md-6">
-			<h4 class = "col-heading">1. Sign up with us</h4>
-			<p class = "col-paragraph">We promise it's really simple. If you're a teenager, customize your profile by adding what tasks you would like to do.</p>
+			<h4 class = "col-heading">1. <%= t :SignUpWithUs %></h4>
+			<p class = "col-paragraph"><%= t :SignUpDes %></p>
 		</div>
 	</div>
 
@@ -36,8 +36,8 @@
 			<%= image_tag "009-calendar.svg", :size => "200x200", :class => "calendar-svg"%>
 		</div>
 		<div class = "col-md-6">
-			<h4 class = "col-heading">2. Describe what you want to get done</h4>
-			<p class = "col-paragraph">If you're a client, simply list details about what you want to get done and get automatically contacted by a teenager who is interested.</p>
+			<h4 class = "col-heading">2. <%= t :describeHome %></h4>
+			<p class = "col-paragraph"><%= t :describeDes %></p>
 		</div>
 	</div>
 
@@ -46,8 +46,8 @@
 			<%= image_tag "010-checklist-done.svg", :size => "200x200", :class => "checklist-done-svg"%>
 		</div>
 		<div class = "col-md-6">
-			<h4 class = "col-heading">3. Get the task done</h4>
-			<p class = "col-paragraph">The TeenServer will arrive at your location and get the task done. Payments are carried out through our app. Don't forget to leave a review!</p>
+			<h4 class = "col-heading">3. <%= t :taskDoneHome %></h4>
+			<p class = "col-paragraph"><%= t :taskDoneDes %></p>
 		</div>
 	</div>
 </div>
