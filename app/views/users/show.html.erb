@@ -36,11 +36,17 @@
           </button>
         </div>
         <% if @user.id==current_user.id || current_user.is_CSR? %>
-            <div class="btn-group" role="group">
-              <button type="button" id="billing" class="btn btn-default" data-toggle="tab"><span class="fa fa-dollar" aria-hidden="true"></span>
-                <div class="hidden-xs">Billing & Payments</div>
-              </button>
-            </div>
+	        <div class="btn-group" role="group">
+	          <button type="button" id="billing" class="btn btn-default" data-toggle="tab"><span class="fa fa-dollar" aria-hidden="true"></span>
+	            <div class="hidden-xs">Billing & Payments</div>
+	          </button>
+	        </div>
+	      <% else %>
+		      <div class="btn-group" role="group">
+			      <button type="button" id="message" class="btn btn-default" data-toggle="tab"><span class="fa fa-inbox" aria-hidden="true"></span>
+				      <div class="hidden-xs">Send Message</div>
+			      </button>
+		      </div>
         <%end%>
       </div>
 
@@ -111,7 +117,6 @@
 
           <% end %>
          </div>
-
         </div>
         <div class="tab-pane primary fade in well" id="servicesTab">
           <div class="container">
@@ -345,9 +350,9 @@
                 <%else%>
                 <%end%>
               </div>
+            </div>
           </div>
         </div>
-      </div>
         <div class="tab-pane primary fade in well" id="skillsTab">
           <div class="container">
             <div class="row">
@@ -384,85 +389,114 @@
             <div class = "row schedule">
             </div>
           </div>
-          </div>
         </div>
-    <div class="tab-content">
-      <div class="tab-pane fade in well secondary" id="review_reviewsTab">
-        <div class="add-button">
-          <% if @user.id !=  current_user.id  %>
-                <%= link_to new_user_review_path(@user.id), :class => 'btn btn-primary' do %>
-                    <i class="fa fa-plus"></i>
-                    <span class="hidden-xs">Add Review</span>
-                <% end %>
-          <% end %>
-        </div>
-        <% if @user.show_rating? %>
-            <div class="average-review">
-              <% if @user.average_rating.present? %>
-                  <h4>Average Rating:</h4>
-                  <%= render(:partial => 'review', :locals => {:rating => @user.average_rating}) %>
+        <div class="tab-pane primary fade in well" id="messagingTab">
+          <div class="container">
+            <div class="row">
+              <p>Message <%= @user.first_name%> <%= @user.last_name%></p>
+              <%= form_for @message do |f| %>
+                  <% if @message.errors.any? %>
+                      <% @message.errors.full_messages.each do |message| %>
+                          <div class = "alert alert-danger"><%=message %></div>
+                      <% end %>
+                  <% end %>
+
+                  <%= f.hidden_field :sender_id , :value=>current_user.id %>
+                  <%= f.hidden_field :user_id , :value=>current_user.id %>
+                  <%= f.hidden_field :recipient_id , :value=>@user.id %>
+
+                  <div class="input-container">
+                    <label for="body">Message:</label>
+                    <%= f.text_area :body, class: 'form-control', rows: "6", style: "width: 95%;"%>
+                  </div>
+
+                  <div class="button-container create-message">
+                    <div class="col-sm-8 col-sm-offset-2 text-center">
+                      <%= f.submit "Send Message", :id => "submit_create_button", class: "btn btn-default btn-primary"%>
+                    </div>
+                  </div>
               <% end %>
             </div>
-            <% if @user.reviews.count != 0 %>
-                <% @user.reviews.each do |review| %>
-                    <div class="review-block">
-                      <%= render(:partial => 'review', :locals => {:rating => review.rating}) %>
-                      <% if review.body.present? %>
-                          <h4><%= review.body %></h4>
-                      <% end %>
+          </div>
+        </div>
+        <div class="tab-content">
+          <div class="tab-pane fade in well secondary" id="review_reviewsTab">
+          <div class="add-button">
+            <% if @user.id !=  current_user.id  %>
+                  <%= link_to new_user_review_path(@user.id), :class => 'btn btn-primary' do %>
+                      <i class="fa fa-plus"></i>
+                      <span class="hidden-xs">Add Review</span>
+                  <% end %>
+            <% end %>
+          </div>
+          <% if @user.show_rating? %>
+              <div class="average-review">
+                <% if @user.average_rating.present? %>
+                    <h4>Average Rating:</h4>
+                    <%= render(:partial => 'review', :locals => {:rating => @user.average_rating}) %>
+                <% end %>
+              </div>
+              <% if @user.reviews.count != 0 %>
+                  <% @user.reviews.reverse_each do |review| %>
+                      <div class="review-block">
+                        <%= render(:partial => 'review', :locals => {:rating => review.rating}) %>
+                        <% if review.body.present? %>
+                            <h4><%= review.body %></h4>
+                        <% end %>
+                      </div>
+                  <% end %>
+              <% end %>
+
+          <%else %>
+              <h5> There are no reviews yet </h5>
+          <% end %>
+        </div>
+          <div class="tab-pane fade in well secondary" id="review_endorsementsTab">
+            <% if current_user.endorsement_invites.map(&:user_id).include?(@user.id)  %>
+              <div class="add-button">
+              <%= link_to new_user_endorsement_path(@user.id), :class => 'btn btn-primary' do %>
+                    <i class="fa fa-plus"></i>
+                    <span class="hidden-xs">Add Endorsement</span>
+                <% end %>
+                </div>
+
+
+        <% elsif @user.id == current_user.id %>
+                <%= form_for :endorsement_request, :url => user_endorsement_requests_path(@user.id) do |f| %>
+                    <div class="add-button data form-group">
+                    <div class="col-sm-3">
+                      <%= f.label :invitee_id, 'User ID:'%>
+                    </div>
+                      <div class="col-sm-3">
+                        <%= f.number_field :invitee_id , { class: 'form-control', id: 'charge_per_hour', min: 1, maxlength: "4", size: "4" }%>
+                      </div>
+                      <div class="col-sm-2">
+                        <%= f.submit 'Invite User', :class => 'btn btn-primary' %>
+                      </div>
                     </div>
                 <% end %>
             <% end %>
-
-        <%else %>
-            <h5> There are no reviews yet </h5>
-        <% end %>
-      </div>
-      <div class="tab-pane fade in well secondary" id="review_endorsementsTab">
-          <% if current_user.endorsement_invites.map(&:user_id).include?(@user.id)  %>
-            <div class="add-button">
-            <%= link_to new_user_endorsement_path(@user.id), :class => 'btn btn-primary' do %>
-                  <i class="fa fa-plus"></i>
-                  <span class="hidden-xs">Add Endorsement</span>
-              <% end %>
+          <% if @user.endorsements.any? %>
+              <div>
+                  <h3> Endorsements: </h3>
               </div>
-
-
-      <% elsif @user.id == current_user.id %>
-              <%= form_for :endorsement_request, :url => user_endorsement_requests_path(@user.id) do |f| %>
-                  <div class="add-button data form-group">
-                  <div class="col-sm-3">
-                    <%= f.label :invitee_id, 'User ID:'%>
-                  </div>
-                    <div class="col-sm-3">
-                      <%= f.number_field :invitee_id , { class: 'form-control', id: 'charge_per_hour', min: 1, maxlength: "4", size: "4" }%>
+                <% @user.endorsements.each do |endorsement| %>
+                    <div class="endorsement_block">
+                     <h5> <%= endorsement.body %> </h5>
+                      <h4>Author:
+                        <%= link_to user_path(endorsement.author_id) do %>
+                            <%=endorsement.author.try(:first_name) %>
+                        <% end %>
+                      </h4>
                     </div>
-                    <div class="col-sm-2">
-                      <%= f.submit 'Invite User', :class => 'btn btn-primary' %>
-                    </div>
-                  </div>
-              <% end %>
+
+                  <% end %>
+          <% else %>
+              <h5> There are no endorsements yet </h5>
           <% end %>
-        <% if @user.endorsements.any? %>
-            <div>
-                <h3> Endorsements: </h3>
-            </div>
-              <% @user.endorsements.each do |endorsement| %>
-                  <div class="endorsement_block">
-                   <h5> <%= endorsement.body %> </h5>
-                    <h4>Author:
-                      <%= link_to user_path(endorsement.author_id) do %>
-                          <%=endorsement.author.try(:first_name) %>
-                      <% end %>
-                    </h4>
-                  </div>
-
-                <% end %>
-        <% else %>
-            <h5> There are no endorsements yet </h5>
-        <% end %>
+        </div>
+        </div>
       </div>
-    </div>
   </div>
 
 <% else %>
@@ -508,6 +542,9 @@
                     break;
                 case 'skills_timetable':
                     $('#skillsTab').addClass('active');
+                    break;
+		            case 'message':
+                    $('#messagingTab').addClass('active');
                     break;
             }
         });

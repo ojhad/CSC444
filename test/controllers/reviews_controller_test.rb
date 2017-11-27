@@ -9,10 +9,12 @@
 #  user_id    :integer
 #  rating     :float            default(5.0)
 #  author_id  :integer
+#  skill_id   :integer
 #
 # Indexes
 #
-#  index_reviews_on_user_id  (user_id)
+#  index_reviews_on_skill_id  (skill_id)
+#  index_reviews_on_user_id   (user_id)
 #
 
 require 'test_helper'

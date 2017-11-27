@@ -26,7 +26,7 @@
   <% else %>
         <% transactions = @transactions.teen_approved %>
   <% end %>
-    <% transactions.where(:status => :not_approved).each do |t| %>
+    <% transactions.each do |t| %>
         <div class="card-container">
           <div class="card transaction-card">
             <div class="card-body">

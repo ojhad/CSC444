@@ -10,8 +10,10 @@ class ReviewsController < ApplicationController
   def create
     @review = Review.new(review_params)
     if @review.save
+      flash['notice'] = "Review submitted"
       redirect_to(user_path(@user.id))
     else
+      flash['error'] = "Review could not save: #{@review.errors}"
       render :new
     end
   end
@@ -24,7 +26,7 @@ class ReviewsController < ApplicationController
   end
 
   def review_params
-    params.require(:review).permit(:rating, :body, :user_id, :author_id)
+    params.require(:review).permit(:rating, :body, :user_id, :author_id, :skill_id)
   end
 
 end

@@ -19,10 +19,15 @@ class TransactionsController < ApplicationController
   def create
     @transaction = Transaction.new(transaction_params)
     @transaction.update_attributes(:teen_id => @user.id, :status => :teen_approved)
-    service_user = Service.find_by_id(@transaction.service_id).service_users.first
-    @transaction.update_attributes(:client_id => service_user.user_id)
+    client_id = Service.find_by_id(@transaction.service_id).user_id
+    client = User.find_by_id(client_id)
+    @transaction.update_attributes(:client_id => client_id)
     if @transaction.save
-      redirect_to(user_path(current_user.id))
+      client.notifications.create title: "#{@user.first_name} #{@user.last_name} has created a new transaction that needs your approval",
+                                   reference_user_id: @user.id,
+                                   user_id: client,
+                                   read: FALSE
+      redirect_to(user_path(@user.id))
     else
       flash.error = @transaction.errors
       render :new
@@ -42,7 +47,28 @@ class TransactionsController < ApplicationController
     @transaction = Transaction.find(params[:id])
     @transaction.update_attributes(transaction_params)
     if @transaction.save
-      redirect_to(user_transaction_path(@user.id, @transaction.id))
+      if @user.is_teen?
+        client = User.find_by_id(@transaction.client_id)
+        client.notifications.create title: "#{@user.first_name} #{@user.last_name} has updated the transaction",
+                                  reference_user_id: @user.id,
+                                  user_id: client,
+                                  read: FALSE
+      else
+        teen = User.find_by_id(@transaction.teen_id)
+        if @transaction.status == 'client_approved'
+          teen.notifications.create title: "#{@user.first_name} #{@user.last_name} has approved your transaction",
+                                      reference_user_id: @user.id,
+                                      user_id: teen,
+                                      read: FALSE
+        else
+          teen.notifications.create title: "#{@user.first_name} #{@user.last_name} has requested changes to the transaction",
+                                    reference_user_id: @user.id,
+                                    user_id: teen,
+                                    read: FALSE
+        end
+      end
+      flash['notice'] = 'Updated transaction'
+      redirect_to(user_transactions_path(@user.id))
     else
       flash.error = @transaction.errors
       render :edit
