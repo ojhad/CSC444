@@ -15,7 +15,7 @@ end
 #
 #  id              :integer          not null, primary key
 #  body            :string
-#  read            :boolean
+#  read            :boolean          default(FALSE)
 #  conversation_id :integer
 #  user_id         :integer
 #  created_at      :datetime         not null
