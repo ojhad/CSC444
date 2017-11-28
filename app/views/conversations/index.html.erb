@@ -2,8 +2,11 @@
 	<h1><%= t :allConversations %></h1>
 	<br>
 	<div class="list-group">
+		<% if @convos.length == 0 %>
+			<h1>No Conversatins yet. Find a user and message him from there!</h1>
+		<% end %>
 		<% @convos.each do |conversation| %>
-				<% user_to_find = conversation.sender_id == @current_user.id ? conversation.recipient_id : converation.sender_id %>
+				<% user_to_find = conversation.sender_id == @current_user.id ? conversation.recipient_id : conversation.sender_id %>
 				<% user_profile = User.find(user_to_find) %>
 				<% last_message = conversation.messages.last %>
 				<% unread_count = conversation.messages.unread().count() %>
