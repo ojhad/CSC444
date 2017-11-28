@@ -72,6 +72,8 @@ en:
   message: "Message"
   send: "Send"
   sendAMessage: "Send Message"
+  allConversations: "All Conversations"
+  at: "at"
 
 fr:
   enterSqlQuery: "Entrer une requête SQL"
@@ -115,3 +117,5 @@ fr:
   message: "Message"
   send: "Envoyer"
   sendAMessage: "Envoyer le Message"
+  allConversations: "Toutes les conversations"
+  at: "à"
