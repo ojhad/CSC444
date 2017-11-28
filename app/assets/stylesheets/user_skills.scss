@@ -8,6 +8,16 @@
   margin-bottom: 10px;
 }
 
-.addSkill, .removeSkill{
+.addSkill{
   margin-left: 5px;
+}
+
+.removeSkill{
+  color: red;
+  cursor: pointer;
+  float: right;
+}
+
+.skillNames{
+  width: 150px;
 }

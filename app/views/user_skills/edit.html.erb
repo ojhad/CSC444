@@ -1,7 +1,7 @@
 <div class="skills">
   <h4><i class="fa fa-star" aria-hidden="true"></i> Skills</h4>
   <% @userSkills.each do |skill| %>
-      <%= Skill.find(skill.id).skill_name %><br>
+      <div class="skillNames"><%= Skill.find(skill.id).skill_name %><i class="fa fa-times removeSkill" aria-hidden="true"></i></div>
   <% end %>
 </div>
 <div class="addSkill">
@@ -9,16 +9,6 @@
       <%= csrf_meta_tags %>
       <%= select_tag :skill_id, options_from_collection_for_select(Skill.find_by_sql("SELECT * FROM ((SELECT id, skill_name  FROM skills) EXCEPT (SELECT skills.id, skills.skill_name FROM skills JOIN user_skills ON skills.id = user_skills.skill_id where user_id = #{@user.id}))a ORDER BY a.id"), :id, :skill_name) %>
       <button type="submit" class="btn btn-default addSkillButton">Add Skill</button>
-  <% end %>
-</div>
-<div class="removeSkill">
-  <% if @userSkills.any? %>
-    <%= form_for :user_skill, :url => url_for(:controller => 'user_skills', :action => 'destroy'), :html => {class: 'removeSkillForm'} do |f| %>
-        <%= csrf_meta_tags %>
-        <%= select_tag :skill_id, options_from_collection_for_select(@userSkills, :id, :skill_name) %>
-        <input name="_method" type="hidden" value="DELETE">
-        <button type="submit" class="btn btn-default removeSkillButton">Remove Skill</button>
-    <% end %>
   <% end %>
 </div>
 
@@ -30,6 +20,17 @@
 
         $(".removeSkillForm").submit(function () {
             $(".removeSkillButton").attr("disabled", true);
+        });
+
+        $(".removeSkill").on("click", function(){
+            var remove = confirm("Are you sure you want to delete this skill");
+            if (remove == true) {
+                $.ajax({
+                    url: '.',
+                    type: 'DELETE',
+                    data: {skill_id: this.previousSibling.data}
+                });
+            }
         });
     });
 </script>
