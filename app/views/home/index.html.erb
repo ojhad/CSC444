@@ -170,4 +170,10 @@
       <%end%>
       </div>
     </div>
+<%elsif @user.is_sadmin?%>
+    <h3><%= t :welcomeSadmin %></h3>
+<%elsif @user.is_admin?%>
+    <h3><%= t :welcomeAdmin %></h3>
+<%elsif @user.is_CSR?%>
+    <h3><%= t :welcomeCSR %></h3>
 <%end%>

@@ -76,6 +76,9 @@ en:
   allConversations: "All Conversations"
   at: "at"
   conversations: "Conversations"
+  welcomeSadmin: "Welcome Super Administrator"
+  welcomeAdmin: "Welcome Administrator"
+  welcomeCSR: "Welcome Customer Service Representative"
 
 fr:
   enterSqlQuery: "Entrer une requête SQL"
@@ -123,3 +126,6 @@ fr:
   allConversations: "Toutes les conversations"
   at: "à"
   conversations: "Conversations"
+  welcomeSadmin: "Bienvenue Super administrateur"
+  welcomeAdmin: "Bienvenue administrateur"
+  welcomeCSR: "Bienvenue au service clientèle"
