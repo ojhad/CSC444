@@ -15,7 +15,7 @@
       <div class="btn-pref btn-group btn-group-justified btn-group-lg" role="group" aria-label="...">
         <div class="btn-group" role="group">
           <button type="button" id="about" class="btn btn-primary" data-toggle="tab"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-            <div class="hidden-xs">About</div>
+            <div class="hidden-xs"><%= t :about%></div>
           </button>
         </div>
         <div class="btn-group" role="group">
@@ -26,19 +26,19 @@
         <%if @user.is_teen?%>
             <div class="btn-group" role="group">
               <button type="button" id="skills_timetable" class="btn btn-default" data-toggle="tab"><span class="fa fa-clock-o" aria-hidden="true"></span>
-                <div class="hidden-xs">Skills & Availability</div>
+                <div class="hidden-xs"><%=t :skills%> & <%=t :availability%></div>
               </button>
             </div>
         <%end%>
         <div class="btn-group" role="group">
           <button type="button" id="reviews" class="btn btn-default" data-toggle="tab"><span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-            <div class="hidden-xs">Reviews/Endorsements</div>
+            <div class="hidden-xs"><%=t :reviews%>/<%=t :endorsements%></div>
           </button>
         </div>
         <% if @user.id==current_user.id || current_user.is_CSR? %>
 	        <div class="btn-group" role="group">
 	          <button type="button" id="billing" class="btn btn-default" data-toggle="tab"><span class="fa fa-dollar" aria-hidden="true"></span>
-	            <div class="hidden-xs">Billing & Payments</div>
+	            <div class="hidden-xs"><%= t :billing%> & <%=t :payments%></div>
 	          </button>
 	        </div>
 	      <% else %>
@@ -59,9 +59,9 @@
               <%else%>
               <div class="col-md-6">
               <%end%>
-                <h4> <i class="fa fa-user" aria-hidden="true"></i> Account type</h4>
+                <h4> <i class="fa fa-user" aria-hidden="true"></i> <%= t :accountType%></h4>
                 <% if @user.is_teen? %>
-                    <p>Teenager</p>
+                    <p><%=t :teenager%></p>
                 <% elsif @user.is_client? %>
                     <p>Client</p>
                 <% elsif @user.is_sadmin? %>
@@ -69,19 +69,19 @@
                 <% elsif @user.is_admin? %>
                     <p>Admin</p>
                 <% elsif @user.is_CSR? %>
-                    <p>Customer Service Representative</p>
+                    <p><%= t :csr%></p>
                 <%end%>
                 <br>
-                <h4 style=""><i class="fa fa-addressBaby sitting-book" aria-hidden="true"></i> Contact Information</h4>
+                <h4 style=""><i class="fa fa-addressBaby sitting-book" aria-hidden="true"></i> <%= t :contactInfo%></h4>
                 <p><i class="fa fa-envelope" aria-hidden="true"></i> <%=@user.email%></p>
                 <p><i class="fa fa-phone" aria-hidden="true"></i> <%=@user.mobile_number%></p>
               </div>
               <div class="col-md-4">
                 <% if @user.id == current_user.id || current_user.is_CSR? %>
-                <h4><i class="fa fa-building-o" aria-hidden="true"></i> Address </h4>
+                <h4><i class="fa fa-building-o" aria-hidden="true"></i> <%= t :address%> </h4>
                   <table>
                     <tr>
-                      <td><b><%=@user.first_name%> <%=@user.last_name%></b></td>
+                      <td><b><%=@user.first_name.capitalize%> <%=@user.last_name.capitalize%></b></td>
                     </tr>
                     <tr>
                       <td><%=@user.address_1.capitalize()%></td>
@@ -123,23 +123,23 @@
             <div class="row">
               <div class="col-md-4">
                 <% if @user.id == current_user.id && @user.is_client? || current_user.is_CSR? %>
-                    <h4><i class="fa fa-cogs" aria-hidden="true"></i> Unlisted Services </h4>
+                    <h4><i class="fa fa-cogs" aria-hidden="true"></i> <%= t :unlistedServices%> </h4>
                     <% if @user.services.status(Service::UNLISTED).count != 0 %>
                         <% @user.services.status(Service::UNLISTED).each do |service| %>
                             <p>Service: <%= service.title %></p>
-                            <p>Charge: $<%= service.charge_per_hour %> per hour</p>
+                            <p>Charge: $<%= service.charge_per_hour %> <%=t :perHour%></p>
                             <%= link_to "List", list_service_path(service), method: :post, :class => 'btn btn-success' %>
                             <%= link_to "Edit", edit_service_path(service), :class => 'btn btn-primary' %>
                             <%= link_to "Delete", service_path(service), method: :delete, data: {title: 'Delete Listed Service' , confirm: 'Are you sure? Item will not appear under listed services'}, :class => 'btn btn-danger' %>
                         <%end%>
                     <%else%>
-                        <h5> You have no unlisted services </h5>
+                        <h5> <%= t :noUnlistedServices%> </h5>
                     <%end%>
-                    <h4><i class="fa fa-cogs" aria-hidden="true"></i> Listed Services </h4>
+                    <h4><i class="fa fa-cogs" aria-hidden="true"></i> <%= t :listedServices%> </h4>
                     <% if @user.services.status(Service::LISTED).count != 0 %>
                         <% @user.services.status(Service::LISTED).each do |service| %>
                             <p>Service: <%= service.title %></p>
-                            <p>Charge: $<%= service.charge_per_hour %> per hour</p>
+                            <p>Charge: $<%= service.charge_per_hour %> <%= t :perHour%></p>
                             <% if @user.id == current_user.id || current_user.is_admin? %>
                                 <%= link_to "View", service_path(service), :class => 'btn btn-success' %>
                                 <%= link_to "Edit", edit_service_path(service),
@@ -156,54 +156,54 @@
                         <%end%>
                     <%else%>
                         <% if @user.id==current_user.id%>
-                            <h5> You have no listed services </h5>
+                            <h5> <%= t :noListedServices1%> </h5>
                         <%else%>
-                            <h5>No services listed by this user at the moment.</h5>
+                            <h5> <%=t :noListedServices2%> </h5>
                         <%end%>
                     <%end%>
-                    <h4><i class="fa fa-cogs" aria-hidden="true"></i> Completed Services</h4>
+                    <h4><i class="fa fa-cogs" aria-hidden="true"></i> <%=t :completedServices%></h4>
                     <% if @user.services.status(Service::COMPLETED).count != 0 %>
                         <% @user.services.status(Service::COMPLETED).each do |service| %>
                             <p>Service: <%= service.title %></p>
-                            <p>Charge: $<%= service.charge_per_hour %> per hour</p>
+                            <p>Charge: $<%= service.charge_per_hour %> <%=t :perHour%></p>
                             <%= link_to "View", service_path(service), :class => 'btn btn-success' %>
                         <%end%>
                     <%else%>
-                        <h5> You do not have any completed services </h5>
+                        <h5> <%=t :noCompletedServices%> </h5>
                     <%end%>
                 <% elsif @user.id == current_user.id && @user.is_teen? || current_user.is_CSR?  %>
-                    <h4><i class="fa fa-cogs" aria-hidden="true"></i> Requested Services </h4>
+                    <h4><i class="fa fa-cogs" aria-hidden="true"></i> <%=t :requestedServices%> </h4>
                     The Teen's requested services should go here.
                 <%else%><!--Not the current user-->
                     <% if @user.is_client?%>
-                        <h4><i class="fa fa-cogs" aria-hidden="true"></i> Listed Services </h4>
+                        <h4><i class="fa fa-cogs" aria-hidden="true"></i> <%= t :listedServices%> </h4>
                         <% if @user.services.status(Service::LISTED).count != 0 %>
                             <% @user.services.status(Service::LISTED).each do |service| %>
                                 <p>Service: <%= service.title %></p>
-                                <p>Charge: $<%= service.charge_per_hour %> per hour</p>
+                                <p>Charge: $<%= service.charge_per_hour %> <%= t :perHour%></p>
                                 <br>
                                 <%= link_to "View Service", service_path(service.id), :class => 'btn btn-primary' %>
                             <%end%>
                         <%else%>
                             <% if @user.id==current_user.id%>
-                                <h5> You have no listed services </h5>
+                                <h5> <%=t :noListedServices1%> </h5>
                             <%else%>
-                                <h5>No services listed by this user at the moment.</h5>
+                                <h5><%=t :noListedServices2%></h5>
                             <%end%>
                         <%end%>
                     <%elsif @user.is_teen?%>
-                        <h4><i class="fa fa-cogs" aria-hidden="true"></i> Active Services </h4>
+                        <h4><i class="fa fa-cogs" aria-hidden="true"></i> <%= t :activeServices%> </h4>
                         The teenager's current active service should go here
                     <%end%>
                 <%end%>
               </div>
               <div class="col-md-4">
                 <% if @user.id == current_user.id && @user.is_client? || current_user.is_CSR? %>
-                    <h4><i class="fa fa-cog fa-spin" aria-hidden="true"></i> Accepted Services</h4>
+                    <h4><i class="fa fa-cog fa-spin" aria-hidden="true"></i> <%=t :acceptedServices%></h4>
                     <% if @user.services.status(Service::ACCEPTED).count != 0 %>
                         <% @user.services.status(Service::ACCEPTED).each do |service| %>
                             <p>Service: <%= service.title %></p>
-                            <p>Charge: $<%= service.charge_per_hour %> per hour</p>
+                            <p>Charge: $<%= service.charge_per_hour %> <%=t :perHour%></p>
                             <%= link_to "View", service_path(service), :class => 'btn btn-success' %>
                             <%= link_to "Edit", edit_service_path(service),
                                         data: {title: 'Edit Service' ,
@@ -217,16 +217,16 @@
                     <%else%>
                         <h5> None of your services have been accepted yet </h5>
                     <%end%>
-                    <h4><i class="fa fa-cog fa-spin" aria-hidden="true"></i> Pending Completion Services</h4>
+                    <h4><i class="fa fa-cog fa-spin" aria-hidden="true"></i> <%=t :pendingCompletion%></h4>
                     <% if @user.services.status(Service::PENDING).count != 0 %>
                         <% @user.services.status(Service::PENDING).each do |service| %>
                             <p>Service: <%= service.title %></p>
-                            <p>Charge: $<%= service.charge_per_hour %> per hour</p>
+                            <p>Charge: $<%= service.charge_per_hour %> <%= t :perHour%></p>
                             <%= link_to "View", service_path(service), :class => 'btn btn-primary' %>
                             <%= link_to "Review Timesheet", service_path(service), :class => 'btn btn-success' %>
                         <%end%>
                     <%else%>
-                        <h5> There are no services pending completion. </h5>
+                        <h5> <%=t :noPendingServices%> </h5>
                     <%end%>
                 <%elsif current_user.id != @user.id%>
                   <% if @user.is_client?%>
@@ -249,13 +249,13 @@
             <div class="btn-group" role="group">
               <button type="button" id="review_reviews" class="btn btn-primary topBar" data-toggle="tab">
                 <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-                <div class="hidden-xs">Reviews</div>
+                <div class="hidden-xs"><%= t :reviews%></div>
               </button>
             </div>
             <div class="btn-group" role="group">
               <button type="button" id="review_endorsements" class="btn btn-default topBar" data-toggle="tab">
                 <i class="glyphicon glyphicon-list-alt"></i>
-                <div class="hidden-xs">Endorsements</div>
+                <div class="hidden-xs"><%=t :endorsements%></div>
               </button>
             </div>
           </div>
@@ -264,14 +264,14 @@
                 <% if @user.id !=  current_user.id || current_user.is_CSR? %>
                     <%= link_to new_user_review_path(@user.id), :class => 'btn btn-primary' do %>
                         <i class="fa fa-plus"></i>
-                        <span class="hidden-xs">Add Review</span>
+                        <span class="hidden-xs"><%=t :addReview%></span>
                     <% end %>
                 <% end %>
               </div>
               <% if @user.show_rating? %>
                   <div class="average-review">
                     <% if @user.average_rating.present? %>
-                        <h4>Average Rating:</h4>
+                        <h4><%=t :averageRating%>:</h4>
                         <%= render(:partial => 'review', :locals => {:rating => @user.average_rating}) %>
                     <% end %>
                   </div>
@@ -287,7 +287,7 @@
                   <% end %>
 
               <%else %>
-                  <h5> There are no reviews yet </h5>
+                  <h5> <%=t :noReviews%> </h5>
               <% end %>
 
           <% end %>
@@ -305,7 +305,7 @@
                 <% end %>
               </div>
               <div class="col-md-4">
-                <h4>Billing</h4>
+                <h4><%= t :billing%> </h4>
                 <% if @user.is_client? && @user.stripe_id.blank?%>
                     <%= form_tag user_cards_path(@user.id) do %>
                         <article>
@@ -337,9 +337,9 @@
               </div>
               <div class="col-md-4">
                 <% if @user.is_teen?%>
-                    <h4> Account Balance</h4>
+                    <h4> <%=t :accountBalance%> </h4>
                     <p> CAD $<%=@user.balance%></p>
-                    <p> Payout method: <%=@user.payout_information.method.upcase()%></p>
+                    <p> <%=t :payoutMethod%>: <%=@user.payout_information.method.upcase()%></p>
                     <%= form_tag user_payouts_path(@user.id) do %>
                         <% if @user.balance>0%>
                           <%= submit_tag "Withdraw balance", class: "btn btn-default" %>
@@ -357,7 +357,7 @@
           <div class="container">
             <div class="row">
               <div class="col-md-8">
-                <h4><i class="fa fa-star" aria-hidden="true"></i> Skills</h4>
+                <h4><i class="fa fa-star" aria-hidden="true"></i> <%=t :skills%></h4>
                 <% @userSkills = UserSkill.where(:user_id => @user.id) %>
                 <% if @userSkills.empty? && @user.id != current_user.id %>
                     This user has no assigned skills
@@ -378,7 +378,7 @@
             </div>
             <div class = "row">
               <div class="col-md-8">
-                <h4><i class="fa fa-clock-o" aria-hidden="true"></i> Availability Timetable</h4>
+                <h4><i class="fa fa-clock-o" aria-hidden="true"></i> <%= t :availability%></h4>
               </div>
               <% if @user.id == current_user.id %>
                   <div class="col-md-4">
@@ -448,7 +448,7 @@
               <% end %>
 
           <%else %>
-              <h5> There are no reviews yet </h5>
+              <h5> <%=t :noReviews%> </h5>
           <% end %>
         </div>
           <div class="tab-pane fade in well secondary" id="review_endorsementsTab">
@@ -456,7 +456,7 @@
               <div class="add-button">
               <%= link_to new_user_endorsement_path(@user.id), :class => 'btn btn-primary' do %>
                     <i class="fa fa-plus"></i>
-                    <span class="hidden-xs">Add Endorsement</span>
+                    <span class="hidden-xs"><%=t :addEndorsement%></span>
                 <% end %>
                 </div>
 
@@ -478,7 +478,7 @@
             <% end %>
           <% if @user.endorsements.any? %>
               <div>
-                  <h3> Endorsements: </h3>
+                  <h3> <%=t :endorsements%>: </h3>
               </div>
                 <% @user.endorsements.each do |endorsement| %>
                     <div class="endorsement_block">
@@ -492,7 +492,7 @@
 
                   <% end %>
           <% else %>
-              <h5> There are no endorsements yet </h5>
+              <h5> <%=t :noEndorsements%> </h5>
           <% end %>
         </div>
         </div>
@@ -500,14 +500,14 @@
   </div>
 
 <% else %>
-    <h4>Please sign up or login to view this user's profile</h4>
+    <h4><%=t :noAccessUser%></h4>
 <% end %>
 <script>
     $(document).ready(function() {
         displaySchedule();
         function displaySchedule(){
           <% if @teenDays.empty? %>
-            $(".schedule").append("<div class='noAvaib'>No timetable available for this user</div>");
+            $(".schedule").html("<div class='noAvaib'>No timetable available for this user</div>");
           <% else %>
             <% @teenDays.each do |day| %>
               $(".schedule").append("<div class='col-md-2 <%= day.day %>'><%= day.day %> <br></div>");
