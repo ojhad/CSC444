@@ -8,6 +8,12 @@ class Message < ApplicationRecord
     created_at.strftime("%m/%d/%y at %l:%M %p")
   end
 
+  def self.mark_messages_as_read (messages)
+    messages.each do |message|
+      message.read = true
+      message.save
+    end
+  end
   scope :unread, -> () do
     where("messages.read = #{false}")
   end

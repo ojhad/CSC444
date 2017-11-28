@@ -19,20 +19,21 @@ class MessagesController < ApplicationController
 
   def index
     @messages = @conversation.messages
-    if @messages.length > 5
-      @over_5 = true
-      @messages = @messages[-5..-1]
-    end
-    if params[:m]
-      @over_5 = false
-      @messages = @conversation.messages
-    end
-    if @messages.last
-      if @messages.last.user_id != current_user.id
-        @messages.last.read = true
-      end
-    end
-    @message = @conversation.messages.new
+    Message.mark_messages_as_read(@messages)
+    # if @messages.length > 5
+    #   @over_5 = true
+    #   @messages = @messages[-5..-1]
+    # end
+    # if params[:m]
+    #   @over_5 = false
+    #   @messages = @conversation.messages
+    # end
+    # if @messages.last
+    #   if @messages.last.user_id != current_user.id
+    #     @messages.last.read = true
+    #   end
+    # end
+    # @message = @conversation.messages.new
   end
 
   def new

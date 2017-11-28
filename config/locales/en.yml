@@ -70,10 +70,12 @@ en:
   createNewService: "Create New Service"
   viewServicePosting: "View Service Postings"
   message: "Message"
+  messages: "Messages"
   send: "Send"
   sendAMessage: "Send Message"
   allConversations: "All Conversations"
   at: "at"
+  conversations: "Conversations"
 
 fr:
   enterSqlQuery: "Entrer une requête SQL"
@@ -115,7 +117,9 @@ fr:
   createNewService: "Créer un nouveau service"
   viewServicePosting: "Afficher les affichages de service"
   message: "Message"
+  messages: "Messages"
   send: "Envoyer"
   sendAMessage: "Envoyer le Message"
   allConversations: "Toutes les conversations"
   at: "à"
+  conversations: "Conversations"
