@@ -46,6 +46,7 @@
     $(document).ready(function() {
         displaySchedule();
         function displaySchedule(){
+            $(".schedule").html("");
             <% @teenDays.each do |day| %>
               $(".schedule").append("<div class='col-md-2 <%= day.day %>'><%= day.day %>  <i class=\"fa fa-times removeDay\" aria-hidden=\"true\"></i> <br></div>");
             <% end %>

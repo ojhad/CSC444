@@ -507,8 +507,9 @@
         displaySchedule();
         function displaySchedule(){
           <% if @teenDays.empty? %>
-            $(".schedule").append("<div class='noAvaib'>No timetable available for this user</div>");
+            $(".schedule").html("<div class='noAvaib'>No timetable available for this user</div>");
           <% else %>
+            $(".schedule").html("");
             <% @teenDays.each do |day| %>
               $(".schedule").append("<div class='col-md-2 <%= day.day %>'><%= day.day %> <br></div>");
             <% end %>
