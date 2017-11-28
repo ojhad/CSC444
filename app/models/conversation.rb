@@ -10,6 +10,10 @@ class Conversation < ApplicationRecord
     where("(conversations.sender_id = #{sender_id} AND conversations.recipient_id = #{recipient_id})
       OR (conversations.sender_id = #{recipient_id} AND conversations.recipient_id = #{sender_id})")
   end
+
+  scope :user_conversations, -> (user_id) do
+    where("conversations.sender_id = #{user_id} OR conversations.recipient_id = #{user_id}")
+  end
 end
 
 # == Schema Information

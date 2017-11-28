@@ -2,6 +2,9 @@ class ConversationsController < ApplicationController
   def index
     @users = User.all
     @conversations = Conversation.all
+    @current_user = current_user
+
+    @convos = Conversation.user_conversations(current_user.id)
   end
 
   def create
