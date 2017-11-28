@@ -2,7 +2,7 @@
 <div id = "header" class = "header-div">
     <header class="header-intro">
         <div class="container-intro">
-			<h1 id = "welcome-tag"><%= t :welcome %></h1>
+			<h1 id = "welcome-tag"><%= t :welcomeTeenServ %></h1>
 			<h3 id = "welcome-description-1"><%= t :fastTask %></h3>
 			<h4 id = "welcome-description-2"><%= t :fastDes %></h4>
 		</div>
@@ -54,19 +54,18 @@
 <%elsif @user.is_teen?%>
     <div class="container">
       <div class="row" style="text-align: center">
-        <h3>Welcome <%=@user.first_name.capitalize()%> !</h3>
+        <h3><%=t :welcome%> <%=@user.first_name.capitalize()%> !</h3>
       </div>
       <div class="row" style="margin-top: 5%">
         <div class="col-lg-9">
-          <p>If you would like to learn how the website works and how you can start earning money, then click below.</p>
+          <p><%= t :howItWorksTeenDesc%></p>
           <%= link_to "How it works", "#", :class => 'btn btn-primary' %>
         </div>
       </div>
       <div class="row" style="margin-top: 3%">
         <% if @user_skills.blank? || @user_availability.blank?%>
           <div class="col-lg-9">
-            <p>It seems you don't have a complete profile! In order to enhance your experience, please complete your profile by
-            providing the skills you can perform and ensuring your availability timetable is complete.</p>
+            <p><%= t :incompleteProfile%></p>
             <%= link_to "My Skills", edit_user_skill_path(@user.id) , :class => 'btn btn-primary' %>
             <%= link_to "My Availability", edit_teen_time_path(@user.id) , :class => 'btn btn-primary' %>
           </div>
@@ -74,23 +73,22 @@
         <%else%>
             <% if @recommended_services.blank?%>
                 <div class="row" style="margin-top: 5%">
-                  <p>Based on your current profile, there are no services that suit you. Please consider updating your profile.</p>
+                  <p><%=t :noRecServices1%></p>
                   <br>
-                  <p>You can also view all services and request whatever you like. However, not having the skill required for the job
-                    may reduce your chances of getting accepted by the client.</p>
+                  <p><%=t :noRecServices2%></p>
                 </div>
             <%else%>
                 <div class="row">
-                  <h4> Recommended Services</h4>
+                  <h4> <%= t :recommendedServices%></h4>
                   <br>
                   <% @recommended_services.each do |s|%>
                       <div class="col-md-3">
                         <table style="border:solid">
                           <tr>
                             <td>
-                              <p>Title: <%=s.title%></p>
+                              <p><%=t :title%>: <%=s.title%></p>
                               <p>Description: <%=s.description%></p>
-                              <p>Charge: $<%=s.charge_per_hour%> per hour</p>
+                              <p>Charge: $<%=s.charge_per_hour%> <%=t :perHour%></p>
                             </td>
                           <tr>
                             <td>
@@ -108,28 +106,28 @@
 <%elsif @user.is_client?%>
     <div class="container">
       <div class="row" style="text-align: center">
-        <h3>Welcome <%=@user.first_name.capitalize%>!</h3>
+        <h3><%=t :welcome%> <%=@user.first_name.capitalize%>!</h3>
       </div>
       <br>
       <div class="row">
         <% if @latest_service.blank?%>
             <div class="col-lg-9">
-              <p>You haven't posted any service yet. If you're new to the site, make sure to learn how our website works by clicking on the button below</p>
+              <p><%= t :noLatestJob%>></p>
               <%= link_to "How it works", "#", :class => 'btn btn-primary' %>
               <br><br>
-              <p>If you are familiar with our website and want to create a new service posting, then click the button below to get started.</p>
+              <p><%=t :familiarCreateService%></p>
               <%= link_to "Create Service", new_service_path, :class => 'btn btn-primary' %>
             </div>
         <%else%>
         <div class="col-md-4">
-          <h3>Latest Job Posted</h3>
+          <h3><%= t :latestJob %></h3>
             <hr>
             <table>
               <tr>
                 <td>
-                  <p>Title: <%=@latest_service[0].title%></p>
+                  <p><%=t :title%>: <%=@latest_service[0].main_title%></p>
                   <p>Description: <%=@latest_service[0].description%></p>
-                  <p>Charge: $<%=@latest_service[0].charge_per_hour%> per hour</p>
+                  <p>Charge: $<%=@latest_service[0].charge_per_hour%> <%=t :perHour%></p>
                 </td>
               <tr>
                 <td>
@@ -140,16 +138,16 @@
             </table>
         </div>
         <div class="col-md-4">
+          <h3><%= t :currentJobsActive%></h3>
+          <hr>
           <% if @current_services.blank?%>
-              <p> You don't have any undergoing services at the moment. Add a new service or send offers to teenagers to perform your services.</p>
+              <p> <%=t :noActiveJobs%> </p>
           <%else%>
-            <h3>Current Jobs Active</h3>
-            <hr>
             <% @current_services.each do |s|%>
                 <table>
                   <tr>
                     <td>
-                      <p>Title: <%=s.title%></p>
+                      <p>Title: <%=s.main_title%></p>
                       <p>Description: <%=s.description%></p>
                       <p>Charge: $<%=s.charge_per_hour%> per hour</p>
                     </td>
@@ -165,7 +163,29 @@
           <%end%>
         </div>
         <div class="col-md-4">
-          JOBS AWAITING TIMESHEET APPROVAL GO HERE
+          <h3><%= t :jobsPendingApproval%></h3>
+          <hr>
+          <% if @pending_services.blank?%>
+              <p> <%=t :noPendingJobs%></p>
+          <%else%>
+              <% @pending_services.each do |s|%>
+                  <table>
+                    <tr>
+                      <td>
+                        <p><%=t :title%>: <%=s.main_title%></p>
+                        <p>Description: <%=s.description%></p>
+                        <p>Charge: $<%=s.charge_per_hour%> <%=t :perhour%></p>
+                      </td>
+                    <tr>
+                      <td>
+                        <%= link_to "View", service_path(s.id), :class => 'btn btn-primary' %>
+                      </td>
+                    </tr>
+                    </tr>
+                  </table>
+                  <br>
+              <%end%>
+          <%end%>
         </div>
       <%end%>
       </div>

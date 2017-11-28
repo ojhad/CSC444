@@ -13,6 +13,7 @@ class HomeController < ApplicationController
       elsif @user.is_client?
         @latest_service = Service.where(user_id: @user.id).order('created_at DESC').limit(1)
         @current_services = Service.where(user_id: @user.id , status:2)
+        @pending_services = Service.where(user_id: @user.id, status: 3)
       end
     else
       @user = nil
