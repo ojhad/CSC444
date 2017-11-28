@@ -11,9 +11,7 @@ class TransactionsController < ApplicationController
 
 
   def new
-    service_jobs = @user.service_jobs.where(:status => 3 )
-    services = @user.services.where(:status => 3)
-    @services = services + service_jobs
+    find_services
   end
 
   def create
@@ -39,7 +37,7 @@ class TransactionsController < ApplicationController
   end
 
   def edit
-    @services = @user.services.select{ |s| s.service_users.any?}
+    find_services
     @transaction = Transaction.find(params[:id])
   end
 
@@ -60,6 +58,8 @@ class TransactionsController < ApplicationController
                                       reference_user_id: @user.id,
                                       user_id: teen,
                                       read: FALSE
+          params = {:amount => @transaction.total_amount * 100, :service_id => @transaction.service_id, :service_name => @transaction.service_title}
+          charge_card(params)
         else
           teen.notifications.create title: "#{@user.first_name} #{@user.last_name} has requested changes to the transaction",
                                     reference_user_id: @user.id,
@@ -75,6 +75,8 @@ class TransactionsController < ApplicationController
     end
   end
 
+  private
+
   def find_user
     if params[:user_id]
       @user = User.find(params[:user_id])
@@ -84,6 +86,60 @@ class TransactionsController < ApplicationController
   def transaction_params
     params.require(:transaction).permit(:charge_per_hour, :total_amount, :number_of_hours, :service_title,
                                         :service_id, :client_id, :teen_id, :status )
+  end
+
+  def find_services
+    service_jobs = @user.service_jobs.where(:status => 3 )
+    services = @user.services.where(:status => 3)
+    @services = services + service_jobs
+  end
+
+  def charge_card(params)
+
+    customer = @user
+    amount = params[:amount].to_i
+
+    @charge = Stripe::Charge.create(
+    :amount => amount,
+    :currency => "cad",
+    :customer => customer.stripe_id,
+    :description => "Charge for " + params[:service_id].to_s + ": " + params[:service_name]
+    )
+    if @charge['failure_code'].present?
+      flash[:error] = "Credit card charge failed: #{@charge['failure_message']}"
+      redirect_to(user_transaction_path(@user.id, @transaction.id))
+
+    end
+    @db_charge = Charge.new(:user_id => params[:id], :amount => amount.to_f % 100 , :stripe_charge_id => @charge.id)
+
+    @db_charge.save!
+
+    year = @db_charge.created_at.year
+    month = @db_charge.created_at.month
+
+    @finance = Finance.where(month: month , year: year)
+
+    if @finance.blank?
+      @finance_entry = Finance.new(:month => month , :year => year, :amount => @db_charge.amount)
+      @finance_entry.save!
+    else
+      @finance.amount = @finance.amount + @db_charge.amount
+      @finance.save!
+    end
+
+    @transaction.update_attributes(:status => 'completed')
+    service = find_by_id( @transaction.service_id)
+
+    # Update states after payments are completed
+    @transaction.update_attributes(:status => 'completed')
+    service.update_attributes(:status => 4)
+
+    # If you will explicitly let the customer submit a form before paying then you can use the below for redirecting
+    # If the charge is implicit, then I don't think a notice or redirect is required
+    flash.notice = "Your credit card has been charged successfully."
+
+    redirect_to user_charges_path(customer.id)
+
   end
 
 end

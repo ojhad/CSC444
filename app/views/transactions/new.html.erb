@@ -3,7 +3,7 @@
     <div class="data form-group">
       <%= f.label :service_id, "Service:", class: 'control-label col-sm-3'%>
       <div class="">
-        <%= f.select :service_id, options_from_collection_for_select(@services, :id, :title), id: 'service_pick', class: 'col-sm-9' %>
+        <%= f.select :service_id, options_from_collection_for_select(@services, :id, :main_title), id: 'service_pick', class: 'col-sm-9' %>
       </div>
     </div>
 

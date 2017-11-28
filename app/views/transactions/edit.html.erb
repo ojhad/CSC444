@@ -3,7 +3,7 @@
     <div class="form-group">
       <%= f.label :service_title, "Service Title", class: 'control-label col-sm-3'%>
       <div class="input-box col-sm-9">
-        <%= f.text_field :service_title , class: 'form-control'%>
+        <%= f.text_field :service_title , class: 'form-control', id: 'service_title'%>
       </div>
     </div>
 
@@ -24,7 +24,7 @@
     <div class="data form-group">
       <%= f.label :service_id, "Service:", class: 'control-label col-sm-3'%>
       <div class="input-box">
-        <%= f.select :service_id, options_from_collection_for_select(@services, :id, :title), class: 'input-box col-sm-9' %>
+        <%= f.select :service_id, options_from_collection_for_select(@services, :id, :main_title), class: 'input-box col-sm-9' %>
       </div>
     </div>
 
@@ -59,4 +59,9 @@
     }
     window.onload = calculate_total();
     $( "#charge_per_hour, #number_of_hours" ).on("change", calculate_total);
+    function update_title(){
+        var input1 = $("#transaction_service_id").find(":selected").text()
+        $( "#service_title" ).val( input1 );
+    }
+    $( "#transaction_service_id").on("change", update_title());
 </script>
