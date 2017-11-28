@@ -33,7 +33,6 @@ class MessagesController < ApplicationController
     #   end
     # end
     # @message = @conversation.messages.new
-    puts @messages
   end
 
   def new

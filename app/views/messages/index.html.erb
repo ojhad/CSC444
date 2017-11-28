@@ -5,32 +5,43 @@
 		<div class="panel" style="height: 500px;">
 			<div class="panel-body">
 				<ul class="chat">
-					<% @messages.each do |message| %>
-						<% sender = message.user %>
-						<li class="<%= message.user.id == current_user.id ? "right" : "left"; %> clearfix">
-							<span class="chat-img <%= message.user.id == current_user.id ? "pull-right" : "pull-left"; %>">
+					<% @messages.each do |m| %>
+						<% sender = m.user %>
+						<li class="<%= m.user.id == current_user.id ? "right" : "left"; %> clearfix">
+							<span class="chat-img <%= m.user.id == current_user.id ? "pull-right" : "pull-left"; %>">
                 <img src="<%= sender.profile_pic.url %>" alt="User Avatar" class="img-circle" style="max-height: 50px; max-width: 50px" />
               </span>
 							<div class="chat-body clearfix">
 								<div class="header">
-									<% if message.user.id == current_user.id %><small class=" text-muted"><span class="glyphicon glyphicon-time"></span>15 mins ago</small><% end %>
-									<strong class="<%= message.user.id == current_user.id ? "pull-right " : ""; %>primary-font"><%= sender.first_name + ' ' + sender.last_name %></strong> <% if message.user.id != current_user.id %><small class="pull-right text-muted">
-									<span class="glyphicon glyphicon-time"></span>12 mins ago</small><% end %>
+									<% if m.user.id == current_user.id %><small class=" text-muted"><span class="glyphicon glyphicon-time"></span>15 mins ago</small><% end %>
+									<strong class="<%= m.user.id == current_user.id ? "pull-right " : ""; %>primary-font"><%= sender.first_name + ' ' + sender.last_name %></strong> <% if m.user.id != current_user.id %><small class="pull-right text-muted">
+									<span class="glyphicon glyphicon-time"></span><%= m.message_time %></small><% end %>
 								</div>
-								<p><%= message.body %></p>
+								<p><%= m.body %></p>
 							</div>
 						</li>
 					<% end %>
 				</ul>
 			</div>
 			<div class="panel-footer">
-				<div class="input-group">
-					<input id="btn-input" type="text" class="form-control input-sm" placeholder="Type your message here..." />
-					<span class="input-group-btn">
-	                            <button class="btn btn-warning btn-sm" id="btn-chat">
-	                                Send</button>
-	                        </span>
-				</div>
+				<form class="new_message" id="new_message" action="/messages" accept-charset="UTF-8" method="post">
+					<div class="input-group">
+
+						<input name="utf8" type="hidden" value="✓">
+						<%= hidden_field_tag(request_forgery_protection_token.to_s, form_authenticity_token) %>
+
+						<input value="<%= current_user.id %>" type="hidden" name="message[sender_id]" id="message_sender_id">
+						<input value="<%= current_user.id %>" type="hidden" name="message[user_id]" id="message_user_id">
+						<input value="<%= @messages.first.conversation.sender_id == current_user.id ? @messages.first.conversation.recipient_id : @messages.first.conversation.sender_id%>" type="hidden" name="message[recipient_id]" id="message_recipient_id">
+
+						<textarea name="message[body]" id="message_user_id" class="form-control input-sm" placeholder="Type your message here..." ></textarea>
+						<span class="input-group-btn">
+              <button type="submit" class="btn btn-warning btn-sm" id="btn-chat" style="height: 48px;">
+                  Send</button>
+            </span>
+
+					</div>
+				</form>
 			</div>
 		</div>
 	</div>
