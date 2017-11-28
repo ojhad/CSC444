@@ -19,6 +19,7 @@ class MessagesController < ApplicationController
 
   def index
     @messages = @conversation.messages
+    Message.mark_messages_as_read(@messages)
     # if @messages.length > 5
     #   @over_5 = true
     #   @messages = @messages[-5..-1]
