@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
 
 
+  get 'set_language/english'
+
+  get 'set_language/french'
+
   resources :notifications do
     collection do
       post :mark_as_read
