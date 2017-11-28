@@ -60,6 +60,8 @@ class TransactionsController < ApplicationController
                                       read: FALSE
           params = {:amount => @transaction.total_amount * 100, :service_id => @transaction.service_id, :service_name => @transaction.service_title}
           charge_card(params)
+          redirect_to user_charges_path(@user.id)
+          return
         else
           teen.notifications.create title: "#{@user.first_name} #{@user.last_name} has requested changes to the transaction",
                                     reference_user_id: @user.id,
@@ -97,7 +99,8 @@ class TransactionsController < ApplicationController
   def charge_card(params)
 
     customer = @user
-    amount = params[:amount].to_i
+    # 14 % charge
+    amount = (params[:amount] * 1.14).round
 
     @charge = Stripe::Charge.create(
     :amount => amount,
@@ -110,25 +113,39 @@ class TransactionsController < ApplicationController
       redirect_to(user_transaction_path(@user.id, @transaction.id))
 
     end
-    @db_charge = Charge.new(:user_id => params[:id], :amount => amount.to_f % 100 , :stripe_charge_id => @charge.id)
+    @db_charge = Charge.new(:user_id => @user.id,
+                            :amount => amount.to_f / 100,
+                            :stripe_charge_id => @charge.id)
 
     @db_charge.save!
 
     year = @db_charge.created_at.year
     month = @db_charge.created_at.month
 
-    @finance = Finance.where(month: month , year: year)
+    @finance = Finance.where(month: month , year: year).first
+
+    payout = @db_charge.amount * (100.to_f / 114.to_f)
+    credit_card_fee = @db_charge.amount * 0.02
+    profit = @db_charge.amount * 0.12
 
     if @finance.blank?
-      @finance_entry = Finance.new(:month => month , :year => year, :amount => @db_charge.amount)
+      @finance_entry = Finance.new(:month => month ,
+                                   :year => year,
+                                   :total_amount => @db_charge.amount,
+                                   :payout => payout,
+                                   :credit_card_fee => credit_card_fee,
+                                   :profit => profit )
       @finance_entry.save!
     else
-      @finance.amount = @finance.amount + @db_charge.amount
+      @finance.total_amount = @finance.total_amount + @db_charge.amount
+      @finance.payout = @finance.payout + payout
+      @finance.credit_card_fee = @finance.credit_card_fee + credit_card_fee
+      @finance.profit = @finance.profit + profit
       @finance.save!
     end
 
     @transaction.update_attributes(:status => 'completed')
-    service = find_by_id( @transaction.service_id)
+    service = Service.find_by_id( @transaction.service_id)
 
     # Update states after payments are completed
     @transaction.update_attributes(:status => 'completed')
@@ -137,8 +154,6 @@ class TransactionsController < ApplicationController
     # If you will explicitly let the customer submit a form before paying then you can use the below for redirecting
     # If the charge is implicit, then I don't think a notice or redirect is required
     flash.notice = "Your credit card has been charged successfully."
-
-    redirect_to user_charges_path(customer.id)
 
   end
 

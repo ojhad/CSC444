@@ -50,10 +50,11 @@
         var input1 = $( "#charge_per_hour" ).val();
         var input2 = $( "#number_of_hours" ).val();
         $( "#total_amount" ).text( '$' + (input1 * input2) );
-    })
+    });
     function update_title(){
-        var input1 = $("#transaction_service_id").find(":selected").text()
+        var input1 = $("#transaction_service_id").find(":selected").text();
         $( "#service_title" ).val( input1 );
-    }
-    $( "#transaction_service_id").on("change", update_title());
+    };
+    window.onload = update_title();
+    $( "#transaction_service_id").on('change', update_title);
 </script>
