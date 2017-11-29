@@ -18,19 +18,20 @@
 						<div class="row">
 					<% end %>
 						<div class="col-md-4">
-							<div class="card" style="width: 25rem;">
-								<div class="card-body">
-									<h4 class="card-title"><%= s.main_title %></h4>
-	                <br>
-	                <p class="card-title">Posted By: <a href="/users/<%=s.user.id%>"><%= s.user.first_name.capitalize %> <%=s.user.last_name.capitalize%></a></p>
-									<p class="card-text">Cost: $<%= s.charge_per_hour %>/hour</p>
-	                <p class="card-text">Skill: <%=s.title%></p>
-	                <p class="card-text">Location: <%=s.city.capitalize%></p>
-	                <p> Distance from me: <%=s.distance.round(2)%> kms</p>
-	                <br>
-									<a href="/services/<%= s.id %>" class="btn btn-primary">More Details</a>
-								</div>
-							</div>
+							<div class="card-container">
+	              <div class="card transaction-card">
+	                <div class="card-body">
+	                  <h4 class="card-title"><%=s.main_title%></h4><br>
+	                  <p class="card-title">Posted By: <a href="/users/<%=s.user.id%>"><%= s.user.first_name.capitalize %> <%=s.user.last_name.capitalize%></a></p>
+	                  <p class="card-text">Charge: $<%=s.charge_per_hour%> <%=t :perHour%></p>
+	                  <p class="card-text">Skill: <%=s.title%></p>
+	                  <p class="card-text">Location: <%=s.city.capitalize%></p>
+	        
+	                  <p> Distance from me: <%=s.distance.round(2)%> kms</p>
+	                  <a href="/services/<%= s.id %>" class="btn btn-primary">More Details</a>
+	                </div>
+	              </div>
+	            </div>
 						</div>
 					<%if i == @services.length - 1%>
 						</div>
