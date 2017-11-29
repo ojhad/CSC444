@@ -174,11 +174,11 @@
                 <% elsif @user.id == current_user.id && @user.is_teen? || current_user.is_CSR?  %>
                     <h4><i class="fa fa-cogs" aria-hidden="true"></i> <%=t :requestedServices%> </h4>
                     <% if @user.service_jobs.status(Service::LISTED).any? %>
-                      <% @user.service_jobs.status(Service::LISTED).each do |service| %>
-                                <p>Service: <%= service.title %></p>
-                                <p>Charge: $<%= service.charge_per_hour %> <%=t :perHour%></p>
-                                <%= link_to "View", service_path(service), :class => 'btn btn-success' %>
-                      <%end%>
+                        <% @user.service_jobs.status(Service::LISTED).each do |service| %>
+                            <p>Service: <%= service.title %></p>
+                            <p>Charge: $<%= service.charge_per_hour %> <%=t :perHour%></p>
+                            <%= link_to "View", service_path(service), :class => 'btn btn-success' %>
+                        <%end%>
                     <%else%>
                         <h5> <%=t :noRequestedServices%> </h5>
                     <%end%>
@@ -241,6 +241,17 @@
                   <% if @user.is_client?%>
                   <%elsif @user.is_teen?%>
                   <%end%>
+                <% elsif @user.id == current_user.id && @user.is_teen? || current_user.is_CSR?  %>
+                    <h4><i class="fa fa-cog fa-spin" aria-hidden="true"></i> <%=t :acceptedServices%></h4>
+                    <% if @user.service_jobs.status(Service::ACCEPTED).count != 0 %>
+                        <% @user.service_jobs.status(Service::ACCEPTED).each do |service| %>
+                            <p>Service: <%= service.title %></p>
+                            <p>Charge: $<%= service.charge_per_hour %> <%= t :perHour%></p>
+                            <%= link_to "View", service_path(service), :class => 'btn btn-primary' %>
+                        <%end%>
+                    <%else%>
+                        <h5> None of your services have been accepted yet </h5>
+                    <%end%>
                 <%end%>
               </div>
               <% if @user.id ==  current_user.id && @user.is_client?%>
