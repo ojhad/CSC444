@@ -108,17 +108,19 @@
           <script type="text/javascript">
               $(function () {
                   firstDate = $("#service_date_time_field_hidden").val()
-                  $('#datetimepicker1').datetimepicker({defaultDate: firstDate});
+                  $('#datetimepicker1').datetimepicker({
+                      defaultDate: firstDate,
+                      minDate: new Date()});
               });
           </script>
         </div>
 
         <div class="input-container">
           <%= f.label :duration, "Duration of this service in hours", class: 'control-label'%>
-          <%= f.number_field :duration, placeholder: "e.g. 1.5" , class: 'form-control' %>
+          <%= f.number_field :duration, step: :any, placeholder: "e.g. 1.5" , class: 'form-control' %>
         </div>
 
-        <!-- Frequcy Toggle and Input Field-->
+        <!-- Frequency Toggle and Input Field-->
         <div class="input-container">
           <input class = "checkbox-inline" id = "service_freq_toggle" onclick="frequencyToggle()" type="checkbox"/>
           <%= f.label "This is a reoccuring service", class: 'control-label'%>
