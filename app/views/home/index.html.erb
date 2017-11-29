@@ -83,14 +83,14 @@
                   <br>
                   <% @recommended_services.each do |s|%>
                     <div class="col-md-4">
-                      <div class="card" style="width: 25rem;">
-                        <div class="card-body">
-                          <h4 class="card-title"><%= s.title %></h4>
-                          <br>
-                          <p class="card-text">Description: <%=s.description%></p>
-                          <p class="card-text">Charge: $<%= s.charge_per_hour %> <%=t :perHour%></p>
-                          <br>
-                          <%= link_to "View", service_path(s.id), :class => 'btn btn-primary' %>
+                      <div class="card-container">
+                        <div class="card transaction-card">
+                          <div class="card-body">
+                            <h4 class="card-title"><%= s.title %></h4>
+                            <p class="card-text">Description: <%=s.description%></p>
+                            <p class="card-text">Charge: $<%= s.charge_per_hour %> <%=t :perHour%></p>
+                            <%= link_to "View", service_path(s.id), :class => 'btn btn-primary' %>
+                          </div>
                         </div>
                       </div>
                     </div>
