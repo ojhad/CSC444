@@ -17,10 +17,12 @@ class TransactionsController < ApplicationController
   def create
     @transaction = Transaction.new(transaction_params)
     @transaction.update_attributes(:teen_id => @user.id, :status => :teen_approved)
-    client_id = Service.find_by_id(@transaction.service_id).user_id
+    service =  Service.find_by_id(@transaction.service_id)
+    client_id = service.user_id
     client = User.find_by_id(client_id)
     @transaction.update_attributes(:client_id => client_id)
     if @transaction.save
+      service.update_attribute(:status, Service::PENDING)
       client.notifications.create title: "#{@user.first_name} #{@user.last_name} has created a new transaction that needs your approval",
                                    reference_user_id: @user.id,
                                    user_id: client,
@@ -91,8 +93,8 @@ class TransactionsController < ApplicationController
   end
 
   def find_services
-    service_jobs = @user.service_jobs.where(:status => 3 )
-    services = @user.services.where(:status => 3)
+    service_jobs = @user.service_jobs.where(:status => Service::ACCEPTED )
+    services = @user.services.where(:status => Service::ACCEPTED )
     @services = services + service_jobs
   end
 
@@ -149,7 +151,7 @@ class TransactionsController < ApplicationController
 
     # Update states after payments are completed
     @transaction.update_attributes(:status => 'completed')
-    service.update_attributes(:status => 4)
+    service.update_attributes(:status => Service::COMPLETED)
 
     # If you will explicitly let the customer submit a form before paying then you can use the below for redirecting
     # If the charge is implicit, then I don't think a notice or redirect is required

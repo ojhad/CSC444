@@ -121,7 +121,7 @@
         <div class="tab-pane primary fade in well" id="servicesTab">
           <div class="container">
             <div class="row">
-              <div class="col-md-4">
+              <div class="col-md-3">
                 <% if @user.id == current_user.id && @user.is_client? || current_user.is_CSR? %>
                     <h4><i class="fa fa-cogs" aria-hidden="true"></i> <%= t :unlistedServices%> </h4>
                     <% if @user.services.status(Service::UNLISTED).count != 0 %>
@@ -161,16 +161,6 @@
                             <h5> <%=t :noListedServices2%> </h5>
                         <%end%>
                     <%end%>
-                    <h4><i class="fa fa-cogs" aria-hidden="true"></i> <%=t :completedServices%></h4>
-                    <% if @user.services.status(Service::COMPLETED).count != 0 %>
-                        <% @user.services.status(Service::COMPLETED).each do |service| %>
-                            <p>Service: <%= service.title %></p>
-                            <p>Charge: $<%= service.charge_per_hour %> <%=t :perHour%></p>
-                            <%= link_to "View", service_path(service), :class => 'btn btn-success' %>
-                        <%end%>
-                    <%else%>
-                        <h5> <%=t :noCompletedServices%> </h5>
-                    <%end%>
                 <% elsif @user.id == current_user.id && @user.is_teen? || current_user.is_CSR?  %>
                     <h4><i class="fa fa-cogs" aria-hidden="true"></i> <%=t :requestedServices%> </h4>
                     <% if @user.service_jobs.status(Service::LISTED).any? %>
@@ -206,7 +196,7 @@
                     <%end%>
                 <%end%>
               </div>
-              <div class="col-md-4">
+              <div class="col-md-3">
                 <% if @user.id == current_user.id && @user.is_client? || current_user.is_CSR? %>
                     <h4><i class="fa fa-cog fa-spin" aria-hidden="true"></i> <%=t :acceptedServices%></h4>
                     <% if @user.services.status(Service::ACCEPTED).count != 0 %>
@@ -232,7 +222,7 @@
                             <p>Service: <%= service.title %></p>
                             <p>Charge: $<%= service.charge_per_hour %> <%= t :perHour%></p>
                             <%= link_to "View", service_path(service), :class => 'btn btn-primary' %>
-                            <%= link_to "Review Timesheet", service_path(service), :class => 'btn btn-success' %>
+                            <%= link_to "Review Timesheet", user_transaction_path(@user.id, service.transactions.first.id), :class => 'btn btn-success' %>
                         <%end%>
                     <%else%>
                         <h5> <%=t :noPendingServices%> </h5>
@@ -254,15 +244,42 @@
                     <%end%>
                 <%end%>
               </div>
-              <% if @user.id ==  current_user.id && @user.is_client?%>
-                <div class="col-md-4">
-                  <%= link_to "Add service", new_service_path(@user.id) , :class => 'btn btn-primary' ,:style => 'margin-bottom:4px'%><br>
-                  <%= link_to "Past services" ,services_path(@user.id), :class => 'btn btn-primary'%>
-                </div>
-              <%end%>
+              <div class="col-md-3">
+                <% if @user.id ==  current_user.id && @user.is_client?%>
+                    <h4><i class="fa fa-cogs" aria-hidden="true"></i> <%=t :completedServices%></h4>
+                    <% if @user.services.status(Service::COMPLETED).any? %>
+                        <% @user.services.status(Service::COMPLETED).each do |service| %>
+                            <p>Service: <%= service.title %></p>
+                            <p>Charge: $<%= service.charge_per_hour %> <%=t :perHour%></p>
+                            <%= link_to "View", service_path(service), :class => 'btn btn-success' %>
+                        <%end%>
+                    <%else%>
+                        <h5> <%=t :noCompletedServices%> </h5>
+                    <%end%>
+                <% elsif @user.id == current_user.id && @user.is_teen? || current_user.is_CSR?  %>
+                    <h4><i class="fa fa-cog fa-spin" aria-hidden="true"></i> <%=t :pendingCompletion%></h4>
+                    <% if @user.service_jobs.status(Service::PENDING).any? %>
+                        <% @user.service_jobs.status(Service::PENDING).each do |service| %>
+                            <p>Service: <%= service.title %></p>
+                            <p>Charge: $<%= service.charge_per_hour %> <%= t :perHour%></p>
+                            <%= link_to "View", service_path(service), :class => 'btn btn-primary' %>
+                            <%= link_to "Review Timesheet", user_transaction_path(@user.id, service.transactions.first.id), :class => 'btn btn-success' %>
+                        <%end%>
+                    <%else%>
+                        <h5> <%=t :noPendingServices%> </h5>
+                    <%end%>
+                <%end%>
+              </div>
+              <div class="col-md-3">
+                <% if @user.id ==  current_user.id && @user.is_client?%>
+                    <%= link_to "Add service", new_service_path(@user.id) , :class => 'btn btn-primary' ,:style => 'margin-bottom:4px'%><br>
+                    <%= link_to "Past services" ,services_path(@user.id), :class => 'btn btn-primary'%>
+                <%end%>
+              </div>
             </div>
           </div>
         </div>
+
         <div class="tab-pane primary fade in" id="reviewsTab">
           <% if @user.is_teen? || @user.is_CSR? %>
           <div class="btn-pref2 btn-group btn-group-justified btn-group-lg" role="group" aria-label="...">
