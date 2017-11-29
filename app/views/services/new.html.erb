@@ -44,7 +44,7 @@
         </div>
 
         <div class="input-container">
-          <%= f.label :charge_per_hour, "How much do you want to charge per hour?", class: 'control-label'%>
+          <%= f.label :charge_per_hour, "How much are you willing to pay per hour?", class: 'control-label chargePerHour'%>
           <%= f.text_field :charge_per_hour, placeholder: "Charge per hour in dollars", class: "form-control" %>
         </div>
 
@@ -60,9 +60,9 @@
           <%= f.number_field :max_age, placeholder: "e.g. 19", class: "form-control"%>
         </div>
 
-        <div class = "input-container">
+        <div class = "input-container location">
           <label> Location of Service</label>
-          Same as my address<input type="radio" class="ServiceAddress" name="address" value="same" id="sameradio">
+          Same as my address<input type="radio" class="ServiceAddress" name="address" value="same" id="sameradio">&nbsp
           Different <input type="radio" class="ServiceAddress" name="address" value="different" id="differentradio">
         </div>
 
