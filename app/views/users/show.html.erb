@@ -274,6 +274,17 @@
                 <% if @user.id ==  current_user.id && @user.is_client?%>
                     <%= link_to "Add service", new_service_path(@user.id) , :class => 'btn btn-primary' ,:style => 'margin-bottom:4px'%><br>
                     <%= link_to "Past services" ,services_path(@user.id), :class => 'btn btn-primary'%>
+                <% elsif @user.id ==  current_user.id && @user.is_teen?%>
+                        <h4><i class="fa fa-cogs" aria-hidden="true"></i> <%=t :completedServices%></h4>
+                        <% if @user.service_jobs.status(Service::COMPLETED).any? %>
+                            <% @user.service_jobs.status(Service::COMPLETED).each do |service| %>
+                                <p>Service: <%= service.title %></p>
+                                <p>Charge: $<%= service.charge_per_hour %> <%=t :perHour%></p>
+                                <%= link_to "View", service_path(service), :class => 'btn btn-success' %>
+                            <%end%>
+                        <%else%>
+                            <h5> <%=t :noCompletedServices%> </h5>
+                        <%end%>
                 <%end%>
               </div>
             </div>
