@@ -6,7 +6,7 @@ class HomeController < ApplicationController
 
         @recommended_services = Service.find_by_sql("SELECT S.ID,S.TITLE,S.CHARGE_PER_HOUR,S.FREQUENCY,S.DESCRIPTION FROM SERVICES S JOIN
   (SELECT U.SKILL_ID,U.USER_ID,DAY,START_TIME,END_TIME FROM USER_SKILLS U JOIN TEEN_TIMES T ON (U.USER_ID=T.USER_ID AND U.USER_ID=#{@user.id})) A
-    ON (S.STATUS=1 AND S.SKILL=A.SKILL_ID AND (#{@user.age} BETWEEN MIN_AGE AND MAX_AGE) AND S.START_TIME>=A.START_TIME AND S.END_TIME<=A.END_TIME)")
+    ON (S.STATUS=1 AND S.SKILL=A.SKILL_ID AND (#{@user.age} BETWEEN MIN_AGE AND MAX_AGE) AND S.DAY = A.DAY  AND S.START_TIME>=A.START_TIME AND S.END_TIME<=A.END_TIME)")
 
         @user_skills = UserSkill.where(user_id: @user.id)
         @user_availability =  TeenTime.where(user_id: @user.id)
