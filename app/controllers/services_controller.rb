@@ -88,8 +88,12 @@ AND B.start_time<='#{@service.start_time}' AND B.END_TIME>='#{@service.end_time}
 			@service.other_title = ""
 		end
 
+		invalid_service_state = @service.status != Service::LISTED &&
+														@service.status != Service::UNLISTED
+		has_invalid_credit_card = current_user.stripe_id.blank? && false
+
 		# Check to make sure that user is not trying to feed us invalid data
-		if @service.status != Service::LISTED && @service.status != Service::UNLISTED
+		if invalid_service_state || has_invalid_credit_card
 			render :new
 		elsif @service.save
 			redirect_to(user_path(current_user.id))
@@ -204,14 +208,6 @@ AND B.start_time<='#{@service.start_time}' AND B.END_TIME>='#{@service.end_time}
 			end
 			@service.update({:status => Service::ACCEPTED});
 		end
-		redirect_to (@service)
-	end
-
-	# User wants to submit timesheet for service
-	# TODO: Make sure timesheet is created and valid before changing service status
-	def submit_timesheet
-		@service = Service.find(params[:id])
-		@service.update({:status => Service::PENDING});
 		redirect_to (@service)
 	end
 
