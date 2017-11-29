@@ -308,36 +308,37 @@
             </div>
           </div>
           <% else %>
-              <div class="add-button">
-                <% if @user.id !=  current_user.id || current_user.is_CSR? %>
-                    <%= link_to new_user_review_path(@user.id), :class => 'btn btn-primary' do %>
-                        <i class="fa fa-plus"></i>
-                        <span class="hidden-xs"><%=t :addReview%></span>
-                    <% end %>
-                <% end %>
-              </div>
-              <% if @user.show_rating? %>
-                  <div class="average-review">
-                    <% if @user.average_rating.present? %>
-                        <h4><%=t :averageRating%>:</h4>
-                        <%= render(:partial => 'review', :locals => {:rating => @user.average_rating}) %>
-                    <% end %>
-                  </div>
-                  <% if @user.reviews.count != 0 %>
-                      <% @user.reviews.each do |review| %>
-                          <div class="review-block">
-                            <%= render(:partial => 'review', :locals => {:rating => review.rating}) %>
-                            <% if review.body.present? %>
-                                <h4><%= review.body %></h4>
-                            <% end %>
-                          </div>
+              <div class = "well">
+                <div class="add-button">
+                  <% if @user.id !=  current_user.id || current_user.is_CSR? %>
+                      <%= link_to new_user_review_path(@user.id), :class => 'btn btn-primary' do %>
+                          <i class="fa fa-plus"></i>
+                          <span class="hidden-xs"><%=t :addReview%></span>
                       <% end %>
                   <% end %>
+                </div>
+                <% if @user.show_rating? %>
+                    <div class="average-review">
+                      <% if @user.average_rating.present? %>
+                          <h4><%=t :averageRating%>:</h4>
+                          <%= render(:partial => 'review', :locals => {:rating => @user.average_rating}) %>
+                      <% end %>
+                    </div>
+                    <% if @user.reviews.count != 0 %>
+                        <% @user.reviews.each do |review| %>
+                            <div class="review-block">
+                              <%= render(:partial => 'review', :locals => {:rating => review.rating}) %>
+                              <% if review.body.present? %>
+                                  <h4><%= review.body %></h4>
+                              <% end %>
+                            </div>
+                        <% end %>
+                    <% end %>
 
-              <%else %>
-                  <h5> <%=t :noReviews%> </h5>
-              <% end %>
-
+                <%else %>
+                    <h5> <%=t :noReviews%> </h5>
+                <% end %>
+              </div>
           <% end %>
         </div>
         <div class="tab-pane primary fade in well" id="billingTab">
