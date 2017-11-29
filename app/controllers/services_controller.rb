@@ -110,6 +110,17 @@ AND B.start_time<='#{@service.start_time}' AND B.END_TIME>='#{@service.end_time}
 			params[:service][:other_title] = ""
 		end
 
+		if params[:service][:address_1].blank?
+			@user = User.find(current_user.id)
+			params[:service][:address_1] = @user.address_1
+			params[:service][:address_2] = @user.address_2
+			params[:service][:city] = @user.city
+			params[:service][:country] = @user.country
+			params[:service][:province] = @user.province
+			params[:service][:postal_code] = @user.postal_code
+		end
+
+
 		if @service.update(service_params)
 			redirect_to (user_path(@service.user_id))
 		else

@@ -52,6 +52,42 @@
             <%= f.number_field :max_age, placeholder: "e.g. 19", class: 'form-control'%>
         </div>
 
+        <div class = "input-container location">
+          <label> Location of Service</label>
+          Same as my address<input type="radio" class="ServiceAddress" name="address" value="same" id="sameradio">&nbsp
+          Different <input type="radio" class="ServiceAddress" name="address" value="different" id="differentradio">
+        </div>
+
+        <div id="address" hidden>
+          <div class="input-container">
+            <%= f.label :address_1, "Street Address", class: 'control-label'%>
+            <%= f.text_field :address_1, id: "address_1_field", class: "form-control"%>
+          </div>
+          <div class="input-container">
+            <%= f.label :address_2, "Apt/Unit number", class: 'control-label'%>
+            <%= f.text_field :address_2, class: "form-control"%>
+          </div>
+          <div class="input-container">
+            <%= f.label :city, "City", class: 'control-label'%>
+            <%= f.text_field :city, class: "form-control"%>
+          </div>
+          <div class="input-container">
+            <%= f.label :province, "Province/Territory", class: 'control-label'%>
+            <%= f.select :province, [ ['Alberta','AB'],['British Columbia','BC'],['Manitoba','MB'],['New Brunswich','NB'],
+                                      ['Newfoundland and Labrador','NL'],['Nova Scotia','NS'],['Ontario','ON'],['Prince Edward Island','PE'],
+                                      ['Quebec','QC'],['Saskatchewan','SK'],['Northwest Territories','NT'],
+                                      ['Nunavut','NU'],['Yukon','YT']], {:prompt => 'Select One'} , {:class => "form-control"}%>
+          </div>
+          <div class="input-container">
+            <%= f.label :postal_code, "Postal Code", class: 'control-label'%>
+            <%= f.text_field :postal_code, class: "form-control"%>
+          </div>
+          <div class="input-container">
+            <%= f.label :country, "Country", class: 'control-label'%>
+            <%= f.text_field :country, class: "form-control"%>
+          </div>
+        </div>
+
         <!-- Set the service start date -->
         <!-- TODO: Add date format validation -->
         <div class="input-container">
@@ -110,6 +146,28 @@
     var frequencyInputField = document.getElementById("service_freq_input_field")
     var hiddenOtherField = document.getElementById("other-div");
 
+    /* Initialize service address */
+
+    $('#sameradio').attr('checked',true)
+    if ("<%=@service.address_1%>" != "<%=@service.user.address_1%>" ||
+        "<%=@service.address_2%>" != "<%=@service.user.address_2%>"){
+        $('#address').show()
+        $('#sameradio').attr('checked',true)
+        $('#differentradio').attr('checked',true)
+    }
+
+
+    $(".ServiceAddress").change(function(){
+        switch($(this).val()) {
+            case 'same' :
+                $('#address').hide()
+                break;
+            case 'different' :
+                $('#address').show()
+                break;
+        }
+    })
+
     /* Initialize the frequency toggle */
     if(frequencyInputField.value != 0){
       document.getElementById("service_freq_toggle").checked = "true"
@@ -144,6 +202,15 @@
     }
 
     submitHelperFunction = () => {
+
+        // Erase custom input address data if needed
+        if(document.getElementById('sameradio').checked){
+            console.log("Erasing data")
+            $("#address_1_field").val("")
+        } else {
+            console.log("not erasing data")
+        }
+
 
         // Update the date time field value of the form
         userSetDateTime = $('#datetimepicker1').data("DateTimePicker").date()
