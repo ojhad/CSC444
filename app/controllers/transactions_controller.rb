@@ -27,7 +27,7 @@ class TransactionsController < ApplicationController
                                    reference_user_id: @user.id,
                                    user_id: client,
                                    read: FALSE
-      redirect_to(user_path(@user.id))
+      redirect_to(user_transaction_path(@user.id, @transaction.id))
     else
       flash.error = @transaction.errors
       render :new
