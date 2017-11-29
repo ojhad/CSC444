@@ -78,21 +78,19 @@
                   <p><%=t :noRecServices2%></p>
                 </div>
             <%else%>
-                <div class="row">
-                  <h4> <%= t :recommendedServices%></h4>
+                <div class = "row">
+                  <h4 class = "title-recommended-services"> <%= t :recommendedServices%></h4>
                   <br>
                   <% @recommended_services.each do |s|%>
-                    <div class="row">
-                      <div class="col-md-4">
-                        <div class="card" style="width: 25rem;">
-                          <div class="card-body">
-                            <h4 class="card-title"><%= s.title %></h4>
-                            <br>
-                            <p class="card-text">Description: <%=s.description%></p>
-                            <p class="card-text">Charge: $<%= s.charge_per_hour %> <%=t :perHour%></p>
-                            <br>
-                            <%= link_to "View", service_path(s.id), :class => 'btn btn-primary' %>
-                          </div>
+                    <div class="col-md-4">
+                      <div class="card" style="width: 25rem;">
+                        <div class="card-body">
+                          <h4 class="card-title"><%= s.title %></h4>
+                          <br>
+                          <p class="card-text">Description: <%=s.description%></p>
+                          <p class="card-text">Charge: $<%= s.charge_per_hour %> <%=t :perHour%></p>
+                          <br>
+                          <%= link_to "View", service_path(s.id), :class => 'btn btn-primary' %>
                         </div>
                       </div>
                     </div>
@@ -119,21 +117,17 @@
         <%else%>
         <div class="col-md-4">
           <h3><%= t :latestJob %></h3>
-            <hr>
-            <table>
-              <tr>
-                <td>
-                  <p><%=t :title%>: <%=@latest_service[0].main_title%></p>
-                  <p>Description: <%=@latest_service[0].description%></p>
-                  <p>Charge: $<%=@latest_service[0].charge_per_hour%> <%=t :perHour%></p>
-                </td>
-              <tr>
-                <td>
-                  <%= link_to "View", service_path(@latest_service[0].id), :class => 'btn btn-primary' %>
-                </td>
-              </tr>
-              </tr>
-            </table>
+          <hr>
+            <div class="card" style="width: 25rem;">
+              <div class="card-body">
+                <h4 class="card-title"><%=t :title%>: <%=@latest_service[0].main_title%></h4>
+                <br>
+                <p class="card-text">Description: <%=@latest_service[0].description%></p>
+                <p class="card-text">Charge: $<%=@latest_service[0].charge_per_hour%> <%=t :perHour%></p>
+                <br>
+                <%= link_to "View", service_path(@latest_service[0].id), :class => 'btn btn-primary' %>
+              </div>
+            </div>
         </div>
         <div class="col-md-4">
           <h3><%= t :currentJobsActive%></h3>
