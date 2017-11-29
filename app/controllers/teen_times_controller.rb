@@ -18,7 +18,7 @@ class TeenTimesController < ApplicationController
   def create
     @check = TeenTime.find_by_day_and_user_id_and_end_time(params[:day], @user.id, params[:start_time])
     if @check.blank?
-      @TeenTime = TeenTime.new(user_id: @user.id, day: params[:day], start_time: params[:start_time], end_time: params[:end_time])
+      @teenTime = TeenTime.new(user_id: @user.id, day: params[:day], start_time: params[:start_time], end_time: params[:end_time])
       unless @teenTime.save
         flash[:error] = @teenTime.errors.full_messages
       end
