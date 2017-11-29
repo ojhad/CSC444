@@ -173,8 +173,17 @@
                     <%end%>
                 <% elsif @user.id == current_user.id && @user.is_teen? || current_user.is_CSR?  %>
                     <h4><i class="fa fa-cogs" aria-hidden="true"></i> <%=t :requestedServices%> </h4>
-                    The Teen's requested services should go here.
-                <%else%><!--Not the current user-->
+                    <% if @user.service_jobs.status(Service::LISTED).any? %>
+                      <% @user.service_jobs.status(Service::LISTED).each do |service| %>
+                                <p>Service: <%= service.title %></p>
+                                <p>Charge: $<%= service.charge_per_hour %> <%=t :perHour%></p>
+                                <%= link_to "View", service_path(service), :class => 'btn btn-success' %>
+                      <%end%>
+                    <%else%>
+                        <h5> <%=t :noRequestedServices%> </h5>
+                    <%end%>
+
+                    <%else%><!--Not the current user-->
                     <% if @user.is_client?%>
                         <h4><i class="fa fa-cogs" aria-hidden="true"></i> <%= t :listedServices%> </h4>
                         <% if @user.services.status(Service::LISTED).count != 0 %>
