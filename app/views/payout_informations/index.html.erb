@@ -1,26 +1,23 @@
 <div class="container" style="padding-top: 4em">
-  <p>In order to get paid, you will need to have an active PayPal Account. If you haven't already, please provide the PayPal email address
-  that you want us to send your earnings to.</p>
-  <p> Alternatively, we can mail you a check. If you would like to be mailed a check, please indicate so below.
-  By default, we will send the check to the address on your profile. If this is not your mailing address, please indicate
-  below as well.</p>
+  <p><%= t :payoutDesc1%></p>
+  <p><%= t :payoutDesc2%> </p>
   <br>
   <% if @user_payout_info.method == 'check'%>
-      <p> Your current deposit method is set to <b>Check by Mail</b> </p>
+      <p> <%=t :currentDeposit%> <b><%=t :chequeMail%></b> </p>
   <% else %>
-      <p> Your current deposit method is set to <b>PayPal</b></p>
+      <p> <%=t :currentDeposit%> <b>PayPal</b></p>
   <%end%>
   <br>
   <%= form_tag user_payout_information_path(@user.id , @user.payout_information.id) , :method => :put do %>
     <%= csrf_meta_tags %>
     <div class = "form-group">
-        <label> Update Deposit Method</label>
+        <label> <%=t :updateDeposit%></label>
         <input type="radio" class="PayoutInfo" name="method" value="paypal"> PayPal
-        <input type="radio" class="PayoutInfo" name="method" value="check"> Check
+        <input type="radio" class="PayoutInfo" name="method" value="check"> <%=t :cheque%>
     </div>
     <%=hidden_field_tag 'which_form' , 'method'%>
     <div class="form-group">
-      <%= submit_tag 'Submit', class: 'btn btn-primary' %>
+      <%= submit_tag I18n.t(:submit), class: 'btn btn-primary' %>
     </div>
   <%end%>
   <hr>
@@ -30,9 +27,9 @@
     <div class="row">
       <div class="col-lg-6">
         <% if !@user_payout_info.has_paypal?%>
-            <p> Your current PayPal address is <b><%=@user_payout_info.paypal%></b></p>
+            <p> <%=t :currentPaypal%> <b><%=@user_payout_info.paypal%></b></p>
             <br>
-            <p> If you want to set a new PayPal address, please fill and submit the form below.</p>
+            <p> <%= t :setNewPaypal%> </p>
             <br>
         <%end%>
       </div>
@@ -42,12 +39,12 @@
         <%= form_tag user_payout_information_path(@user.id , @user.payout_information.id) , :method => :put do %>
             <%= csrf_meta_tags %>
             <div class="form-group">
-              <%= label_tag 'paypal', 'PayPal Address', class: 'control-label col-sm-3'%>
+              <%= label_tag 'paypal', I18n.t(:paypalAddress), class: 'control-label col-sm-3'%>
               <%= email_field_tag 'paypal', nil , class: 'form-control',required:'true'%>
             </div>
             <%=hidden_field_tag 'which_form' , 'paypal'%>
             <div class="form-group">
-              <%= submit_tag 'Submit', class: 'btn btn-primary' %>
+              <%= submit_tag I18n.t(:submit), class: 'btn btn-primary' %>
             </div>
         <%end%>
       </div>
@@ -58,7 +55,7 @@
   <div id="check" hidden>
     <div class="row">
       <div class="col-lg-6">
-        <p>Current Mailing Address</p>
+        <p><%=t :currentMailAddress%></p>
         <table>
           <tr>
             <td><b><%=@user.first_name.capitalize%> <%=@user.last_name.capitalize%></b></td>
@@ -81,26 +78,26 @@
     <hr>
     <div class="row">
       <div class="col-lg-6">
-        <p> Complete the form below to update your mailing address</p>
+        <p><%=t :updateMailAddress%></p>
         <br>
         <%= form_tag user_payout_information_path(@user.id , @user.payout_information.id) , :method => :put do %>
             <%= csrf_meta_tags %>
             <div class="form-group">
-              <%= label_tag :address_1, 'Address line 1:', class: "control-label col-sm-4" %>
+              <%= label_tag :address_1, I18n.t(:address1), class: "control-label col-sm-4" %>
               <div class="col-sm-5">
                 <%= text_field_tag :address_1 , nil, class: 'form-control',required:'true'%>
               </div>
             </div>
 
             <div class="form-group">
-              <%= label_tag :address_2, 'Address line 2:', class: "control-label col-sm-4" %>
+              <%= label_tag :address_2, I18n.t(:address2), class: "control-label col-sm-4" %>
               <div class="col-sm-5">
                 <%= text_field_tag :address_2 , nil, class: 'form-control',required:'true'%>
               </div>
             </div>
 
             <div class="form-group">
-              <%= label_tag :city, 'City:', class: "control-label col-sm-4" %>
+              <%= label_tag :city, I18n.t(:city), class: "control-label col-sm-4" %>
               <div class="col-sm-5">
                 <%= text_field_tag :city , nil, class: 'form-control',required:'true'%>
               </div>
@@ -109,24 +106,33 @@
             <div class="form-group">
               <%= label_tag :province, 'Province:', class: "control-label col-sm-4" %>
               <div class="col-sm-5">
-                <%= select_tag "province","<option value='AB'>Alberta</option><option value='BC'>British Columbia</option>
-            <option value='MB'>Manitoba</option><option value='NB'>New Brunswich</option>
+                <% if I18n.locale == :en %>
+                  <%= select_tag "province","<option value='AB'>Alberta</option><option value='BC'>British Columbia</option>
+            <option value='MB'>Manitoba</option><option value='NB'>New Brunswick</option>
 <option value='NL'>Newfoundland and Labrador</option><option value='NS'>Nova Scotia</option><option value='ON'>Ontario</option>
 <option value='PE'>Prince Edward Island</option><option value='QC'>Quebec</option><option value='SK'>Saskatchewan</option>
 <option value='NT'>Northwest Territories</option><option value='NU'>Nunavut</option>
-<option value='YT'>Yukon</option>", prompt: 'Select One', class: "form-control",required:'true'%>
+<option value='YT'>Yukon</option>", prompt: I18n.t(:selectOne) , class: "form-control",required:'true'%>
+                <%else%>
+                    <%= select_tag "province","<option value='AB'>Alberta</option><option value='BC'>Colombie-Britannique</option>
+            <option value='MB'>Manitoba</option><option value='NB'>Nouveau-Brunswick</option>
+<option value='NL'>Terre-Neuve-et-Labrador</option><option value='NS'>Nouvelle-Écosse</option><option value='ON'>L'Ontario</option>
+<option value='PE'>Île-du-Prince-Édouard</option><option value='QC'>Québec</option><option value='SK'>Saskatchewan</option>
+<option value='NT'>Territoires du Nord-Ouest</option><option value='NU'>Nunavut</option>
+<option value='YT'>Yukon</option>", prompt: I18n.t(:selectOne) , class: "form-control",required:'true'%>
+                <%end%>
               </div>
             </div>
 
             <div class="form-group">
-              <%= label_tag :postal_code, 'Postal Code:', :class => "control-label col-sm-4" %>
+              <%= label_tag :postal_code, I18n.t(:postalCode), :class => "control-label col-sm-4" %>
               <div class="col-sm-5">
                 <%= text_field_tag :postal_code ,nil, class: 'form-control',required:'true'%>
               </div>
             </div>
 
             <div class="form-group">
-              <%= label_tag :country, 'Country:', class: "control-label col-sm-4" %>
+              <%= label_tag :country, I18n.t(:country), class: "control-label col-sm-4" %>
               <div class="col-sm-5">
                 <%= text_field_tag :country, nil,class: 'form-control',required:'true' %>
               </div>
@@ -134,7 +140,7 @@
 
             <div class="form-group">
               <div class="col-sm-5">
-                <%= submit_tag 'Submit', class: 'btn btn-primary' %>
+                <%= submit_tag I18n.t(:submit), class: 'btn btn-primary' %>
               </div>
             </div>
 

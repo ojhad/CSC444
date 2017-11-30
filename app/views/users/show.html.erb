@@ -8,7 +8,7 @@
             <img alt="" src="http://gazettereview.com/wp-content/uploads/2016/03/facebook-avatar.jpg">
           <% end %>
         </div>
-        <div class="card-info"> <span class="card-title"><%= @user.first_name%> <%= @user.last_name%></span>
+        <div class="card-info"> <span class="card-title"><%= @user.first_name.capitalize%> <%= @user.last_name.capitalize%></span>
 
         </div>
       </div>
@@ -107,8 +107,8 @@
               </div>
               <% if @user.id == current_user.id %>
                 <div class="col-md-4">
-                  <%= link_to "Edit Profile", edit_user_registration_path(@user.id) , :class => 'btn btn-primary',:style => 'margin-bottom:4px' %><br>
-                  <%= link_to "Delete Account", user_registration_path, :class => 'btn btn-danger', data: {title: 'Delete Account' ,confirm: "Are you sure you want to delete your account?" }, method: :delete %>
+                  <%= link_to I18n.t(:editProfile), edit_user_registration_path(@user.id) , :class => 'btn btn-primary',:style => 'margin-bottom:4px' %><br>
+                  <%= link_to I18n.t(:deleteAccount), user_registration_path, :class => 'btn btn-danger', data: {title: 'Delete Account' ,confirm: "Are you sure you want to delete your account?" }, method: :delete %>
 
                 </div>
               <%end%>
@@ -128,9 +128,9 @@
                         <% @user.services.status(Service::UNLISTED).each do |service| %>
                             <p>Service: <%= service.title %></p>
                             <p>Charge: $<%= service.charge_per_hour %> <%=t :perHour%></p>
-                            <%= link_to "List", list_service_path(service), method: :post, :class => 'btn btn-success' %>
-                            <%= link_to "Edit", edit_service_path(service), :class => 'btn btn-primary' %>
-                            <%= link_to "Delete", service_path(service), method: :delete, data: {title: 'Delete Listed Service' , confirm: 'Are you sure? Item will not appear under listed services'}, :class => 'btn btn-danger' %>
+                            <%= link_to I18n.t(:list), list_service_path(service), method: :post, :class => 'btn btn-success' %>
+                            <%= link_to I18n.t(:edit), edit_service_path(service), :class => 'btn btn-primary' %>
+                            <%= link_to I18n.t(:delete), service_path(service), method: :delete, data: {title: 'Delete Listed Service' , confirm: 'Are you sure? Item will not appear under listed services'}, :class => 'btn btn-danger' %>
                         <%end%>
                     <%else%>
                         <h5> <%= t :noUnlistedServices%> </h5>
@@ -141,17 +141,17 @@
                             <p>Service: <%= service.title %></p>
                             <p>Charge: $<%= service.charge_per_hour %> <%= t :perHour%></p>
                             <% if @user.id == current_user.id || current_user.is_admin? %>
-                                <%= link_to "View", service_path(service), :class => 'btn btn-success' %>
-                                <%= link_to "Edit", edit_service_path(service),
+                                <%= link_to I18n.t(:view), service_path(service), :class => 'btn btn-success' %>
+                                <%= link_to I18n.t(:edit), edit_service_path(service),
                                             data: {title: 'Edit Service' ,
                                                    confirm: 'Are you sure you want to edit this service? Performing this action will unlist the service and delete all current requests.'},
                                             :class => 'btn btn-primary' %>
-                                <%= link_to 'Unlist', unlist_service_path(service), method: :post,
+                                <%= link_to I18n.t(:unlist), unlist_service_path(service), method: :post,
                                             data: {title: 'Unlist Service' ,
                                                    confirm: 'Are you sure you want to unlist this service? Performing this action will delete all current requests.'},
                                             :class => 'btn btn-danger' %>
                             <% else %>
-                                <%= link_to "View Service", service_path(service.id), :class => 'btn btn-primary' %>
+                                <%= link_to I18n.t(:view), service_path(service.id), :class => 'btn btn-primary' %>
                             <% end %>
                         <%end%>
                     <%else%>
@@ -166,7 +166,7 @@
                         <% @user.services.status(Service::COMPLETED).each do |service| %>
                             <p>Service: <%= service.title %></p>
                             <p>Charge: $<%= service.charge_per_hour %> <%=t :perHour%></p>
-                            <%= link_to "View", service_path(service), :class => 'btn btn-success' %>
+                            <%= link_to I18n.t(:view), service_path(service), :class => 'btn btn-success' %>
                         <%end%>
                     <%else%>
                         <h5> <%=t :noCompletedServices%> </h5>
@@ -177,7 +177,7 @@
                         <% @user.service_jobs.status(Service::LISTED).each do |service| %>
                             <p>Service: <%= service.title %></p>
                             <p>Charge: $<%= service.charge_per_hour %> <%=t :perHour%></p>
-                            <%= link_to "View", service_path(service), :class => 'btn btn-success' %>
+                            <%= link_to I18n.t(:view), service_path(service), :class => 'btn btn-success' %>
                         <%end%>
                     <%else%>
                         <h5> <%=t :noRequestedServices%> </h5>
@@ -191,7 +191,7 @@
                                 <p>Service: <%= service.title %></p>
                                 <p>Charge: $<%= service.charge_per_hour %> <%= t :perHour%></p>
                                 <br>
-                                <%= link_to "View Service", service_path(service.id), :class => 'btn btn-primary' %>
+                                <%= link_to I18n.t(:view), service_path(service.id), :class => 'btn btn-primary' %>
                             <%end%>
                         <%else%>
                             <% if @user.id==current_user.id%>
@@ -213,12 +213,12 @@
                         <% @user.services.status(Service::ACCEPTED).each do |service| %>
                             <p>Service: <%= service.title %></p>
                             <p>Charge: $<%= service.charge_per_hour %> <%=t :perHour%></p>
-                            <%= link_to "View", service_path(service), :class => 'btn btn-success' %>
-                            <%= link_to "Edit", edit_service_path(service),
+                            <%= link_to I18n.t(:view), service_path(service), :class => 'btn btn-success' %>
+                            <%= link_to I18n.t(:edit), edit_service_path(service),
                                         data: {title: 'Edit Service' ,
                                                confirm: 'Are you sure you want to edit this service? Performing this action will unlist the service and delete all current requests.'},
                                         :class => 'btn btn-primary' %>
-                            <%= link_to 'Unlist', unlist_service_path(service), method: :post,
+                            <%= link_to I18n.t(:unlist), unlist_service_path(service), method: :post,
                                         data: {title: 'Unlist Service',
                                                confirm: 'Are you sure you want to unlist this service? Performing this action will delete all current requests.'},
                                         :class => 'btn btn-danger' %>
@@ -231,8 +231,8 @@
                         <% @user.services.status(Service::PENDING).each do |service| %>
                             <p>Service: <%= service.title %></p>
                             <p>Charge: $<%= service.charge_per_hour %> <%= t :perHour%></p>
-                            <%= link_to "View", service_path(service), :class => 'btn btn-primary' %>
-                            <%= link_to "Review Timesheet", service_path(service), :class => 'btn btn-success' %>
+                            <%= link_to I18n.t(:view), service_path(service), :class => 'btn btn-primary' %>
+                            <%= link_to I18n.t(:reviewTS), service_path(service), :class => 'btn btn-success' %>
                         <%end%>
                     <%else%>
                         <h5> <%=t :noPendingServices%> </h5>
@@ -247,17 +247,17 @@
                         <% @user.service_jobs.status(Service::ACCEPTED).each do |service| %>
                             <p>Service: <%= service.title %></p>
                             <p>Charge: $<%= service.charge_per_hour %> <%= t :perHour%></p>
-                            <%= link_to "View", service_path(service), :class => 'btn btn-primary' %>
+                            <%= link_to I18n.t(:view), service_path(service), :class => 'btn btn-primary' %>
                         <%end%>
                     <%else%>
-                        <h5> None of your services have been accepted yet </h5>
+                        <h5> <%=t :noServicesAccepted%> </h5>
                     <%end%>
                 <%end%>
               </div>
               <% if @user.id ==  current_user.id && @user.is_client?%>
                 <div class="col-md-4">
-                  <%= link_to "Add service", new_service_path(@user.id) , :class => 'btn btn-primary' ,:style => 'margin-bottom:4px'%><br>
-                  <%= link_to "Past services" ,services_path(@user.id), :class => 'btn btn-primary'%>
+                  <%= link_to I18n.t(:addService), new_service_path(@user.id) , :class => 'btn btn-primary' ,:style => 'margin-bottom:4px'%><br>
+                  <%= link_to I18n.t(:pastServices) ,services_path(@user.id), :class => 'btn btn-primary'%>
                 </div>
               <%end%>
             </div>
@@ -317,7 +317,7 @@
             <div class="row">
               <div class="col-md-4">
                 <h4> Transactions </h4>
-                <%= link_to "View Transactions", user_transactions_path(@user.id), :class => 'btn btn-default' %>
+                <%= link_to I18n.t(:viewTrans), user_transactions_path(@user.id), :class => 'btn btn-default' %>
                 <% if @user.is_teen? %>
                   <%= link_to  new_user_transaction_path(@user.id), :class => 'btn btn-primary' do %>
                         <i class="fa fa-plus"></i>
@@ -339,20 +339,20 @@
                         <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                                 data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
                                 data-description="Add a credit card"
-                                data-locale="auto"
+                                data-locale=<%=I18n.locale%>
                                 data-email="<%=@user.email%>"
                                 data-allow-remember-me='false'
-                                data-panel-label="Add New Card"
-                                data-label="Add New Card">
+                                data-panel-label=<%=t :addNew%>
+                                data-label=<%=t :addNew%>>
                         </script>
                     <% end %>
                 <%elsif @user.is_client?%>
-                    <%= link_to "View credit card on file", user_cards_path(@user.id), :class => 'btn btn-default' %>
-                    <%= link_to "View charges", user_charges_path(@user.id), :class => 'btn btn-default' %>
+                    <%= link_to I18n.t(:viewCard), user_cards_path(@user.id), :class => 'btn btn-default' %>
+                    <%= link_to I18n.t(:viewCharges), user_charges_path(@user.id), :class => 'btn btn-default' %>
                 <%end%>
                 <% if @user.is_teen?%>
-                        <%= link_to "Payouts", user_payouts_path(@user.id), :class => 'btn btn-default' %>
-                        <%= link_to "Payout information", user_payout_informations_path(@user.id), :class => 'btn btn-default' %><br>
+                        <%= link_to I18n.t(:payouts), user_payouts_path(@user.id), :class => 'btn btn-default' %>
+                        <%= link_to I18n.t(:payoutInfo), user_payout_informations_path(@user.id), :class => 'btn btn-default' %><br>
                 <%end%>
               </div>
               <div class="col-md-4">
@@ -362,9 +362,9 @@
                     <p> <%=t :payoutMethod%>: <%=@user.payout_information.method.upcase()%></p>
                     <%= form_tag user_payouts_path(@user.id) do %>
                         <% if @user.balance>0%>
-                          <%= submit_tag "Withdraw balance", class: "btn btn-default" %>
+                          <%= submit_tag I18n.t(:withdrawBalance), class: "btn btn-default" %>
                         <%else%>
-                            <%= submit_tag "Withdraw balance", class: "btn btn-default", disabled: true %>
+                            <%= submit_tag I18n.t(:withdrawBalance), class: "btn btn-default", disabled: true %>
                         <%end%>
                     <%end%>
                 <%else%>
@@ -380,9 +380,9 @@
                 <h4><i class="fa fa-star" aria-hidden="true"></i> <%=t :skills%></h4>
                 <% @userSkills = UserSkill.where(:user_id => @user.id) %>
                 <% if @userSkills.empty? && @user.id != current_user.id %>
-                    This user has no assigned skills
+                    <%= t :noUserSkills%>
                 <% elsif @userSkills.empty? && @user.id == current_user.id %>
-                    You have no assigned skills
+                    <%= t :noSkills%>
                 <% else %>
                     <% @userSkills.each do |skill| %>
                         <%= Skill.find(skill.skill_id).skill_name %><br>
@@ -392,7 +392,7 @@
               </div>
               <% if @user.id == current_user.id %>
                   <div class="col-md-4">
-                    <%= link_to "Edit Skills", edit_user_skill_path , :class => 'btn btn-primary',:style => 'margin-bottom:4px' %><br>
+                    <%= link_to I18n.t(:editSkills), edit_user_skill_path , :class => 'btn btn-primary',:style => 'margin-bottom:4px' %><br>
                   </div>
               <% end %>
             </div>
@@ -402,7 +402,7 @@
               </div>
               <% if @user.id == current_user.id %>
                   <div class="col-md-4">
-                    <%= link_to "Edit Availability", edit_teen_time_path , :class => 'btn btn-primary',:style => 'margin-bottom:4px' %><br>
+                    <%= link_to I18n.t(:editAvail), edit_teen_time_path , :class => 'btn btn-primary',:style => 'margin-bottom:4px' %><br>
                   </div>
               <% end %>
             </div>
@@ -413,7 +413,7 @@
         <div class="tab-pane primary fade in well" id="messagingTab">
           <div class="container">
             <div class="row">
-              <p><%= t :message %> <%= @user.first_name%> <%= @user.last_name%></p>
+              <p><%= t :message %> <%= @user.first_name.capitalize%> <%= @user.last_name.capitalize%></p>
               <%= form_for @message do |f| %>
                   <% if @message.errors.any? %>
                       <% @message.errors.full_messages.each do |message| %>
@@ -445,14 +445,14 @@
             <% if @user.id !=  current_user.id  %>
                   <%= link_to new_user_review_path(@user.id), :class => 'btn btn-primary' do %>
                       <i class="fa fa-plus"></i>
-                      <span class="hidden-xs">Add Review</span>
+                      <span class="hidden-xs"><%=t :addReview%></span>
                   <% end %>
             <% end %>
           </div>
           <% if @user.show_rating? %>
               <div class="average-review">
                 <% if @user.average_rating.present? %>
-                    <h4>Average Rating:</h4>
+                    <h4><%=t :averageRating%>:</h4>
                     <%= render(:partial => 'review', :locals => {:rating => @user.average_rating}) %>
                 <% end %>
               </div>
@@ -491,7 +491,7 @@
                         <%= f.number_field :invitee_id , { class: 'form-control', id: 'charge_per_hour', min: 1, maxlength: "4", size: "4" }%>
                       </div>
                       <div class="col-sm-2">
-                        <%= f.submit 'Invite User', :class => 'btn btn-primary' %>
+                        <%= f.submit I18n.t(:inviteUser), :class => 'btn btn-primary' %>
                       </div>
                     </div>
                 <% end %>
@@ -527,7 +527,7 @@
         displaySchedule();
         function displaySchedule(){
           <% if @teenDays.empty? %>
-            $(".schedule").html("<div class='noAvaib'>No timetable available for this user</div>");
+            $(".schedule").html("<div class='noAvaib'><%=t :noTimetable%></div>");
           <% else %>
             $(".schedule").html("");
             <% @teenDays.each do |day| %>

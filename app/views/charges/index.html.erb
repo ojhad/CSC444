@@ -1,7 +1,7 @@
 <div class="container charges">
-  <h4> Credit Card Charges History</h4>
+  <h4> <%=t :chargeHistory%></h4>
   <br>
-  <p> Please find below all your credit card charges to date.</p><hr>
+  <p> <%=t :chargesDesc%></p><hr>
   <div class="col-md-6">
     <% if !@charges.blank?%>
         <% @charges.each do |c| %>
@@ -9,7 +9,7 @@
               <table style="width:100%" >
                 <tr>
                   <th>ID</th>
-                  <th>Amount (CAD)</th>
+                  <th><%=t :amount%> (CAD)</th>
                   <th>Date</th>
                 </tr>
                 <tr>
@@ -22,7 +22,7 @@
             <hr>
         <%end%>
     <%else%>
-        <p>No charges yet!</p>
+        <p><%=t :noCharges%></p>
     <%end%>
   </div>
 </div>

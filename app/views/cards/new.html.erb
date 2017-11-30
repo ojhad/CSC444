@@ -14,10 +14,10 @@
     <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
             data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
             data-description="Add a credit card"
-            data-locale="auto"
+            data-locale=<%=I18n.locale%>
             data-email="<%=@user.email%>"
             data-allow-remember-me='false'
-            data-panel-label="Add New Card"
-            data-label="Add New Card">
+            data-panel-label=<%=t :addNew%>
+            data-label="<%=t :addNew%>">
     </script>
 <% end %>

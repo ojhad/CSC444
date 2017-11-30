@@ -1,17 +1,16 @@
 <%if @current_user.id==@user.id%>
+
 <div class="container" style="padding-top: 5em">
 
   <div class="row">
 
     <% if @user.stripe_id%>
-      <p> Below are the details of the credit card details in our system. This will be the credit card that we will use when
-      billing you after accepting teenagers' time sheets for your services. </p>
-
-      <p> If you would like us to charge a different credit card, please click on 'Provide Default Credit Card'.</p>
-      <p> Please note that you can only have one credit card on file, and you <b>must</b> have a credit card on file before adding a service.</p>
-      <p> Having just one credit card on file ensures that all parties are aware which card will be billed. Requiring a credit card on file avoids service posting disruption. </p>
-    <%else%>
-      <p> You don't have any cards on file. Click 'Add New Credit Card' to add a credit card so you can post services.</p>
+      <p> <%=t :cardDesc1%></p>
+      <p> <%=t :cardDesc2%></p>
+      <p> <%=t :cardDesc3%></p>
+      <p> <%=t :cardDesc4%></p>
+    <%elsif @cards.blank?%>
+      <p> <%=t :noCardDesc%></p>
     <%end%>
   </div>
   <br>
@@ -21,17 +20,17 @@
       <div class="row">
         <div class="col-md-3" style="border:solid">
           <% if card.brand=='Visa'%>
-            <p> <i class="fa fa-cc-visa fa-lg" aria-hidden="true"></i> Card type: <%=card.brand%></p>
+            <p> <i class="fa fa-cc-visa fa-lg" aria-hidden="true"></i> <%=t :cardType%>: <%=card.brand%></p>
           <% elsif card.brand=='MasterCard'%>
-             <p> <i class="fa fa-cc-mastercard fa-lg" aria-hidden="true"></i> Card type: <%=card.brand%></p>
+             <p> <i class="fa fa-cc-mastercard fa-lg" aria-hidden="true"></i> <%=t :cardType%>: <%=card.brand%></p>
           <% elsif card.brand=='American Express'%>
-             <p> <i class="fa fa-cc-mastercard fa-lg" aria-hidden="true"></i> Card type: <%=card.brand%></p>
+             <p> <i class="fa fa-cc-mastercard fa-lg" aria-hidden="true"></i> <%=t :cardType%>: <%=card.brand%></p>
           <%else%>
-             <p> <i class="fa fa-credit-card fa-lg" aria-hidden="true"></i> Card type: <%=card.brand%></p>
+             <p> <i class="fa fa-credit-card fa-lg" aria-hidden="true"></i> <%=t :cardType%>: <%=card.brand%></p>
           <%end%>
-          <p> Last 4 digits of card: <%=card.last4%></p>
+          <p> <%=t :last4%>: <%=card.last4%></p>
 
-          <p> Card expiry date: <%=card.exp_month%>/<%=card.exp_year%></p>
+          <p> <%=t :cardExpiry%>: <%=card.exp_month%>/<%=card.exp_year%></p>
 
         </div>
       </div>
@@ -51,17 +50,17 @@
 
       <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
               data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
-              data-description="Provide a default credit card"
-              data-locale="auto"
+              data-description=<%=t :provideDefault%>
+              data-locale=<%=I18n.locale%>
               data-email="<%=@user.email%>"
               data-allow-remember-me='false'
               data-panel-label="Submit"
-              data-label="Provide Default Credit Card">
+              data-label="<%=t :provideDefault%>">
       </script>
   <% end %>
 
 </div>
 
 <%else%>
-    <p> You are not authorized to view this page!!!</p>
+    <p> <%= t :notAuthorized%></p>
 <%end%>
