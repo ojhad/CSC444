@@ -1,33 +1,73 @@
-<h1>Services</h1>
-<% if @services.length == 0 %>
-		<p>No services currently available</p>
-<% else %>
-	<div class="container">
-		<% @services.each_with_index do |s, i| %>
-				<% if i != 0 and i % 3 == 0 %>
-						</div>
-				<% end %>
-				<% if i % 3 == 0 %>
-					<div class="row">
-				<% end %>
-					<div class="col-md-4">
-						<div class="card" style="width: 25rem;">
-							<div class="card-body">
-								<h4 class="card-title"><%= s.main_title %></h4>
-                <br>
-                <p class="card-title">Posted By: <a href="/users/<%=s.user.id%>"><%= s.user.first_name.capitalize %> <%=s.user.last_name.capitalize%></a></p>
-								<p class="card-text">Cost: $<%= s.charge_per_hour %>/hour</p>
-                <p class="card-text">Skill: <%=s.title%></p>
-                <p class="card-text">Location: <%=s.city.capitalize%></p>
-                <p> Distance from me: <%=s.distance.round(2)%> kms</p>
-                <br>
-								<a href="/services/<%= s.id %>" class="btn btn-primary">More Details</a>
-							</div>
-						</div>
-					</div>
-				<%if i == @services.length - 1%>
-					</div>
-				<% end %>
-		<% end %>
+<div class = "container-service-postings">
+	<h1 class = "title-service-postings">Services</h1>
+
+	<div class="range-slider">
+		<h4>Filter by distance</h4>
+		<input type="text" class="js-range-slider" value="" />
 	</div>
-<% end %>
+
+	<% if @services.length == 0 %>
+			<p>No services currently available</p>
+	<% else %>
+		<div class="container">
+			<% @services.each_with_index do |s, i| %>
+					<% if i != 0 and i % 3 == 0 %>
+							</div>
+					<% end %>
+					<% if i % 3 == 0 %>
+						<div class="row">
+					<% end %>
+						<div class="col-md-4">
+							<div class="card-container">
+	              <div class="card transaction-card">
+	                <div class="card-body">
+	                  <h4 class="card-title"><%=s.main_title%></h4><br>
+	                  <p class="card-title">Posted By: <a href="/users/<%=s.user.id%>"><%= s.user.first_name.capitalize %> <%=s.user.last_name.capitalize%></a></p>
+	                  <p class="card-text">Charge: $<%=s.charge_per_hour%> <%=t :perHour%></p>
+	                  <p class="card-text">Skill: <%=s.title%></p>
+	                  <p class="card-text">Location: <%=s.city.capitalize%></p>
+	        
+	                  <p> Distance from me: <%=s.distance.round(2)%> kms</p>
+	                  <a href="/services/<%= s.id %>" class="btn btn-primary">More Details</a>
+	                </div>
+	              </div>
+	            </div>
+						</div>
+					<%if i == @services.length - 1%>
+						</div>
+					<% end %>
+			<% end %>
+		</div>
+	<% end %>
+</div>
+<script>
+	var $range = $(".js-range-slider")
+	var min = 0.1
+	var max = 100
+	var from = gon.from_distance
+
+	$range.ionRangeSlider({
+		type: "single",
+		min: min,
+		max: max,
+		from: from,
+		postfix: "km",
+		onFinish: function (data) {
+        	 // console.log($range.prop("value"));
+        	// $.ajax("/services/filter_by_distance")
+        	console.log(data)
+	        from = data["from"]
+	        console.log(from)
+        	$.ajax({
+        		type: "GET",
+			    url: "/services/filter_by_distance",
+			    data: {
+			        distance: data["from"]
+			    },
+			    success: function(json){
+               		console.log("LIVERPOOL LIVERPOOL LIVERPOOL LIVERPOOL LIVERPOOL")   
+                }
+			});
+    	},
+	});
+</script>

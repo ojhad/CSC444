@@ -121,7 +121,7 @@
         <div class="tab-pane primary fade in well" id="servicesTab">
           <div class="container">
             <div class="row">
-              <div class="col-md-4">
+              <div class="col-md-3">
                 <% if @user.id == current_user.id && @user.is_client? || current_user.is_CSR? %>
                     <h4><i class="fa fa-cogs" aria-hidden="true"></i> <%= t :unlistedServices%> </h4>
                     <% if @user.services.status(Service::UNLISTED).count != 0 %>
@@ -206,7 +206,7 @@
                     <%end%>
                 <%end%>
               </div>
-              <div class="col-md-4">
+              <div class="col-md-3">
                 <% if @user.id == current_user.id && @user.is_client? || current_user.is_CSR? %>
                     <h4><i class="fa fa-cog fa-spin" aria-hidden="true"></i> <%=t :acceptedServices%></h4>
                     <% if @user.services.status(Service::ACCEPTED).count != 0 %>
@@ -224,7 +224,7 @@
                                         :class => 'btn btn-danger' %>
                         <%end%>
                     <%else%>
-                        <h5> None of your services have been accepted yet </h5>
+                        <h5> <%=t :noServicesAccepted%> </h5>
                     <%end%>
                     <h4><i class="fa fa-cog fa-spin" aria-hidden="true"></i> <%=t :pendingCompletion%></h4>
                     <% if @user.services.status(Service::PENDING).count != 0 %>
@@ -232,7 +232,7 @@
                             <p>Service: <%= service.title %></p>
                             <p>Charge: $<%= service.charge_per_hour %> <%= t :perHour%></p>
                             <%= link_to I18n.t(:view), service_path(service), :class => 'btn btn-primary' %>
-                            <%= link_to I18n.t(:reviewTS), service_path(service), :class => 'btn btn-success' %>
+                            <%= link_to I18n.t(:reviewTS), user_transaction_path(@user.id, service.transactions.first.id), :class => 'btn btn-success' %>
                         <%end%>
                     <%else%>
                         <h5> <%=t :noPendingServices%> </h5>
@@ -254,12 +254,49 @@
                     <%end%>
                 <%end%>
               </div>
-              <% if @user.id ==  current_user.id && @user.is_client?%>
-                <div class="col-md-4">
-                  <%= link_to I18n.t(:addService), new_service_path(@user.id) , :class => 'btn btn-primary' ,:style => 'margin-bottom:4px'%><br>
-                  <%= link_to I18n.t(:pastServices) ,services_path(@user.id), :class => 'btn btn-primary'%>
-                </div>
-              <%end%>
+              <div class="col-md-3">
+                <% if @user.id ==  current_user.id && @user.is_client?%>
+                    <h4><i class="fa fa-cogs" aria-hidden="true"></i> <%=t :completedServices%></h4>
+                    <% if @user.services.status(Service::COMPLETED).any? %>
+                        <% @user.services.status(Service::COMPLETED).each do |service| %>
+                            <p>Service: <%= service.title %></p>
+                            <p>Charge: $<%= service.charge_per_hour %> <%=t :perHour%></p>
+                            <%= link_to t(:view), service_path(service), :class => 'btn btn-success' %>
+                        <%end%>
+                    <%else%>
+                        <h5> <%=t :noCompletedServices%> </h5>
+                    <%end%>
+                <% elsif @user.id == current_user.id && @user.is_teen? || current_user.is_CSR?  %>
+                    <h4><i class="fa fa-cog fa-spin" aria-hidden="true"></i> <%=t :pendingCompletion%></h4>
+                    <% if @user.service_jobs.status(Service::PENDING).any? %>
+                        <% @user.service_jobs.status(Service::PENDING).each do |service| %>
+                            <p>Service: <%= service.title %></p>
+                            <p>Charge: $<%= service.charge_per_hour %> <%= t :perHour%></p>
+                            <%= link_to t(:view), service_path(service), :class => 'btn btn-primary' %>
+                            <%= link_to t(:reviewTimesheet), user_transaction_path(@user.id, service.transactions.first.id), :class => 'btn btn-success' %>
+                        <%end%>
+                    <%else%>
+                        <h5> <%=t :noPendingServices%> </h5>
+                    <%end%>
+                <%end%>
+              </div>
+              <div class="col-md-3">
+                <% if @user.id ==  current_user.id && @user.is_client?%>
+                    <%= link_to t(:addService), new_service_path(@user.id) , :class => 'btn btn-primary' ,:style => 'margin-bottom:4px'%><br>
+                    <%= link_to t(:pastService) ,services_path(@user.id), :class => 'btn btn-primary'%>
+                <% elsif @user.id ==  current_user.id && @user.is_teen?%>
+                        <h4><i class="fa fa-cogs" aria-hidden="true"></i> <%=t :completedServices%></h4>
+                        <% if @user.service_jobs.status(Service::COMPLETED).any? %>
+                            <% @user.service_jobs.status(Service::COMPLETED).each do |service| %>
+                                <p>Service: <%= service.title %></p>
+                                <p>Charge: $<%= service.charge_per_hour %> <%=t :perHour%></p>
+                                <%= link_to "View", service_path(service), :class => 'btn btn-success' %>
+                            <%end%>
+                        <%else%>
+                            <h5> <%=t :noCompletedServices%> </h5>
+                        <%end%>
+                <%end%>
+              </div>
             </div>
           </div>
         </div>
@@ -280,36 +317,36 @@
             </div>
           </div>
           <% else %>
-              <div class="add-button">
-                <% if @user.id !=  current_user.id || current_user.is_CSR? %>
-                    <%= link_to new_user_review_path(@user.id), :class => 'btn btn-primary' do %>
-                        <i class="fa fa-plus"></i>
-                        <span class="hidden-xs"><%=t :addReview%></span>
-                    <% end %>
-                <% end %>
-              </div>
-              <% if @user.show_rating? %>
-                  <div class="average-review">
-                    <% if @user.average_rating.present? %>
-                        <h4><%=t :averageRating%>:</h4>
-                        <%= render(:partial => 'review', :locals => {:rating => @user.average_rating}) %>
-                    <% end %>
-                  </div>
-                  <% if @user.reviews.count != 0 %>
-                      <% @user.reviews.each do |review| %>
-                          <div class="review-block">
-                            <%= render(:partial => 'review', :locals => {:rating => review.rating}) %>
-                            <% if review.body.present? %>
-                                <h4><%= review.body %></h4>
-                            <% end %>
-                          </div>
+              <div class = "well">
+                <div class="add-button">
+                  <% if @user.id !=  current_user.id || current_user.is_CSR? %>
+                      <%= link_to new_user_review_path(@user.id), :class => 'btn btn-primary' do %>
+                          <i class="fa fa-plus"></i>
+                          <span class="hidden-xs"><%=t :addReview%></span>
                       <% end %>
                   <% end %>
-
-              <%else %>
-                  <h5> <%=t :noReviews%> </h5>
-              <% end %>
-
+                </div>
+                <% if @user.show_rating? %>
+                    <div class="average-review">
+                      <% if @user.average_rating.present? %>
+                          <h4><%=t :averageRating%>:</h4>
+                          <%= render(:partial => 'review', :locals => {:rating => @user.average_rating}) %>
+                      <% end %>
+                    </div>
+                    <% if @user.reviews.count != 0 %>
+                        <% @user.reviews.each do |review| %>
+                            <div class="review-block">
+                              <%= render(:partial => 'review', :locals => {:rating => review.rating}) %>
+                              <% if review.body.present? %>
+                                  <h4><%= review.body %></h4>
+                              <% end %>
+                            </div>
+                        <% end %>
+                    <% end %>
+                <%else %>
+                    <h5> <%=t :noReviews%> </h5>
+                <% end %>
+              </div>
           <% end %>
         </div>
         <div class="tab-pane primary fade in well" id="billingTab">
@@ -335,7 +372,6 @@
                               </div>
                           <% end %>
                         </article>
-
                         <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                                 data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
                                 data-description="Add a credit card"
@@ -347,12 +383,12 @@
                         </script>
                     <% end %>
                 <%elsif @user.is_client?%>
-                    <%= link_to I18n.t(:viewCard), user_cards_path(@user.id), :class => 'btn btn-default' %>
-                    <%= link_to I18n.t(:viewCharges), user_charges_path(@user.id), :class => 'btn btn-default' %>
+                    <%= link_to t(:viewCConFile), user_cards_path(@user.id), :class => 'btn btn-default' %>
+                    <%= link_to t(:viewCharges), user_charges_path(@user.id), :class => 'btn btn-default' %>
                 <%end%>
                 <% if @user.is_teen?%>
-                        <%= link_to I18n.t(:payouts), user_payouts_path(@user.id), :class => 'btn btn-default' %>
-                        <%= link_to I18n.t(:payoutInfo), user_payout_informations_path(@user.id), :class => 'btn btn-default' %><br>
+                        <%= link_to t(:payouts), user_payouts_path(@user.id), :class => 'btn btn-default' %>
+                        <%= link_to t(:payoutInfo), user_payout_informations_path(@user.id), :class => 'btn btn-default' %><br>
                 <%end%>
               </div>
               <div class="col-md-4">
@@ -362,9 +398,9 @@
                     <p> <%=t :payoutMethod%>: <%=@user.payout_information.method.upcase()%></p>
                     <%= form_tag user_payouts_path(@user.id) do %>
                         <% if @user.balance>0%>
-                          <%= submit_tag I18n.t(:withdrawBalance), class: "btn btn-default" %>
+                          <%= submit_tag t(:withdrawBalance), class: "btn btn-default" %>
                         <%else%>
-                            <%= submit_tag I18n.t(:withdrawBalance), class: "btn btn-default", disabled: true %>
+                            <%= submit_tag t(:withdrawBalance), class: "btn btn-default", disabled: true %>
                         <%end%>
                     <%end%>
                 <%else%>
@@ -392,7 +428,7 @@
               </div>
               <% if @user.id == current_user.id %>
                   <div class="col-md-4">
-                    <%= link_to I18n.t(:editSkills), edit_user_skill_path , :class => 'btn btn-primary',:style => 'margin-bottom:4px' %><br>
+                    <%= link_to t(:editSkills), edit_user_skill_path , :class => 'btn btn-primary',:style => 'margin-bottom:4px' %><br>
                   </div>
               <% end %>
             </div>
@@ -402,7 +438,7 @@
               </div>
               <% if @user.id == current_user.id %>
                   <div class="col-md-4">
-                    <%= link_to I18n.t(:editAvail), edit_teen_time_path , :class => 'btn btn-primary',:style => 'margin-bottom:4px' %><br>
+                    <%= link_to t(:editAvailablility), edit_teen_time_path , :class => 'btn btn-primary',:style => 'margin-bottom:4px' %><br>
                   </div>
               <% end %>
             </div>
@@ -429,7 +465,6 @@
                     <label for="body">Message:</label>
                     <%= f.text_area :body, class: 'form-control', rows: "6", style: "width: 95%;"%>
                   </div>
-
                   <div class="button-container create-message">
                     <div class="col-sm-8 col-sm-offset-2 text-center">
                       <%= f.submit t('send'), :id => "submit_create_button", class: "btn btn-default btn-primary"%>
@@ -466,7 +501,6 @@
                       </div>
                   <% end %>
               <% end %>
-
           <%else %>
               <h5> <%=t :noReviews%> </h5>
           <% end %>
@@ -527,7 +561,7 @@
         displaySchedule();
         function displaySchedule(){
           <% if @teenDays.empty? %>
-            $(".schedule").html("<div class='noAvaib'><%=t :noTimetable%></div>");
+            $(".schedule").html("<div class='noAvaib'><%= t :noTimetable %></div>");
           <% else %>
             $(".schedule").html("");
             <% @teenDays.each do |day| %>

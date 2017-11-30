@@ -2,18 +2,39 @@ class ServicesController < ApplicationController
 
 	before_action :find_user
 
+	$filter_by_distance
+	
 	def index
+		#Default distance filter value
+		gon.from_distance = 50
 		@services = Service.status(Service::LISTED).viewable_services(current_user)
 
-    @user = User.find(current_user.id)
+	    @user = User.find(current_user.id)
 
-    #Store distance of service to the location of the current user
-    @services.each do |s|
-      distance = s.distance_from(@user, :units=>:kms)
-      s.distance = distance
-    end
+	    #Store distance of service to the location of the current user
+	    @services.each do |s|
+	    	distance = s.distance_from(@user, :units=>:kms)
+	    	s.distance = distance
+	    end
 
-  end
+	    if $filter_by_distance.to_f != 0
+		    @services = @services.reject {|s| s.distance > $filter_by_distance.to_f} 
+		    gon.from_distance = $filter_by_distance.to_f
+	    end
+
+  	end
+
+  	def filter_by_distance
+	   	$filter_by_distance = params[:distance]
+	   	
+	   	# result = {"filter_by_distance" => filter_by_distance}
+	   	# respond_to do |format|
+     #  		format.html
+     #  		format.json { render json: result }  # respond with the created JSON object
+    	# end
+  		
+  		render :js => "window.location = '/services'"
+  	end
 
 	def show
 		@service = Service.find(params[:id])
@@ -67,8 +88,12 @@ AND B.start_time<='#{@service.start_time}' AND B.END_TIME>='#{@service.end_time}
 			@service.other_title = ""
 		end
 
+		invalid_service_state = @service.status != Service::LISTED &&
+														@service.status != Service::UNLISTED
+		has_invalid_credit_card = current_user.stripe_id.blank? && false
+
 		# Check to make sure that user is not trying to feed us invalid data
-		if @service.status != Service::LISTED && @service.status != Service::UNLISTED
+		if invalid_service_state || has_invalid_credit_card
 			render :new
 		elsif @service.save
 			redirect_to(user_path(current_user.id))
@@ -84,6 +109,17 @@ AND B.start_time<='#{@service.start_time}' AND B.END_TIME>='#{@service.end_time}
 		if params[:service][:title] != "Other"
 			params[:service][:other_title] = ""
 		end
+
+		if params[:service][:address_1].blank?
+			@user = User.find(current_user.id)
+			params[:service][:address_1] = @user.address_1
+			params[:service][:address_2] = @user.address_2
+			params[:service][:city] = @user.city
+			params[:service][:country] = @user.country
+			params[:service][:province] = @user.province
+			params[:service][:postal_code] = @user.postal_code
+		end
+
 
 		if @service.update(service_params)
 			redirect_to (user_path(@service.user_id))
@@ -183,14 +219,6 @@ AND B.start_time<='#{@service.start_time}' AND B.END_TIME>='#{@service.end_time}
 			end
 			@service.update({:status => Service::ACCEPTED});
 		end
-		redirect_to (@service)
-	end
-
-	# User wants to submit timesheet for service
-	# TODO: Make sure timesheet is created and valid before changing service status
-	def submit_timesheet
-		@service = Service.find(params[:id])
-		@service.update({:status => Service::PENDING});
 		redirect_to (@service)
 	end
 

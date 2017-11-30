@@ -1,8 +1,6 @@
 Rails.application.routes.draw do
 
-
   get 'set_language/english'
-
   get 'set_language/french'
 
   resources :notifications do
@@ -10,6 +8,7 @@ Rails.application.routes.draw do
       post :mark_as_read
     end
   end
+
   get 'search/search'
 
   get 'home/index'
@@ -18,6 +17,8 @@ Rails.application.routes.draw do
   get "faq", to: "home#faq"
   get "contact_us", to: "home#contact_us"
   get "send_email", to: "home#send_email"
+
+  get "/services/filter_by_distance", to: "services#filter_by_distance"
 
   devise_for :users, :controllers => {:registrations => "registrations"}
 

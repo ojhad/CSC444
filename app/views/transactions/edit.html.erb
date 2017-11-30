@@ -24,7 +24,7 @@
     <div class="data form-group">
       <%= f.label :service_id, "Service:", class: 'control-label col-sm-3'%>
       <div class="input-box">
-        <%= f.select :service_id, options_from_collection_for_select(@services, :id, :main_title), class: 'input-box col-sm-9' %>
+        <%= f.select :service_id, options_from_collection_for_select(@services, :id, :title), class: 'input-box col-sm-9' %>
       </div>
     </div>
 

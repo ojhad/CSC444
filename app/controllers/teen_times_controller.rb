@@ -16,13 +16,20 @@ class TeenTimesController < ApplicationController
   end
 
   def create
-    @teenTime = TeenTime.new(user_id: @user.id, day: params[:day], start_time: params[:start_time], end_time: params[:end_time])
-    if @teenTime.save
-      redirect_to edit_teen_time_path(@user.id)
+    @check = TeenTime.find_by_day_and_user_id_and_end_time(params[:day], @user.id, params[:start_time])
+    if @check.blank?
+      @teenTime = TeenTime.new(user_id: @user.id, day: params[:day], start_time: params[:start_time], end_time: params[:end_time])
+      unless @teenTime.save
+        flash[:error] = @teenTime.errors.full_messages
+      end
     else
-      flash[:error] = @teenTime.errors.full_messages
-      redirect_to edit_teen_time_path(@user.id)
+      if params[:end_time] > params[:start_time]
+        @check.update(end_time: params[:end_time])
+      else
+        flash[:error] = ["Start Time must be before End Time"]
+      end
     end
+    redirect_to edit_teen_time_path(@user.id)
   end
 
   def destroy

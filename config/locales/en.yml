@@ -137,6 +137,19 @@ en:
   payoutMethod: "Payout Method"
   noAccessUser: "Please sign up or login to view this user's profile"
   addEndorsement: "Add Endorsement"
+  payouts: "Payouts"
+  payoutInfo: "Payout information"
+  withdrawBalance: "Withdraw balance"
+  viewTransactions: "View Transactions"
+  view: "View"
+  reviewTimesheet: "Review Timesheet"
+  addService: "Add service"
+  pastService: "Past services"
+  viewCConFile: "View credit card on file"
+  viewCharges: "View charges"
+  editSkills: "Edit Skills"
+  editAvailablility: "Edit Availability"
+  noTimetable: "No timetable available for this user"
 
   #payouts
   payoutHistory: "Payouts Transaction History"
@@ -195,6 +208,7 @@ en:
   editAvail: "Edit Availability"
   inviteUser: "Invite User"
   noTimetable: "No timetable available for this user"
+  acceptedServices: "Accepted Services"
 
   ##################### FRENCH BELOW #######################
 
@@ -328,6 +342,19 @@ fr:
   country: "Pays"
   postalCode: "Code Postal"
   selectOne: "Sélectionnez-en Un"
+  payouts: "Paiements"
+  payoutInfo: "Informations de paiement"
+  withdrawBalance: "Retirer l'équilibre"
+  viewTransactions: "Voir les transactions"
+  view: "Vue"
+  reviewTimesheet: "Vérifier la feuille de temps"
+  addService: "Ajouter un service"
+  pastService: "Services passés"
+  viewCConFile: "Afficher la carte de crédit dans le fichier"
+  viewCharges: "Voir les frais"
+  editSkills: "Modifier les compétences"
+  editAvailablility: "Modifier la disponibilité"
+  noTimetable: "Aucun horaire disponible pour cet utilisateur"
 
   #cards
 
@@ -363,3 +390,4 @@ fr:
   editAvail: "Modifier la disponibilité"
   inviteUser: "Inviter l'utilisateur"
   noTimetable: "Aucun horaire disponible pour cet utilisateur"
+  acceptedServices: "Services Acceptés"
