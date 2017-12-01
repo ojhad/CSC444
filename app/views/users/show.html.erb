@@ -248,7 +248,8 @@
                             <p>Service: <%= service.title %></p>
                             <p>Charge: $<%= service.charge_per_hour %> <%= t :perHour%></p>
                             <%= link_to I18n.t(:view), service_path(service), :class => 'btn btn-primary' %>
-                        <%end%>
+                            <%= link_to 'Submit Transaction', new_user_transaction_path(@user.id), :class => 'btn btn-success' %>
+              <%end%>
                     <%else%>
                         <h5> <%=t :noServicesAccepted%> </h5>
                     <%end%>
