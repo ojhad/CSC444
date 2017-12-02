@@ -1,9 +1,19 @@
+<head>
+	<%= include_gon %>
+  <%= Gon::Base.render_data %>
+</head>
+
 <div class = "container-service-postings">
 	<h1 class = "title-service-postings">Services</h1>
 
 	<div class="range-slider">
 		<h4>Filter by distance</h4>
-		<input type="text" class="js-range-slider" value="" />
+		<input type="text" id = "js-range-slider-distance" value="" />
+	</div>
+
+	<div class="range-slider">
+		<h4>Filter by teenager age</h4>
+		<input type="text" id = "js-range-slider-age" value="" />
 	</div>
 
 	<% if @services.length == 0 %>
@@ -41,33 +51,59 @@
 	<% end %>
 </div>
 <script>
-	var $range = $(".js-range-slider")
-	var min = 0.1
-	var max = 100
-	var from = gon.from_distance
+	var $range_distane = $("#js-range-slider-distance")
+	var min_distance = 0.1
+	var max_distance = 100
+	var from_distance = gon.from_distance
 
-	$range.ionRangeSlider({
+	$range_distane.ionRangeSlider({
 		type: "single",
-		min: min,
-		max: max,
-		from: from,
+		min: min_distance,
+		max: max_distance,
+		from: from_distance,
 		postfix: "km",
 		onFinish: function (data) {
         	 // console.log($range.prop("value"));
         	// $.ajax("/services/filter_by_distance")
-        	console.log(data)
-	        from = data["from"]
-	        console.log(from)
         	$.ajax({
         		type: "GET",
-			    url: "/services/filter_by_distance",
-			    data: {
-			        distance: data["from"]
-			    },
-			    success: function(json){
-               		console.log("LIVERPOOL LIVERPOOL LIVERPOOL LIVERPOOL LIVERPOOL")   
-                }
+				    url: "/services/filter_by_distance",
+				    data: {
+				        distance: data["from"]
+				    },
+				    success: function(json){
+           		console.log("Distance slider success")   
+            }
 			});
     	},
 	});
+
+	var $range_age = $("#js-range-slider-age")
+	var min_age = 13
+	var max_age = 19
+	var from_age = gon.from_age
+	var to_age = gon.to_age
+
+	$range_age.ionRangeSlider({
+    type: "double",
+    min: min_age,
+    max: max_age,
+    from: from_age,
+    to: to_age,
+    step: 1,
+
+    onFinish: function (data) {
+        $.ajax({
+        	type: "GET",
+			    url: "/services/filter_by_age",
+			    data: {
+			        from_age: data["from"],
+			        to_age: data["to"]
+			    },
+			    success: function(json){
+         		console.log("Age slider success")   
+          }
+			});
+    }
+});
 </script>
