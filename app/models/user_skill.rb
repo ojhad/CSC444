@@ -1,4 +1,10 @@
 class UserSkill < ApplicationRecord
+
+    def calculate_avg_review(user_id)
+      user = User.find_by_id(user_id)
+      reviews = user.reviews.where(:skill_id => self.skill_id)
+      reviews.map(&:rating).instance_eval { reduce(:+) / size.to_f } if reviews.any?
+    end
 end
 
 # == Schema Information

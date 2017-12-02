@@ -107,6 +107,7 @@ en:
   #user profile translations
   about: "About"
   skills: "Skills"
+  skillRating: "Skill Rating"
   availability: "Availability"
   reviews: "Reviews"
   endorsements: "Endorsements"
@@ -316,6 +317,7 @@ fr:
   #user profile translations
   about: "À propos de moi"
   skills: "Compétences"
+  skillRating: "Compétence Évaluations"
   availability: "Disponibilité"
   reviews: "Critiques"
   endorsements: "Recommandations"
