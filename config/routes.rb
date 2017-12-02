@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   get "send_email", to: "home#send_email"
 
   get "/services/filter_by_distance", to: "services#filter_by_distance"
+  get "/services/filter_by_age", to: "services#filter_by_age"
 
   devise_for :users, :controllers => {:registrations => "registrations"}
 

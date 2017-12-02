@@ -2,11 +2,16 @@ class ServicesController < ApplicationController
 
 	before_action :find_user
 
-	$filter_by_distance
+	$filter_by_distance = -1
+	$filter_by_fromage = -1
+	$filter_by_toage = -1
 	
 	def index
 		#Default distance filter value
 		gon.from_distance = 50
+		gon.from_age = 13
+		gon.to_age = 19
+
 		@services = Service.status(Service::LISTED).viewable_services(current_user)
 
 	    @user = User.find(current_user.id)
@@ -17,22 +22,31 @@ class ServicesController < ApplicationController
 	    	s.distance = distance
 	    end
 
-	    if $filter_by_distance.to_f != 0
+	    if $filter_by_distance.to_f != -1
 		    @services = @services.reject {|s| s.distance > $filter_by_distance.to_f} 
 		    gon.from_distance = $filter_by_distance.to_f
 	    end
 
+
+	    if $filter_by_fromage.to_f != -1 
+	    	@services = @services.reject {|s| s.min_age > $filter_by_fromage.to_f} 
+		    gon.from_age = $filter_by_fromage.to_f
+	    end
+
+	    if $filter_by_toage.to_f != -1 
+	    	@services = @services.reject {|s| s.max_age < $filter_by_toage.to_f} 
+		    gon.to_age = $filter_by_toage.to_f
+	    end
   	end
 
   	def filter_by_distance
 	   	$filter_by_distance = params[:distance]
-	   	
-	   	# result = {"filter_by_distance" => filter_by_distance}
-	   	# respond_to do |format|
-     #  		format.html
-     #  		format.json { render json: result }  # respond with the created JSON object
-    	# end
-  		
+  		render :js => "window.location = '/services'"
+  	end
+
+  	def filter_by_age
+	   	$filter_by_fromage = params[:from_age]
+	   	$filter_by_toage = params[:to_age]
   		render :js => "window.location = '/services'"
   	end
 
