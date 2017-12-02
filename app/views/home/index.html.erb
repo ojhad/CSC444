@@ -136,20 +136,16 @@
               <p> <%=t :noActiveJobs%> </p>
           <%else%>
             <% @current_services.each do |s|%>
-                <table>
-                  <tr>
-                    <td>
-                      <p>Title: <%=s.main_title%></p>
-                      <p>Description: <%=s.description%></p>
-                      <p>Charge: $<%=s.charge_per_hour%> per hour</p>
-                    </td>
-                  <tr>
-                    <td>
+                <div class="card-container">
+                  <div class="card transaction-card">
+                    <div class="card-body">
+                      <h4 class="card-title"><%=t :title%>:  <%=s.main_title%></h4>
+                      <p class="card-text">Description: <%=s.description%></p>
+                      <p class="card-text">Charge: $<%=s.charge_per_hour%> <%=t :perHour%></p>
                       <%= link_to "View", service_path(s.id), :class => 'btn btn-primary' %>
-                    </td>
-                  </tr>
-                  </tr>
-                </table>
+                    </div>
+                  </div>
+                </div>
                 <br>
             <%end%>
           <%end%>
