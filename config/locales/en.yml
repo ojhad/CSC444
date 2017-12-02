@@ -210,6 +210,20 @@ en:
   noTimetable: "No timetable available for this user"
   acceptedServices: "Accepted Services"
 
+  #Availablility
+  availability: "Availability"
+  day: "Day"
+  startTime: "Start time"
+  endTime: "End time"
+  addTime: "Add time"
+  Monday: "Monday"
+  Tuesday: "Tuesday"
+  Wednesday: "Wednesday"
+  Thursday: "Thursday"
+  Friday: "Friday"
+  Saturday: "Saturday"
+  Sunday: "Sunday"
+
   ##################### FRENCH BELOW #######################
 
 fr:
@@ -391,3 +405,17 @@ fr:
   inviteUser: "Inviter l'utilisateur"
   noTimetable: "Aucun horaire disponible pour cet utilisateur"
   acceptedServices: "Services Acceptés"
+
+  #Availablility
+  availability: "Disponibilité"
+  day: "Journée"
+  startTime: "Heure de début"
+  endTime: "Heure de fin"
+  addTime: "Ajouter du temps"
+  Monday: "Lundi"
+  Tuesday: "Mardi"
+  Wednesday: "Mercredi"
+  Thursday: "Jeudi"
+  Friday: "Vendredi"
+  Saturday: "Samedi"
+  Sunday: "Dimanche"
