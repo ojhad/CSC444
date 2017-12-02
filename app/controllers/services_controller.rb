@@ -217,6 +217,12 @@ AND B.start_time<='#{@service.start_time}' AND B.END_TIME>='#{@service.end_time}
 					@service.service_users.destroy(relation)
 				end
 			end
+			@reqUser = User.find(@service.service_users.first.user_id)
+			@reqUser.notifications.create title: "#{current_user.first_name} #{current_user.last_name} has requested you for #{@service.title}!",
+																				 reference_user_id: current_user.id,
+																				 reference_service_id: @service.id,
+																				 user_id: @reqUser,
+																				 read: FALSE
 			@service.update({:status => Service::ACCEPTED});
 		end
 		redirect_to (@service)
