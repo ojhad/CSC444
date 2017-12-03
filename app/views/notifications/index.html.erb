@@ -1,7 +1,6 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Notifications</h1>
-
 <table class="table table-hover">
   <%  @notifications.each_with_index do |notification, i|  %>
       <% if i == 0 %>
@@ -19,6 +18,8 @@
         <tr>
           <td><%= link_to notification.title.split.first, user_path(notification.reference_user_id)%> <%= notification.title[notification.title.index("has")..notification.title.length] %></td>
           <% if notification.notification_type == "AddRequest" %>
+              <td><%= link_to 'Show', service_path(notification.reference_service_id) %></td>
+          <% elsif notification.notification_type == "RemoveRequest" %>
               <td><%= link_to 'Show', service_path(notification.reference_service_id) %></td>
           <% elsif notification.notification_type == "AcceptRequest" %>
               <td><%= link_to 'Show', service_path(notification.reference_service_id) %></td>

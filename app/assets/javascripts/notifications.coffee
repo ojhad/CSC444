@@ -6,12 +6,15 @@ ready = ->
     constructor: ->
       @currUser = $("[data-behavior='notifications']").attr("id")
       @notifications = $("[data-behavior='notifications']")
+      @count_checked = 0
+      @num_items = 0
+      @audio = new Audio('/assets/button_tiny.mp3');
       @setup()
       if @notifications.length > 0
         @setup()
         setInterval (=>
           @getNewNotifications()
-        ), 5000
+        ), 10000
 
     getNewNotifications: ->
       $.ajax(
@@ -57,6 +60,10 @@ ready = ->
       if (items.length != 0 && count >0)
         $("[data-behavior='unread-count']").attr("data-count",count)
         $('head').append('<style>.notification-icon:after {background: gold;}</style>');
+        if (@count_checked > 0 && @num_items != items.length)
+          @audio.play()
+        @count_checked = @count_checked + 1
+        @num_items = items.length
       else
         $("[data-behavior='unread-count']").attr("data-count","")
         $('head').append('<style>.notification-icon:after {background: none;}</style>');

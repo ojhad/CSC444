@@ -206,6 +206,12 @@ AND B.start_time<='#{@service.start_time}' AND B.END_TIME>='#{@service.end_time}
 				delete_record_id = delete_record[0].id
 				@service.service_users.destroy(delete_record_id)
 			end
+			@service.user.notifications.create title: "#{current_user.first_name} #{current_user.last_name} has removed their request for #{@service.title}",
+																				 reference_user_id: current_user.id,
+																				 reference_service_id: @service.id,
+																				 user_id: @service.user_id,
+																				 notification_type: "RemoveRequest",
+																				 read: FALSE
 			redirect_to (services_path)
 		else
 			# Do nothing because user is trying to remove themselves from 
