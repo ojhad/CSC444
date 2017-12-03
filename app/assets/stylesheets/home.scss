@@ -9,6 +9,10 @@ html,body
     overflow-x: hidden;
 }
 
+body {
+  background-color: #f7f9f9;
+}
+
 //fade in of welcome page
 /*#header {
 	animation: fadein 2s;
@@ -303,4 +307,24 @@ body{
     display: -webkit-flex;
     flex-direction: column;
     -webkit-flex-direction: column;
+}
+
+.round {
+
+  border-radius: 50%;
+  text-align: center;
+  border: solid;
+  padding-top: 50px;
+  padding-bottom: 5px;
+  margin-left: 40px;
+  width: 200px;
+  height: 200px;
+}
+
+.statistics {
+  margin-left: 15%;
+}
+
+.reco {
+  margin-left: 10%;
 }
