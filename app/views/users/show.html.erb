@@ -235,12 +235,17 @@
                     <%elsif @user.is_teen?%>
                         <h4><i class="fa fa-cogs" aria-hidden="true"></i> <%= t :activeServices%> </h4>
                         <hr>
-                        <% if @active_service.blank?%>
-                          <p><%=t :userNoServices%></p>
+                        <% if @active_service.count != 0 %>
+                            <% @active_service.each do |service| %>
+                                <div id="service_<%=service.id%>" class="service_block">
+                                  <div class="service_block_component">Service: <%= service.title %></div>
+                                  <div class="service_block_component">Description: $<%= service.description %></div>
+                                </div>
+                                <hr>
+                            <%end%>
                         <%else%>
-                        <p><%= @active_service.title%></p>
-                        <p><%=@active_service.description%></p>
-                        <%end%>
+                            <p><%=t :userNoServices%></p>
+                        <% end %>
                     <%end%>
                 <%end%>
               </div>
