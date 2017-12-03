@@ -10,7 +10,7 @@ class UserSkillsController < ApplicationController
   end
 
   def destroy
-    @userSkill = UserSkill.find_by_user_id_and_skill_id(current_user.id, Skill.find_by_skill_name(params[:skill_id]).id)
+    @userSkill = UserSkill.find_by_user_id_and_skill_id(current_user.id,params[:skill_id])
     UserSkill.destroy(@userSkill.id)
     redirect_to edit_user_skill_path(current_user.id)
   end
