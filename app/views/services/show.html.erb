@@ -17,8 +17,13 @@
       <p><b>Location:</b> <%=@service.city.upcase%>, <%=@service.province%></p>
       <br>
 
+      <div style='width: 300px;'>
+        <div id="map" style='width: 300px; height: 300px;'></div>
+      </div>
+      <br>
+
       <% if @service.status == Service::UNLISTED && @service.user_id == current_user.id%>
-          <div class="bottom_action_buttons_container">
+          <div class="services-bottom-action-buttons-container">
             <%= button_to 'List Service', list_service_path, method: :post, :class => 'btn btn-success' %>
           </div>
       <% elsif @service.status == Service::LISTED %>
@@ -50,7 +55,11 @@
                     <% end %>
                 <% end %>
               </table>
-              <div class="bottom-action-buttons-container">
+              <div class="services-bottom-action-buttons-container">
+                <%= link_to I18n.t(:edit), edit_service_path(@service),
+                            data: {title: 'Edit Service' ,
+                                   confirm: 'Are you sure you want to edit this service? Performing this action will unlist the service and delete all current requests.'},
+                            :class => 'btn btn-primary' %>
                 <%= button_to 'Unlist Service', unlist_service_path, method: :post,
                               data: {title: 'Unlist Service' , confirm: 'Are you sure you want to unlist this service? Performing this action will delete all current requests.'}, :class => 'btn btn-danger' %>
               </div>
@@ -66,13 +75,17 @@
           <% @acceptedUser = User.find(@service.service_users.first.user_id) %>
           <% if @service.user_id == current_user.id %>
               <p> Congratulations! You have succesfully connected with <%= @acceptedUser.email %><p>
-              <div class="bottom_action_buttons_container">
+              <div class="services-bottom-action-buttons-container">
+                <%= link_to I18n.t(:edit), edit_service_path(@service),
+                            data: {title: 'Edit Service' ,
+                                   confirm: 'Are you sure you want to edit this service? Performing this action will unlist the service and delete all current requests.'},
+                            :class => 'btn btn-primary' %>
                 <%= button_to 'Unlist Service', unlist_service_path, method: :post,
                               data: {title: 'Unlist Service' , confirm: 'Are you sure you want to unlist this service? Performing this action will delete all current requests.'}, :class => 'btn btn-danger' %>
               </div>
           <% elsif @acceptedUser.id == current_user.id %>
               <p> Congratulations! You have succesfully connected with <%= @service.user.email %><p>
-              <div class="bottom_action_buttons_container">
+              <div class="services-bottom-action-buttons-container">
                 <%= link_to 'Submit Transaction', new_user_transaction_path(@user.id), :class => 'btn btn-success' %>
               </div>
           <% end %>
@@ -101,4 +114,20 @@
 
 
 </div>
+
+<script>
+    handler = Gmaps.build('Google');
+    handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+        markers = handler.addMarkers([
+            {
+                "lat": <%= @service.latitude ? @service.latitude : 0 %>,
+                "lng": <%= @service.longitude ? @service.longitude : 0 %>,
+            }
+        ]);
+        handler.bounds.extendWith(markers);
+        handler.fitMapToBounds();
+        handler.getMap().setZoom(16);
+
+    });
+</script>
 

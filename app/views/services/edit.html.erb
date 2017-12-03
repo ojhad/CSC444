@@ -16,9 +16,12 @@
         <% end %>
         <%= f.hidden_field :user_id , :value=>@service.user.id %>
         <%= f.hidden_field :status, :id => "service_status_field_hidden", :value=>Service::UNLISTED %>
-        <%= f.hidden_field :date, :id => "serivce_date_time_field_hidden"%>
+        <%= f.hidden_field :day, :id => "service_day_field_hidden"%>
+        <%= f.hidden_field :start_time, :id => "service_start_time_field_hidden"%>
+        <%= f.hidden_field :end_time, :id => "service_end_time_field_hidden"%>
+        <%= f.hidden_field :date, :id => "service_date_time_field_hidden"%>
 
-        <div class="input-container">
+            <div class="input-container">
           <%= f.label :title, "Please select service type", class: 'control-label'%>
           <%= f.select :title, Service::SERVICE_TYPES, {}, :id => "main_category_id", class: 'form-control'%>
         </div>
@@ -90,6 +93,7 @@
 
         <!-- Set the service start date -->
         <!-- TODO: Add date format validation -->
+<<<<<<< HEAD
             <div class="input-container">
               <%= f.label :charge_per_hour, "Date and time of this service", class: 'control-label'%>
               <div class='input-group date' id='datetimepicker1'>
@@ -99,14 +103,30 @@
               </span>
               </div>
               <script type="text/javascript">
+=======
+        <div class="input-container">
+          <%= f.label :charge_per_hour, "Date and time of this service", class: 'control-label'%>
+          <div class='input-group date' id='datetimepicker1'>
+            <input type='text' id="service_date_time_field" class="form-control date-custom" />
+            <span class="input-group-addon">
+            <span class="glyphicon glyphicon-calendar"></span>
+            </span>
+          </div>
+            <script type="text/javascript">
+>>>>>>> 7dac2fdd920348b963091023d660844a9ffe4a9f
                   $(function () {
                       firstDate = $("#service_date_time_field_hidden").val()
                       $('#datetimepicker1').datetimepicker({
                           defaultDate: firstDate,
                           minDate: new Date()});
                   });
+<<<<<<< HEAD
               </script>
             </div>
+=======
+            </script>
+        </div>
+>>>>>>> 7dac2fdd920348b963091023d660844a9ffe4a9f
 
         <div class="input-container">
           <%= f.label :duration, "Duration of this service in hours", class: 'control-label'%>
@@ -210,7 +230,6 @@
         } else {
             console.log("not erasing data")
         }
-
 
         // Update the date time field value of the form
         userSetDateTime = $('#datetimepicker1').data("DateTimePicker").date()

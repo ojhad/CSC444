@@ -250,6 +250,7 @@ en:
   pastServDesc: "You don't have any completed service. Once you complete a service, the details will appear here."
 
   noConversations: "No Conversations yet. Find a user and message him from there!"
+  submitTrans: "Submit Transaction"
 
   ##################### FRENCH BELOW #######################
 
@@ -473,3 +474,4 @@ fr:
   serviceRecDesc: "Services recommandés en fonction de vos compétences et de votre disponibilité"
 
   noConversations: "Aucune conversation pour le moment. Trouvez un utilisateur et message lui à partir de là!"
+  submitTrans: "Soumettre la transaction"
