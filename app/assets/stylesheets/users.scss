@@ -178,3 +178,23 @@ table, th, td {
 .service_block_component {
   margin-top: 4px;
 }
+
+#billingTab {
+
+  .btn-default {
+
+    -webkit-border-radius: 28;
+    -moz-border-radius: 28;
+    border-radius: 28px;
+    color: #000000;
+    font-size: 14px;
+    background: #f7f9f9;
+    padding: 10px 20px 10px 20px;
+    text-decoration: none;
+  }
+
+  .btn-default:hover{
+    background: #ADB0AE;
+    text-decoration: none;
+  }
+}

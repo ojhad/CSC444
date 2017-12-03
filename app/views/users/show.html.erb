@@ -125,7 +125,7 @@
          </div>
         </div>
         <div class="tab-pane primary fade in well" id="servicesTab">
-          <div class="container">
+          <div class="container-fluid">
             <div class="row">
               <div class="col-md-3">
                 <% if @user.id == current_user.id && @user.is_client? || current_user.is_CSR? %>
@@ -526,7 +526,7 @@
               <% end %>
             </div>
             <div class = "row">
-              <div class="col-md-8">
+              <div class="col-md-8" style="border-right: solid 1px">
                 <h4><i class="fa fa-clock-o" aria-hidden="true"></i> <%= t :availability%></h4>
                 <hr>
               </div>

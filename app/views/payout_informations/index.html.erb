@@ -1,31 +1,42 @@
-<div class="container" style="padding-top: 4em">
-  <p><%= t :payoutDesc1%></p>
-  <p><%= t :payoutDesc2%> </p>
-  <br>
-  <% if @user_payout_info.method == 'check'%>
-      <p> <%=t :currentDeposit%> <b><%=t :chequeMail%></b> </p>
-  <% else %>
-      <p> <%=t :currentDeposit%> <b>PayPal</b></p>
-  <%end%>
-  <br>
-  <%= form_tag user_payout_information_path(@user.id , @user.payout_information.id) , :method => :put do %>
-    <%= csrf_meta_tags %>
-    <div class = "form-group">
-        <label> <%=t :updateDeposit%></label>
-        <input type="radio" class="PayoutInfo" name="method" value="paypal"> PayPal
-        <input type="radio" class="PayoutInfo" name="method" value="check"> <%=t :cheque%>
+<div class="container" style="margin-top: 2%; background-color: white; border-radius: 15px; padding-top: 5em; padding-left:10%; padding-right: 10%">
+  <div class="row" style="text-align: center">
+    <div class="col-md-12">
+      <p><%= t :payoutDesc1%></p>
+      <p><%= t :payoutDesc2%> </p>
     </div>
-    <%=hidden_field_tag 'which_form' , 'method'%>
-    <div class="form-group">
-      <%= submit_tag I18n.t(:submit), class: 'btn btn-primary' %>
+  </div>
+
+  <div class="row" style="text-align: center">
+    <div class="col-md-12">
+      <% if @user_payout_info.method == 'check'%>
+          <p> <%=t :currentDeposit%> <b><%=t :chequeMail%></b> </p>
+      <% else %>
+          <p> <%=t :currentDeposit%> <b>PayPal</b></p>
+      <%end%>
     </div>
-  <%end%>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <%= form_tag user_payout_information_path(@user.id , @user.payout_information.id) , :method => :put do %>
+          <%= csrf_meta_tags %>
+          <div class = "form-group">
+            <label> <%=t :updateDeposit%></label><br>
+            <input type="radio" class="PayoutInfo" name="method" value="paypal"> PayPal
+            <br>
+            <input type="radio" class="PayoutInfo" name="method" value="check"> <%=t :cheque%>
+          </div>
+          <%=hidden_field_tag 'which_form' , 'method'%>
+          <div class="form-group">
+            <%= submit_tag I18n.t(:submit), class: 'btn btn-success' %>
+          </div>
+      <%end%>
+    </div>
+  </div>
   <hr>
-
-
   <div id="paypal" hidden>
     <div class="row">
-      <div class="col-lg-6">
+      <div class="col-lg-12">
         <% if !@user_payout_info.has_paypal?%>
             <p> <%=t :currentPaypal%> <b><%=@user_payout_info.paypal%></b></p>
             <br>
@@ -34,17 +45,18 @@
         <%end%>
       </div>
     </div>
+    <br>
     <div class="row">
-      <div class="col-lg-6">
+      <div class="col-lg-12">
         <%= form_tag user_payout_information_path(@user.id , @user.payout_information.id) , :method => :put do %>
             <%= csrf_meta_tags %>
             <div class="form-group">
-              <%= label_tag 'paypal', I18n.t(:paypalAddress), class: 'control-label col-sm-3'%>
+              <%= label_tag 'paypal', I18n.t(:paypalAddress), class: 'control-label col-sm-10'%>
               <%= email_field_tag 'paypal', nil , class: 'form-control',required:'true'%>
             </div>
             <%=hidden_field_tag 'which_form' , 'paypal'%>
             <div class="form-group">
-              <%= submit_tag I18n.t(:submit), class: 'btn btn-primary' %>
+              <%= submit_tag I18n.t(:submit), class: 'btn btn-success' %>
             </div>
         <%end%>
       </div>
@@ -54,7 +66,7 @@
 
   <div id="check" hidden>
     <div class="row">
-      <div class="col-lg-6">
+      <div class="col-lg-12">
         <p><%=t :currentMailAddress%></p>
         <table>
           <tr>
@@ -77,7 +89,7 @@
     </div>
     <hr>
     <div class="row">
-      <div class="col-lg-6">
+      <div class="col-lg-12" style="padding-bottom: 5%">
         <p><%=t :updateMailAddress%></p>
         <br>
         <%= form_tag user_payout_information_path(@user.id , @user.payout_information.id) , :method => :put do %>
@@ -140,7 +152,7 @@
 
             <div class="form-group">
               <div class="col-sm-5">
-                <%= submit_tag I18n.t(:submit), class: 'btn btn-primary' %>
+                <%= submit_tag I18n.t(:submit), class: 'btn btn-success' %>
               </div>
             </div>
 

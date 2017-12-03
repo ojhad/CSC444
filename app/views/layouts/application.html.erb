@@ -159,11 +159,11 @@
 
     <main>
       <% if notice %>
-          <p class="alert alert-success"><%= notice %></p>
+          <p  id="notice" class="alert alert-success"><%= notice %></p>
       <% end %>
 
       <% if alert %>
-          <p class="alert alert-danger"><%= alert %></p>
+          <p id="alert" class="alert alert-danger"><%= alert %></p>
       <% end %>
 
       <%= yield %>
@@ -214,6 +214,15 @@
             var styleElem = document.head.appendChild(document.createElement("style"));
             styleElem.innerHTML = ".notification-icon:after {background: none;}";
         }
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+            setTimeout(function(){
+                $('#flash').fadeOut();
+                $('#notice').fadeOut();
+            }, 2000);
+        })
     </script>
   </body>
 
