@@ -137,7 +137,8 @@
               "infowindow": "Your Location"
           }
       ]);
-      handler.bounds.extendWith(Gmaps.store.markers);
+      handler.bounds.extendWith(userlocation);
       handler.fitMapToBounds();
+      handler.getMap().setZoom(16);
   });
 </script>
