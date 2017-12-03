@@ -10,7 +10,7 @@
           <% user_to_find = conversation.sender_id == @current_user.id ? conversation.recipient_id : conversation.sender_id %>
           <% user_profile = User.find(user_to_find) %>
           <% last_message = conversation.messages.last %>
-          <% unread_count = conversation.messages.unread().count() %>
+          <% unread_count = conversation.messages.unread_by_me(user_to_find).count() %>
           <a href="/conversations/<%= conversation.id %>/messages" class="list-group-item list-group-item-action flex-column align-items-start">
 				<span class="chat-img pull-left">
 	        <img src="<%= user_profile.profile_pic.url %>" alt="User Avatar" class="img-circle" style="vertical-align: middle; width: 75px; height: 75px;" />
