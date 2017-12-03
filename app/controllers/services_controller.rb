@@ -2,15 +2,14 @@ class ServicesController < ApplicationController
 
 	before_action :find_user
 
-	$filter_by_distance = -1
-	$filter_by_fromage = -1
-	$filter_by_toage = -1
-	
+	$distance_filter = -1
+	$from_age_filter = -1
+	$to_age_filter = -1
+
 	def index
-		#Default distance filter value
-		gon.from_distance = 50
-		gon.from_age = 13
-		gon.to_age = 19
+		$distance_filter = -1
+		$from_age_filter = -1
+		$to_age_filter = -1
 
 		@services = Service.status(Service::LISTED).viewable_services(current_user)
 
@@ -22,22 +21,6 @@ class ServicesController < ApplicationController
 			s.distance = distance
 		end
 
-		if $filter_by_distance.to_f != -1
-			@services = @services.reject {|s| s.distance > $filter_by_distance.to_f}
-			gon.from_distance = $filter_by_distance.to_f
-		end
-
-
-		if $filter_by_fromage.to_f != -1
-			@services = @services.reject {|s| s.min_age > $filter_by_fromage.to_f}
-			gon.from_age = $filter_by_fromage.to_f
-		end
-
-		if $filter_by_toage.to_f != -1
-      @services = @services.reject {|s| s.max_age < $filter_by_toage.to_f}
-			gon.to_age = $filter_by_toage.to_f
-    end
-
     @servicesLocations = Gmaps4rails.build_markers(@services) do |service, marker|
       marker.lat service.latitude
       marker.lng service.longitude
@@ -46,16 +29,64 @@ class ServicesController < ApplicationController
 
 	end
 
-  	def filter_by_distance
-	   	$filter_by_distance = params[:distance]
-  		render :js => "window.location = '/services'"
-  	end
+	def filter
+		@services = Service.status(Service::LISTED).viewable_services(current_user)
+		@user = User.find(current_user.id)
 
-  	def filter_by_age
-	   	$filter_by_fromage = params[:from_age]
-	   	$filter_by_toage = params[:to_age]
-  		render :js => "window.location = '/services'"
-  	end
+		#Store distance of service to the location of the current user
+		@services.each do |s|
+			distance = s.distance_from(@user, :units=>:kms)
+			s.distance = distance
+		end
+
+		if params[:distance]
+			$distance_filter = params[:distance].to_f
+
+			if $from_age_filter != -1 && $to_age_filter != -1
+				@services = @services.select {|s| s.min_age >= $from_age_filter && s.max_age <= $to_age_filter}
+			end
+			
+			@services = @services.reject {|s| s.distance > params[:distance].to_f}				
+		
+		end
+		
+		if params[:from_age] && params[:to_age]
+			$from_age_filter = params[:from_age].to_i
+			$to_age_filter = params[:to_age].to_i
+
+			if $distance_filter != -1
+				@services = @services.reject {|s| s.distance > $distance_filter}
+			end
+
+			@services = @services.select {|s| s.min_age >= params[:from_age].to_i && s.max_age <= params[:to_age].to_i}
+
+		end
+
+		container = "<div class = 'container' id = 'ljobs'>"
+
+		@services.each_with_index do |s, i|
+      newCard = "<div class = 'card-container'>" << "<div class = 'card transaction-card sjobs'>"
+  	  cardBody = "<div class = 'card-body'>"
+      
+      cardBody << "<img src = '/assets/#{s.get_image_id}service.svg', width = '32', height = '32', class = 'service-image' )>"
+      cardBody << "<h4 class = 'card-title'>#{s.main_title}</h4><br>" 
+      cardBody << "<p class = 'card-title'>Posted By: <a href = '/users/#{s.user.id}''>#{ s.user.first_name.capitalize} #{s.user.last_name.capitalize}</a></p>"
+      cardBody << "<p class='card-text'>Charge: $#{s.charge_per_hour} #{t :perHour}</p>"
+      cardBody << "<p class = 'card-text'>Skill: #{s.title}</p>"
+      cardBody << "<p class = 'card-text'>Location: #{s.city.capitalize}</p>"
+      cardBody << "<p> Distance from me: #{s.distance.round(2)} kms</p>" 
+      cardBody << "<a href='/services/#{s.id}' class='btn btn-primary'>More Details</a>"
+      cardBody << "</div>"
+
+      newCard << cardBody << "</div>" << "</div>"
+			container << newCard
+    end
+
+   	respond_to do |format|
+   		msg = {:html => container}
+   		format.json { render :json => msg }
+   	end
+	end
 
 	def show
 		@service = Service.find(params[:id])
