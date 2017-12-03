@@ -85,7 +85,7 @@
         <%else%>
             <div id="recommended_services" class="row">
               <% if @recommended_services.blank?%>
-                  <div class="col-md-12" style="margin: auto;">
+                  <div class="col-md-12" id = "recommended_services_title_id" style="margin: auto;">
                     <p><%=t :noRecServices1%></p>
                     <br>
                     <p><%=t :noRecServices2%></p>

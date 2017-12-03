@@ -179,6 +179,7 @@
                       <% if !user_signed_in? %>
                         <li><%= link_to t('signUp'), new_user_registration_path %></li>
                       <% end %>
+                      <li><%= link_to t('howItWorks'), how_it_works_path %></li>
                   </ul>
               </div>
               <div class="col-sm-4 myCols">
@@ -193,7 +194,6 @@
                   <h5>Legal</h5>
                   <ul>
                       <li><%= link_to t('tos'), terms_of_service_path %></li>
-                      <li><%= link_to t('privacyPolicy'), about_path %></li>
                   </ul>
               </div>
           </div>
