@@ -240,7 +240,9 @@ body {
 	color:white;
 	flex: 0 0 auto;
   -webkit-flex: 0 0 auto;
-  margin-top: 20%;
+    position: static;
+    bottom: 0;
+    width: inherit;
 }
 
 #myFooter ul{
