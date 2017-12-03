@@ -28,9 +28,6 @@
           <% else %>
               <td><%= link_to 'Show', user_path(notification.reference_user_id) %></td>
           <% end %>
-        <% if @current_user.is_sadmin? ||  @current_user.is_admin? %>
-                <td><%= link_to 'Edit', edit_notification_path(notification) %></td>
-          <% end %>
           <td><%= link_to 'Dismiss', notification, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         </tr>
         <% end %>
