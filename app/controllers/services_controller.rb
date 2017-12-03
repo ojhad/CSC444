@@ -41,7 +41,9 @@ class ServicesController < ApplicationController
     @servicesLocations = Gmaps4rails.build_markers(@services) do |service, marker|
       marker.lat service.latitude
       marker.lng service.longitude
+      marker.infowindow  service.main_title
     end
+
 	end
 
   	def filter_by_distance

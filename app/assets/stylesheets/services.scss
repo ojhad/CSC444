@@ -76,11 +76,24 @@
 }
 
 #map{
-  width: 810px;
-  height: 800px;
+  width: 915px;
+  height: 570px;
 }
 
 .sjobs{
   width: 100%;
   margin-left: 25%;
+}
+
+#ljobs{
+  width: inherit;
+}
+
+#ljobscoloumn{
+  height: 570px;
+  overflow-y: scroll;
+}
+
+#mapcoloumn{
+  padding-left: 0px;
 }
