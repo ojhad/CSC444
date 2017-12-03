@@ -1,5 +1,5 @@
 <div class="sched">
-  <h4><i class="fa fa-clock-o" aria-hidden="true"></i> Availability</h4>
+  <h4><i class="fa fa-clock-o" aria-hidden="true"></i> <%= t :availability %></h4>
   <div class = "row schedule">
   </div>
 </div>
@@ -13,30 +13,30 @@
   <% end %>
   <%= form_for :teen_time, :url => url_for(:controller => 'teen_times', :action => 'create'), :html => {class: 'addTimeForm'} do |f| %>
     <div class="col-md-1">
-      <h5>Day</h5>
+      <h5><%= t :day %></h5>
       <select id="day" name="day">
-        <option value="Monday">Monday</option>
-        <option value="Tuesday">Tuesday</option>
-        <option value="Wednesday">Wednesday</option>
-        <option value="Thursday">Thursday</option>
-        <option value="Friday">Friday</option>
-        <option value="Saturday">Saturday</option>
-        <option value="Sunday">Sunday</option>
+        <option value="Monday"><%= t :Monday %></option>
+        <option value="Tuesday"><%= t :Tuesday %></option>
+        <option value="Wednesday"><%= t :Wednesday %></option>
+        <option value="Thursday"><%= t :Thurday %></option>
+        <option value="Friday"><%= t :Friday %></option>
+        <option value="Saturday"><%= t :Saturday %></option>
+        <option value="Sunday"><%= t :Sunday %></option>
       </select>
     </div>
 
     <div class="col-md-1">
-      <h5>Start time</h5>
+      <h5 class="timeInputsLabel" ><%= t :startTime %></h5>
       <input type="time" name="start_time" >
     </div>
 
     <div class="col-md-1">
-      <h5>End time</h5>
+      <h5 class="timeInputsLabel" ><%= t :endTime %></h5>
       <input type="time" name="end_time" >
     </div>
 
     <div class="col-md-1">
-      <button type="submit" class="btn btn-default submitTime">Add time</button>
+      <button type="submit" class="btn btn-default submitTime"><%= t :addTime %></button>
     </div>
   <% end %>
 
@@ -48,7 +48,7 @@
         function displaySchedule(){
             $(".schedule").html("");
             <% @teenDays.each do |day| %>
-              $(".schedule").append("<div class='col-md-2 <%= day.day %>'><%= day.day %>  <i class=\"fa fa-times removeDay\" aria-hidden=\"true\"></i> <br></div>");
+              $(".schedule").append("<div class='col-md-2 <%= day.day %>'><%= "#{t day.day}" %>  <i class=\"fa fa-times removeDay\" aria-hidden=\"true\"></i> <br></div>");
             <% end %>
             <% @teenTime.each do |time| %>
               $(".<%= time.day %>").append("<div class='timeEntry'><div class='startTime'><%= time.start_time.strftime("%I:%M %p") %></div> - <div class='endTime'><%= time.end_time.strftime("%I:%M %p") %></div>  <i class=\"fa fa-times removeTime\" aria-hidden=\"true\"></i></div>");

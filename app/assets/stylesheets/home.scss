@@ -10,11 +10,11 @@ html,body
 }
 
 //fade in of welcome page
-#header {
+/*#header {
 	animation: fadein 2s;
-	-moz-animation: fadein 2s; /* Firefox */
-	-webkit-animation: fadein 2s; /* Safari and Chrome */
-	-o-animation: fadein 2s; /* Opera */
+	-moz-animation: fadein 2s; // Firefox 
+	-webkit-animation: fadein 2s; // Safari and Chrome 
+	-o-animation: fadein 2s; // Opera 
 }
 @keyframes fadein {
 	from {
@@ -24,7 +24,7 @@ html,body
 		opacity:1;
 	}
 }
-@-moz-keyframes fadein { /* Firefox */
+@-moz-keyframes fadein { // Firefox 
 	from {
 		opacity:0.3;
 	}
@@ -32,7 +32,7 @@ html,body
 		opacity:1;
 	}
 }
-@-webkit-keyframes fadein { /* Safari and Chrome */
+@-webkit-keyframes fadein { // Safari and Chrome 
 	from {
 		opacity:0.3;
 	}
@@ -40,16 +40,20 @@ html,body
 		opacity:1;
 	}
 }
-@-o-keyframes fadein { /* Opera */
+@-o-keyframes fadein { // Opera 
 	from {
 		opacity:0.3;
 	}
 	to {
 		opacity: 1;
 	}
-}
+}*/
 //end fade-in header
 //Home page css
+.alert {
+	margin-bottom: 0px;
+}
+
 .navbar {
 	border-radius: 0px;
 	margin-bottom: -1px;
@@ -59,7 +63,15 @@ html,body
 
 .mynav {
 	min-height: 70px !important;
-	background-color: #DADFE1;
+	background-color: #3a539b;
+}
+
+.navbar-default .navbar-nav>li>a {
+  color: white
+}
+
+.navbar>.container .navbar-brand, .navbar>.container-fluid .navbar-brand {
+  color: white
 }
 
 .container-fluid {

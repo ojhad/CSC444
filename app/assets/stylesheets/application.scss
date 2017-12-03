@@ -39,5 +39,22 @@
 
 .languages{
   margin-left: 20px;
-  margin-top: 10px;
+  margin-top: 15px;
+  color: white;
+}
+
+.languages >a {
+  color: gold;
+}
+
+.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover {
+
+  color:white;
+  background-color: inherit;
+}
+
+.navbar-default .navbar-nav>li>a:focus, .navbar-default .navbar-nav>li>a:hover{
+
+  background-color: inherit;
+  color: white
 }

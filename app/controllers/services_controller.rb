@@ -2,11 +2,16 @@ class ServicesController < ApplicationController
 
 	before_action :find_user
 
-	$filter_by_distance
+	$filter_by_distance = -1
+	$filter_by_fromage = -1
+	$filter_by_toage = -1
 	
 	def index
 		#Default distance filter value
 		gon.from_distance = 50
+		gon.from_age = 13
+		gon.to_age = 19
+
 		@services = Service.status(Service::LISTED).viewable_services(current_user)
 
 	    @user = User.find(current_user.id)
@@ -17,22 +22,31 @@ class ServicesController < ApplicationController
 	    	s.distance = distance
 	    end
 
-	    if $filter_by_distance.to_f != 0
+	    if $filter_by_distance.to_f != -1
 		    @services = @services.reject {|s| s.distance > $filter_by_distance.to_f} 
 		    gon.from_distance = $filter_by_distance.to_f
 	    end
 
+
+	    if $filter_by_fromage.to_f != -1 
+	    	@services = @services.reject {|s| s.min_age > $filter_by_fromage.to_f} 
+		    gon.from_age = $filter_by_fromage.to_f
+	    end
+
+	    if $filter_by_toage.to_f != -1 
+	    	@services = @services.reject {|s| s.max_age < $filter_by_toage.to_f} 
+		    gon.to_age = $filter_by_toage.to_f
+	    end
   	end
 
   	def filter_by_distance
 	   	$filter_by_distance = params[:distance]
-	   	
-	   	# result = {"filter_by_distance" => filter_by_distance}
-	   	# respond_to do |format|
-     #  		format.html
-     #  		format.json { render json: result }  # respond with the created JSON object
-    	# end
-  		
+  		render :js => "window.location = '/services'"
+  	end
+
+  	def filter_by_age
+	   	$filter_by_fromage = params[:from_age]
+	   	$filter_by_toage = params[:to_age]
   		render :js => "window.location = '/services'"
   	end
 
@@ -176,6 +190,7 @@ AND B.start_time<='#{@service.start_time}' AND B.END_TIME>='#{@service.end_time}
                                          reference_user_id: current_user.id,
                                          reference_service_id: @service.id,
                                          user_id: @service.user_id,
+																				 notification_type: "AddRequest",
                                          read: FALSE
       #@service.user.notifications.create_notification(@service.user,
        # "#{current_user.first_name} #{current_user.last_name} has requested you for #{@service.title}!",
@@ -196,6 +211,12 @@ AND B.start_time<='#{@service.start_time}' AND B.END_TIME>='#{@service.end_time}
 				delete_record_id = delete_record[0].id
 				@service.service_users.destroy(delete_record_id)
 			end
+			@service.user.notifications.create title: "#{current_user.first_name} #{current_user.last_name} has removed their request for #{@service.title}",
+																				 reference_user_id: current_user.id,
+																				 reference_service_id: @service.id,
+																				 user_id: @service.user_id,
+																				 notification_type: "RemoveRequest",
+																				 read: FALSE
 			redirect_to (services_path)
 		else
 			# Do nothing because user is trying to remove themselves from 
@@ -222,6 +243,13 @@ AND B.start_time<='#{@service.start_time}' AND B.END_TIME>='#{@service.end_time}
 					@service.service_users.destroy(relation)
 				end
 			end
+			@reqUser = User.find(@service.service_users.first.user_id)
+			@reqUser.notifications.create title: "#{current_user.first_name} #{current_user.last_name} has accepted you for #{@service.title}!",
+																				 reference_user_id: current_user.id,
+																				 reference_service_id: @service.id,
+																				 user_id: @reqUser,
+																		     notification_type: "AcceptRequest",
+																				 read: FALSE
 			@service.update({:status => Service::ACCEPTED});
 		end
 		redirect_to (@service)
