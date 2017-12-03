@@ -47,21 +47,6 @@
               <%= link_to_unless I18n.locale == :fr, "Français", set_language_french_path %>
             </p>
           </ul>
-          <% if user_signed_in? %>
-            <ul class = "nav navbar-nav">
-              <li class="dropdown">
-                <%= link_to("#", :class=>"dropdown-toggle", "data-toggle" =>"dropdown", :role => "button", "aria-expanded" => "false") do %> <i class="fa fa-cogs hidden-xs"></i> Services <span class="caret"></span>
-                <% end %>
-                <ul class="dropdown-menu">
-                  <% if !@user.nil? && @user.is_client?%>
-                      <li><%= link_to t('createNewService'), new_service_path%></li>
-                  <%end%>
-                  <li><%= link_to t('viewServicePosting'), services_path%></li>
-                </ul>
-              </li>
-            </ul>
-          <% end %>
-
           <% if current_user != true_user %>
               <ul class = "nav navbar-nav loginAs">
                 <%= t :youAreSignedInAs %> <%= current_user.first_name %> <%= current_user.last_name %>
@@ -71,7 +56,17 @@
           <!-- Items to the right side of the navbar -->
           <ul class="nav navbar-nav navbar-right">
             <% if user_signed_in? %>
-              <li>
+                <li class="dropdown">
+                  <%= link_to("#", :class=>"dropdown-toggle", "data-toggle" =>"dropdown", :role => "button", "aria-expanded" => "false") do %> <i class="fa fa-cogs hidden-xs"></i> Services <span class="caret"></span>
+                  <% end %>
+                  <ul class="dropdown-menu">
+                    <% if !@user.nil? && @user.is_client?%>
+                        <li><%= link_to t('createNewService'), new_service_path%></li>
+                    <%end%>
+                    <li><%= link_to t('viewServicePosting'), services_path%></li>
+                  </ul>
+                </li>
+                <li>
                     <li id = "<%= @current_user.id %>" class="dropdown dropdown-notifications" data-behavior="notifications">
                       <a href="#notifications-panel" class="dropdown-toggle" data-toggle="dropdown" data-behavior="notifications-link">
                         <p class="visible-xs">Notifications</p>
@@ -79,26 +74,10 @@
                       </a>
                       <div class="dropdown-container dropdown-position-bottomright">
                         <div class="dropdown-toolbar">
-                          <!--removed, as just default to removing all notifications once bell is clicked-->
-                          <!--<div class="dropdown-toolbar-actions">
-                            <a onclick="markAllAsRead()">Mark all as read</a>
-                          </div>-->
                           <h3 id = "notif-title" class="dropdown-toolbar-title"><%= t :notifications %></h3>
                         </div><!-- /dropdown-toolbar -->
 
                         <ul class="dropdown-menu" data-behavior="notification-items">
-                          <!-- commented out as notifications will be dynamically populated in notifications.coffee -->
-
-                          <!--<div class="notification new" ng-repeat="notification in newNotifications.slice().reverse() track by notification.timestamp">
-                            <div class="notification-image-wrapper">
-                              <div class="notification-image">
-                                <img src="{{notification.user.imageUrl}}" alt="" width="32">
-                              </div>
-                            </div>
-                            <div class="notification-text">
-                              <span class="highlight">hiasdf jaksdjf</span> asdfas jasdfasfj
-                            </div>
-                          </div>-->
                           <li class="notification">
                             <div class="media">
                               <div class="media-left">
