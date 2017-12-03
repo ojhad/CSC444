@@ -131,8 +131,13 @@ AND B.start_time<='#{@service.start_time}' AND B.END_TIME>='#{@service.end_time}
 	def destroy
 		@service = Service.find(params[:id])
 		user_id = @service.user_id
+		service_id = @service.id
 		@service.destroy
-		redirect_to (user_path(user_id))
+		respond_to do |format|
+			msg = { :id => service_id}
+			format.json  { render :json => msg } # don't do msg.to_json
+		end
+		#@redirect_to (user_path(user_id))
 	end
 
 	# Changes status of the service associated with the passed in service id

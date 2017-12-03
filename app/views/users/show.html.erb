@@ -126,11 +126,13 @@
                     <h4><i class="fa fa-cogs" aria-hidden="true"></i> <%= t :unlistedServices%> </h4>
                     <% if @user.services.status(Service::UNLISTED).count != 0 %>
                         <% @user.services.status(Service::UNLISTED).each do |service| %>
-                            <p>Service: <%= service.title %></p>
-                            <p>Charge: $<%= service.charge_per_hour %> <%=t :perHour%></p>
-                            <%= link_to I18n.t(:list), list_service_path(service), method: :post, :class => 'btn btn-success' %>
-                            <%= link_to I18n.t(:edit), edit_service_path(service), :class => 'btn btn-primary' %>
-                            <%= link_to I18n.t(:delete), service_path(service), method: :delete, data: {title: 'Delete Listed Service' , confirm: 'Are you sure? Item will not appear under listed services'}, :class => 'btn btn-danger' %>
+                            <div id="service_<%=service.id%>">
+                              <p>Service: <%= service.title %></p>
+                              <p>Charge: $<%= service.charge_per_hour %> <%=t :perHour%></p>
+                              <%= link_to I18n.t(:list), list_service_path(service), method: :post, :class => 'btn btn-success' %>
+                              <%= link_to I18n.t(:edit), edit_service_path(service), :class => 'btn btn-primary' %>
+                              <%= link_to I18n.t(:delete), service, method: :delete, remote: true, data: {title: 'Delete Listed Service' , confirm: 'Are you sure? Item will not appear under listed services'}, :class => 'btn btn-danger delete_service' %>
+                            </div>
                         <%end%>
                     <%else%>
                         <h5> <%= t :noUnlistedServices%> </h5>
@@ -558,6 +560,12 @@
     <h4><%=t :noAccessUser%></h4>
 <% end %>
 <script>
+
+    $(".delete_service").on('ajax:success', function(data) {
+        var divString = "#service_" + data.originalEvent.detail[0].id;
+        $(divString).fadeOut()
+    });
+
     $(document).ready(function() {
         displaySchedule();
         function displaySchedule(){
