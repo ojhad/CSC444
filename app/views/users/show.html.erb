@@ -145,7 +145,6 @@
                     <%else%>
                         <h5> <%= t :noUnlistedServices%> </h5>
                     <%end%>
-                    <hr>
                     <h4><i class="fa fa-cogs" aria-hidden="true"></i> <%= t :listedServices%> </h4>
                     <hr>
                     <% if @user.services.status(Service::LISTED).count != 0 %>
@@ -177,7 +176,6 @@
                             <h5> <%=t :noListedServices2%> </h5>
                         <%end%>
                     <%end%>
-                    <hr>
                     <h4><i class="fa fa-cogs" aria-hidden="true"></i> <%=t :completedServices%></h4>
                     <hr>
                     <% if @user.services.status(Service::COMPLETED).count != 0 %>
@@ -208,7 +206,6 @@
                     <%else%>
                         <h5> <%=t :noRequestedServices%> </h5>
                     <%end%>
-                    <hr>
                     <%else%><!--Not the current user-->
                     <% if @user.is_client?%>
                         <h4><i class="fa fa-cogs" aria-hidden="true"></i> <%= t :listedServices%> </h4>
@@ -229,7 +226,6 @@
                                 <h5><%=t :noListedServices2%></h5>
                             <%end%>
                         <%end%>
-                        <hr>
                     <%elsif @user.is_teen?%>
                         <h4><i class="fa fa-cogs" aria-hidden="true"></i> <%= t :activeServices%> </h4>
                         <hr>
@@ -266,7 +262,6 @@
                     <%else%>
                         <h5> <%=t :noServicesAccepted%> </h5>
                     <%end%>
-                    <hr>
                     <h4><i class="fa fa-cog fa-spin" aria-hidden="true"></i> <%=t :pendingCompletion%></h4>
                     <hr>
                     <% if @user.services.status(Service::PENDING).count != 0 %>
@@ -282,7 +277,6 @@
                     <%else%>
                         <h5> <%=t :noPendingServices%> </h5>
                     <%end%>
-                    <hr>
                 <%elsif current_user.id != @user.id%>
                   <% if @user.is_client?%>
                   <%elsif @user.is_teen?%>
@@ -303,7 +297,6 @@
                     <%else%>
                         <h5> <%=t :noServicesAccepted%> </h5>
                     <%end%>
-                    <hr>
                 <%end%>
               </div>
               <div class="col-md-3" style="border-right: solid 1px;">
@@ -322,7 +315,6 @@
                     <%else%>
                         <h5> <%=t :noCompletedServices%> </h5>
                     <%end%>
-                    <hr>
                 <% elsif @user.id == current_user.id && @user.is_teen? || current_user.is_CSR?  %>
                     <h4><i class="fa fa-cog fa-spin" aria-hidden="true"></i> <%=t :pendingCompletion%></h4>
                     <hr>
@@ -339,7 +331,6 @@
                     <%else%>
                         <h5> <%=t :noPendingServices%> </h5>
                     <%end%>
-                    <hr>
                 <%end%>
               </div>
               <div class="col-md-3">
@@ -354,14 +345,13 @@
                             <div id="service_<%=service.id%>" class="service_block">
                             <div class="service_block_component">Service: <%= service.title %></div>
                                   <div class="service_block_component">Charge: $<%= service.charge_per_hour %> <%=t :perHour%></div>
-                                <%= link_to "View", service_path(service), :class => 'btn btn-success service_block_component' %>
+                                <%= link_to t(:view), service_path(service), :class => 'btn btn-success service_block_component' %>
                             </div>
                             <hr>
                         <%end%>
                         <%else%>
                             <h5> <%=t :noCompletedServices%> </h5>
                         <%end%>
-                        <hr>
                 <%end%>
               </div>
             </div>
