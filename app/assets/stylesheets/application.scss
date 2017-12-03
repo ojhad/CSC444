@@ -62,3 +62,11 @@
 body {
 font-family: Tahoma, Geneva, sans-serif
 }
+
+.navbar-default .navbar-toggle , .navbar-default .navbar-toggle:focus , .navbar-default .navbar-toggle:hover {
+  background-color: inherit;
+}
+
+.navbar-default .navbar-toggle .icon-bar {
+  background-color: white
+}

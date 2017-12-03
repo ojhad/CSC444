@@ -1,8 +1,8 @@
 //for navbar expand in mobile screens
 @media only screen and (max-width: 767px) {
 	.navbar .navbar-collapse {
-		border-color: #DADFE1;
-		background-color: #DADFE1;
+		border-color: #3a539b;
+		background-color: #3a539b;
 		z-index: 1000;
 		position: relative;
 	}
@@ -938,7 +938,7 @@
 /* STYLES GO HERE */
 	.mynav {
 		min-height: 65px !important;
-		background-color: #ecf0f1;
+		background-color: #3a539b;
 	}
 
 	.container-fluid {
@@ -1052,7 +1052,7 @@
 /* STYLES GO HERE */
 	.mynav {
 		min-height: 100px !important;
-		background-color: #ecf0f1;
+		background-color: #3a539b;
 	}
 
 	.container-fluid {
@@ -1151,3 +1151,60 @@
 	}
 
 }
+
+@media (max-width: 767px) {
+  .navbar-default .navbar-nav .open .dropdown-menu>li>a {
+    color: white;
+  }
+
+  .open>.dropdown-menu {
+    display: inline-flex;
+  }
+
+  .languages {
+    margin-left: 0px !important;
+  }
+
+  .navbar .navbar-collapse {
+    text-align: center;
+  }
+
+  .statistics {
+    margin-left: 9% !important;
+  }
+
+  .reco {
+    margin-left: 17% !important;
+  }
+
+  #aboutTab , #servicesTab , #skillsTab , #reviewsTab , #billingTab  {
+
+    .col-md-3 {
+      border: none !important;
+    }
+
+    .col-md-4 {
+      border: none !important;
+    }
+
+    text-align: center;
+
+    table {
+      margin-left: 27%;
+    }
+  }
+}
+
+@media (max-width: 808px) {
+  .container-fluid {
+    padding-right: 0px !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .container-fluid>.navbar-collapse, .container-fluid>.navbar-header, .container>.navbar-collapse, .container>.navbar-header {
+    margin-right: -1px !important;
+  }
+
+}
+

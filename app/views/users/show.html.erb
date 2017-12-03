@@ -78,6 +78,7 @@
                 <p><i class="fa fa-envelope" aria-hidden="true"></i> <%=@user.email%></p>
                 <p><i class="fa fa-phone" aria-hidden="true"></i> <%=@user.mobile_number%></p>
               </div>
+              <hr class="visible-xs">
               <div class="col-md-4" style="border-right: solid 1px">
                 <% if @user.id == current_user.id || current_user.is_CSR? %>
                 <h4><i class="fa fa-building-o" aria-hidden="true"></i> <%= t :address%> </h4>
@@ -109,6 +110,7 @@
                     </div>
                 <%end%>
               </div>
+              <hr class="visible-xs">
               <% if @user.id == current_user.id %>
                 <div class="col-md-4">
                   <%= link_to I18n.t(:editProfile), edit_user_registration_path(@user.id) , :class => 'btn btn-primary',:style => 'margin-bottom:4px' %><br>
@@ -427,6 +429,7 @@
                     <% end %>
                 <% end %>
               </div>
+              <hr class="visible-xs">
               <div class="col-md-4">
                 <h4><%= t :billing%> </h4>
                 <hr>
@@ -458,6 +461,7 @@
                         <%= link_to t(:payoutInfo), user_payout_informations_path(@user.id), :class => 'btn btn-default' %><br>
                 <%end%>
               </div>
+              <hr class="visible-xs">
               <div class="col-md-4">
                 <% if @user.is_teen?%>
                     <h4> <%=t :accountBalance%> </h4>
