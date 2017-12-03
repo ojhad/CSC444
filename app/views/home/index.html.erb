@@ -1,270 +1,270 @@
 <% if @user.blank?%>
-<div id = "header" class = "header-div">
-    <header class="header-intro">
-        <div class="container-intro">
-			<h1 id = "welcome-tag"><%= t :welcomeTeenServ %></h1>
-			<h3 id = "welcome-description-1"><%= t :fastTask %></h3>
-			<h4 id = "welcome-description-2"><%= t :fastDes %></h4>
-		</div>
-		<div class = "container-svg">
-				<%= image_tag "001-gardening-shovel-tool-shape.svg", :size => "80x80", :class => "shovel-svg"%>
-				<%= image_tag "002-wheelbarrow.svg", :size => "65x65", :class => "wheel-barrow-svg"%>
-				<%= image_tag "003-study.svg", :size => "65x65", :class => "study-svg"%>
-				<%= image_tag "004-dog-with-belt-walking-with-a-man.svg", :size => "65x65", :class => "dog-walk-svg"%>
-				<%= image_tag "005-lawn-mower.svg", :size => "65x65", :class => "lawn-mower-svg"%>
-				<%= image_tag "006-vacuum.svg", :size => "65x65", :class => "vacuum-svg"%>
-				<%= image_tag "007-mop-tool-to-clean-floors.svg", :size => "65x65", :class => "mop-svg"%>
-		</div>
-    </header>
-</div>
-
-<div class = "container-how-it-works">
-	<h3 id = "title-how-it-works"><%= t :howItWorks %></h3>
-
-	<div class = "how-it-works-1">
-		<div class = "col-md-6">
-			<%= image_tag "008-sign-up.svg", :size => "200x200", :class => "sign-up-svg"%>
-		</div>
-		<div class = "col-md-6">
-			<h4 class = "col-heading">1. <%= t :SignUpWithUs %></h4>
-			<p class = "col-paragraph"><%= t :SignUpDes %></p>
-		</div>
-	</div>
-
-	<div class = "how-it-works-2">
-		<div class = "col-md-6">
-			<%= image_tag "009-calendar.svg", :size => "200x200", :class => "calendar-svg"%>
-		</div>
-		<div class = "col-md-6">
-			<h4 class = "col-heading">2. <%= t :describeHome %></h4>
-			<p class = "col-paragraph"><%= t :describeDes %></p>
-		</div>
-	</div>
-
-	<div class = "how-it-works-3">
-		<div class = "col-md-6">
-			<%= image_tag "010-checklist-done.svg", :size => "200x200", :class => "checklist-done-svg"%>
-		</div>
-		<div class = "col-md-6">
-			<h4 class = "col-heading">3. <%= t :taskDoneHome %></h4>
-			<p class = "col-paragraph"><%= t :taskDoneDes %></p>
-		</div>
-	</div>
-</div>
-<%elsif @user.is_teen?%>
-    <div class="container" style="background-color: white ; margin-top: 10px ; border-radius: 10px">
-      <div class="row" style="text-align: center">
-        <h3><%=t :welcome%> <%=@user.first_name.capitalize()%> !</h3>
-      </div>
-      <div class="row" style="text-align: center">
-        <h4> <%=t :funFacts%></h4>
-      </div>
-      <br>
-      <div class="row statistics">
-        <div class="col-md-4 round">
-          <p> <%=@jobs_24hrs%></p><br>
-          <p><%=t :jobs24%></p>
+    <div id = "header" class = "header-div">
+        <header class="header-intro">
+            <div class="container-intro">
+          <h1 id = "welcome-tag"><%= t :welcomeTeenServ %></h1>
+          <h3 id = "welcome-description-1"><%= t :fastTask %></h3>
+          <h4 id = "welcome-description-2"><%= t :fastDes %></h4>
         </div>
-        <div class="col-md-4 round">
-          <p><%=@same_city_users%></p><br>
-          <p><%=t :teensLocation%> <%=@user.city.capitalize%></p>
+        <div class = "container-svg">
+            <%= image_tag "001-gardening-shovel-tool-shape.svg", :size => "80x80", :class => "shovel-svg"%>
+            <%= image_tag "002-wheelbarrow.svg", :size => "65x65", :class => "wheel-barrow-svg"%>
+            <%= image_tag "003-study.svg", :size => "65x65", :class => "study-svg"%>
+            <%= image_tag "004-dog-with-belt-walking-with-a-man.svg", :size => "65x65", :class => "dog-walk-svg"%>
+            <%= image_tag "005-lawn-mower.svg", :size => "65x65", :class => "lawn-mower-svg"%>
+            <%= image_tag "006-vacuum.svg", :size => "65x65", :class => "vacuum-svg"%>
+            <%= image_tag "007-mop-tool-to-clean-floors.svg", :size => "65x65", :class => "mop-svg"%>
         </div>
-        <div class="col-md-4 round">
-          <p><%=@completed_1week%></p><br>
-          <p><%=t :jobsCompleted%></p>
+        </header>
+    </div>
+
+    <div class = "container-how-it-works" style="padding-bottom: 5px">
+      <h3 id = "title-how-it-works"><%= t :howItWorks %></h3>
+
+      <div class = "how-it-works-1">
+        <div class = "col-md-6">
+          <%= image_tag "008-sign-up.svg", :size => "200x200", :class => "sign-up-svg"%>
+        </div>
+        <div class = "col-md-6">
+          <h4 class = "col-heading">1. <%= t :SignUpWithUs %></h4>
+          <p class = "col-paragraph"><%= t :SignUpDes %></p>
         </div>
       </div>
-      <div class="row" style="margin-top: 3%">
-        <% if @user_skills.blank? || @user_availability.blank?%>
-          <div class="col-lg-9">
-            <p><%= t :incompleteProfile%></p>
-            <%= link_to I18n.t(:skills), edit_user_skill_path(@user.id) , :class => 'btn btn-primary' %>
-            <%= link_to I18n.t(:availability), edit_teen_time_path(@user.id) , :class => 'btn btn-primary' %>
+
+      <div class = "how-it-works-2">
+        <div class = "col-md-6">
+          <%= image_tag "009-calendar.svg", :size => "200x200", :class => "calendar-svg"%>
+        </div>
+        <div class = "col-md-6">
+          <h4 class = "col-heading">2. <%= t :describeHome %></h4>
+          <p class = "col-paragraph"><%= t :describeDes %></p>
+        </div>
+      </div>
+
+      <div class = "how-it-works-3">
+        <div class = "col-md-6" style="padding-bottom: 10px;">
+          <%= image_tag "010-checklist-done.svg", :size => "200x200", :class => "checklist-done-svg"%>
+        </div>
+        <div class = "col-md-6">
+          <h4 class = "col-heading">3. <%= t :taskDoneHome %></h4>
+          <p class = "col-paragraph"><%= t :taskDoneDes %></p>
+        </div>
+      </div>
+    </div>
+    <%elsif @user.is_teen?%>
+        <div class="container" style="background-color: white ; margin-top: 10px ; border-radius: 10px">
+          <div class="row" style="text-align: center">
+            <h3><%=t :welcome%> <%=@user.first_name.capitalize()%> !</h3>
           </div>
-      </div>
-        <%else%>
-            <div id="recommended_services" class="row">
-              <% if @recommended_services.blank?%>
-                  <div class="col-md-12" style="margin: auto;">
-                    <p><%=t :noRecServices1%></p>
-                    <br>
-                    <p><%=t :noRecServices2%></p>
-                  </div>
-              <%else%>
-                    <div class="col-md-12">
-                      <h4 class= "title-recommended-services" style="text-align: center"> <%= t :recommendedServices%></h4>
-                      <hr style="margin-left: 10%;margin-right: 10%">
-                    </div>
-                    <div class="col-md-12">
-                      <p style="text-align: center"><%=t :serviceRecDesc%></p>
-                    </div>
-                    <br>
-                    <div class="row reco">
-                    <% @recommended_services.each do |s|%>
-                        <div class="col-md-4" >
-                          <div class="card-container">
-                            <div class="card transaction-card">
-                              <div class="card-body">
-                                <%= image_tag("#{s.get_image_id}"+"service.svg", width: "32",
-                                              height:"32", class: "service-image") %>
-                                <h4 class="card-title"><%= s.title %></h4>
-                                <p class="card-text">Description: <%=s.description%></p>
-                                <p class="card-text">Charge: $<%= s.charge_per_hour %> <%=t :perHour%></p>
-                                <%= link_to I18n.t(:view), service_path(s.id), :class => 'btn btn-primary' %>
+          <div class="row" style="text-align: center">
+            <h4> <%=t :funFacts%></h4>
+          </div>
+          <br>
+          <div class="row statistics">
+            <div class="col-md-4 round">
+              <p> <%=@jobs_24hrs%></p><br>
+              <p><%=t :jobs24%></p>
+            </div>
+            <div class="col-md-4 round">
+              <p><%=@same_city_users%></p><br>
+              <p><%=t :teensLocation%> <%=@user.city.capitalize%></p>
+            </div>
+            <div class="col-md-4 round">
+              <p><%=@completed_1week%></p><br>
+              <p><%=t :jobsCompleted%></p>
+            </div>
+          </div>
+          <div class="row" style="margin-top: 3%">
+            <% if @user_skills.blank? || @user_availability.blank?%>
+              <div class="col-lg-9">
+                <p><%= t :incompleteProfile%></p>
+                <%= link_to I18n.t(:skills), edit_user_skill_path(@user.id) , :class => 'btn btn-primary' %>
+                <%= link_to I18n.t(:availability), edit_teen_time_path(@user.id) , :class => 'btn btn-primary' %>
+              </div>
+          </div>
+            <%else%>
+                <div id="recommended_services" class="row">
+                  <% if @recommended_services.blank?%>
+                      <div class="col-md-12" style="margin: auto;">
+                        <p><%=t :noRecServices1%></p>
+                        <br>
+                        <p><%=t :noRecServices2%></p>
+                      </div>
+                  <%else%>
+                        <div class="col-md-12">
+                          <h4 class= "title-recommended-services" style="text-align: center"> <%= t :recommendedServices%></h4>
+                          <hr style="margin-left: 10%;margin-right: 10%">
+                        </div>
+                        <div class="col-md-12">
+                          <p style="text-align: center"><%=t :serviceRecDesc%></p>
+                        </div>
+                        <br>
+                        <div class="row reco">
+                        <% @recommended_services.each do |s|%>
+                            <div class="col-md-4" >
+                              <div class="card-container">
+                                <div class="card transaction-card">
+                                  <div class="card-body">
+                                    <%= image_tag("#{s.get_image_id}"+"service.svg", width: "32",
+                                                  height:"32", class: "service-image") %>
+                                    <h4 class="card-title"><%= s.title %></h4>
+                                    <p class="card-text">Description: <%=s.description%></p>
+                                    <p class="card-text">Charge: $<%= s.charge_per_hour %> <%=t :perHour%></p>
+                                    <%= link_to I18n.t(:view), service_path(s.id), :class => 'btn btn-primary' %>
+                                  </div>
+                                </div>
                               </div>
                             </div>
+                        <%end%>
+                        </div>
+                  <%end%>
+                </div>
+                <div id="current_service" class="row">
+                  <div class="col-md-12">
+                    <h4 style="text-align: center"> <%=t :activeServices%></h4>
+                    <hr style="margin-left: 10%;margin-right: 10%">
+                  </div>
+                  <% if @current_service.blank?%>
+                      <div class="col-md-12">
+                        <p style="text-align: center"><%=t :currentServDesc%></p>
+                      </div>
+                  <%else%>
+
+                    <div class="col-md-12">
+                      <div class="card-container">
+                        <div class="card transaction-card">
+                          <div class="card-body">
+                            <%= image_tag("#{@current_service.get_image_id}"+"service.svg", width: "32",
+                                          height:"32", class: "service-image") %>
+                            <h4 class="card-title"><%= @current_service.title %></h4>
+                            <p class="card-text">Description: <%=@current_service.description%></p>
+                            <p class="card-text">Charge: $<%= @current_service.charge_per_hour %> <%=t :perHour%></p>
+                            <%= link_to I18n.t(:view), service_path(s.id), :class => 'btn btn-primary' %>
                           </div>
                         </div>
-                    <%end%>
-                    </div>
-              <%end%>
-            </div>
-            <div id="current_service" class="row">
-              <div class="col-md-12">
-                <h4 style="text-align: center"> <%=t :activeServices%></h4>
-                <hr style="margin-left: 10%;margin-right: 10%">
-              </div>
-              <% if @current_service.blank?%>
-                  <div class="col-md-12">
-                    <p style="text-align: center"><%=t :currentServDesc%></p>
-                  </div>
-              <%else%>
-
-                <div class="col-md-12">
-                  <div class="card-container">
-                    <div class="card transaction-card">
-                      <div class="card-body">
-                        <%= image_tag("#{@current_service.get_image_id}"+"service.svg", width: "32",
-                                      height:"32", class: "service-image") %>
-                        <h4 class="card-title"><%= @current_service.title %></h4>
-                        <p class="card-text">Description: <%=@current_service.description%></p>
-                        <p class="card-text">Charge: $<%= @current_service.charge_per_hour %> <%=t :perHour%></p>
-                        <%= link_to I18n.t(:view), service_path(s.id), :class => 'btn btn-primary' %>
                       </div>
                     </div>
-                  </div>
+                  <%end%>
                 </div>
-              <%end%>
-            </div>
-            <div class="completed_services" class="row">
-              <div class="col-md-12">
-                <h4 style="text-align: center"> <%=t :completedServices%></h4>
-                <hr style="margin-left: 10%;margin-right: 10%">
-              </div>
-              <% if @past_services.blank?%>
+                <div class="completed_services" class="row">
                   <div class="col-md-12">
-                    <p style="text-align: center"><%=t :pastServDesc%> </p>
+                    <h4 style="text-align: center"> <%=t :completedServices%></h4>
+                    <hr style="margin-left: 10%;margin-right: 10%">
                   </div>
-              <%else%>
-                  <div class="row reco">
-                    <% @past_services.each do |s|%>
-                        <div class="col-md-4">
-                          <div class="card-container">
-                            <div class="card transaction-card">
-                              <%= image_tag("#{s.get_image_id}"+"service.svg", width: "32", height:"32", class: "service-image") %>
-                              <div class="card-body">
-                                <h4 class="card-title"><%= s.title %>
-                                </h4>
-                                <p class="card-text">Description: <%=s.description%></p>
-                                <p class="card-text">Charge: $<%= s.charge_per_hour %> <%=t :perHour%></p>
-                                <p class="card-text">Completed on: <%=s.created_at.getlocal%></p>
-                                <%= link_to I18n.t(:view), service_path(s.id), :class => 'btn btn-primary' %>
+                  <% if @past_services.blank?%>
+                      <div class="col-md-12">
+                        <p style="text-align: center"><%=t :pastServDesc%> </p>
+                      </div>
+                  <%else%>
+                      <div class="row reco">
+                        <% @past_services.each do |s|%>
+                            <div class="col-md-4">
+                              <div class="card-container">
+                                <div class="card transaction-card">
+                                  <%= image_tag("#{s.get_image_id}"+"service.svg", width: "32", height:"32", class: "service-image") %>
+                                  <div class="card-body">
+                                    <h4 class="card-title"><%= s.title %>
+                                    </h4>
+                                    <p class="card-text">Description: <%=s.description%></p>
+                                    <p class="card-text">Charge: $<%= s.charge_per_hour %> <%=t :perHour%></p>
+                                    <p class="card-text">Completed on: <%=s.created_at.getlocal%></p>
+                                    <%= link_to I18n.t(:view), service_path(s.id), :class => 'btn btn-primary' %>
+                                  </div>
+                                </div>
                               </div>
                             </div>
-                          </div>
-                        </div>
-                    <%end%>
+                        <%end%>
+                      </div>
+                  <%end%>
+                </div>
+            <%end%>
+        </div>
+    <%elsif @user.is_client?%>
+        <div class="container" style="background-color: white ; margin-top: 10px ; border-radius: 10px">
+          <div class="row" style="text-align: center">
+            <h3><%=t :welcome%> <%=@user.first_name.capitalize%>!</h3>
+          </div>
+          <br>
+          <div class="row">
+            <% if @latest_service.blank?%>
+                <div class="col-lg-9">
+                  <p><%= t :noLatestJob%>></p>
+                  <%= link_to "How it works", "#", :class => 'btn btn-primary' %>
+                  <br><br>
+                  <p><%=t :familiarCreateService%></p>
+                  <%= link_to I18n.t(:createNewService), new_service_path, :class => 'btn btn-primary' %>
+                </div>
+            <%else%>
+            <div class="col-md-4">
+              <h3><%= t :latestJob %></h3>
+              <hr>
+              <div class="card-container">
+                <div class="card transaction-card">
+                  <div class="card-body">
+                    <%= image_tag("#{@latest_service[0].get_image_id}"+"service.svg", width: "32", height:"32", class: "service-image") %>
+                    <h4 class="card-title">
+                      <%=t :title%>: <%=@latest_service[0].main_title%>
+                    </h4>
+                    <p class="card-text">Description: <%=@latest_service[0].description%></p>
+                    <p class="card-text">Charge: $<%=@latest_service[0].charge_per_hour%> <%=t :perHour%></p>
+                    <%= link_to I18n.t(:view), service_path(@latest_service[0].id), :class => 'btn btn-primary' %>
                   </div>
-              <%end%>
-            </div>
-        <%end%>
-    </div>
-<%elsif @user.is_client?%>
-    <div class="container" style="background-color: white ; margin-top: 10px ; border-radius: 10px">
-      <div class="row" style="text-align: center">
-        <h3><%=t :welcome%> <%=@user.first_name.capitalize%>!</h3>
-      </div>
-      <br>
-      <div class="row">
-        <% if @latest_service.blank?%>
-            <div class="col-lg-9">
-              <p><%= t :noLatestJob%>></p>
-              <%= link_to "How it works", "#", :class => 'btn btn-primary' %>
-              <br><br>
-              <p><%=t :familiarCreateService%></p>
-              <%= link_to I18n.t(:createNewService), new_service_path, :class => 'btn btn-primary' %>
-            </div>
-        <%else%>
-        <div class="col-md-4">
-          <h3><%= t :latestJob %></h3>
-          <hr>
-          <div class="card-container">
-            <div class="card transaction-card">
-              <div class="card-body">
-                <%= image_tag("#{@latest_service[0].get_image_id}"+"service.svg", width: "32", height:"32", class: "service-image") %>
-                <h4 class="card-title">
-                  <%=t :title%>: <%=@latest_service[0].main_title%>
-                </h4>
-                <p class="card-text">Description: <%=@latest_service[0].description%></p>
-                <p class="card-text">Charge: $<%=@latest_service[0].charge_per_hour%> <%=t :perHour%></p>
-                <%= link_to I18n.t(:view), service_path(@latest_service[0].id), :class => 'btn btn-primary' %>
+                </div>
               </div>
             </div>
+            <div class="col-md-4">
+              <h3><%= t :currentJobsActive%></h3>
+              <hr>
+              <% if @current_services.blank?%>
+                  <p> <%=t :noActiveJobs%> </p>
+              <%else%>
+                <% @current_services.each do |s|%>
+                    <div class="card-container">
+                      <div class="card transaction-card">
+                        <div class="card-body">
+                          <%= image_tag("#{s.get_image_id}"+"service.svg", width: "32", height:"32", class:"service-image") %>
+                          <h4 class="card-title">
+                            <%=t :title%>:  <%=s.main_title%>
+                          </h4>
+                          <p class="card-text">Description: <%=s.description%></p>
+                          <p class="card-text">Charge: $<%=s.charge_per_hour%> <%=t :perHour%></p>
+                          <%= link_to I18n.t(:view), service_path(s.id), :class => 'btn btn-primary' %>
+                        </div>
+                      </div>
+                    </div>
+                    <br>
+                <%end%>
+              <%end%>
+            </div>
+            <div class="col-md-4">
+              <h3><%= t :jobsPendingApproval%></h3>
+              <hr>
+              <% if @pending_services.blank?%>
+                  <p> <%=t :noPendingJobs%></p>
+              <%else%>
+                  <% @pending_services.each do |s|%>
+                    <div class="card-container">
+                      <div class="card transaction-card">
+                        <div class="card-body">
+                          <%= image_tag("#{s.get_image_id}"+"service.svg", width: "32", height:"32", class:'service-image') %>
+                          <h4 class="card-title"><%=t :title%>: <%=s.main_title%></h4>
+                          <p class="card-text">Description: <%=s.description%></p>
+                          <p class="card-text">Charge: $<%=s.charge_per_hour%> <%=t :perhour%></p>
+                          <%= link_to I18n.t(:view), service_path(s.id), :class => 'btn btn-primary' %>
+                        </div>
+                      </div>
+                    </div>
+                    <br>
+                  <%end%>
+              <%end%>
+            </div>
+          <%end%>
           </div>
         </div>
-        <div class="col-md-4">
-          <h3><%= t :currentJobsActive%></h3>
-          <hr>
-          <% if @current_services.blank?%>
-              <p> <%=t :noActiveJobs%> </p>
-          <%else%>
-            <% @current_services.each do |s|%>
-                <div class="card-container">
-                  <div class="card transaction-card">
-                    <div class="card-body">
-                      <%= image_tag("#{s.get_image_id}"+"service.svg", width: "32", height:"32", class:"service-image") %>
-                      <h4 class="card-title">
-                        <%=t :title%>:  <%=s.main_title%>
-                      </h4>
-                      <p class="card-text">Description: <%=s.description%></p>
-                      <p class="card-text">Charge: $<%=s.charge_per_hour%> <%=t :perHour%></p>
-                      <%= link_to I18n.t(:view), service_path(s.id), :class => 'btn btn-primary' %>
-                    </div>
-                  </div>
-                </div>
-                <br>
-            <%end%>
-          <%end%>
-        </div>
-        <div class="col-md-4">
-          <h3><%= t :jobsPendingApproval%></h3>
-          <hr>
-          <% if @pending_services.blank?%>
-              <p> <%=t :noPendingJobs%></p>
-          <%else%>
-              <% @pending_services.each do |s|%>
-                <div class="card-container">
-                  <div class="card transaction-card">
-                    <div class="card-body">
-                      <%= image_tag("#{s.get_image_id}"+"service.svg", width: "32", height:"32", class:'service-image') %>
-                      <h4 class="card-title"><%=t :title%>: <%=s.main_title%></h4>
-                      <p class="card-text">Description: <%=s.description%></p>
-                      <p class="card-text">Charge: $<%=s.charge_per_hour%> <%=t :perhour%></p>
-                      <%= link_to I18n.t(:view), service_path(s.id), :class => 'btn btn-primary' %>
-                    </div>
-                  </div>
-                </div>
-                <br>
-              <%end%>
-          <%end%>
-        </div>
-      <%end%>
-      </div>
-    </div>
-<%elsif @user.is_sadmin?%>
-    <h3><%= t :welcomeSadmin %></h3>
-<%elsif @user.is_admin?%>
-    <h3><%= t :welcomeAdmin %></h3>
-<%elsif @user.is_CSR?%>
-    <h3><%= t :welcomeCSR %></h3>
-<%end%>
+    <%elsif @user.is_sadmin?%>
+        <h3><%= t :welcomeSadmin %></h3>
+    <%elsif @user.is_admin?%>
+        <h3><%= t :welcomeAdmin %></h3>
+    <%elsif @user.is_CSR?%>
+        <h3><%= t :welcomeCSR %></h3>
+    <%end%>

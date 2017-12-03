@@ -2,7 +2,7 @@
 	<h1><%= t :messages %></h1>
 	<br>
 	<div style="border: 1px solid #ede8e8">
-		<div class="panel" style="height: 500px;">
+		<div class="panel">
 			<div class="panel-body">
 				<ul class="chat">
 					<% @messages.each do |m| %>
@@ -23,7 +23,7 @@
 					<% end %>
 				</ul>
 			</div>
-			<div class="panel-footer">
+			<div class="panel-footer" style="background-color: white">
 				<form class="new_message" id="new_message" action="/messages" accept-charset="UTF-8" method="post">
 					<div class="input-group">
 
