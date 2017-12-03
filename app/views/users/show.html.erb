@@ -131,16 +131,20 @@
                 <% if @user.id == current_user.id && @user.is_client? || current_user.is_CSR? %>
                     <h4><i class="fa fa-cogs" aria-hidden="true"></i> <%= t :unlistedServices%> </h4>
                     <hr>
+                    <div id="no_unlisted_services_message" style="display:none">
+                      <h5> <%= t :noUnlistedServices%> </h5>
+                    <br>
+                    </div>
                     <% if @user.services.status(Service::UNLISTED).count != 0 %>
                         <% @user.services.status(Service::UNLISTED).each do |service| %>
-                              <div id="service_<%=service.id%>" class="service_block">
+                              <div id="service_<%=service.id%>" class="service_block service_block_unlisted">
                                 <div class="service_block_component">Service: <%= service.title %></div>
                                 <div class="service_block_component">Charge: $<%= service.charge_per_hour %> <%=t :perHour%></div>
                                 <%= link_to I18n.t(:list), list_service_path(service), method: :post, :class => 'btn btn-success service_block_component' %>
                                 <%= link_to I18n.t(:edit), edit_service_path(service), :class => 'btn btn-primary service_block_component' %>
                                 <%= link_to I18n.t(:delete), service, method: :delete, remote: true, data: {title: 'Delete Listed Service' , confirm: 'Are you sure? Item will not appear under listed services'}, :class => 'btn btn-danger delete_service service_block_component' %>
+                                <hr>
                               </div>
-                            <hr>
                         <%end%>
                     <%else%>
                         <h5> <%= t :noUnlistedServices%> </h5>
@@ -645,6 +649,12 @@
     $(".delete_service").on('ajax:success', function(data) {
         var divString = "#service_" + data.originalEvent.detail[0].id;
         $(divString).fadeOut()
+        $(divString).remove()
+        // if user has deleted all unlisted services, show no unlisted message
+        var numUnlistedServices = $(".service_block_unlisted").length;
+        if(numUnlistedServices <= 0){
+            $("#no_unlisted_services_message").show()
+        }
     });
 
     $(document).ready(function() {
