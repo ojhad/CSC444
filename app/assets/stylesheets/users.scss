@@ -4,7 +4,6 @@
 
 /* USER PROFILE PAGE */
 .card {
-  margin-top: 20px;
   padding: 30px;
   background-color: rgba(214, 224, 226, 0.2);
   -webkit-border-top-left-radius:5px;
@@ -23,8 +22,19 @@
   overflow: hidden;
   text-align: center;
   background-color: white;
+  margin-top: 20px;
+  border-radius: 15px;
+}
+
+.well {
+  background-color: white;
+}
+
+.tab-pane {
+  border-radius: 0px 0px 15px 15px;
 }
 .card.picBar .card-background {
+
   height: 200px;
 }
 .card-background img {
@@ -139,10 +149,32 @@
 }
 
 table, th, td {
-  border: 1px solid black;
   padding: 3px;
 }
 
 .queryTable{
   margin-left: 30px;
+}
+
+#profile_tabs{
+  .btn-primary {
+    background-color:#3a539b;
+    color: white
+  }
+
+}
+
+#review_endorsements.btn.topBar.btn-primary,#review_reviews.btn.topBar.btn-primary {
+
+    background-color:#3a539b;
+    color: white
+
+}
+
+.service_block {
+  margin-top: 10px;
+}
+
+.service_block_component {
+  margin-top: 4px;
 }

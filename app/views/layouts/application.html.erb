@@ -129,8 +129,8 @@
                 <ul class="dropdown-menu">
                   <li><%= link_to t('viewProfile'), user_path(current_user)%></li>
                   <% if current_user.is_teen? %>
-                    <li><%= link_to "Skills", edit_user_skill_path(current_user)  %></li>
-                    <li><%= link_to "Availability", edit_teen_time_path(current_user) %></li>
+                    <li><%= link_to I18n.t(:skills), edit_user_skill_path(current_user)  %></li>
+                    <li><%= link_to I18n.t(:availability), edit_teen_time_path(current_user) %></li>
                   <% end %>
                   <% if current_user.is_sadmin? %>
                     <li><%= link_to t('addUser'), new_user_path%></li>

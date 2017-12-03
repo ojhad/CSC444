@@ -54,20 +54,10 @@ class ServicesController < ApplicationController
 		@service = Service.find(params[:id])
 		@user = User.find(current_user.id)
 
-=begin
-		@start_date = @service.date
-		@start_day = @start_date.strftime("%A")
-		@start_time = @start_date.strftime("%H:%M")
-
-		@end_date = @start_date + @service.duration.hours
-		@end_day = @end_date.strftime("%A")
-		@end_time = @end_date.strftime("%H:%M")
-=end
-
 		# TODO: take into consideration if start and end days are not the same
 		# Get all teenagers that match the service's skill. Once service duration is added to the service model, I will update
 		# this query to match those with the skill and are available at the given times
-		@teens = User.find_by_sql("SELECT * FROM USERS JOIN (SELECT TEEN_TIMES.USER_ID,DAY,START_TIME,END_TIME FROM TEEN_TIMES JOIN
+		@teens = User.find_by_sql("SELECT DISTINCT * FROM USERS JOIN (SELECT TEEN_TIMES.USER_ID,DAY,START_TIME,END_TIME FROM TEEN_TIMES JOIN
 (SELECT USER_SKILLS.USER_ID, SERVICES.MIN_AGE,SERVICES.MAX_AGE FROM SERVICES JOIN USER_SKILLS ON
 (SERVICES.SKILL=USER_SKILLS.SKILL_ID AND SERVICES.SKILL=#{@service.skill}))A ON
 (A.USER_ID=TEEN_TIMES.USER_ID)) B ON (USERS.ID=B.USER_ID AND B.DAY= '#{@service.day}'
@@ -145,8 +135,13 @@ AND B.start_time<='#{@service.start_time}' AND B.END_TIME>='#{@service.end_time}
 	def destroy
 		@service = Service.find(params[:id])
 		user_id = @service.user_id
+		service_id = @service.id
 		@service.destroy
-		redirect_to (user_path(user_id))
+		respond_to do |format|
+			msg = { :id => service_id}
+			format.json  { render :json => msg } # don't do msg.to_json
+		end
+		#@redirect_to (user_path(user_id))
 	end
 
 	# Changes status of the service associated with the passed in service id

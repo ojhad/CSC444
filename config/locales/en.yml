@@ -210,6 +210,7 @@ en:
   inviteUser: "Invite User"
   noTimetable: "No timetable available for this user"
   acceptedServices: "Accepted Services"
+  userNoServices: "This user is not engaged in any service at this moment."
 
   #Availablility
   availability: "Availability"
@@ -238,6 +239,18 @@ en:
   Reading: "Reading"
   addskill: "Add Skill"
 
+  #homepage
+
+  funFacts: "Fun Facts"
+  jobs24: "Jobs posted in the last 24 hours"
+  teensLocation: "Teenagers located in "
+  jobsCompleted: "Jobs completed in the past week"
+  serviceRecDesc: "Recommended services based on your skill set and availability"
+  currentServDesc: "You are not performing any service at the moment. Once you agree with a client to perform a service and accept it, the service will appear here."
+  pastServDesc: "You don't have any completed service. Once you complete a service, the details will appear here."
+
+  noConversations: "No Conversations yet. Find a user and message him from there!"
+  submitTrans: "Submit Transaction"
 
   ##################### FRENCH BELOW #######################
 
@@ -348,6 +361,7 @@ fr:
   payoutMethod: "Méthode de Dépôt"
   noAccessUser: "Veuillez vous inscrire ou vous connecter pour voir le profil de cet utilisateur"
   addEndorsement: "Ajouter un endossement"
+  userNoServices: "Cet utilisateur n'est engagé dans aucun service en ce moment."
 
   #payouts
   payoutHistory: "Historique des Transactions de Paiements"
@@ -448,3 +462,16 @@ fr:
   Tutoring: "Tutorat"
   Reading: "En train de lire"
   addskill: "Ajouter une compétence"
+
+  #homepage
+
+  funFacts: "Faits Amusants"
+  jobs24: "Offres d'emploi publiées au cours des dernières 24 heures"
+  teensLocation: " Adolescents situés dans"
+  jobsCompleted: "Emplois terminés la semaine dernière"
+  pastServDesc: "Vous n'avez aucun service terminé. Une fois que vous avez terminé un service, les détails apparaîtront ici."
+  currentServDesc: "Vous n'effectuez aucun service pour le moment. Une fois que vous êtes d'accord avec un client pour effectuer un service et l'accepter, le service apparaîtra ici."
+  serviceRecDesc: "Services recommandés en fonction de vos compétences et de votre disponibilité"
+
+  noConversations: "Aucune conversation pour le moment. Trouvez un utilisateur et message lui à partir de là!"
+  submitTrans: "Soumettre la transaction"
