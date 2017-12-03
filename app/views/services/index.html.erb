@@ -51,7 +51,9 @@
         $.each(Gmaps.store.markers, function() {
             if (this.serviceObject.id == sid) {
                 this.panTo();
+                var marker = this.serviceObject;
                 this.serviceObject.setAnimation(google.maps.Animation.BOUNCE);
+                setTimeout(function(){ marker.setAnimation(null); }, 1500);
             }
             else this.serviceObject.setAnimation(null);
         });
