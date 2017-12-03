@@ -5,6 +5,7 @@ class ConversationsController < ApplicationController
     @current_user = current_user
 
     @convos = Conversation.user_conversations(current_user.id)
+    @unread_conversations_count = Conversation.my_unread_messages_count(current_user.id)
   end
 
   def create
