@@ -25,6 +25,7 @@
             <div class="card-container">
               <div class="card transaction-card sjobs" data-serviceId="<%= s.id %>">
                 <div class="card-body">
+                  <%= image_tag("#{s.get_image_id}"+"service.svg", width: "32", height:"32", class:"service-image" ) %>
                   <h4 class="card-title"><%=s.main_title%></h4><br>
                   <p class="card-title">Posted By: <a href="/users/<%=s.user.id%>"><%= s.user.first_name.capitalize %> <%=s.user.last_name.capitalize%></a></p>
                   <p class="card-text">Charge: $<%=s.charge_per_hour%> <%=t :perHour%></p>

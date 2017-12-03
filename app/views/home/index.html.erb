@@ -93,6 +93,7 @@
               <%else%>
                     <div class="col-md-12">
                       <h4 class= "title-recommended-services" style="text-align: center"> <%= t :recommendedServices%></h4>
+                      <hr style="margin-left: 10%;margin-right: 10%">
                     </div>
                     <div class="col-md-12">
                       <p style="text-align: center"><%=t :serviceRecDesc%></p>
@@ -104,6 +105,8 @@
                           <div class="card-container">
                             <div class="card transaction-card">
                               <div class="card-body">
+                                <%= image_tag("#{s.get_image_id}"+"service.svg", width: "32",
+                                              height:"32", class: "service-image") %>
                                 <h4 class="card-title"><%= s.title %></h4>
                                 <p class="card-text">Description: <%=s.description%></p>
                                 <p class="card-text">Charge: $<%= s.charge_per_hour %> <%=t :perHour%></p>
@@ -119,6 +122,7 @@
             <div id="current_service" class="row">
               <div class="col-md-12">
                 <h4 style="text-align: center"> <%=t :activeServices%></h4>
+                <hr style="margin-left: 10%;margin-right: 10%">
               </div>
               <% if @current_service.blank?%>
                   <div class="col-md-12">
@@ -130,6 +134,8 @@
                   <div class="card-container">
                     <div class="card transaction-card">
                       <div class="card-body">
+                        <%= image_tag("#{@current_service.get_image_id}"+"service.svg", width: "32",
+                                      height:"32", class: "service-image") %>
                         <h4 class="card-title"><%= @current_service.title %></h4>
                         <p class="card-text">Description: <%=@current_service.description%></p>
                         <p class="card-text">Charge: $<%= @current_service.charge_per_hour %> <%=t :perHour%></p>
@@ -143,6 +149,7 @@
             <div class="completed_services" class="row">
               <div class="col-md-12">
                 <h4 style="text-align: center"> <%=t :completedServices%></h4>
+                <hr style="margin-left: 10%;margin-right: 10%">
               </div>
               <% if @past_services.blank?%>
                   <div class="col-md-12">
@@ -154,8 +161,10 @@
                         <div class="col-md-4">
                           <div class="card-container">
                             <div class="card transaction-card">
+                              <%= image_tag("#{s.get_image_id}"+"service.svg", width: "32", height:"32", class: "service-image") %>
                               <div class="card-body">
-                                <h4 class="card-title"><%= s.title %></h4>
+                                <h4 class="card-title"><%= s.title %>
+                                </h4>
                                 <p class="card-text">Description: <%=s.description%></p>
                                 <p class="card-text">Charge: $<%= s.charge_per_hour %> <%=t :perHour%></p>
                                 <p class="card-text">Completed on: <%=s.created_at.getlocal%></p>
@@ -192,7 +201,10 @@
           <div class="card-container">
             <div class="card transaction-card">
               <div class="card-body">
-                <h4 class="card-title"><%=t :title%>: <%=@latest_service[0].main_title%></h4>
+                <%= image_tag("#{@latest_service[0].get_image_id}"+"service.svg", width: "32", height:"32", class: "service-image") %>
+                <h4 class="card-title">
+                  <%=t :title%>: <%=@latest_service[0].main_title%>
+                </h4>
                 <p class="card-text">Description: <%=@latest_service[0].description%></p>
                 <p class="card-text">Charge: $<%=@latest_service[0].charge_per_hour%> <%=t :perHour%></p>
                 <%= link_to I18n.t(:view), service_path(@latest_service[0].id), :class => 'btn btn-primary' %>
@@ -210,7 +222,10 @@
                 <div class="card-container">
                   <div class="card transaction-card">
                     <div class="card-body">
-                      <h4 class="card-title"><%=t :title%>:  <%=s.main_title%></h4>
+                      <%= image_tag("#{s.get_image_id}"+"service.svg", width: "32", height:"32", class:"service-image") %>
+                      <h4 class="card-title">
+                        <%=t :title%>:  <%=s.main_title%>
+                      </h4>
                       <p class="card-text">Description: <%=s.description%></p>
                       <p class="card-text">Charge: $<%=s.charge_per_hour%> <%=t :perHour%></p>
                       <%= link_to I18n.t(:view), service_path(s.id), :class => 'btn btn-primary' %>
@@ -231,6 +246,7 @@
                 <div class="card-container">
                   <div class="card transaction-card">
                     <div class="card-body">
+                      <%= image_tag("#{s.get_image_id}"+"service.svg", width: "32", height:"32", class:'service-image') %>
                       <h4 class="card-title"><%=t :title%>: <%=s.main_title%></h4>
                       <p class="card-text">Description: <%=s.description%></p>
                       <p class="card-text">Charge: $<%=s.charge_per_hour%> <%=t :perhour%></p>

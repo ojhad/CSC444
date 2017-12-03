@@ -1,28 +1,35 @@
-<div class="container charges">
-  <h4> <%=t :chargeHistory%></h4>
+<div class="container charges" style="margin-top: 2%; background-color: white; border-radius: 15px; padding-top: 5em; padding-left:10%; padding-right: 10%">
+  <div class="row" style="text-align: center">
+    <div class="col-md-12">
+      <h2> <%=t :chargeHistory%></h2>
+    </div>
+  </div>
   <br>
-  <p> <%=t :chargesDesc%></p><hr>
-  <div class="col-md-6">
-    <% if !@charges.blank?%>
-        <% @charges.each do |c| %>
-            <div class="row">
-              <table style="width:100%" >
-                <tr>
-                  <th>ID</th>
-                  <th><%=t :amount%> (CAD)</th>
-                  <th>Date</th>
-                </tr>
-                <tr>
-                  <td><%=c.id%></td>
-                  <td>$<%=c.amount%></td>
-                  <td><%=c.created_at.strftime("%B %d, %Y")%></td>
-                </tr>
-              </table>
-            </div>
-            <hr>
-        <%end%>
-    <%else%>
-        <p><%=t :noCharges%></p>
-    <%end%>
+  <div class="row">
+    <div class="col-md-12">
+      <p> <%=t :chargesDesc%></p><hr>
+    </div>
+  </div>
+  <div class="row" style="padding-bottom: 5%">
+    <div class="col-md-6">
+      <% if !@charges.blank?%>
+          <% @charges.each do |c| %>
+                <table style="width:100%" >
+                  <tr>
+                    <th>ID</th>
+                    <th><%=t :amount%> (CAD)</th>
+                    <th>Date</th>
+                  </tr>
+                  <tr>
+                    <td><%=c.id%></td>
+                    <td>$<%=c.amount%></td>
+                    <td><%=c.created_at.strftime("%B %d, %Y")%></td>
+                  </tr>
+                </table>
+          <%end%>
+      <%else%>
+          <p><%=t :noCharges%></p>
+      <%end%>
+    </div>
   </div>
 </div>

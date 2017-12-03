@@ -51,7 +51,7 @@
           </ul>
           <ul class = "nav navbar-nav">
             <li class="dropdown">
-              <%= link_to("#", :class=>"dropdown-toggle", "data-toggle" =>"dropdown", :role => "button", "aria-expanded" => "false") do %> <i class="fa fa-cogs"></i> Services <span class="caret"></span>
+              <%= link_to("#", :class=>"dropdown-toggle", "data-toggle" =>"dropdown", :role => "button", "aria-expanded" => "false") do %> <i class="fa fa-cogs hidden-xs"></i> Services <span class="caret"></span>
               <% end %>
               <ul class="dropdown-menu">
                 <% if !@user.nil? && @user.is_client?%>
@@ -72,10 +72,10 @@
           <ul class="nav navbar-nav navbar-right">
             <% if user_signed_in? %>
               <li>
-                  <ul class="nav navbar-nav navbar-left">
                     <li id = "<%= @current_user.id %>" class="dropdown dropdown-notifications" data-behavior="notifications">
                       <a href="#notifications-panel" class="dropdown-toggle" data-toggle="dropdown" data-behavior="notifications-link">
-                        <i data-behavior="unread-count" id = "data-notif" data-count="" class="glyphicon glyphicon-bell notification-icon"></i>
+                        <p class="visible-xs">Notifications</p>
+                        <i data-behavior="unread-count" id = "data-notif" data-count="" class="glyphicon glyphicon-bell notification-icon hidden-xs"></i>
                       </a>
                       <div class="dropdown-container dropdown-position-bottomright">
                         <div class="dropdown-toolbar">
@@ -118,13 +118,15 @@
 
                       </div><!-- /dropdown-container -->
                     </li><!-- /dropdown -->
-                  </ul>
               </li>
 		          <li class="dropdown">
-                <a class="dropdown-toggle" aria-expanded="false" href="/conversations"><i class="glyphicon glyphicon-inbox"></i></a>
+                <a class="dropdown-toggle" aria-expanded="false" href="/conversations"><i class="glyphicon glyphicon-inbox hidden-xs"></i>
+                  <p class="visible-xs">Conversations</p>
+                </a>
 		          </li>
               <li class="dropdown">
-                <%= link_to("#", :class=>"dropdown-toggle", "data-toggle" =>"dropdown", :role => "button", "aria-expanded" => "false") do %> <i class="glyphicon glyphicon-user"></i> <span class="caret"></span>
+                <%= link_to("#", :class=>"dropdown-toggle", "data-toggle" =>"dropdown", :role => "button", "aria-expanded" => "false") do %> <i class="glyphicon glyphicon-user hidden-xs"></i>
+                    <p class="visible-xs">My Account</p> <span class="caret"></span>
                   <% end %>
                 <ul class="dropdown-menu">
                   <li><%= link_to t('viewProfile'), user_path(current_user)%></li>
@@ -157,11 +159,11 @@
 
     <main>
       <% if notice %>
-          <p class="alert alert-success"><%= notice %></p>
+          <p  id="notice" class="alert alert-success"><%= notice %></p>
       <% end %>
 
       <% if alert %>
-          <p class="alert alert-danger"><%= alert %></p>
+          <p id="alert" class="alert alert-danger"><%= alert %></p>
       <% end %>
 
       <%= yield %>
@@ -212,6 +214,15 @@
             var styleElem = document.head.appendChild(document.createElement("style"));
             styleElem.innerHTML = ".notification-icon:after {background: none;}";
         }
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+            setTimeout(function(){
+                $('#flash').fadeOut();
+                $('#notice').fadeOut();
+            }, 2000);
+        })
     </script>
   </body>
 

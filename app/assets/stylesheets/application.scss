@@ -62,3 +62,43 @@
 body {
 font-family: Tahoma, Geneva, sans-serif
 }
+
+.navbar-default .navbar-toggle , .navbar-default .navbar-toggle:focus , .navbar-default .navbar-toggle:hover {
+  background-color: inherit;
+}
+
+.navbar-default .navbar-toggle .icon-bar {
+  background-color: white
+}
+
+.btn-primary {
+    -webkit-border-radius: 28;
+    -moz-border-radius: 28;
+    border-radius: 28px;
+    color: #ffffff;
+    font-size: 14px;
+    background: #3a539b;
+    padding: 10px 20px 10px 20px;
+    text-decoration: none;
+
+}
+
+.btn-primary:hover {
+  background: #293c70;
+  text-decoration: none;
+}
+
+.btn-danger , .btn-success {
+  -webkit-border-radius: 28;
+  -moz-border-radius: 28;
+  border-radius: 28px;
+  font-size: 14px;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+}
+
+.btn-danger:hover, .btn-success:hover{
+  text-decoration: none;
+}
+
+

@@ -1,63 +1,78 @@
 <%if @current_user.id==@user.id%>
 
-<div class="container" style="padding-top: 5em">
+<div class="container" style="margin-top: 2%; background-color: white; border-radius: 15px; padding-top: 5em; padding-left:10%; padding-right: 10%">
 
+  <div class="row" style="text-align: center">
+    <div class="col-md-12">
+      <h2>Your Credit Cards</h2>
+    </div>
+  </div>
   <div class="row">
-
-    <% if @user.stripe_id%>
-      <p> <%=t :cardDesc1%></p>
-      <p> <%=t :cardDesc2%></p>
-      <p> <%=t :cardDesc3%></p>
-      <p> <%=t :cardDesc4%></p>
-    <%elsif @cards.blank?%>
-      <p> <%=t :noCardDesc%></p>
-    <%end%>
+    <div class="col-md-12">
+      <% if @user.stripe_id%>
+          <p> <%=t :cardDesc1%></p>
+          <p> <%=t :cardDesc2%></p>
+          <p> <%=t :cardDesc3%></p>
+          <p> <%=t :cardDesc4%></p>
+      <%elsif @cards.blank?%>
+          <p> <%=t :noCardDesc%></p>
+      <%end%>
+    </div>
   </div>
   <br>
+  <div class="row" style="text-align: center;">
+    <% @cards.each do |card|%>
 
-  <% @cards.each do |card|%>
-
-      <div class="row">
-        <div class="col-md-3" style="border:solid">
+        <div class="col-md-4">
+          <div class="card-container">
+            <div class="card transaction-card">
+              <div class="card-body">
           <% if card.brand=='Visa'%>
-            <p> <i class="fa fa-cc-visa fa-lg" aria-hidden="true"></i> <%=t :cardType%>: <%=card.brand%></p>
+              <h4 class="card-title"> <i class="fa fa-cc-visa fa-lg" aria-hidden="true"></i> <%=t :cardType%>: <%=card.brand%></h4>
           <% elsif card.brand=='MasterCard'%>
-             <p> <i class="fa fa-cc-mastercard fa-lg" aria-hidden="true"></i> <%=t :cardType%>: <%=card.brand%></p>
+              <p class="card-text"> <i class="fa fa-cc-mastercard fa-lg" aria-hidden="true"></i> <%=t :cardType%>: <%=card.brand%></p>
           <% elsif card.brand=='American Express'%>
-             <p> <i class="fa fa-cc-mastercard fa-lg" aria-hidden="true"></i> <%=t :cardType%>: <%=card.brand%></p>
+              <p class="card-text"> <i class="fa fa-cc-mastercard fa-lg" aria-hidden="true"></i> <%=t :cardType%>: <%=card.brand%></p>
           <%else%>
-             <p> <i class="fa fa-credit-card fa-lg" aria-hidden="true"></i> <%=t :cardType%>: <%=card.brand%></p>
+              <p class="card-text"> <i class="fa fa-credit-card fa-lg" aria-hidden="true"></i> <%=t :cardType%>: <%=card.brand%></p>
           <%end%>
-          <p> <%=t :last4%>: <%=card.last4%></p>
+          <p class="card-text"> <%=t :last4%>: <%=card.last4%></p>
 
-          <p> <%=t :cardExpiry%>: <%=card.exp_month%>/<%=card.exp_year%></p>
-
-        </div>
-      </div>
-      <hr>
-
-  <%end%>
-
-  <%= form_tag user_cards_path(@user.id) do %>
-      <%= csrf_meta_tags %>
-      <article>
-        <% if flash[:error].present? %>
-            <div id="error_explanation">
-              <p><%= flash[:error] %></p>
+          <p class="card-text"> <%=t :cardExpiry%>: <%=card.exp_month%>/<%=card.exp_year%></p>
+              </div>
             </div>
-        <% end %>
-      </article>
+          </div>
+        </div>
+    <%end%>
+  </div>
+  <hr>
 
-      <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-              data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
-              data-description=<%=t :provideDefault%>
-              data-locale=<%=I18n.locale%>
-              data-email="<%=@user.email%>"
-              data-allow-remember-me='false'
-              data-panel-label="Submit"
-              data-label="<%=t :provideDefault%>">
-      </script>
-  <% end %>
+  <div class="row>">
+    <div class="col-md-12" style="margin-bottom: 5% ; text-align: center">
+      <%= form_tag user_cards_path(@user.id) do %>
+          <%= csrf_meta_tags %>
+          <article>
+            <% if flash[:error].present? %>
+                <div id="error_explanation">
+                  <p><%= flash[:error] %></p>
+                </div>
+            <% end %>
+          </article>
+
+          <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                  data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+                  data-description=<%=t :provideDefault%>
+                      data-locale=<%=I18n.locale%>
+                  data-email="<%=@user.email%>"
+                  data-allow-remember-me='false'
+                  data-panel-label="Submit"
+                  data-label="<%=t :provideDefault%>">
+          </script>
+      <% end %>
+    </div>
+  </div>
+
+
 
 </div>
 

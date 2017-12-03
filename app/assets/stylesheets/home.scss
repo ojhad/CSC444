@@ -95,7 +95,7 @@ body {
 }
 
 .sign-up, .sign-in {
-	font-size: 1.5em;
+	font-size: 1.2em;
 }
 
 .btn-outline-success {
@@ -325,6 +325,7 @@ body{
   margin-left: 40px;
   width: 200px;
   height: 200px;
+  background-color: #cae4fb;
 }
 
 .statistics {
@@ -333,4 +334,9 @@ body{
 
 .reco {
   margin-left: 10%;
+}
+.service-image{
+  display: block;
+  margin-left: auto;
+  margin-right: auto
 }
