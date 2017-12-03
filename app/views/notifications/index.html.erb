@@ -2,21 +2,27 @@
 
 <h1>Notifications</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<table class="table table-hover">
+  <%  @notifications.each_with_index do |notification, i|  %>
+      <% if i == 0 %>
+          <!--<thead>
+          <tr>
+           <th>Title</th>
+            <th colspan="3"></th>
+          </tr>
+        </thead>   -->
+      <% end %>
+  <% end %>
   <tbody>
     <% @notifications.each do |notification| %>
       <% if notification.reference_user_id != current_user.id && notification.user_id == current_user.id%>
         <tr>
           <td><%= notification.title %></td>
-          <td><%= link_to 'Show', notification %></td>
-          <td><%= link_to 'Edit', edit_notification_path(notification) %></td>
-          <td><%= link_to 'Destroy', notification, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= link_to 'Show', user_path(notification.reference_user_id) %></td>
+          <% if @current_user.is_sadmin? ||  @current_user.is_admin? %>
+            <td><%= link_to 'Edit', edit_notification_path(notification) %></td>
+          <% end %>
+          <td><%= link_to 'Dismiss', notification, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         </tr>
         <% end %>
       <% end %>
@@ -24,5 +30,6 @@
 </table>
 
 <br>
-
-<%= link_to 'New Notification', new_notification_path %>
+<% if @current_user.is_sadmin? ||  @current_user.is_admin? %>
+    <%= link_to 'New Notification', new_notification_path %>
+<% end %>

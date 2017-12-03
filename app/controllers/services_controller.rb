@@ -232,7 +232,7 @@ AND B.start_time<='#{@service.start_time}' AND B.END_TIME>='#{@service.end_time}
 				end
 			end
 			@reqUser = User.find(@service.service_users.first.user_id)
-			@reqUser.notifications.create title: "#{current_user.first_name} #{current_user.last_name} has requested you for #{@service.title}!",
+			@reqUser.notifications.create title: "#{current_user.first_name} #{current_user.last_name} has accepted you for #{@service.title}!",
 																				 reference_user_id: current_user.id,
 																				 reference_service_id: @service.id,
 																				 user_id: @reqUser,
