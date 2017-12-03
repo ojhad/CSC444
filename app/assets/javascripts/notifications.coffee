@@ -56,7 +56,7 @@ ready = ->
       $("[data-behavior='notification-items']").html(items)
       if (items.length != 0 && count >0)
         $("[data-behavior='unread-count']").attr("data-count",count)
-        $('head').append('<style>.notification-icon:after {background: #3A539B;}</style>');
+        $('head').append('<style>.notification-icon:after {background: gold;}</style>');
       else
         $("[data-behavior='unread-count']").attr("data-count","")
         $('head').append('<style>.notification-icon:after {background: none;}</style>');

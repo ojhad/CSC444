@@ -26,6 +26,7 @@ class TransactionsController < ApplicationController
       client.notifications.create title: "#{@user.first_name} #{@user.last_name} has created a new transaction that needs your approval",
                                    reference_user_id: @user.id,
                                    user_id: client,
+                                   notification_type: "Transaction",
                                    read: FALSE
       redirect_to(user_transaction_path(@user.id, @transaction.id))
     else
@@ -52,6 +53,7 @@ class TransactionsController < ApplicationController
         client.notifications.create title: "#{@user.first_name} #{@user.last_name} has updated the transaction",
                                   reference_user_id: @user.id,
                                   user_id: client,
+                                  notification_type: "Transaction",
                                   read: FALSE
       else
         teen = User.find_by_id(@transaction.teen_id)
@@ -59,6 +61,7 @@ class TransactionsController < ApplicationController
           teen.notifications.create title: "#{@user.first_name} #{@user.last_name} has approved your transaction",
                                       reference_user_id: @user.id,
                                       user_id: teen,
+                                      notification_type: "Transaction",
                                       read: FALSE
           params = {:amount => @transaction.total_amount * 100, :service_id => @transaction.service_id, :service_name => @transaction.service_title}
           charge_card(params)
@@ -68,6 +71,7 @@ class TransactionsController < ApplicationController
           teen.notifications.create title: "#{@user.first_name} #{@user.last_name} has requested changes to the transaction",
                                     reference_user_id: @user.id,
                                     user_id: teen,
+                                    notification_type: "Transaction",
                                     read: FALSE
         end
       end

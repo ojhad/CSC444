@@ -185,6 +185,7 @@ AND B.start_time<='#{@service.start_time}' AND B.END_TIME>='#{@service.end_time}
                                          reference_user_id: current_user.id,
                                          reference_service_id: @service.id,
                                          user_id: @service.user_id,
+																				 notification_type: "AddRequest",
                                          read: FALSE
       #@service.user.notifications.create_notification(@service.user,
        # "#{current_user.first_name} #{current_user.last_name} has requested you for #{@service.title}!",
@@ -236,6 +237,7 @@ AND B.start_time<='#{@service.start_time}' AND B.END_TIME>='#{@service.end_time}
 																				 reference_user_id: current_user.id,
 																				 reference_service_id: @service.id,
 																				 user_id: @reqUser,
+																		     notification_type: "AcceptRequest",
 																				 read: FALSE
 			@service.update({:status => Service::ACCEPTED});
 		end

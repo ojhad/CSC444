@@ -18,9 +18,17 @@
       <% if notification.reference_user_id != current_user.id && notification.user_id == current_user.id%>
         <tr>
           <td><%= notification.title %></td>
-          <td><%= link_to 'Show', user_path(notification.reference_user_id) %></td>
-          <% if @current_user.is_sadmin? ||  @current_user.is_admin? %>
-            <td><%= link_to 'Edit', edit_notification_path(notification) %></td>
+          <% if notification.notification_type == "AddRequest" %>
+              <td><%= link_to 'Show', service_path(notification.reference_service_id) %></td>
+          <% elsif notification.notification_type == "AcceptRequest" %>
+              <td><%= link_to 'Show', user_path(notification.reference_service_id) %></td>
+          <% elsif notification.notification_type == "Transaction" %>
+              <td><%= link_to 'Show', user_transactions_path(notification.user_id) %></td>
+          <% else %>
+              <td><%= link_to 'Show', user_path(notification.reference_user_id) %></td>
+          <% end %>
+        <% if @current_user.is_sadmin? ||  @current_user.is_admin? %>
+                <td><%= link_to 'Edit', edit_notification_path(notification) %></td>
           <% end %>
           <td><%= link_to 'Dismiss', notification, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         </tr>
