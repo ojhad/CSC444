@@ -135,8 +135,13 @@ AND B.start_time<='#{@service.start_time}' AND B.END_TIME>='#{@service.end_time}
 	def destroy
 		@service = Service.find(params[:id])
 		user_id = @service.user_id
+		service_id = @service.id
 		@service.destroy
-		redirect_to (user_path(user_id))
+		respond_to do |format|
+			msg = { :id => service_id}
+			format.json  { render :json => msg } # don't do msg.to_json
+		end
+		#@redirect_to (user_path(user_id))
 	end
 
 	# Changes status of the service associated with the passed in service id
@@ -175,6 +180,7 @@ AND B.start_time<='#{@service.start_time}' AND B.END_TIME>='#{@service.end_time}
                                          reference_user_id: current_user.id,
                                          reference_service_id: @service.id,
                                          user_id: @service.user_id,
+																				 notification_type: "AddRequest",
                                          read: FALSE
       #@service.user.notifications.create_notification(@service.user,
        # "#{current_user.first_name} #{current_user.last_name} has requested you for #{@service.title}!",
@@ -195,6 +201,12 @@ AND B.start_time<='#{@service.start_time}' AND B.END_TIME>='#{@service.end_time}
 				delete_record_id = delete_record[0].id
 				@service.service_users.destroy(delete_record_id)
 			end
+			@service.user.notifications.create title: "#{current_user.first_name} #{current_user.last_name} has removed their request for #{@service.title}",
+																				 reference_user_id: current_user.id,
+																				 reference_service_id: @service.id,
+																				 user_id: @service.user_id,
+																				 notification_type: "RemoveRequest",
+																				 read: FALSE
 			redirect_to (services_path)
 		else
 			# Do nothing because user is trying to remove themselves from 
@@ -226,6 +238,7 @@ AND B.start_time<='#{@service.start_time}' AND B.END_TIME>='#{@service.end_time}
 																				 reference_user_id: current_user.id,
 																				 reference_service_id: @service.id,
 																				 user_id: @reqUser,
+																		     notification_type: "AcceptRequest",
 																				 read: FALSE
 			@service.update({:status => Service::ACCEPTED});
 		end
