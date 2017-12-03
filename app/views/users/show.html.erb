@@ -12,8 +12,8 @@
 
         </div>
       </div>
-      <div class="btn-pref btn-group btn-group-justified btn-group-lg" role="group" aria-label="...">
-        <div class="btn-group" role="group">
+      <div class="btn-pref btn-group btn-group-justified btn-group-lg" role="group" aria-label="..." id="profile_tabs">
+        <div class="btn-group" role="group" >
           <button type="button" id="about" class="btn btn-primary" data-toggle="tab"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
             <div class="hidden-xs"><%= t :about%></div>
           </button>
@@ -60,6 +60,7 @@
               <div class="col-md-6">
               <%end%>
                 <h4> <i class="fa fa-user" aria-hidden="true"></i> <%= t :accountType%></h4>
+                <hr>
                 <% if @user.is_teen? %>
                     <p><%=t :teenager%></p>
                 <% elsif @user.is_client? %>
@@ -72,13 +73,15 @@
                     <p><%= t :csr%></p>
                 <%end%>
                 <br>
-                <h4 style=""><i class="fa fa-addressBaby sitting-book" aria-hidden="true"></i> <%= t :contactInfo%></h4>
+                <h4 style=""><i class="fa fa-id-card-o" aria-hidden="true"></i> <%= t :contactInfo%></h4>
+                <hr>
                 <p><i class="fa fa-envelope" aria-hidden="true"></i> <%=@user.email%></p>
                 <p><i class="fa fa-phone" aria-hidden="true"></i> <%=@user.mobile_number%></p>
               </div>
-              <div class="col-md-4">
+              <div class="col-md-4" style="border-right: solid 1px">
                 <% if @user.id == current_user.id || current_user.is_CSR? %>
                 <h4><i class="fa fa-building-o" aria-hidden="true"></i> <%= t :address%> </h4>
+                    <hr>
                   <table>
                     <tr>
                       <td><b><%=@user.first_name.capitalize%> <%=@user.last_name.capitalize%></b></td>
@@ -98,6 +101,7 @@
                   </table>
                 <%else%>
                     <h4><i class="fa fa-map-marker" aria-hidden="true"></i> Location </h4>
+                    <hr>
                     <p><%=@user.city.capitalize()%> <%=@user.province%> <%=@user.postal_code.upcase()%></p>
                     <p><%=@user.country.capitalize()%></p><br>
                     <div style='width: 300px;'>
@@ -124,6 +128,7 @@
               <div class="col-md-3">
                 <% if @user.id == current_user.id && @user.is_client? || current_user.is_CSR? %>
                     <h4><i class="fa fa-cogs" aria-hidden="true"></i> <%= t :unlistedServices%> </h4>
+                    <hr>
                     <% if @user.services.status(Service::UNLISTED).count != 0 %>
                         <% @user.services.status(Service::UNLISTED).each do |service| %>
                             <div id="service_<%=service.id%>">
@@ -137,7 +142,9 @@
                     <%else%>
                         <h5> <%= t :noUnlistedServices%> </h5>
                     <%end%>
+                    <hr>
                     <h4><i class="fa fa-cogs" aria-hidden="true"></i> <%= t :listedServices%> </h4>
+                    <hr>
                     <% if @user.services.status(Service::LISTED).count != 0 %>
                         <% @user.services.status(Service::LISTED).each do |service| %>
                             <p>Service: <%= service.title %></p>
@@ -163,7 +170,9 @@
                             <h5> <%=t :noListedServices2%> </h5>
                         <%end%>
                     <%end%>
+                    <hr>
                     <h4><i class="fa fa-cogs" aria-hidden="true"></i> <%=t :completedServices%></h4>
+                    <hr>
                     <% if @user.services.status(Service::COMPLETED).count != 0 %>
                         <% @user.services.status(Service::COMPLETED).each do |service| %>
                             <p>Service: <%= service.title %></p>
@@ -173,8 +182,10 @@
                     <%else%>
                         <h5> <%=t :noCompletedServices%> </h5>
                     <%end%>
+                    <hr>
                 <% elsif @user.id == current_user.id && @user.is_teen? || current_user.is_CSR?  %>
                     <h4><i class="fa fa-cogs" aria-hidden="true"></i> <%=t :requestedServices%> </h4>
+                    <hr>
                     <% if @user.service_jobs.status(Service::LISTED).any? %>
                         <% @user.service_jobs.status(Service::LISTED).each do |service| %>
                             <p>Service: <%= service.title %></p>
@@ -184,10 +195,11 @@
                     <%else%>
                         <h5> <%=t :noRequestedServices%> </h5>
                     <%end%>
-
+                    <hr>
                     <%else%><!--Not the current user-->
                     <% if @user.is_client?%>
                         <h4><i class="fa fa-cogs" aria-hidden="true"></i> <%= t :listedServices%> </h4>
+                        <hr>
                         <% if @user.services.status(Service::LISTED).count != 0 %>
                             <% @user.services.status(Service::LISTED).each do |service| %>
                                 <p>Service: <%= service.title %></p>
@@ -202,15 +214,23 @@
                                 <h5><%=t :noListedServices2%></h5>
                             <%end%>
                         <%end%>
+                        <hr>
                     <%elsif @user.is_teen?%>
                         <h4><i class="fa fa-cogs" aria-hidden="true"></i> <%= t :activeServices%> </h4>
-                        The teenager's current active service should go here
+                        <hr>
+                        <% if @active_service.blank?%>
+                          <p><%=t :userNoServices%></p>
+                        <%else%>
+                        <p><%= @active_service.title%></p>
+                        <p><%=@active_service.description%></p>
+                        <%end%>
                     <%end%>
                 <%end%>
               </div>
               <div class="col-md-3">
                 <% if @user.id == current_user.id && @user.is_client? || current_user.is_CSR? %>
                     <h4><i class="fa fa-cog fa-spin" aria-hidden="true"></i> <%=t :acceptedServices%></h4>
+                    <hr>
                     <% if @user.services.status(Service::ACCEPTED).count != 0 %>
                         <% @user.services.status(Service::ACCEPTED).each do |service| %>
                             <p>Service: <%= service.title %></p>
@@ -228,7 +248,9 @@
                     <%else%>
                         <h5> <%=t :noServicesAccepted%> </h5>
                     <%end%>
+                    <hr>
                     <h4><i class="fa fa-cog fa-spin" aria-hidden="true"></i> <%=t :pendingCompletion%></h4>
+                    <hr>
                     <% if @user.services.status(Service::PENDING).count != 0 %>
                         <% @user.services.status(Service::PENDING).each do |service| %>
                             <p>Service: <%= service.title %></p>
@@ -239,12 +261,14 @@
                     <%else%>
                         <h5> <%=t :noPendingServices%> </h5>
                     <%end%>
+                    <hr>
                 <%elsif current_user.id != @user.id%>
                   <% if @user.is_client?%>
                   <%elsif @user.is_teen?%>
                   <%end%>
                 <% elsif @user.id == current_user.id && @user.is_teen? || current_user.is_CSR?  %>
                     <h4><i class="fa fa-cog fa-spin" aria-hidden="true"></i> <%=t :acceptedServices%></h4>
+                    <hr>
                     <% if @user.service_jobs.status(Service::ACCEPTED).count != 0 %>
                         <% @user.service_jobs.status(Service::ACCEPTED).each do |service| %>
                             <p>Service: <%= service.title %></p>
@@ -255,11 +279,13 @@
                     <%else%>
                         <h5> <%=t :noServicesAccepted%> </h5>
                     <%end%>
+                    <hr>
                 <%end%>
               </div>
-              <div class="col-md-3">
+              <div class="col-md-3" style="border-right: solid 1px;">
                 <% if @user.id ==  current_user.id && @user.is_client?%>
                     <h4><i class="fa fa-cogs" aria-hidden="true"></i> <%=t :completedServices%></h4>
+                    <hr>
                     <% if @user.services.status(Service::COMPLETED).any? %>
                         <% @user.services.status(Service::COMPLETED).each do |service| %>
                             <p>Service: <%= service.title %></p>
@@ -269,8 +295,10 @@
                     <%else%>
                         <h5> <%=t :noCompletedServices%> </h5>
                     <%end%>
+                    <hr>
                 <% elsif @user.id == current_user.id && @user.is_teen? || current_user.is_CSR?  %>
                     <h4><i class="fa fa-cog fa-spin" aria-hidden="true"></i> <%=t :pendingCompletion%></h4>
+                    <hr>
                     <% if @user.service_jobs.status(Service::PENDING).any? %>
                         <% @user.service_jobs.status(Service::PENDING).each do |service| %>
                             <p>Service: <%= service.title %></p>
@@ -281,6 +309,7 @@
                     <%else%>
                         <h5> <%=t :noPendingServices%> </h5>
                     <%end%>
+                    <hr>
                 <%end%>
               </div>
               <div class="col-md-3">
@@ -289,6 +318,7 @@
                     <%= link_to t(:pastService) ,services_path(@user.id), :class => 'btn btn-primary'%>
                 <% elsif @user.id ==  current_user.id && @user.is_teen?%>
                         <h4><i class="fa fa-cogs" aria-hidden="true"></i> <%=t :completedServices%></h4>
+                        <hr>
                         <% if @user.service_jobs.status(Service::COMPLETED).any? %>
                             <% @user.service_jobs.status(Service::COMPLETED).each do |service| %>
                                 <p>Service: <%= service.title %></p>
@@ -298,6 +328,7 @@
                         <%else%>
                             <h5> <%=t :noCompletedServices%> </h5>
                         <%end%>
+                        <hr>
                 <%end%>
               </div>
             </div>
@@ -357,6 +388,7 @@
             <div class="row">
               <div class="col-md-4">
                 <h4> Transactions </h4>
+                <hr>
                 <%= link_to I18n.t(:viewTrans), user_transactions_path(@user.id), :class => 'btn btn-default' %>
                 <% if @user.is_teen? %>
                   <%= link_to  new_user_transaction_path(@user.id), :class => 'btn btn-primary' do %>
@@ -366,6 +398,7 @@
               </div>
               <div class="col-md-4">
                 <h4><%= t :billing%> </h4>
+                <hr>
                 <% if @user.is_client? && @user.stripe_id.blank?%>
                     <%= form_tag user_cards_path(@user.id) do %>
                         <article>
@@ -397,6 +430,7 @@
               <div class="col-md-4">
                 <% if @user.is_teen?%>
                     <h4> <%=t :accountBalance%> </h4>
+                    <hr>
                     <p> CAD $<%=@user.balance%></p>
                     <p> <%=t :payoutMethod%>: <%=@user.payout_information.method.upcase()%></p>
                     <%= form_tag user_payouts_path(@user.id) do %>
@@ -417,6 +451,7 @@
             <div class="row">
               <div class="col-md-4">
                 <h4><i class="fa fa-magic" aria-hidden="true"></i> <%=t :skills%></h4>
+                <hr>
                 <% @userSkills = UserSkill.where(:user_id => @user.id) %>
                 <% if @userSkills.empty? && @user.id != current_user.id %>
                     <%= t :noUserSkills%>
@@ -432,8 +467,13 @@
                     <br>
                 <% end %>
               </div>
-              <div class="col-md-4">
+              <% if @user.id == current_user.id %>
+                <div class="col-md-4" style="border-right:solid 1px">
+              <%else%>
+                  <div class="col-md-4">
+              <%end%>
                 <h4><i class="fa fa-star" aria-hidden="true"></i> <%= t :skillRating %></h4>
+                <hr>
                 <% if @userSkills.any? %>
                     <% @userSkills = UserSkill.where(:user_id => @user.id) %>
                     <% @userSkills.each do |skill| %>
@@ -453,6 +493,7 @@
             <div class = "row">
               <div class="col-md-8">
                 <h4><i class="fa fa-clock-o" aria-hidden="true"></i> <%= t :availability%></h4>
+                <hr>
               </div>
               <% if @user.id == current_user.id %>
                   <div class="col-md-4">

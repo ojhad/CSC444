@@ -13,6 +13,10 @@ class UsersController < ApplicationController
 					WHEN day = 'Sunday' THEN 7
      END ASC").uniq{|time| time.day }
 		@message = Message.new
+
+		if @user.is_teen?
+      @active_service = @user.service_jobs.status(2)
+    end
 	end
 
 	def new

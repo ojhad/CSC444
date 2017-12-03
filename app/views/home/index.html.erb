@@ -57,29 +57,29 @@
         <h3><%=t :welcome%> <%=@user.first_name.capitalize()%> !</h3>
       </div>
       <div class="row" style="text-align: center">
-        <h4> Statistics bruv</h4>
+        <h4> <%=t :funFacts%></h4>
       </div>
       <br>
       <div class="row statistics">
         <div class="col-md-4 round">
           <p> <%=@jobs_24hrs%></p><br>
-          <p>Jobs posted in the last 24 hours</p>
+          <p><%=t :jobs24%></p>
         </div>
         <div class="col-md-4 round">
           <p><%=@same_city_users%></p><br>
-          <p>Teenagers located in <%=@user.city.capitalize%></p>
+          <p><%=t :teensLocation%> <%=@user.city.capitalize%></p>
         </div>
         <div class="col-md-4 round">
           <p><%=@completed_1week%></p><br>
-          <p>Jobs completed in the past week</p>
+          <p><%=t :jobsCompleted%></p>
         </div>
       </div>
       <div class="row" style="margin-top: 3%">
         <% if @user_skills.blank? || @user_availability.blank?%>
           <div class="col-lg-9">
             <p><%= t :incompleteProfile%></p>
-            <%= link_to "My Skills", edit_user_skill_path(@user.id) , :class => 'btn btn-primary' %>
-            <%= link_to "My Availability", edit_teen_time_path(@user.id) , :class => 'btn btn-primary' %>
+            <%= link_to I18n.t(:skills), edit_user_skill_path(@user.id) , :class => 'btn btn-primary' %>
+            <%= link_to I18n.t(:availability), edit_teen_time_path(@user.id) , :class => 'btn btn-primary' %>
           </div>
       </div>
         <%else%>
@@ -95,7 +95,7 @@
                       <h4 class= "title-recommended-services" style="text-align: center"> <%= t :recommendedServices%></h4>
                     </div>
                     <div class="col-md-12">
-                      <p style="text-align: center">Recommended services based on your skill set and availability</p>
+                      <p style="text-align: center"><%=t :serviceRecDesc%></p>
                     </div>
                     <br>
                     <div class="row reco">
@@ -107,7 +107,7 @@
                                 <h4 class="card-title"><%= s.title %></h4>
                                 <p class="card-text">Description: <%=s.description%></p>
                                 <p class="card-text">Charge: $<%= s.charge_per_hour %> <%=t :perHour%></p>
-                                <%= link_to "View", service_path(s.id), :class => 'btn btn-primary' %>
+                                <%= link_to I18n.t(:view), service_path(s.id), :class => 'btn btn-primary' %>
                               </div>
                             </div>
                           </div>
@@ -118,11 +118,11 @@
             </div>
             <div id="current_service" class="row">
               <div class="col-md-12">
-                <h4 style="text-align: center"> Current Service</h4>
+                <h4 style="text-align: center"> <%=t :activeServices%></h4>
               </div>
               <% if @current_service.blank?%>
                   <div class="col-md-12">
-                    <p style="text-align: center">You are not performing any service at the moment. Once you agree with a client to perform a service and accept it, the service will appear here </p>
+                    <p style="text-align: center"><%=t :currentServDesc%></p>
                   </div>
               <%else%>
 
@@ -133,7 +133,7 @@
                         <h4 class="card-title"><%= @current_service.title %></h4>
                         <p class="card-text">Description: <%=@current_service.description%></p>
                         <p class="card-text">Charge: $<%= @current_service.charge_per_hour %> <%=t :perHour%></p>
-                        <%= link_to "View", service_path(s.id), :class => 'btn btn-primary' %>
+                        <%= link_to I18n.t(:view), service_path(s.id), :class => 'btn btn-primary' %>
                       </div>
                     </div>
                   </div>
@@ -142,11 +142,11 @@
             </div>
             <div class="completed_services" class="row">
               <div class="col-md-12">
-                <h4 style="text-align: center"> Completed Services</h4>
+                <h4 style="text-align: center"> <%=t :completedServices%></h4>
               </div>
               <% if @past_services.blank?%>
                   <div class="col-md-12">
-                    <p style="text-align: center">You don't have any completed service. Once you complete a service, the details will appear here. </p>
+                    <p style="text-align: center"><%=t :pastServDesc%> </p>
                   </div>
               <%else%>
                   <div class="row reco">
@@ -159,7 +159,7 @@
                                 <p class="card-text">Description: <%=s.description%></p>
                                 <p class="card-text">Charge: $<%= s.charge_per_hour %> <%=t :perHour%></p>
                                 <p class="card-text">Completed on: <%=s.created_at.getlocal%></p>
-                                <%= link_to "View", service_path(s.id), :class => 'btn btn-primary' %>
+                                <%= link_to I18n.t(:view), service_path(s.id), :class => 'btn btn-primary' %>
                               </div>
                             </div>
                           </div>
@@ -171,7 +171,7 @@
         <%end%>
     </div>
 <%elsif @user.is_client?%>
-    <div class="container">
+    <div class="container" style="background-color: white ; margin-top: 10px ; border-radius: 10px">
       <div class="row" style="text-align: center">
         <h3><%=t :welcome%> <%=@user.first_name.capitalize%>!</h3>
       </div>
@@ -183,7 +183,7 @@
               <%= link_to "How it works", "#", :class => 'btn btn-primary' %>
               <br><br>
               <p><%=t :familiarCreateService%></p>
-              <%= link_to "Create Service", new_service_path, :class => 'btn btn-primary' %>
+              <%= link_to I18n.t(:createNewService), new_service_path, :class => 'btn btn-primary' %>
             </div>
         <%else%>
         <div class="col-md-4">
@@ -195,7 +195,7 @@
                 <h4 class="card-title"><%=t :title%>: <%=@latest_service[0].main_title%></h4>
                 <p class="card-text">Description: <%=@latest_service[0].description%></p>
                 <p class="card-text">Charge: $<%=@latest_service[0].charge_per_hour%> <%=t :perHour%></p>
-                <%= link_to "View", service_path(@latest_service[0].id), :class => 'btn btn-primary' %>
+                <%= link_to I18n.t(:view), service_path(@latest_service[0].id), :class => 'btn btn-primary' %>
               </div>
             </div>
           </div>
@@ -213,7 +213,7 @@
                       <h4 class="card-title"><%=t :title%>:  <%=s.main_title%></h4>
                       <p class="card-text">Description: <%=s.description%></p>
                       <p class="card-text">Charge: $<%=s.charge_per_hour%> <%=t :perHour%></p>
-                      <%= link_to "View", service_path(s.id), :class => 'btn btn-primary' %>
+                      <%= link_to I18n.t(:view), service_path(s.id), :class => 'btn btn-primary' %>
                     </div>
                   </div>
                 </div>
@@ -234,7 +234,7 @@
                       <h4 class="card-title"><%=t :title%>: <%=s.main_title%></h4>
                       <p class="card-text">Description: <%=s.description%></p>
                       <p class="card-text">Charge: $<%=s.charge_per_hour%> <%=t :perhour%></p>
-                      <%= link_to "View", service_path(s.id), :class => 'btn btn-primary' %>
+                      <%= link_to I18n.t(:view), service_path(s.id), :class => 'btn btn-primary' %>
                     </div>
                   </div>
                 </div>

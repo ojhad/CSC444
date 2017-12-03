@@ -1,25 +1,28 @@
-<div style="width: 80%; margin:0 auto;">
-	<h1><%= t :allConversations %></h1>
-	<br>
-	<div class="list-group">
-		<% if @convos.length == 0 %>
-			<h1>No Conversatins yet. Find a user and message him from there!</h1>
-		<% end %>
-		<% @convos.each do |conversation| %>
-				<% user_to_find = conversation.sender_id == @current_user.id ? conversation.recipient_id : conversation.sender_id %>
-				<% user_profile = User.find(user_to_find) %>
-				<% last_message = conversation.messages.last %>
-				<% unread_count = conversation.messages.unread().count() %>
-			<a href="/conversations/<%= conversation.id %>/messages" class="list-group-item list-group-item-action flex-column align-items-start">
+<div class="container" style="background-color: white">
+  <div style="width: 80%; margin:0 auto;">
+    <h1><%= t :allConversations %></h1>
+    <br>
+    <div class="list-group">
+      <% if @convos.length == 0 %>
+          <h1><%=t :noConversations%></h1>
+      <% end %>
+      <% @convos.each do |conversation| %>
+          <% user_to_find = conversation.sender_id == @current_user.id ? conversation.recipient_id : conversation.sender_id %>
+          <% user_profile = User.find(user_to_find) %>
+          <% last_message = conversation.messages.last %>
+          <% unread_count = conversation.messages.unread().count() %>
+          <a href="/conversations/<%= conversation.id %>/messages" class="list-group-item list-group-item-action flex-column align-items-start">
 				<span class="chat-img pull-left">
 	        <img src="<%= user_profile.profile_pic.url %>" alt="User Avatar" class="img-circle" style="vertical-align: middle; width: 75px; height: 75px;" />
 	      </span>
-				<div style="margin-left: 90px;" class="d-flex w-100 justify-content-between">
-					<h5 class="mb-1"><%= user_profile.first_name + ' ' + user_profile.last_name%> <span class="badge"><%= unread_count %></span></h5>
-					<small><%= last_message.message_time %></small>
-					<p class="mb-1"><%= last_message.body %></p>
-				</div>
-			</a>
-		<% end %>
-	</div>
+            <div style="margin-left: 90px;" class="d-flex w-100 justify-content-between">
+              <h5 class="mb-1"><%= user_profile.first_name + ' ' + user_profile.last_name%> <span class="badge"><%= unread_count %></span></h5>
+              <small><%= last_message.message_time %></small>
+              <p class="mb-1"><%= last_message.body %></p>
+            </div>
+          </a>
+      <% end %>
+    </div>
+  </div>
 </div>
+
