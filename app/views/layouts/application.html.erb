@@ -62,8 +62,9 @@
                   <ul class="dropdown-menu">
                     <% if !@user.nil? && @user.is_client?%>
                         <li><%= link_to t('createNewService'), new_service_path%></li>
+                    <%else%>
+                      <li><%= link_to t('viewServicePosting'), services_path%></li>
                     <%end%>
-                    <li><%= link_to t('viewServicePosting'), services_path%></li>
                   </ul>
                 </li>
                 <li>
