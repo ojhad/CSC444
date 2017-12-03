@@ -17,6 +17,11 @@
       <p><b>Location:</b> <%=@service.city.upcase%>, <%=@service.province%></p>
       <br>
 
+      <div style='width: 300px;'>
+        <div id="map" style='width: 300px; height: 300px;'></div>
+      </div>
+      <br>
+
       <% if @service.status == Service::UNLISTED && @service.user_id == current_user.id%>
           <div class="services-bottom-action-buttons-container">
             <%= button_to 'List Service', list_service_path, method: :post, :class => 'btn btn-success' %>
@@ -109,4 +114,20 @@
 
 
 </div>
+
+<script>
+    handler = Gmaps.build('Google');
+    handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+        markers = handler.addMarkers([
+            {
+                "lat": <%= @user.latitude ? @user.latitude : 0 %>,
+                "lng": <%= @user.longitude ? @user.longitude : 0 %>,
+            }
+        ]);
+        handler.bounds.extendWith(markers);
+        handler.fitMapToBounds();
+        handler.getMap().setZoom(16);
+
+    });
+</script>
 
