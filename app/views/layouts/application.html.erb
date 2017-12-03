@@ -47,18 +47,20 @@
               <%= link_to_unless I18n.locale == :fr, "Français", set_language_french_path %>
             </p>
           </ul>
-          <ul class = "nav navbar-nav">
-            <li class="dropdown">
-              <%= link_to("#", :class=>"dropdown-toggle", "data-toggle" =>"dropdown", :role => "button", "aria-expanded" => "false") do %> <i class="fa fa-cogs hidden-xs"></i> Services <span class="caret"></span>
-              <% end %>
-              <ul class="dropdown-menu">
-                <% if !@user.nil? && @user.is_client?%>
-                    <li><%= link_to t('createNewService'), new_service_path%></li>
-                <%end%>
-                <li><%= link_to t('viewServicePosting'), services_path%></li>
-              </ul>
-            </li>
-          </ul>
+          <% if user_signed_in? %>
+            <ul class = "nav navbar-nav">
+              <li class="dropdown">
+                <%= link_to("#", :class=>"dropdown-toggle", "data-toggle" =>"dropdown", :role => "button", "aria-expanded" => "false") do %> <i class="fa fa-cogs hidden-xs"></i> Services <span class="caret"></span>
+                <% end %>
+                <ul class="dropdown-menu">
+                  <% if !@user.nil? && @user.is_client?%>
+                      <li><%= link_to t('createNewService'), new_service_path%></li>
+                  <%end%>
+                  <li><%= link_to t('viewServicePosting'), services_path%></li>
+                </ul>
+              </li>
+            </ul>
+          <% end %>
 
           <% if current_user != true_user %>
               <ul class = "nav navbar-nav loginAs">
