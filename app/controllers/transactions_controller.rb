@@ -42,6 +42,7 @@ class TransactionsController < ApplicationController
   def edit
     find_services
     @transaction = Transaction.find(params[:id])
+    @services << @transaction.service
   end
 
   def update

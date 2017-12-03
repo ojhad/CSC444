@@ -7,7 +7,8 @@
 <div class="card-container">
   <div class="card transaction-card">
     <div class="card-body">
-      <h1>Transaction Details</h1>
+      <h2>Transaction Details</h2>
+      <%= image_tag("#{@transaction.service.get_image_id}"+"service.svg", width: "32", height:"32", class: "service-image") %>
       <h4 class="card-title"><%= @transaction.service_title %></h4>
       <p class="card-text">Total time: <%= @transaction.number_of_hours %> hour(s)</p>
       <p class="card-text">Cost per hours: <%= @transaction.charge_per_hour %>/hour</p>
