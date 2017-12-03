@@ -1,8 +1,12 @@
 <div class="container">
 
   <div class="row">
-    <div class="col-lg-8">
-      <h1>Service Details</h1>
+    <div class="col-lg-2"></div>
+    <div class="col-lg-8 well">
+      <h1>
+        Service Details
+        <%= image_tag("#{@service.get_image_id}"+"service.svg", width: "64", height:"64", class: "show-service-image") %>
+      </h1>
 
       <h3><%= @service.main_title %></h3>
       <hr>

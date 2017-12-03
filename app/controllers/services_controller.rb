@@ -14,30 +14,37 @@ class ServicesController < ApplicationController
 
 		@services = Service.status(Service::LISTED).viewable_services(current_user)
 
-	    @user = User.find(current_user.id)
+		@user = User.find(current_user.id)
 
-	    #Store distance of service to the location of the current user
-	    @services.each do |s|
-	    	distance = s.distance_from(@user, :units=>:kms)
-	    	s.distance = distance
-	    end
+		#Store distance of service to the location of the current user
+		@services.each do |s|
+			distance = s.distance_from(@user, :units=>:kms)
+			s.distance = distance
+		end
 
-	    if $filter_by_distance.to_f != -1
-		    @services = @services.reject {|s| s.distance > $filter_by_distance.to_f} 
-		    gon.from_distance = $filter_by_distance.to_f
-	    end
+		if $filter_by_distance.to_f != -1
+			@services = @services.reject {|s| s.distance > $filter_by_distance.to_f}
+			gon.from_distance = $filter_by_distance.to_f
+		end
 
 
-	    if $filter_by_fromage.to_f != -1 
-	    	@services = @services.reject {|s| s.min_age > $filter_by_fromage.to_f} 
-		    gon.from_age = $filter_by_fromage.to_f
-	    end
+		if $filter_by_fromage.to_f != -1
+			@services = @services.reject {|s| s.min_age > $filter_by_fromage.to_f}
+			gon.from_age = $filter_by_fromage.to_f
+		end
 
-	    if $filter_by_toage.to_f != -1 
-	    	@services = @services.reject {|s| s.max_age < $filter_by_toage.to_f} 
-		    gon.to_age = $filter_by_toage.to_f
-	    end
-  	end
+		if $filter_by_toage.to_f != -1
+      @services = @services.reject {|s| s.max_age < $filter_by_toage.to_f}
+			gon.to_age = $filter_by_toage.to_f
+    end
+
+    @servicesLocations = Gmaps4rails.build_markers(@services) do |service, marker|
+      marker.lat service.latitude
+      marker.lng service.longitude
+      marker.infowindow  service.main_title
+    end
+
+	end
 
   	def filter_by_distance
 	   	$filter_by_distance = params[:distance]

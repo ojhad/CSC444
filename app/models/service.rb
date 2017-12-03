@@ -18,6 +18,19 @@ class Service < ApplicationRecord
 					"Simple cleaning tasks", "Vacation services", "Dog walking", "Computer help",
 					"Tutoring", "Reading", "Other"]
 
+	IMAGE_TO_SERVICE = {
+	"Babysitting" => '01',
+	"Yard work" => '02',
+	"Snow shoveling" => '03',
+	"Furniture moving" => '04',
+	"Simple cleaning tasks" => '05',
+	"Vacation services" => '06',
+	"Dog walking" => '07',
+	"Computer help" => '08',
+	"Tutoring" => '09',
+	"Reading" => '10',
+	"Other" => '11'
+	}
 	belongs_to :user
 	has_many :service_users, :dependent => :destroy
   has_many :transactions, :dependent => :destroy
@@ -50,6 +63,9 @@ class Service < ApplicationRecord
     !self.other_title.empty?
   end
 
+	def get_image_id
+		IMAGE_TO_SERVICE[self.title] or 11
+	end
   #gets lat & long for service
   geocoded_by :get_address
 
