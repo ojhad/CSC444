@@ -413,8 +413,8 @@
         <div class="tab-pane primary fade in well" id="skillsTab">
           <div class="container">
             <div class="row">
-              <div class="col-md-8">
-                <h4><i class="fa fa-star" aria-hidden="true"></i> <%=t :skills%></h4>
+              <div class="col-md-4">
+                <h4><i class="fa fa-magic" aria-hidden="true"></i> <%=t :skills%></h4>
                 <% @userSkills = UserSkill.where(:user_id => @user.id) %>
                 <% if @userSkills.empty? && @user.id != current_user.id %>
                     <%= t :noUserSkills%>
@@ -422,9 +422,24 @@
                     <%= t :noSkills%>
                 <% else %>
                     <% @userSkills.each do |skill| %>
-                        <%= Skill.find(skill.skill_id).skill_name %><br>
+
+                        <%= Skill.find(skill.skill_id).skill_name %>
+                        <br>
+
                     <% end %>
                     <br>
+                <% end %>
+              </div>
+              <div class="col-md-4">
+                <h4><i class="fa fa-star" aria-hidden="true"></i> <%= t :skillRating %></h4>
+                <% if @userSkills.any? %>
+                    <% @userSkills = UserSkill.where(:user_id => @user.id) %>
+                    <% @userSkills.each do |skill| %>
+                        <% if skill.calculate_avg_review(@user.id).present? %>
+                              <%= skill.calculate_avg_review(@user.id) %>
+                        <% end %>
+                        <br>
+                  <% end %>
                 <% end %>
               </div>
               <% if @user.id == current_user.id %>
@@ -585,9 +600,12 @@
                 case 'reviews':
                     $('#reviewsTab').addClass('active');
                     <% if @user.is_teen? %>
-                      $('#review_reviewsTab').addClass('active');
-                      $('#review_reviews').removeClass("btn-default").addClass("btn-primary");
-                      $('#review_endorsements').removeClass("btn-primary").addClass("btn-default");
+                      if ($('#review_reviews').hasClass('btn-primary')){
+                          $('#review_reviewsTab').addClass('active');
+                      }
+                      else {
+                          $('#review_endorsementsTab').addClass('active');
+                      }
                     <% end %>
                     break;
                 case 'services':

@@ -107,6 +107,7 @@ en:
   #user profile translations
   about: "About"
   skills: "Skills"
+  skillRating: "Skill Rating"
   availability: "Availability"
   reviews: "Reviews"
   endorsements: "Endorsements"
@@ -224,6 +225,20 @@ en:
   Saturday: "Saturday"
   Sunday: "Sunday"
 
+  #Skills
+  Babysitting: "Babysitting"
+  Yard work: "Yard work"
+  Snow shoveling: "Snow shoveling"
+  Simple cleaning tasks: "Simple cleaning tasks"
+  Furniture moving: "Furniture moving"
+  Vacation services: "Vacation services"
+  Dog walking: "Dog walking"
+  Computer help: "Computer help"
+  Tutoring: "Tutoring"
+  Reading: "Reading"
+  addskill: "Add Skill"
+
+
   ##################### FRENCH BELOW #######################
 
 fr:
@@ -302,6 +317,7 @@ fr:
   #user profile translations
   about: "À propos de moi"
   skills: "Compétences"
+  skillRating: "Compétence Évaluations"
   availability: "Disponibilité"
   reviews: "Critiques"
   endorsements: "Recommandations"
@@ -419,3 +435,16 @@ fr:
   Friday: "Vendredi"
   Saturday: "Samedi"
   Sunday: "Dimanche"
+
+  #Skills
+  Babysitting: "Baby-sitting"
+  Yard work: "Travaux de jardinage"
+  Snow shoveling: "Pelleter la neige"
+  Simple cleaning tasks: "Tâches de nettoyage simples"
+  Furniture moving: "Déménagement de meubles"
+  Vacation services: "Services de vacances"
+  Dog walking: "Promener le chien"
+  Computer help: "Aide informatique"
+  Tutoring: "Tutorat"
+  Reading: "En train de lire"
+  addskill: "Ajouter une compétence"

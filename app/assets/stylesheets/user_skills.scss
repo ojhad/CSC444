@@ -19,6 +19,11 @@
 }
 
 .skillNames{
-  width: 200px;
+  width: 300px;
   font-size: 17px;
 }
+
+.addSkillButton, .skillsDropdown{
+  width: max-content !important;
+}
+

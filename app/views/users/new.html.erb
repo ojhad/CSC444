@@ -1,77 +1,104 @@
-<%=  form_for :user, :url => url_for(:controller => 'users', :action => 'add_user') do |f| %>
-    Choose User group: <br>
-    <%= f.radio_button :group, 0 %>
-    <%= f.label :group_teen, 'Teen' %>
-    <%= f.radio_button :group, 1 %>
-    <%= f.label :group_client, 'Client' %>
-    <%= f.radio_button :group, 3 %>
-    <%= f.label :group_admin, 'Admin' %>
-    <%= f.radio_button :group, 4 %>
-    <%= f.label :group_CSR, 'CSR' %>
-    <br>
-    <br>
-    <%= f.label :email, 'Email' %>
-    <%= f.email_field :email %>
-    <br>
-    <br>
-    <%= f.label :password, 'Password' %>
-    <%= f.password_field :password %>
-    <br>
-    <br>
-    <%= f.label :password_confirmation, 'Confirm password' %>
-    <%= f.password_field :password_confirmation %>
-    <br>
-    <br>
-    <%= f.label :first_name, 'First Name' %>
-    <%= f.text_field :first_name %>
-    <br>
-    <br>
-    <%= f.label :last_name, 'Last Name' %>
-    <%= f.text_field :last_name%>
-    <br>
-    <br>
-    <%= f.label :address_1, 'Street Address'%>
-    <%= f.text_field :address_1 %>
-    <br>
-    <br>
-    <%= f.label :address_2, 'Apt/Unit/Suite'%>
-    <%= f.text_field :address_2 %>
-    <br>
-    <br>
-    <%= f.label :city, 'City'%>
-    <%= f.text_field :city %>
-    <br>
-    <br>
-    <%= f.label :province, 'Province' %>
-    <%= f.select :province, [ ['Alberta','AB'],['British Columbia','BC'],['Manitoba','MB'],['New Brunswich','NB'],
-                              ['Newfoundland and Labrador','NL'],['Nova Scotia','NS'],['Ontario','ON'],['Prince Edward Island','PE'],
-                              ['Quebec','QC'],['Saskatchewan','SK'],['Northwest Territories','NT'],
-                              ['Nunavut','NU'],['Yukon','YT']], {:prompt => 'Select One'}%>
-    <br>
-    <br>
-    <%= f.label :postal_code, 'Postal Code' %>
-    <%= f.text_field :postal_code %>
-    <br>
-    <br>
-    <%= f.label :country, 'Country' %>
-    <%= f.text_field :country %>
-    <br>
-    <br>
-    <%= f.label :home_number, 'Home Number' %>
-    <%= f.text_field :home_number %>
-    <br>
-    <br>
-    <%= f.label :mobile_number, 'Mobile Number' %>
-    <%= f.text_field :mobile_number %>
-    <br>
-    <br>
-    <%= f.label :age, 'Age' %>
-    <%= f.text_field :age %>
-    <br>
-    <br>
-    <button type="submit" class="btn btn-default">Add User</button>
+<div class = "form-horizontal">
+  <div class="sign-in-container">
+    <div class="card-signIn"></div>
+      <div class="card-signIn">
+        <h1 class="title">Add New User</h1>
 
-<% end %>
-<script type="text/javascript">
+        <%=  form_for :user, :url => url_for(:controller => 'users', :action => 'add_user') do |f| %>
+          
+          <div class="input-container">
+            <label class = "control-label">Choose User group: </label>
+            <%= f.radio_button :group, 0 %>
+            <%= f.label :group_teen, 'Teen', class: 'control-label' %>
+            <%= f.radio_button :group, 1 %>
+            <%= f.label :group_client, 'Client', class: 'control-label' %>
+            <%= f.radio_button :group, 3 %>
+            <%= f.label :group_admin, 'Admin', class: 'control-label' %>
+            <%= f.radio_button :group, 4 %>
+            <%= f.label :group_CSR, 'CSR', class: 'control-label' %>
+          </div>  
 
-</script>
+          <div class="input-container">
+            <%= f.label :email, 'Email', class: 'control-label' %>
+            <%= f.email_field :email, class: 'form-control' %>
+          </div>
+
+          <div class="input-container">
+            <%= f.label :password, 'Password', class: 'control-label'  %>
+            <%= f.password_field :password, class: 'form-control' %>
+          </div>
+
+          <div class="input-container">
+            <%= f.label :password_confirmation, 'Confirm password', class: 'control-label'  %>
+            <%= f.password_field :password_confirmation, class: 'form-control' %>
+          </div>
+
+          <div class="input-container">
+            <%= f.label :first_name, 'First Name', class: 'control-label'  %>
+            <%= f.text_field :first_name, class: 'form-control' %>
+          </div>
+
+          <div class="input-container">
+            <%= f.label :last_name, 'Last Name', class: 'control-label'  %>
+            <%= f.text_field :last_name, class: 'form-control' %>
+          </div>
+
+          <div class="input-container">
+            <%= f.label :address_1, 'Street Address', class: 'control-label' %>
+            <%= f.text_field :address_1, class: 'form-control' %>
+          </div>
+
+          <div class="input-container">
+            <%= f.label :address_2, 'Apt/Unit/Suite', class: 'control-label' %>
+            <%= f.text_field :address_2, class: 'form-control' %>
+          </div>
+
+          <div class="input-container">
+            <%= f.label :city, 'City', class: 'control-label' %>
+            <%= f.text_field :city, class: 'form-control' %>
+          </div>
+
+          <div class="input-container">
+            <%= f.label :province, 'Province', class: 'control-label'  %>
+            <%= f.select :province, [ ['Alberta','AB'],['British Columbia','BC'],['Manitoba','MB'],['New Brunswich','NB'],
+                                    ['Newfoundland and Labrador','NL'],['Nova Scotia','NS'],['Ontario','ON'],['Prince Edward Island','PE'],
+                                    ['Quebec','QC'],['Saskatchewan','SK'],['Northwest Territories','NT'],
+                                    ['Nunavut','NU'],['Yukon','YT']], {:prompt => 'Select One'}%>
+          </div>
+
+          <div class="input-container">
+            <%= f.label :postal_code, 'Postal Code', class: 'control-label'  %>
+            <%= f.text_field :postal_code, class: 'form-control' %>
+          </div>
+
+          <div class="input-container">
+            <%= f.label :country, 'Country', class: 'control-label'  %>
+            <%= f.text_field :country, class: 'form-control' %>
+          </div>
+
+          <div class="input-container">
+            <%= f.label :home_number, 'Home Number', class: 'control-label'  %>
+            <%= f.text_field :home_number, class: 'form-control' %>
+          </div>
+
+          <div class="input-container">
+            <%= f.label :mobile_number, 'Mobile Number', class: 'control-label'  %>
+            <%= f.text_field :mobile_number, class: 'form-control' %>
+          </div>
+
+          <div class="input-container">
+            <%= f.label :age, 'Age', class: 'control-label'  %>
+            <%= f.text_field :age, class: 'form-control' %>
+          </div>
+        
+          <div class="button-container create-service">
+              <div class="col-sm-8 col-sm-offset-2 text-center">
+                <button type="submit" class="btn btn-default btn-primary"> Add User </button>
+              </div>
+          </div>
+
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
