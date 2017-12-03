@@ -17,6 +17,10 @@ class Message < ApplicationRecord
   scope :unread, -> () do
     where("messages.read = #{false}")
   end
+
+  scope :unread_by_me, -> (user_id) do
+    where("messages.read = #{false} AND messages.user_id = #{user_id}")
+  end
 end
 
 # == Schema Information
