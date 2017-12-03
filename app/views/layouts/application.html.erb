@@ -3,8 +3,6 @@
   <head>
     <title>TeenServ</title>
     <%= csrf_meta_tags %>
-    <%= include_gon %>
-    <%= Gon::Base.render_data %>
     <%= stylesheet_link_tag    'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
@@ -166,7 +164,9 @@
           <p id="alert" class="alert alert-danger"><%= alert %></p>
       <% end %>
 
-      <%= yield %>
+      <div id="section">
+        <%= yield %>
+      </div>
     </main>
 
     <footer id="myFooter">
@@ -224,6 +224,4 @@
             }, 2000);
         })
     </script>
-  </body>
-
-</html>
+  </bod      html>

@@ -240,9 +240,9 @@ body {
 	color:white;
 	flex: 0 0 auto;
   -webkit-flex: 0 0 auto;
-    position: fixed;
     bottom: 0;
     width: inherit;
+    height: 192px
 }
 
 #myFooter ul{
@@ -276,8 +276,6 @@ body {
 
 #myFooter .social-networks{
 	text-align: center;
-	padding-top: 30px;
-	padding-bottom: 38px;
 }
 
 #myFooter .social-networks a{

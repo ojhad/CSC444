@@ -1,8 +1,3 @@
-<head>
-	<%= include_gon %>
-  <%= Gon::Base.render_data %>
-</head>
-
 <div class="col-md-4" id="ljobscoloumn">
   <div class = "container-service-postings">
     <h1 class = "title-service-postings">Services</h1>
@@ -63,7 +58,7 @@
 	var $range_distane = $("#js-range-slider-distance")
 	var min_distance = 0.1
 	var max_distance = 100
-	var from_distance = gon.from_distance
+	var from_distance = 50
 
 	$range_distane.ionRangeSlider({
 		type: "single",
@@ -72,16 +67,17 @@
 		from: from_distance,
 		postfix: "km",
 		onFinish: function (data) {
-        	 // console.log($range.prop("value"));
-        	// $.ajax("/services/filter_by_distance")
         	$.ajax({
         		type: "GET",
-				    url: "/services/filter_by_distance",
+				    url: "/services/filter",
 				    data: {
 				        distance: data["from"]
 				    },
-				    success: function(json){
-           		console.log("Distance slider success")   
+				    success: function(data){
+           		console.log("Distance slider success")
+
+              $("#ljobs").remove()
+              $(".container-service-postings").append(data.html)
             }
 			});
     	},
@@ -90,8 +86,8 @@
 	var $range_age = $("#js-range-slider-age")
 	var min_age = 13
 	var max_age = 19
-	var from_age = gon.from_age
-	var to_age = gon.to_age
+	var from_age = 13
+	var to_age = 19
 
 	$range_age.ionRangeSlider({
     type: "double",
@@ -104,13 +100,15 @@
     onFinish: function (data) {
         $.ajax({
         	type: "GET",
-			    url: "/services/filter_by_age",
+			    url: "/services/filter",
 			    data: {
 			        from_age: data["from"],
 			        to_age: data["to"]
 			    },
-			    success: function(json){
-         		console.log("Age slider success")   
+			    success: function(data){
+         		console.log("Age slider success") 
+            $("#ljobs").remove()
+            $(".container-service-postings").append(data.html)  
           }
 			});
     }
@@ -138,6 +136,7 @@
           }
       ]);
       handler.bounds.extendWith(Gmaps.store.markers);
+      handler.bounds.extendWith(userlocation);
       handler.fitMapToBounds();
   });
 </script>
