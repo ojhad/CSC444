@@ -17,7 +17,7 @@
 									<strong class="<%= m.user.id == current_user.id ? "pull-right " : ""; %>primary-font"><%= sender.first_name + ' ' + sender.last_name %></strong> <% if m.user.id != current_user.id %><small class="pull-right text-muted">
 									<span class="glyphicon glyphicon-time"></span><%= m.message_time %></small><% end %>
 								</div>
-								<p><%= m.body %></p>
+								<p style="word-wrap: break-word;",class="<%= m.user.id == current_user.id ? 'pull-right ' : ''%>"><%= m.body %></p>
 							</div>
 						</li>
 					<% end %>
