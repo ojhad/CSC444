@@ -103,6 +103,8 @@ en:
   view: "View"
   delete: "Delete"
   pastServices: "Past Services"
+  description: "Description"
+  charge: "Charge"
 
   #user profile translations
   about: "About"

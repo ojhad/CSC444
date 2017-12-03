@@ -71,6 +71,8 @@ fr:
   edit: "Editer"
   view: "Voir"
   delete: "Supprimer"
+  description: "La Description"
+  charge: "Charge"
 
   #user profile translations
   about: "À propos de moi"

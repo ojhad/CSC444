@@ -139,7 +139,7 @@
                         <% @user.services.status(Service::UNLISTED).each do |service| %>
                               <div id="service_<%=service.id%>" class="service_block service_block_unlisted">
                                 <div class="service_block_component">Service: <%= service.title %></div>
-                                <div class="service_block_component">Charge: $<%= service.charge_per_hour %> <%=t :perHour%></div>
+                                <div class="service_block_component"><%=I18n.t(:charge)%>: $<%= service.charge_per_hour %> <%=t :perHour%></div>
                                 <%= link_to I18n.t(:list), list_service_path(service), method: :post, :class => 'btn btn-success service_block_component' %>
                                 <%= link_to I18n.t(:edit), edit_service_path(service), :class => 'btn btn-primary service_block_component' %>
                                 <%= link_to I18n.t(:delete), service, method: :delete, remote: true, data: {title: 'Delete Listed Service' , confirm: 'Are you sure? Item will not appear under listed services'}, :class => 'btn btn-danger delete_service service_block_component' %>
@@ -156,7 +156,7 @@
                         <% @user.services.status(Service::LISTED).each do |service| %>
                             <div id="service_<%=service.id%>" class="service_block">
                               <div class="service_block_component">Service: <%= service.title %></div>
-                              <div class="service_block_component">Charge: $<%= service.charge_per_hour %> <%= t :perHour%></div>
+                              <div class="service_block_component"><%=I18n.t(:charge)%>: $<%= service.charge_per_hour %> <%= t :perHour%></div>
                               <% if @user.id == current_user.id || current_user.is_admin? %>
                                   <%= link_to I18n.t(:view), service_path(service), :class => 'btn btn-success service_block_component' %>
                                   <%= link_to I18n.t(:edit), edit_service_path(service),
@@ -190,7 +190,7 @@
                         <% @user.service_jobs.status(Service::LISTED).each do |service| %>
                             <div id="service_<%=service.id%>" class="service_block">
                             <div class="service_block_component">Service: <%= service.title %></div>
-                              <div class="service_block_component">Charge: $<%= service.charge_per_hour %> <%=t :perHour%></div>
+                              <div class="service_block_component"><%=I18n.t(:charge)%>: $<%= service.charge_per_hour %> <%=t :perHour%></div>
                               <%= link_to I18n.t(:view), service_path(service), :class => 'btn btn-success service_block_component' %>
                               </div>
                               <hr>
@@ -205,7 +205,7 @@
                         <% @user.service_jobs.status(Service::COMPLETED).each do |service| %>
                             <div id="service_<%=service.id%>" class="service_block">
                               <div class="service_block_component">Service: <%= service.title %></div>
-                              <div class="service_block_component">Charge: $<%= service.charge_per_hour %> <%=t :perHour%></div>
+                              <div class="service_block_component"><%=I18n.t(:charge)%>: $<%= service.charge_per_hour %> <%=t :perHour%></div>
                               <%= link_to t(:view), service_path(service), :class => 'btn btn-success service_block_component' %>
                             </div>
                             <hr>
@@ -222,7 +222,7 @@
                             <% @user.services.status(Service::LISTED).each do |service| %>
                                 <div id="service_<%=service.id%>" class="service_block">
                                 <div class="service_block_component">Service: <%= service.title %></div>
-                                  <div class="service_block_component">Charge: $<%= service.charge_per_hour %> <%= t :perHour%></div>
+                                  <div class="service_block_component"><%=I18n.t(:charge)%>: $<%= service.charge_per_hour %> <%= t :perHour%></div>
                                 <%= link_to I18n.t(:view), service_path(service.id), :class => 'btn btn-primary service_block_component' %>
                                 </div>
                                 <hr>
@@ -243,7 +243,7 @@
                             <% @active_service.each do |service| %>
                                 <div id="service_<%=service.id%>" class="service_block">
                                   <div class="service_block_component">Service: <%= service.title %></div>
-                                  <div class="service_block_component">Description: $<%= service.description %></div>
+                                  <div class="service_block_component"><%=I18n.t(:description)%>: $<%= service.description %></div>
                                 </div>
                                 <hr>
                             <%end%>
@@ -261,7 +261,7 @@
                         <% @user.services.status(Service::ACCEPTED).each do |service| %>
                             <div id="service_<%=service.id%>" class="service_block">
                             <div class="service_block_component">Service: <%= service.title %></div>
-                              <div class="service_block_component">Charge: $<%= service.charge_per_hour %> <%=t :perHour%></div>
+                              <div class="service_block_component"><%=I18n.t(:charge)%>: $<%= service.charge_per_hour %> <%=t :perHour%></div>
                             <%= link_to I18n.t(:view), service_path(service), :class => 'btn btn-success service_block_component' %>
                             <%= link_to I18n.t(:edit), edit_service_path(service),
                                         data: {title: 'Edit Service' ,
@@ -284,7 +284,7 @@
                         <% @user.services.status(Service::PENDING).each do |service| %>
                             <div id="service_<%=service.id%>" class="service_block">
                             <div class="service_block_component">Service: <%= service.title %></div>
-                              <div class="service_block_component">Charge: $<%= service.charge_per_hour %> <%= t :perHour%></div>
+                              <div class="service_block_component"><%=I18n.t(:charge)%>: $<%= service.charge_per_hour %> <%= t :perHour%></div>
                             <%= link_to I18n.t(:view), service_path(service), :class => 'btn btn-primary service_block_component' %>
                             <%= link_to I18n.t(:reviewTS), user_transaction_path(@user.id, service.transactions.first.id), :class => 'btn btn-success service_block_component' %>
                             </div>
@@ -305,7 +305,7 @@
                           <% @user.service_jobs.status(Service::ACCEPTED).each do |service| %>
                             <div id="service_<%=service.id%>" class="service_block">
                             <div class="service_block_component">Service: <%= service.title %></div>
-                              <div class="service_block_component">Charge: $<%= service.charge_per_hour %> <%= t :perHour%></div>
+                              <div class="service_block_component"><%=I18n.t(:charge)%>: $<%= service.charge_per_hour %> <%= t :perHour%></div>
                               <%= link_to I18n.t(:view), service_path(service), :class => 'btn btn-primary service_block_component' %>
                               <%= link_to I18n.t(:submitTrans), new_user_transaction_path(@user.id), :class => 'btn btn-success service_block_component' %>
                             </div>
@@ -325,7 +325,7 @@
                         <% @user.services.status(Service::COMPLETED).each do |service| %>
                             <div id="service_<%=service.id%>" class="service_block">
                             <div class="service_block_component">Service: <%= service.title %></div>
-                              <div class="service_block_component">Charge: $<%= service.charge_per_hour %> <%=t :perHour%></div>
+                              <div class="service_block_component"><%=I18n.t(:charge)%>: $<%= service.charge_per_hour %> <%=t :perHour%></div>
                             <%= link_to t(:view), service_path(service), :class => 'btn btn-success service_block_component' %>
                             </div>
                             <hr>
@@ -340,7 +340,7 @@
                         <% @user.service_jobs.status(Service::PENDING).each do |service| %>
                             <div id="service_<%=service.id%>" class="service_block">
                             <div class="service_block_component">Service: <%= service.title %></div>
-                              <div class="service_block_component">Charge: $<%= service.charge_per_hour %> <%= t :perHour%></div>
+                              <div class="service_block_component"><%=I18n.t(:charge)%>: $<%= service.charge_per_hour %> <%= t :perHour%></div>
                             <%= link_to t(:view), service_path(service), :class => 'btn btn-primary service_block_component' %>
                             <%= link_to t(:reviewTimesheet), user_transaction_path(@user.id, service.transactions.first.id), :class => 'btn btn-success service_block_component' %>
                             </div>
