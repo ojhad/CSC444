@@ -600,9 +600,12 @@
                 case 'reviews':
                     $('#reviewsTab').addClass('active');
                     <% if @user.is_teen? %>
-                      $('#review_reviewsTab').addClass('active');
-                      $('#review_reviews').removeClass("btn-default").addClass("btn-primary");
-                      $('#review_endorsements').removeClass("btn-primary").addClass("btn-default");
+                      if ($('#review_reviews').hasClass('btn-primary')){
+                          $('#review_reviewsTab').addClass('active');
+                      }
+                      else {
+                          $('#review_endorsementsTab').addClass('active');
+                      }
                     <% end %>
                     break;
                 case 'services':
