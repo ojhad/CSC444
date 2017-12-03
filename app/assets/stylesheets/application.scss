@@ -76,9 +76,7 @@ font-family: Tahoma, Geneva, sans-serif;
 }
 
 .btn-primary {
-    -webkit-border-radius: 28;
-    -moz-border-radius: 28;
-    border-radius: 28px;
+
     color: #ffffff;
     font-size: 14px;
     background: #3a539b;
@@ -93,9 +91,6 @@ font-family: Tahoma, Geneva, sans-serif;
 }
 
 .btn-danger , .btn-success {
-  -webkit-border-radius: 28;
-  -moz-border-radius: 28;
-  border-radius: 28px;
   font-size: 14px;
   padding: 10px 20px 10px 20px;
   text-decoration: none;
@@ -103,6 +98,11 @@ font-family: Tahoma, Geneva, sans-serif;
 
 .btn-danger:hover, .btn-success:hover{
   text-decoration: none;
+}
+
+.btn-default {
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 
