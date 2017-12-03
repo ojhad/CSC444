@@ -10,6 +10,9 @@
 
       <h3><%= @service.main_title %></h3>
       <hr>
+      <div style='width: 300px; float: right;'>
+        <div id="map" style='width: 300px; height: 300px;'></div>
+      </div>
       <p><b>Posted By:</b> <a href="/users/<%=@service.user.id%>"><%= @service.user.first_name.capitalize + ' ' + @service.user.last_name.capitalize %></a></p>
       <p><b>Description:</b> <%=@service.description%></p>
       <p><b>Service skill required:</b> <%=@service.title%></p>
@@ -20,10 +23,6 @@
       <hr>
       <p><b>Location:</b> <%=@service.city.upcase%>, <%=@service.province%></p>
       <br>
-
-      <div style='width: 300px;'>
-        <div id="map" style='width: 300px; height: 300px;'></div>
-      </div>
       <br>
 
       <% if @service.status == Service::UNLISTED && @service.user_id == current_user.id%>
