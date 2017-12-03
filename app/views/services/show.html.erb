@@ -120,8 +120,8 @@
     handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
         markers = handler.addMarkers([
             {
-                "lat": <%= @user.latitude ? @user.latitude : 0 %>,
-                "lng": <%= @user.longitude ? @user.longitude : 0 %>,
+                "lat": <%= @service.latitude ? @service.latitude : 0 %>,
+                "lng": <%= @service.longitude ? @service.longitude : 0 %>,
             }
         ]);
         handler.bounds.extendWith(markers);
