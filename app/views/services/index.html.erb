@@ -3,52 +3,57 @@
   <%= Gon::Base.render_data %>
 </head>
 
-<div class = "container-service-postings">
-	<h1 class = "title-service-postings">Services</h1>
+<div class="col-md-4">
+  <div class = "container-service-postings">
+    <h1 class = "title-service-postings">Services</h1>
 
-	<div class="range-slider">
-		<h4>Filter by distance</h4>
-		<input type="text" id = "js-range-slider-distance" value="" />
-	</div>
+    <div class="range-slider">
+      <h4>Filter by distance</h4>
+      <input type="text" id = "js-range-slider-distance" value="" />
+    </div>
 
-	<div class="range-slider">
-		<h4>Filter by teenager age</h4>
-		<input type="text" id = "js-range-slider-age" value="" />
-	</div>
+    <div class="range-slider">
+      <h4>Filter by teenager age</h4>
+      <input type="text" id = "js-range-slider-age" value="" />
+    </div>
 
-	<% if @services.length == 0 %>
-			<p>No services currently available</p>
-	<% else %>
-		<div class="container">
-			<% @services.each_with_index do |s, i| %>
-					<% if i != 0 and i % 3 == 0 %>
-							</div>
-					<% end %>
-					<% if i % 3 == 0 %>
-						<div class="row">
-					<% end %>
-						<div class="col-md-4">
-							<div class="card-container">
-	              <div class="card transaction-card">
-	                <div class="card-body">
-	                  <h4 class="card-title"><%=s.main_title%></h4><br>
-	                  <p class="card-title">Posted By: <a href="/users/<%=s.user.id%>"><%= s.user.first_name.capitalize %> <%=s.user.last_name.capitalize%></a></p>
-	                  <p class="card-text">Charge: $<%=s.charge_per_hour%> <%=t :perHour%></p>
-	                  <p class="card-text">Skill: <%=s.title%></p>
-	                  <p class="card-text">Location: <%=s.city.capitalize%></p>
-	        
-	                  <p> Distance from me: <%=s.distance.round(2)%> kms</p>
-	                  <a href="/services/<%= s.id %>" class="btn btn-primary">More Details</a>
-	                </div>
-	              </div>
-	            </div>
-						</div>
-					<%if i == @services.length - 1%>
-						</div>
-					<% end %>
-			<% end %>
-		</div>
-	<% end %>
+    <% if @services.length == 0 %>
+        <p>No services currently available</p>
+    <% else %>
+      <div class="container">
+        <% @services.each_with_index do |s, i| %>
+            <% if i != 0 and i % 3 == 0 %>
+                </div>
+            <% end %>
+            <% if i % 3 == 0 %>
+              <div class="row">
+            <% end %>
+              <div class="col-md-4">
+                <div class="card-container">
+                  <div class="card transaction-card sjobs">
+                    <div class="card-body">
+                      <h4 class="card-title"><%=s.main_title%></h4><br>
+                      <p class="card-title">Posted By: <a href="/users/<%=s.user.id%>"><%= s.user.first_name.capitalize %> <%=s.user.last_name.capitalize%></a></p>
+                      <p class="card-text">Charge: $<%=s.charge_per_hour%> <%=t :perHour%></p>
+                      <p class="card-text">Skill: <%=s.title%></p>
+                      <p class="card-text">Location: <%=s.city.capitalize%></p>
+
+                      <p> Distance from me: <%=s.distance.round(2)%> kms</p>
+                      <a href="/services/<%= s.id %>" class="btn btn-primary">More Details</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <%if i == @services.length - 1%>
+              </div>
+            <% end %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>
+<div class="col-md-8">
+    <div id="map"></div>
 </div>
 <script>
 	var $range_distane = $("#js-range-slider-distance")
@@ -105,5 +110,18 @@
           }
 			});
     }
-});
+  });
+
+  handler = Gmaps.build('Google');
+  handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+      /*markers = handler.addMarkers([
+          {
+              "lat": <%= current_user.latitude ? current_user.latitude : 0 %>,
+              "lng": <%= current_user.longitude ? current_user.longitude : 0 %>,
+          }
+      ]);*/
+      markers = handler.addMarkers(<%=raw @servicesLocations.to_json %>);
+      handler.bounds.extendWith(markers);
+      handler.fitMapToBounds();
+  });
 </script>
