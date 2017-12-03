@@ -25,6 +25,7 @@ class ServicesController < ApplicationController
       marker.lat service.latitude
       marker.lng service.longitude
       marker.infowindow  service.main_title
+      marker.json({ :id => service.id })
     end
 
 	end

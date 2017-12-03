@@ -1,11 +1,24 @@
-<div class="container payouts">
-  <h4> <%= t :payoutHistory%></h4>
+<div class="container payouts" style="margin-top: 2%; background-color: white; border-radius: 15px; padding-top: 5em; padding-left:10%; padding-right: 10%">
+  <div class="row" style="text-align: center">
+    <div class="col-md-12">
+      <h4> <%= t :payoutHistory%></h4>
+    </div>
+  </div>
   <br>
-  <p> <%= t :payoutHistoryDesc%> </p><hr>
-  <div class="col-md-6">
+  <div class="row">
+    <div class="col-md-12">
+      <p> <%= t :payoutHistoryDesc%> </p>
+    </div>
+  </div>
+  <hr>
+
+  <div class="row">
+
+  </div>
+
     <% if !@user_payouts.blank?%>
       <% @user_payouts.each do |p| %>
-        <div class="row">
+          <div class="col-md-6">
           <table style="width:100%" >
             <tr>
               <th><%=t :method%></th>
@@ -24,7 +37,9 @@
         <hr>
       <%end%>
     <%else%>
-      <p><%= t :noPayouts%></p>
+      <div class="col-md-12" style="text-align: center">
+        <p><%= t :noPayouts%></p>
+      </div>
+
     <%end%>
-  </div>
 </div>

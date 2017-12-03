@@ -93,6 +93,7 @@
               <%else%>
                     <div class="col-md-12">
                       <h4 class= "title-recommended-services" style="text-align: center"> <%= t :recommendedServices%></h4>
+                      <hr style="margin-left: 10%;margin-right: 10%">
                     </div>
                     <div class="col-md-12">
                       <p style="text-align: center"><%=t :serviceRecDesc%></p>
@@ -121,6 +122,7 @@
             <div id="current_service" class="row">
               <div class="col-md-12">
                 <h4 style="text-align: center"> <%=t :activeServices%></h4>
+                <hr style="margin-left: 10%;margin-right: 10%">
               </div>
               <% if @current_service.blank?%>
                   <div class="col-md-12">
@@ -147,6 +149,7 @@
             <div class="completed_services" class="row">
               <div class="col-md-12">
                 <h4 style="text-align: center"> <%=t :completedServices%></h4>
+                <hr style="margin-left: 10%;margin-right: 10%">
               </div>
               <% if @past_services.blank?%>
                   <div class="col-md-12">

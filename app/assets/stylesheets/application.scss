@@ -60,7 +60,11 @@
 }
 
 body {
-font-family: Tahoma, Geneva, sans-serif
+font-family: Tahoma, Geneva, sans-serif;
+}
+
+#section{
+  padding-bottom: 190px;
 }
 
 .navbar-default .navbar-toggle , .navbar-default .navbar-toggle:focus , .navbar-default .navbar-toggle:hover {
@@ -70,3 +74,35 @@ font-family: Tahoma, Geneva, sans-serif
 .navbar-default .navbar-toggle .icon-bar {
   background-color: white
 }
+
+.btn-primary {
+
+    color: #ffffff;
+    font-size: 14px;
+    background: #3a539b;
+    padding: 10px 20px 10px 20px;
+    text-decoration: none;
+
+}
+
+.btn-primary:hover {
+  background: #293c70;
+  text-decoration: none;
+}
+
+.btn-danger , .btn-success {
+  font-size: 14px;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+}
+
+.btn-danger:hover, .btn-success:hover{
+  text-decoration: none;
+}
+
+.btn-default {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+

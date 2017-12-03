@@ -18,7 +18,7 @@
       <div class="container" id="ljobs">
         <% @services.each_with_index do |s, i| %>
             <div class="card-container">
-              <div class="card transaction-card sjobs">
+              <div class="card transaction-card sjobs" data-serviceId="<%= s.id %>">
                 <div class="card-body">
                   <%= image_tag("#{s.get_image_id}"+"service.svg", width: "32", height:"32", class:"service-image" ) %>
                   <h4 class="card-title"><%=s.main_title%></h4><br>
@@ -41,6 +41,20 @@
     <div id="map"></div>
 </div>
 <script>
+  $(document).ready(function() {
+    $('.sjobs').click(function() {
+        var sid = $(this).attr('data-serviceid');
+        $.each(Gmaps.store.markers, function() {
+            if (this.serviceObject.id == sid) {
+                this.panTo();
+                var marker = this.serviceObject;
+                this.serviceObject.setAnimation(google.maps.Animation.BOUNCE);
+                setTimeout(function(){ marker.setAnimation(null); }, 1500);
+            }
+            else this.serviceObject.setAnimation(null);
+        });
+    })
+  });
 	var $range_distane = $("#js-range-slider-distance")
 	var min_distance = 0.1
 	var max_distance = 100
@@ -102,13 +116,13 @@
 
   handler = Gmaps.build('Google');
   handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
-      /*markers = handler.addMarkers([
-          {
-              "lat": <%= current_user.latitude ? current_user.latitude : 0 %>,
-              "lng": <%= current_user.longitude ? current_user.longitude : 0 %>,
-          }
-      ]);*/
-      markers = handler.addMarkers(<%=raw @servicesLocations.to_json %>);
+      markers = <%= raw @servicesLocations.to_json %>
+      Gmaps.store = {}
+      Gmaps.store.markers = markers.map(function(service) {
+          marker = handler.addMarker(service);
+          marker.serviceObject.set('id', service.id); // You can add other attributes using set
+          return marker;
+      });
       userlocation = handler.addMarkers([
           {
               "lat": <%= current_user.latitude ? current_user.latitude : 0 %>,
@@ -121,7 +135,8 @@
               "infowindow": "Your Location"
           }
       ]);
-      handler.bounds.extendWith(markers);
+      handler.bounds.extendWith(Gmaps.store.markers);
+      handler.bounds.extendWith(userlocation);
       handler.fitMapToBounds();
   });
 </script>

@@ -95,7 +95,7 @@ body {
 }
 
 .sign-up, .sign-in {
-	font-size: 1.5em;
+	font-size: 1.2em;
 }
 
 .btn-outline-success {
@@ -240,7 +240,9 @@ body {
 	color:white;
 	flex: 0 0 auto;
   -webkit-flex: 0 0 auto;
-  margin-top: 20%;
+    bottom: 0;
+    width: inherit;
+    height: 192px
 }
 
 #myFooter ul{
@@ -274,8 +276,6 @@ body {
 
 #myFooter .social-networks{
 	text-align: center;
-	padding-top: 30px;
-	padding-bottom: 38px;
 }
 
 #myFooter .social-networks a{
@@ -323,6 +323,7 @@ body{
   margin-left: 40px;
   width: 200px;
   height: 200px;
+  background-color: #cae4fb;
 }
 
 .statistics {
