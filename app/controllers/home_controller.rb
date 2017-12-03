@@ -22,6 +22,12 @@ class HomeController < ApplicationController
 
         @user_skills = UserSkill.where(user_id: @user.id)
         @user_availability =  TeenTime.where(user_id: @user.id)
+        @current_services = @user.service_jobs.where(status: 2);
+        @past_services = @user.service_jobs.where(status: 4);
+        @same_city_users = User.where('lower(city)= ?', @user.city.downcase).count;
+        @jobs_24hrs = Service.where(:created_at=> (Time.now - 24.hours)..Time.now).count;
+        @completed_1week = Service.where('created_at >= ?', 1.week.ago.utc).where(status:4).count;
+
       elsif @user.is_client?
         @latest_service = Service.where(user_id: @user.id).order('created_at DESC').limit(1)
         @current_services = Service.where(user_id: @user.id , status:2)
