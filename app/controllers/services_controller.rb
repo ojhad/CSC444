@@ -223,7 +223,7 @@ AND B.start_time<='#{@service.start_time}' AND B.END_TIME>='#{@service.end_time}
                                          read: FALSE
 			Message.create body: "This is an auto generated message. Refer to your notifications for more information! #{current_user.first_name} #{current_user.last_name} has requested you for #{@service.title}!",
 										 read: FALSE,
-										 conversation_id: Conversation.between(current_user.id, @service.user_id).first.id,
+										 conversation_id: Conversation.between(current_user.id, @service.user_id).id,
 										 user_id: current_user.id
       #@service.user.notifications.create_notification(@service.user,
        # "#{current_user.first_name} #{current_user.last_name} has requested you for #{@service.title}!",
