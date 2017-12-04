@@ -79,18 +79,18 @@
 
               $("#ljobs").remove()
               $(".container-service-postings").append(data.html)
-                $('.sjobs').click(function() {
-                    var sid = $(this).attr('data-serviceid');
-                    $.each(Gmaps.store.markers, function() {
-                        if (this.serviceObject.id == sid) {
-                            this.panTo();
-                            var marker = this.serviceObject;
-                            this.serviceObject.setAnimation(google.maps.Animation.BOUNCE);
-                            setTimeout(function(){ marker.setAnimation(null); }, 1500);
-                        }
-                        else this.serviceObject.setAnimation(null);
-                    });
-                })
+              $('.sjobs').click(function() {
+                  var sid = $(this).attr('data-serviceid');
+                  $.each(Gmaps.store.markers, function() {
+                      if (this.serviceObject.id == sid) {
+                          this.panTo();
+                          var marker = this.serviceObject;
+                          this.serviceObject.setAnimation(google.maps.Animation.BOUNCE);
+                          setTimeout(function(){ marker.setAnimation(null); }, 1500);
+                      }
+                      else this.serviceObject.setAnimation(null);
+                  });
+              })
             }
 			});
     	},
@@ -123,16 +123,16 @@
             $("#ljobs").remove()
             $(".container-service-postings").append(data.html)
             $('.sjobs').click(function() {
-                var sid = $(this).attr('data-serviceid');
-                $.each(Gmaps.store.markers, function() {
-                    if (this.serviceObject.id == sid) {
-                        this.panTo();
-                        var marker = this.serviceObject;
-                        this.serviceObject.setAnimation(google.maps.Animation.BOUNCE);
-                        setTimeout(function(){ marker.setAnimation(null); }, 1500);
-                    }
-                    else this.serviceObject.setAnimation(null);
-                });
+              var sid = $(this).attr('data-serviceid');
+              $.each(Gmaps.store.markers, function() {
+                  if (this.serviceObject.id == sid) {
+                      this.panTo();
+                      var marker = this.serviceObject;
+                      this.serviceObject.setAnimation(google.maps.Animation.BOUNCE);
+                      setTimeout(function(){ marker.setAnimation(null); }, 1500);
+                  }
+                  else this.serviceObject.setAnimation(null);
+              });
             })
           }
 			});

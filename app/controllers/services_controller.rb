@@ -83,13 +83,6 @@ class ServicesController < ApplicationController
 			container << newCard
     end
 
-    @servicesLocations = Gmaps4rails.build_markers(@services) do |service, marker|
-      marker.lat service.latitude
-      marker.lng service.longitude
-      marker.infowindow  service.main_title
-      marker.json({ :id => service.id })
-    end
-
    	respond_to do |format|
    		msg = {:html => container}
    		format.json { render :json => msg }
