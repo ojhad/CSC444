@@ -280,4 +280,11 @@ fr:
   unreadMsgs: "messages non lus"
 
   addCC: "Ajouter une carte de crédit"
-
+  dateTime: "Date et heure du service"
+  durationService: "Durée du service en heures"
+  recurringService: "Service récurrent"
+  freq: "Fréquence (en jours)"
+  create: "Créer"
+  createList: "Créer et Lister"
+  save: "Sauvegarder"
+  saveList: "Sauvegarder et Lister"

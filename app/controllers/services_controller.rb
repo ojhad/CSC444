@@ -137,7 +137,7 @@ AND B.start_time<='#{@service.start_time}' AND B.END_TIME>='#{@service.end_time}
 		if invalid_service_state || has_invalid_credit_card
 			render :new
 		elsif @service.save
-			redirect_to(user_path(current_user.id))
+			redirect_to(service_path(@service.id))
 		else
 			#redirect_back(fallback_location: root_path)
 			render :new #(new_user_service_path(@user.id))

@@ -305,9 +305,18 @@ en:
   transactionsAction: "Transactions Requiring Action"
   pendingTransactions: "Pending Transactions"
   completeHistory: "Complete History"
+<<<<<<< HEAD
 
   #conversations
   unreadMsgs: "unread messages"
 
   addCC: "Add a credit card"
+  dateTime: "Date and time of service"
+  durationService: "Duration of service in hours"
+  recurringService: "Recurring service"
+  freq: "Frequency (in Days)"
+  create: "Create"
+  createList: "Create and List"
+  save: "Save"
+  saveList: "Save and List"
 
