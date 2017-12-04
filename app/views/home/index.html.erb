@@ -56,11 +56,11 @@
           <div class="row" style="text-align: center">
             <h3><%=t :welcome%> <%=@user.first_name.capitalize()%> !</h3>
           </div>
-          <div class="row" style="text-align: center">
+          <div class="row hidden-xs" style="text-align: center">
             <h4> <%=t :funFacts%></h4>
           </div>
           <br>
-          <div class="row statistics">
+          <div class="row statistics hidden-xs">
             <div class="col-md-3 round">
               <p> <%=@jobs_24hrs%></p><br>
               <p><%=t :jobs24%></p>
@@ -80,7 +80,7 @@
           </div>
           <div class="row" style="margin-top: 3%;">
             <% if @user_skills.blank? || @user_availability.blank?%>
-              <div class="col-lg-12" style="text-align: center">
+              <div class="col-lg-12" style="text-align: center; padding-bottom: 3%">
                 <p ><%= t :incompleteProfile%></p>
                 <br>
                 <%= link_to I18n.t(:skills), edit_user_skill_path(@user.id) , :class => 'btn btn-primary' %>
@@ -189,11 +189,11 @@
           <div class="row" style="text-align: center">
             <h3><%=t :welcome%> <%=@user.first_name.capitalize%>!</h3>
           </div>
-          <div class="row" style="text-align: center">
+          <div class="row hidden-xs" style="text-align: center">
             <h4> <%=t :funFacts%></h4>
           </div>
           <br>
-          <div class="row statistics" style="text-align: center">
+          <div class="row statistics hidden-xs" style="text-align: center">
             <div class="col-md-3 round">
               <p> <%=@jobs_24hrs%></p><br>
               <p><%=t :jobs24%></p>

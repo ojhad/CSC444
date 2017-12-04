@@ -106,6 +106,7 @@ class TransactionsController < ApplicationController
   def charge_card(params)
 
     customer = @user
+    teen = User.find_by_id(@transaction.teen_id)
     # 14 % charge
     amount = (params[:amount] * 1.14).round
 
@@ -120,11 +121,16 @@ class TransactionsController < ApplicationController
       redirect_to(user_transaction_path(@user.id, @transaction.id))
 
     end
+
     @db_charge = Charge.new(:user_id => @user.id,
                             :amount => amount.to_f / 100,
                             :stripe_charge_id => @charge.id)
 
     @db_charge.save!
+
+    current_balance = teen.balance
+    teen.balance = current_balance + (params[:amount]/100);
+    teen.save!
 
     year = @db_charge.created_at.year
     month = @db_charge.created_at.month
