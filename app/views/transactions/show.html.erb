@@ -12,16 +12,18 @@
       <h4 class="card-title"><%= @transaction.service_title %></h4>
       <p class="card-text">Total time: <%= @transaction.number_of_hours %> hour(s)</p>
       <p class="card-text">Cost per hours: <%= @transaction.charge_per_hour %>/hour</p>
-      <p class="card-text">Total amount: $<%= @transaction.total_amount %></p>
-      <p class="card-text">Date: <%= @transaction.service.date.to_date %></p>
+      <p class="card-text">Total amount: <%= number_to_currency(@transaction.total_amount) %></p>
 
       <% if current_user.is_teen? %>
-        <p class="card-text">Client:
+          <p class="card-text">Date: <%= @transaction.service.date.to_date %></p>
+          <p class="card-text">Client:
           <%= link_to user_path(@transaction.client_id) do %>
               <%=@transaction.client.try(:full_name) %>
           <% end %>
         </p>
       <% else %>
+          <p class="card-text">Total charge: <%= number_to_currency((@transaction.total_amount * 1.14).round(2)) %></p>
+          <p class="card-text">Date: <%= @transaction.service.date.to_date %></p>
           <p class="card-text">Teen:
             <%= link_to user_path(@transaction.teen_id) do %>
                 <%=@transaction.teen.try(:full_name) %>
