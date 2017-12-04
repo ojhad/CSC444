@@ -69,7 +69,7 @@ class ServicesController < ApplicationController
       newCard = "<div class = 'card-container'>" << "<div class = 'card transaction-card sjobs' data-serviceId='#{s.id}'>"
   	  cardBody = "<div class = 'card-body'>"
       
-      cardBody << "<img src = '/assets/#{s.get_image_id}service.svg', width = '32', height = '32', class = 'service-image' )>"
+      cardBody << "<%= image_tag('#{s.get_image_id}service.svg', width = '32', height = '32', class = 'service-image' )%>"
       cardBody << "<h4 class = 'card-title'>#{s.main_title}</h4><br>" 
       cardBody << "<p class = 'card-title'>Posted By: <a href = '/users/#{s.user.id}''>#{ s.user.first_name.capitalize} #{s.user.last_name.capitalize}</a></p>"
       cardBody << "<p class='card-text'>Charge: $#{s.charge_per_hour} #{t :perHour}</p>"
