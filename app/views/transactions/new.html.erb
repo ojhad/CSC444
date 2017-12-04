@@ -3,7 +3,7 @@
     <div class="data form-group">
       <%= f.label :service_id, "Service:", class: 'control-label col-sm-3'%>
       <div class="">
-        <%= f.select :service_id, options_from_collection_for_select(@services, :id, :title), id: 'service_pick', class: 'col-sm-9' %>
+        <%= f.select :service_id, options_for_select(@services.map{ |s| [s.title, s.id,  {:data => {:price => s.charge_per_hour}} ]}), id: 'service_pick', class: 'col-sm-9' %>
       </div>
     </div>
 
@@ -29,10 +29,10 @@
     </div>
 
     <div class="form-group">
-      <div class="col-sm-9">
+      <div class="col-sm-3">
         Total amount:
       </div>
-      <div class="col-sm-9" id="total_amount">
+      <div class="input-box col-sm-9" id="total_amount">
       </div>
     </div>
 
@@ -45,15 +45,19 @@
 <% end %>
 
 <script>
-    $( "#charge_per_hour, #number_of_hours" ).on('change',function() {
+    function update_total(){
         var total;
         var input1 = $( "#charge_per_hour" ).val();
         var input2 = $( "#number_of_hours" ).val();
         $( "#total_amount" ).text( '$' + (input1 * input2) );
-    });
+    };
+    $( "#charge_per_hour, #number_of_hours" ).on('change', update_total);
     function update_title(){
         var input1 = $("#transaction_service_id").find(":selected").text();
         $( "#service_title" ).val( input1 );
+        var input2 = $("#transaction_service_id").find(":selected").data('price');
+        $( "#charge_per_hour" ).val( input2 );
+        update_total();
     };
     window.onload = update_title();
     $( "#transaction_service_id").on('change', update_title);
