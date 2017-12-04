@@ -224,7 +224,7 @@ AND B.start_time<='#{@service.start_time}' AND B.END_TIME>='#{@service.end_time}
 			puts 'YOOOOOOOOOOOOOO'
 			puts current_user.id
 			puts @service.user_id
-			puts Conversation
+			puts Conversation.all
 			puts Conversation.between(current_user.id, @service.user_id)
 			Message.create body: "This is an auto generated message. Refer to your notifications for more information! #{current_user.first_name} #{current_user.last_name} has requested you for #{@service.title}!",
 										 read: FALSE,
