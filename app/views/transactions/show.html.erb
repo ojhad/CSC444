@@ -18,16 +18,16 @@
             <%=@transaction.client.try(:first_name) %>
         <% end %>
       </p>
-      <% if @user.id == @transaction.teen_id %>
+      <% if @user.id == @transaction.teen_id && @transaction.status!= 'completed'%>
           <%= link_to "Edit Transaction", edit_user_transaction_path(@user.id, @transaction.id), :class => 'btn btn-default'  %>
       <% else %>
-          <% if @transaction.status != 'client_approved' %>
+          <% if @transaction.status != 'client_approved' && @transaction.status!= 'completed' %>
             <%= form_for :transaction, :url => user_transaction_path(@user.id, @transaction.id), method: :put  do |f| %>
                 <%= f.hidden_field :status , :value=> :client_approved %>
                 <%= f.submit 'Approve Transaction', :class => 'btn btn-success' %>
              <% end %>
           <% end %>
-          <% if  @transaction.status != 'client_approved' %>
+          <% if  @transaction.status != 'client_approved' && @transaction.status!= 'completed'%>
               <%= link_to "Edit Transaction", edit_user_transaction_path(@user.id, @transaction.id), :class => 'btn btn-danger'  %>
           <% end %>
     <% end %>
