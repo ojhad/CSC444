@@ -3,17 +3,17 @@
     <h1 class = "title-service-postings">Services</h1>
 
     <div class="range-slider">
-      <h4>Filter by distance</h4>
+      <h4><%= t :filterByDistance %></h4>
       <input type="text" id = "js-range-slider-distance" value="" />
     </div>
 
     <div class="range-slider">
-      <h4>Filter by teenager age</h4>
+      <h4><%= t :filterByAge %></h4>
       <input type="text" id = "js-range-slider-age" value="" />
     </div>
 
     <% if @services.length == 0 %>
-        <p>No services currently available</p>
+        <p><%= t :noServiceSearch %></p>
     <% else %>
       <div class="container" id="ljobs">
         <% @services.each_with_index do |s, i| %>
