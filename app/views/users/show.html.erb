@@ -63,6 +63,7 @@
                 <hr>
                 <% if @user.is_teen? %>
                     <p><%=t :teenager%></p>
+                    <p><%=t :age%>: <%=@user.age%></p>
                 <% elsif @user.is_client? %>
                     <p>Client</p>
                 <% elsif @user.is_sadmin? %>
