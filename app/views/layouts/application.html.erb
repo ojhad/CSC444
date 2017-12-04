@@ -99,8 +99,8 @@
                       </div><!-- /dropdown-container -->
                     </li><!-- /dropdown -->
               </li>
-		          <li class="dropdown">
-                <a class="dropdown-toggle" aria-expanded="false" href="/conversations"><i class="glyphicon glyphicon-inbox hidden-xs"></i>
+		          <li id = "<%= @current_user.id %>" data-behavior="conversations" class="dropdown">
+                <a id = "conversations-link" count = "<%= @unread_conversations_count %>" class="dropdown-toggle" aria-expanded="false" href="/conversations" ><i id = "convo-notification-count" class="glyphicon glyphicon-inbox  conversation-icon hidden-xs" data-count="" data-behavior="conversations-link"></i>
                   <p class="visible-xs">Conversations</p>
                 </a>
 		          </li>
@@ -187,15 +187,34 @@
       </div>
     </footer>
     <script>
+        function markMessageAsRead(){
 
-        function markAllAsRead(){
-            document.getElementById("notif-title").innerHTML = "Notifications (0)";
-            var num = document.getElementById("data-notif");
-            num.setAttribute("data-count","");
-            //want to change the notification bckgrnd color, but cause we use :before and :after, need to work around this
-            var styleElem = document.head.appendChild(document.createElement("style"));
-            styleElem.innerHTML = ".notification-icon:after {background: none;}";
         }
+    </script>
+
+    <script>
+        //this function will get number of unread messages and add a # to the messages icon:after
+        function getUnreadMessages(){
+            setInterval(function() {
+                var convo = document.getElementById("conversations-link");
+                var convo_count = convo.getAttribute("count");
+                //console.log("this is old convo val: " + convo_count)
+                //convo_count = "<%= @unread_conversations_count%>"
+                var icon = document.getElementById("convo-notification-count");
+                //console.log("parse it: " + parseInt(convo_count))
+                if(parseInt(convo_count) > 0){
+                    //$('head').append('<style>.conversation-icon:after {background: gold;}</style>');
+                    icon.setAttribute("data-count", convo_count);
+                    $('head').append('<style>.conversation-icon:after {background: gold;}</style>');
+                }
+                else{
+                    $('head').append('<style>.conversation-icon:after {background: none;}</style>');
+                    icon.setAttribute("data-count", "");
+                }
+            }, 2500);
+
+        }
+        getUnreadMessages()
     </script>
 
     <script type="text/javascript">
@@ -206,4 +225,5 @@
             }, 2000);
         })
     </script>
-  </bod      html>
+  </body>
+  </html>

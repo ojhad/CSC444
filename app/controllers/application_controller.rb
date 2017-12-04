@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
   def get_notifications
     if current_user
         @notifications = Notification.get_unread_user_notifications( current_user)
+        @unread_conversations_count = Conversation.my_unread_messages_count(current_user.id)
     end
   end
 
