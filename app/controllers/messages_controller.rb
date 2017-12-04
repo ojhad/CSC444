@@ -29,22 +29,6 @@ class MessagesController < ApplicationController
       format.html { Message.mark_messages_as_read(@messages.unread_by_me(@sent_by_other))}
       format.json { render :index}
     end
-    #Message.mark_messages_as_read(@messages.unread_by_me(@sent_by_other))
-    #render :action=>'index'  #look for the _index.html.erb
-    # if @messages.length > 5
-    #   @over_5 = true
-    #   @messages = @messages[-5..-1]
-    # end
-    # if params[:m]
-    #   @over_5 = false
-    #   @messages = @conversation.messages
-    # end
-    # if @messages.last
-    #   if @messages.last.user_id != current_user.id
-    #     @messages.last.read = true
-    #   end
-    # end
-    # @message = @conversation.messages.new
   end
   def new
     # @message = @conversation.messages.new
