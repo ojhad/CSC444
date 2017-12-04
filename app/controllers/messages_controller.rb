@@ -16,11 +16,21 @@ class MessagesController < ApplicationController
       @conversation = Conversation.find(params[:conversation_id])
     end
   end
-
+  def mark_as_read
+    @messages = Message.order( 'created_at' )
+    @messages.update_all(updated_at: Time.zone.now, read: true)
+    render json: {success: true}
+  end
   def index
-    @messages = @conversation.messages
+    @messages = @conversation.messages.order( 'created_at' )
     @sent_by_other = @conversation.sender_id == current_user.id ? @conversation.recipient_id : @conversation.sender_id
-    Message.mark_messages_as_read(@messages.unread_by_me(@sent_by_other))
+    #puts request.original_url
+    respond_to do |format|
+      format.html { Message.mark_messages_as_read(@messages.unread_by_me(@sent_by_other))}
+      format.json { render :index}
+    end
+    #Message.mark_messages_as_read(@messages.unread_by_me(@sent_by_other))
+    #render :action=>'index'  #look for the _index.html.erb
     # if @messages.length > 5
     #   @over_5 = true
     #   @messages = @messages[-5..-1]
@@ -36,7 +46,6 @@ class MessagesController < ApplicationController
     # end
     # @message = @conversation.messages.new
   end
-
   def new
     # @message = @conversation.messages.new
   end

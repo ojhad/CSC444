@@ -3,8 +3,8 @@
 	<br>
 	<div style="border: 1px solid #ede8e8">
 		<div class="panel panel-container">
-			<div class="panel-body">
-				<ul class="chat">
+			<div class="panel-body" data-behavior='messages' id = "<%= @conversation.id %>" >
+				<ul class="chat" data-behavior='messages-user' id = "<%= @current_user.id %>">
 					<% @messages.each do |m| %>
 						<% sender = m.user %>
 						<li class="<%= m.user.id == current_user.id ? "right" : "left"; %> clearfix">
