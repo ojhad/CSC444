@@ -138,13 +138,13 @@
           </div>
 
           <!-- Frequency Toggle and Input Field-->
-          <div class="input-container">
+          <div class="input-container" style="padding-top:8px">
             <input class = "checkbox-inline" id = "service_freq_toggle" onclick="frequencyToggle()" type="checkbox"/>
             <%= f.label "Reoccuring service", class: 'control-label'%>
           </div>
 
           <div class="input-container" id = "service_freq_input_div" style = "display:none;" >
-            <%= f.label :frequency, "How often (in days) should it reoccur?", class: 'control-label reoccur'%>
+            <%= f.label :frequency, "Frequency (in Days)", class: 'control-label reoccur'%>
             <%= f.number_field :frequency, :id => "service_freq_input_field", :value => 0, class: "form-control"%>
           </div>
 
