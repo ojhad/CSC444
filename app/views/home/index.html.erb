@@ -262,7 +262,11 @@
           </div>
         </div>
     <%elsif @user.is_sadmin?%>
-        <h3><%= t :welcomeSadmin %></h3>
+    <div class = "col-md-4"></div>
+    <div class = "col-md-4">
+      <h3><%= t :welcomeSadmin %></h3>
+    </div>
+
     <%elsif @user.is_admin?%>
         <h3><%= t :welcomeAdmin %></h3>
     <%elsif @user.is_CSR?%>
