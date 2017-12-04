@@ -64,8 +64,14 @@ Rails.application.routes.draw do
   resources :finances , only: [:index]
 
   resources :conversations do
-    resources :messages
+    resources :messages do
+      collection do
+        post :mark_as_read
+      end
+    end
   end
 
-  resources :messages
+  resources :messages do
+
+  end
 end

@@ -198,23 +198,27 @@
     <script>
         //this function will get number of unread messages and add a # to the messages icon:after
         function getUnreadMessages(){
-            setInterval(function() {
+            //setInterval(function() {
                 var convo = document.getElementById("conversations-link");
-                var convo_count = convo.getAttribute("count");
-                //console.log("this is old convo val: " + convo_count)
-                //convo_count = "<%= @unread_conversations_count%>"
-                var icon = document.getElementById("convo-notification-count");
-                //console.log("parse it: " + parseInt(convo_count))
-                if(parseInt(convo_count) > 0){
-                    //$('head').append('<style>.conversation-icon:after {background: gold;}</style>');
-                    icon.setAttribute("data-count", convo_count);
-                    $('head').append('<style>.conversation-icon:after {background: gold;}</style>');
+                if(convo){
+                    var convo_count = convo.getAttribute("count");
+                    //console.log("this is how many unread msgs u got: " + convo_count)
+                    //console.log("this is old convo val: " + convo_count)
+                    //convo_count = "<%= @unread_conversations_count%>"
+                    var icon = document.getElementById("convo-notification-count");
+                    //console.log("parse it: " + parseInt(convo_count))
+                    if(parseInt(convo_count) > 0){
+                        //$('head').append('<style>.conversation-icon:after {background: gold;}</style>');
+                        icon.setAttribute("data-count", convo_count);
+                        $('head').append('<style>.conversation-icon:after {background: gold;}</style>');
+                    }
+                    else{
+                        $('head').append('<style>.conversation-icon:after {background: none;}</style>');
+                        icon.setAttribute("data-count", "");
+                    }
                 }
-                else{
-                    $('head').append('<style>.conversation-icon:after {background: none;}</style>');
-                    icon.setAttribute("data-count", "");
-                }
-            }, 2500);
+
+            //}, 2500);
 
         }
         getUnreadMessages()
