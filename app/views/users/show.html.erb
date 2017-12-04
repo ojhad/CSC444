@@ -206,9 +206,9 @@
                         <% if @user.services.status(Service::LISTED).count != 0 %>
                             <% @user.services.status(Service::LISTED).each do |service| %>
                                 <div id="service_<%=service.id%>" class="service_block">
-                                <div class="service_block_component">Service: <%= service.title %></div>
+                                  <div class="service_block_component">Service: <%= service.title %></div>
                                   <div class="service_block_component"><%=I18n.t(:charge)%>: $<%= service.charge_per_hour %> <%= t :perHour%></div>
-                                <%= link_to I18n.t(:view), service_path(service.id), :class => 'btn btn-primary service_block_component' %>
+                                  <%= link_to I18n.t(:view), service_path(service.id), :class => 'btn btn-primary service_block_component' %>
                                 </div>
                                 <hr>
                             <%end%>
@@ -289,7 +289,7 @@
                       <% if @user.service_jobs.status(Service::ACCEPTED).count != 0 %>
                           <% @user.service_jobs.status(Service::ACCEPTED).each do |service| %>
                             <div id="service_<%=service.id%>" class="service_block">
-                            <div class="service_block_component">Service: <%= service.title %></div>
+                              <div class="service_block_component">Service: <%= service.title %></div>
                               <div class="service_block_component"><%=I18n.t(:charge)%>: $<%= service.charge_per_hour %> <%= t :perHour%></div>
                               <%= link_to I18n.t(:view), service_path(service), :class => 'btn btn-primary service_block_component' %>
                               <%= link_to I18n.t(:submitTrans), new_user_transaction_path(@user.id), :class => 'btn btn-success service_block_component' %>
@@ -318,7 +318,8 @@
                     <%else%>
                         <h5> <%=t :noCompletedServices%> </h5>
                     <%end%>
-                <% elsif @user.id == current_user.id && @user.is_teen? || current_user.is_CSR?  %>
+                  </div>
+            <% elsif @user.id == current_user.id && @user.is_teen? || current_user.is_CSR?  %>
                   <div class="col-md-3">
                     <h4><i class="fa fa-cog fa-spin" aria-hidden="true"></i> <%=t :pendingCompletion%></h4>
                     <hr>
@@ -336,8 +337,8 @@
                         <h5> <%=t :noPendingServices%> </h5>
                         <br>
                     <%end%>
-                <%end%>
-              </div>
+                  </div>
+              <%end%>
               <div class="col-md-3">
                 <% if @user.id ==  current_user.id && @user.is_client?%>
                     <%= link_to t(:addService), new_service_path(@user.id) , :class => 'btn btn-primary' ,:style => 'margin-bottom:4px'%><br>
