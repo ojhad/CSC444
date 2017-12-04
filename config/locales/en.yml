@@ -296,4 +296,10 @@ en:
   viewTS: "View Timesheet"
   submittedTS: "has submitted a timesheet for your review."
   submittedTSTeen: "You have submitted the timesheet for this service."
+  filterByDistance: "Filter by distance"
+  filterByAge: "Filter by age"
 
+  # transactions
+  transactionsAction: "Transactions Requiring Action"
+  pendingTransactions: "Pending Transactions"
+  completeHistory: "Complete History"

@@ -267,4 +267,10 @@ fr:
   viewTS: "Afficher la feuille de temps"
   submittedTS: "a soumis une feuille de temps pour votre examen."
   submittedTSTeen: "Vous avez envoyé la feuille de temps pour ce service."
+  filterByDistance: "Filtrer par distance"
+  filterByAge: "Filtrer par âge adolescent"
 
+  # transactions
+  transactionsAction: "Transactions nécessitant une action"
+  pendingTransactions: "Transactions en attente"
+  completeHistory: "Histoire Complète"
