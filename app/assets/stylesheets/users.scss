@@ -143,10 +143,6 @@
   margin-top: 10px;
 }
 
-table, th, td {
-  padding: 3px;
-}
-
 .queryTable, .queryTable th, .queryTable td{
   border: 1px solid black;
 }
@@ -157,6 +153,13 @@ table, th, td {
     color: white
   }
 
+}
+
+#aboutTab {
+
+  table, th, td {
+    padding: 3px;
+  }
 }
 
 #review_endorsements.btn.topBar.btn-primary,#review_reviews.btn.topBar.btn-primary {
