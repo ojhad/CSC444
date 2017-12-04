@@ -56,17 +56,20 @@
           <!-- Items to the right side of the navbar -->
           <ul class="nav navbar-nav navbar-right">
             <% if user_signed_in? %>
+                <% if !@user.blank? && @user.is_client?%>
                 <li class="dropdown">
                   <%= link_to("#", :class=>"dropdown-toggle", "data-toggle" =>"dropdown", :role => "button", "aria-expanded" => "false") do %> <i class="fa fa-cogs hidden-xs"></i> Services <span class="caret"></span>
                   <% end %>
                   <ul class="dropdown-menu">
-                    <% if !@user.nil? && @user.is_client?%>
                         <li><%= link_to t('createNewService'), new_service_path%></li>
-                    <%else%>
-                      <li><%= link_to t('viewServicePosting'), services_path%></li>
-                    <%end%>
+                        <li><%= link_to t('viewServicePosting'), services_path%></li>
                   </ul>
                 </li>
+                <%else%>
+                <li>
+                  <%= link_to t('viewServices'), services_path%>
+                </li>
+                <%end%>
                 <li>
                     <li id = "<%= @current_user.id %>" class="dropdown dropdown-notifications" data-behavior="notifications">
                       <a href="#notifications-panel" class="dropdown-toggle" data-toggle="dropdown" data-behavior="notifications-link">

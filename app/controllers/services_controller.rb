@@ -66,11 +66,9 @@ class ServicesController < ApplicationController
 		container = "<div class = 'container' id = 'ljobs'>"
 
 		@services.each_with_index do |s, i|
-      newCard = "<div class = 'card-container'>" << "<div class = 'card transaction-card sjobs'>"
+      newCard = "<div class = 'card-container'>" << "<div class = 'card transaction-card sjobs' data-serviceId='#{s.id}'>"
   	  cardBody = "<div class = 'card-body'>"
-      
-      cardBody << "<img src = '/assets/#{s.get_image_id}service.svg', width = '32', height = '32', class = 'service-image' )>"
-      cardBody << "<h4 class = 'card-title'>#{s.main_title}</h4><br>" 
+      cardBody << "<h4 class = 'card-title'>#{s.main_title}</h4><br>"
       cardBody << "<p class = 'card-title'>Posted By: <a href = '/users/#{s.user.id}''>#{ s.user.first_name.capitalize} #{s.user.last_name.capitalize}</a></p>"
       cardBody << "<p class='card-text'>Charge: $#{s.charge_per_hour} #{t :perHour}</p>"
       cardBody << "<p class = 'card-text'>Skill: #{s.title}</p>"
@@ -81,6 +79,13 @@ class ServicesController < ApplicationController
 
       newCard << cardBody << "</div>" << "</div>"
 			container << newCard
+    end
+
+    @servicesLocations = Gmaps4rails.build_markers(@services) do |service, marker|
+      marker.lat service.latitude
+      marker.lng service.longitude
+      marker.infowindow  service.main_title
+      marker.json({ :id => service.id })
     end
 
    	respond_to do |format|
