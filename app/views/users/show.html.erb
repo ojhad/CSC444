@@ -284,7 +284,7 @@
                   <%elsif @user.is_teen?%>
                   <%end%>
                 <% elsif @user.id == current_user.id && @user.is_teen? || current_user.is_CSR?  %>
-                    <h4><i class="fa fa-cog fa-spin" aria-hidden="true"></i> <%=t :acceptedServices%></h4>
+                    <h4><i class="fa fa-cog fa-spin" aria-hidden="true"></i> <%=t :activeServices%></h4>
                     <hr>
                       <% if @user.service_jobs.status(Service::ACCEPTED).count != 0 %>
                           <% @user.service_jobs.status(Service::ACCEPTED).each do |service| %>
@@ -297,7 +297,7 @@
                             <hr>
                         <%end%>
                     <%else%>
-                        <h5> <%=t :noServicesAccepted%> </h5>
+                        <h5> <%=t :noActiveJobs%> </h5>
                         <br>
                     <%end%>
                 <%end%>

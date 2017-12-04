@@ -300,6 +300,7 @@ en:
   filterByAge: "Filter by age"
   noServiceSearch: "No services currently available"
 
+
   # transactions
   transactionsAction: "Transactions Requiring Action"
   pendingTransactions: "Pending Transactions"

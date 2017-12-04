@@ -20,9 +20,8 @@
       <%end%>
       <p><b><%=t :chargePerHour%>:</b> $<%= @service.charge_per_hour %>/hour</p>
       <p><b>Date:</b> <%=@service.date.to_date%></p>
-      <p><b><%=t :duration%>:</b> <%=@service.duration%> hours</p>
       <p><b><%=t :startTime%>:</b> <%=@service.start_time.strftime('%H:%M')%></p>
-      <hr>
+      <p><b><%=t :duration%>:</b> <%=@service.duration%> hours</p>
       <p><b><%=t :location%>:</b> <%=@service.city.upcase%>, <%=@service.province%></p>
       <br>
       <br>
@@ -56,7 +55,7 @@
                             <%= link_to t('selectUser'), select_request_service_path({:service => @service, :userId => @requestingUser.id}), method: :post, data: {title: t('selectUser2') , confirm: t('selectConfirm')}, :class => 'btn btn-success' %>
                           </td>
                         </tr>
-                        <tr style=";border-bottom: 1px solid #eeeeee;">
+                        <tr style=";border-bottom: 1px solid #eeeeee !important;">
                           <td></td><td></td><td></td>
                         </tr>
                         <tr>
@@ -69,7 +68,7 @@
                 <%= link_to I18n.t(:edit), edit_service_path(@service),
                             data: {title: t('edit') ,
                                    confirm: t('editWarn')},
-                            :class => 'btn btn-primary' %>
+                            :class => 'btn btn-primary', :style => 'margin-right:10px'%>
                 <%= button_to t('unlistService'), unlist_service_path, method: :post,
                               data: {title: t('unlist') , confirm: t('unlistWarn')}, :class => 'btn btn-danger' %>
               </div>
@@ -84,17 +83,17 @@
       <% elsif @service.status == Service::ACCEPTED %>
           <% @acceptedUser = User.find(@service.service_users.first.user_id) %>
           <% if @service.user_id == current_user.id %>
-              <p> Congratulations! You have succesfully connected with <%= @acceptedUser.email %><p>
+              <p> Congratulations! You have succesfully connected with <%= @acceptedUser.first_name.capitalize %> <%= @acceptedUser.last_name.capitalize %>!<p>
               <div class="services-bottom-action-buttons-container">
                 <%= link_to I18n.t(:edit), edit_service_path(@service),
                             data: {title: t('edit') ,
                                    confirm: t('editWarn')},
-                            :class => 'btn btn-primary' %>
+                            :class => 'btn btn-primary',:style => 'margin-right:10px' %>
                 <%= button_to 'Unlist Service', unlist_service_path, method: :post,
                               data: {title: t('unlist') , confirm: t('unlistWarn')}, :class => 'btn btn-danger' %>
               </div>
           <% elsif @acceptedUser.id == current_user.id %>
-              <p> Congratulations! You have succesfully connected with <%= @service.user.email %><p>
+              <p> Congratulations! You have succesfully connected with <%= @service.user.first_name.capitalize %> <%= @service.user.last_name.capitalize %>!<p>
               <div class="services-bottom-action-buttons-container">
                 <%= link_to t('submitTrans'), new_user_transaction_path(@user.id), :class => 'btn btn-success' %>
               </div>

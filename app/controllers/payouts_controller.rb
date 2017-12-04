@@ -9,6 +9,10 @@ class PayoutsController < ApplicationController
   # PAYOUT AMOUNT IS ALSO A SET AMOUNT SINCE THE PAYPAL TEST ACCOUNT DOESN'T HAVE UNLIMITED FUNDS AND IT
   # TAKES AGES TO ADD FUNDS TO A TEST PAYPAL ACCOUNT. THEIR API SUCKS
 
+  def index
+    @user = User.find(current_user.id)
+    @user_payouts = Payout.where(user_id:@user.id)
+  end
   def create
 
     @user = User.find(current_user.id)
