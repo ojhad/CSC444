@@ -33,10 +33,12 @@
       <span></span>
     </div>
   </div>
-    <label class="control-label col-sm-2" for="skill_id"><h4>Skill to review:</h4></label>
-    <div class="skillsReview">
-      <%= f.select :skill_id, options_from_collection_for_select(Skill.find_by_sql("SELECT * FROM (SELECT id, skill_name  FROM skills) a ORDER BY a.id"), :id, :skill_name), :include_blank => true %>
-    </div>
+    <% if @user.is_teen? %>
+      <label class="control-label col-sm-2" for="skill_id"><h4>Skill to review:</h4></label>
+      <div class="skillsReview">
+        <%= f.select :skill_id, options_from_collection_for_select(Skill.find_by_sql("SELECT * FROM (SELECT id, skill_name  FROM skills) a ORDER BY a.id"), :id, :skill_name), :include_blank => true %>
+      </div>
+    <% end %>
     <div>
       <%= f.text_area :body, class: 'form-control', placeholder: 'Write a review', rows: "5" ,cols:"50" %>
     </div>

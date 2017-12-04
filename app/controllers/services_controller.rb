@@ -66,11 +66,9 @@ class ServicesController < ApplicationController
 		container = "<div class = 'container' id = 'ljobs'>"
 
 		@services.each_with_index do |s, i|
-      newCard = "<div class = 'card-container'>" << "<div class = 'card transaction-card sjobs'>"
+      newCard = "<div class = 'card-container'>" << "<div class = 'card transaction-card sjobs' data-serviceId='#{s.id}'>"
   	  cardBody = "<div class = 'card-body'>"
-      
-      cardBody << "<img src = '/assets/#{s.get_image_id}service.svg', width = '32', height = '32', class = 'service-image' )>"
-      cardBody << "<h4 class = 'card-title'>#{s.main_title}</h4><br>" 
+      cardBody << "<h4 class = 'card-title'>#{s.main_title}</h4><br>"
       cardBody << "<p class = 'card-title'>Posted By: <a href = '/users/#{s.user.id}''>#{ s.user.first_name.capitalize} #{s.user.last_name.capitalize}</a></p>"
       cardBody << "<p class='card-text'>Charge: $#{s.charge_per_hour} #{t :perHour}</p>"
       cardBody << "<p class = 'card-text'>Skill: #{s.title}</p>"
@@ -81,6 +79,13 @@ class ServicesController < ApplicationController
 
       newCard << cardBody << "</div>" << "</div>"
 			container << newCard
+    end
+
+    @servicesLocations = Gmaps4rails.build_markers(@services) do |service, marker|
+      marker.lat service.latitude
+      marker.lng service.longitude
+      marker.infowindow  service.main_title
+      marker.json({ :id => service.id })
     end
 
    	respond_to do |format|
@@ -133,7 +138,7 @@ AND B.start_time<='#{@service.start_time}' AND B.END_TIME>='#{@service.end_time}
 
 		invalid_service_state = @service.status != Service::LISTED &&
 														@service.status != Service::UNLISTED
-		has_invalid_credit_card = current_user.stripe_id.blank? && false
+		has_invalid_credit_card = current_user.stripe_id.blank?
 
 		# Check to make sure that user is not trying to feed us invalid data
 		if invalid_service_state || has_invalid_credit_card
@@ -221,9 +226,17 @@ AND B.start_time<='#{@service.start_time}' AND B.END_TIME>='#{@service.end_time}
                                          user_id: @service.user_id,
 																				 notification_type: "AddRequest",
                                          read: FALSE
+
+			conversation = Conversation.between(current_user.id, @service.user_id).first
+			if conversation.blank?
+				Conversation.create sender_id: current_user.id,
+													  recipient_id: @service.user_id
+			end
+			conversation_id = Conversation.between(current_user.id, @service.user_id).first.id
+
 			Message.create body: "This is an auto generated message. Refer to your notifications for more information! #{current_user.first_name} #{current_user.last_name} has requested you for #{@service.title}!",
 										 read: FALSE,
-										 conversation_id: Conversation.between(current_user.id, @service.user_id).first.id,
+										 conversation_id: conversation_id,
 										 user_id: current_user.id
       #@service.user.notifications.create_notification(@service.user,
        # "#{current_user.first_name} #{current_user.last_name} has requested you for #{@service.title}!",

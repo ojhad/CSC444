@@ -20,6 +20,8 @@
           <p><i>Skill type:</i> <%=@service.other_title%></p>
       <%end%>
       <p><b>Cost:</b> $<%= @service.charge_per_hour %>/hour</p>
+      <p><b>Date:</b> <%=@service.date%></p>
+      <p><b>Duration:</b> <%=@service.duration%> hours</p>
       <hr>
       <p><b>Location:</b> <%=@service.city.upcase%>, <%=@service.province%></p>
       <br>
@@ -32,8 +34,8 @@
       <% elsif @service.status == Service::LISTED %>
           <!-- If the creator is viewing the service, show list of people that requested  -->
           <% if @service.user_id == current_user.id %>
-              <p style="color:red"> List of users requesting this service </p>
-              <table style="width:50%;text-align:center;background-color:#dfdfdf">
+              <p><b> List of users requesting this service </b></p>
+              <table style="width:50%;text-align:center;">
                 <% if @service.service_users.size == 0%>
                     <tr>
                       <td>
@@ -45,15 +47,20 @@
                         <% @requestingUser = User.find(relation.user_id)%>
                         <tr>
                           <td>
-                            <p>Name: <%= @requestingUser.first_name %><%= @requestingUser.last_name %></p>
-                            <p>Email: <%= @requestingUser.email %></p>
-                            <p>Age: <%= @requestingUser.age %></p>
+                            <div><%= @requestingUser.first_name %> <%= @requestingUser.last_name %></div>
+                            <div><%= @requestingUser.age %> years old</div>
                           </td>
                           <td><%= button_to 'View User Info', user_path(@requestingUser),
                                             :class => 'btn btn-default', method: :get %></td>
                           <td>
                             <%= link_to "Select User", select_request_service_path({:service => @service, :userId => @requestingUser.id}), method: :post, data: {title: 'Select User to Perform Service' , confirm: 'Are you sure you want to select this user?'}, :class => 'btn btn-success' %>
                           </td>
+                        </tr>
+                        <tr style=";border-bottom: 1px solid #eeeeee;">
+                          <td></td><td></td><td></td>
+                        </tr>
+                        <tr>
+                          <td></td>
                         </tr>
                     <% end %>
                 <% end %>
