@@ -291,3 +291,17 @@ fr:
 
   skill: "Compétence"
   distanceFromMe: "Distance de moi"
+
+  #login page
+  password: "Mot de passe"
+  confirmPassword: "Confirmez le mot de passe"
+  next: "SUIVANTE"
+  signUpAs: "S'inscrire comme"
+  firstName: "Prénom"
+  lastName: "Nom de famille"
+  ageRange: "Âge: (Vous devez avoir entre 13 et 19)"
+  profilePic: "Image de profil"
+  homePhone: "Téléphone fixe"
+  mobilePhone: "Téléphone portable"
+  complete: "ACHEVÉE"
+  goBack: "retourner"

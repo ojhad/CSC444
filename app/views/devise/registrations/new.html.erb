@@ -6,11 +6,11 @@
       <div class="sign-in-container">
         <div class="card-signIn"></div>
         <div class="card-signIn">
-          <h1 class="title">Sign Up</h1>
+          <h1 class="title"><%= t :signUp %></h1>
           <div class = "radio-container">
-            <label class = "radio-label"> Sign up as </label>
+            <label class = "radio-label"><%= t :signUpAs %></label>
             <input type="radio" class="GroupSelector" id = "teen" name="group" value="teen" checked="checked">
-            <label for = "teen" class = "radio-label">Teenager</label>
+            <label for = "teen" class = "radio-label"><%= t :teenager %></label>
             <input type="radio" class="GroupSelector" name = "group" id = "client" value="client">
             <label for = "client" class = "radio-label">Client</label>
           </div>
@@ -26,19 +26,19 @@
                   <em>(<%= @minimum_password_length %> characters minimum):</em>
                 <% end %><br />
                 <%= f.password_field :password, autocomplete: "off", class: 'form-control' %>
-                <label for="Password">Password:</label>
+                <label for="Password"><%= t :password %>:</label>
             </div>
 
             <div class="input-container">
               <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control'%>
-              <label for="Password">Confirm Password:</label>
+              <label for="Password"><%= t :confirmPassword %>:</label>
             </div>
 
             <%= f.hidden_field :group , class: 'form-control'%>
 
               <div class = "button-container">
               <%= button_tag(type: 'submit', class: "login-btn") do %>
-                  <span class="span"></span>NEXT
+                  <span class="span"></span><%= t :next %>
               <% end %>
             </div>
 

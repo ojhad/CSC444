@@ -322,3 +322,16 @@ en:
   skill: "Skill"
   distanceFromMe: "Distance from me"
 
+  #login page
+  password: "Password"
+  confirmPassword: "Confirm Password"
+  next: "NEXT"
+  signUpAs: "Sign up as"
+  firstName: "First Name"
+  lastName: "Last Name"
+  ageRange: "Age: (You must be 13-19 years old)"
+  profilePic: "Profile Picture"
+  homePhone: "Home Phone"
+  mobilePhone: "Mobile Phone"
+  complete: "COMPLETE"
+  goBack: "go back"
