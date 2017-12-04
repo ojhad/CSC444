@@ -209,9 +209,9 @@ fr:
   Tutoring: "Tutorat"
   Reading: "En train de lire"
   addskill: "Ajouter une compétence"
+  skillMsg: "Ajoutez ou supprimez vos compétences ci-dessous. Avoir les bonnes compétences fera en sorte que vous obtenez correspondant aux bons services."
 
   #homepage
-
   funFacts: "Faits Amusants"
   jobs24: "Offres d'emploi publiées au cours des dernières 24 heures"
   teensLocation: " Adolescents situés dans"
