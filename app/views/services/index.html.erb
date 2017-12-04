@@ -21,12 +21,12 @@
               <div class="card transaction-card sjobs" data-serviceId="<%= s.id %>">
                 <div class="card-body">
                   <h4 class="card-title"><%=s.main_title%></h4><br>
-                  <p class="card-title">Posted By: <a href="/users/<%=s.user.id%>"><%= s.user.first_name.capitalize %> <%=s.user.last_name.capitalize%></a></p>
-                  <p class="card-text">Charge: $<%=s.charge_per_hour%> <%=t :perHour%></p>
-                  <p class="card-text">Skill: <%=s.title%></p>
-                  <p class="card-text">Location: <%=s.city.capitalize%></p>
+                  <p class="card-title"><%= t :postedBy %>: <a href="/users/<%=s.user.id%>"><%= s.user.first_name.capitalize %> <%=s.user.last_name.capitalize%></a></p>
+                  <p class="card-text"><%= t :charge %>: $<%=s.charge_per_hour%> <%=t :perHour%></p>
+                  <p class="card-text"><%= t :skill %>: <%=t s.title%></p>
+                  <p class="card-text"><%= t :location %>: <%=s.city.capitalize%></p>
 
-                  <p> Distance from me: <%=s.distance.round(2)%> kms</p>
+                  <p> <%= t :distanceFromMe %>: <%=s.distance.round(2)%> kms</p>
                   <a href="/services/<%= s.id %>" class="btn btn-primary">More Details</a>
                 </div>
               </div>

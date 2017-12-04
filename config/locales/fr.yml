@@ -288,3 +288,6 @@ fr:
   createList: "Créer et Lister"
   save: "Sauvegarder"
   saveList: "Sauvegarder et Lister"
+
+  skill: "Compétence"
+  distanceFromMe: "Distance de moi"
