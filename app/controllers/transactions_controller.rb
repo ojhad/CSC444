@@ -131,7 +131,7 @@ class TransactionsController < ApplicationController
     current_balance = teen.balance
     teen.balance = current_balance + (params[:amount]/100);
     teen.save!
-    teen.notifications.create title: "#{@user.first_name} #{@user.last_name} has deposited $#{(params[:amount]/100)}into your account. Go to your profile to check Account Balance",
+    teen.notifications.create title: "#{@user.first_name} #{@user.last_name} has deposited $#{(params[:amount]/100)} into your account. Go to your profile to check Account Balance",
                               reference_user_id: @user.id,
                               user_id: teen,
                               notification_type: "Transaction",
