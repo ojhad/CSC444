@@ -199,21 +199,6 @@
                         <h5> <%=t :noRequestedServices%> </h5>
                         <br>
                     <%end%>
-                    <h4><i class="fa fa-cogs" aria-hidden="true"></i> <%=t :completedServices%></h4>
-                    <hr>
-                    <% if @user.service_jobs.status(Service::COMPLETED).any? %>
-                        <% @user.service_jobs.status(Service::COMPLETED).each do |service| %>
-                            <div id="service_<%=service.id%>" class="service_block">
-                              <div class="service_block_component">Service: <%= service.title %></div>
-                              <div class="service_block_component"><%=I18n.t(:charge)%>: $<%= service.charge_per_hour %> <%=t :perHour%></div>
-                              <%= link_to t(:view), service_path(service), :class => 'btn btn-success service_block_component' %>
-                            </div>
-                            <hr>
-                        <%end%>
-                    <%else%>
-                        <h5> <%=t :noCompletedServices%> </h5>
-                        <br>
-                    <%end%>
                     <%else%><!--Not the current user-->
                     <% if @user.is_client?%>
                         <h4><i class="fa fa-cogs" aria-hidden="true"></i> <%= t :listedServices%> </h4>
@@ -317,8 +302,8 @@
                     <%end%>
                 <%end%>
               </div>
-              <div class="col-md-3" style="border-right: solid 1px;">
                 <% if @user.id ==  current_user.id && @user.is_client?%>
+                  <div class="col-md-3" style="border-right: solid 1px;">
                     <h4><i class="fa fa-cogs" aria-hidden="true"></i> <%=t :completedServices%></h4>
                     <hr>
                     <% if @user.services.status(Service::COMPLETED).any? %>
@@ -334,6 +319,7 @@
                         <h5> <%=t :noCompletedServices%> </h5>
                     <%end%>
                 <% elsif @user.id == current_user.id && @user.is_teen? || current_user.is_CSR?  %>
+                  <div class="col-md-3">
                     <h4><i class="fa fa-cog fa-spin" aria-hidden="true"></i> <%=t :pendingCompletion%></h4>
                     <hr>
                     <% if @user.service_jobs.status(Service::PENDING).any? %>
@@ -356,6 +342,22 @@
                 <% if @user.id ==  current_user.id && @user.is_client?%>
                     <%= link_to t(:addService), new_service_path(@user.id) , :class => 'btn btn-primary' ,:style => 'margin-bottom:4px'%><br>
                     <%= link_to t(:pastService) ,services_path(@user.id), :class => 'btn btn-primary'%>
+                <%else%>
+                    <h4><i class="fa fa-cogs" aria-hidden="true"></i> <%=t :completedServices%></h4>
+                    <hr>
+                    <% if @user.service_jobs.status(Service::COMPLETED).any? %>
+                        <% @user.service_jobs.status(Service::COMPLETED).each do |service| %>
+                            <div id="service_<%=service.id%>" class="service_block">
+                              <div class="service_block_component">Service: <%= service.title %></div>
+                              <div class="service_block_component"><%=I18n.t(:charge)%>: $<%= service.charge_per_hour %> <%=t :perHour%></div>
+                              <%= link_to t(:view), service_path(service), :class => 'btn btn-success service_block_component' %>
+                            </div>
+                            <hr>
+                        <%end%>
+                    <%else%>
+                        <h5> <%=t :noCompletedServices%> </h5>
+                        <br>
+                    <%end%>
                 <%end%>
               </div>
             </div>
