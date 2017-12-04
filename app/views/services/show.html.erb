@@ -19,8 +19,9 @@
           <p><i><%=t :skillType%>:</i> <%=@service.other_title%></p>
       <%end%>
       <p><b><%=t :chargePerHour%>:</b> $<%= @service.charge_per_hour %>/hour</p>
-      <p><b>Date:</b> <%=@service.date%></p>
+      <p><b>Date:</b> <%=@service.date.to_date%></p>
       <p><b><%=t :duration%>:</b> <%=@service.duration%> hours</p>
+      <p><b><%=t :startTime%>:</b> <%=@service.start_time.strftime('%H:%M')%></p>
       <hr>
       <p><b><%=t :location%>:</b> <%=@service.city.upcase%>, <%=@service.province%></p>
       <br>
