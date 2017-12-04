@@ -275,3 +275,6 @@ fr:
   transactionsAction: "Transactions nécessitant une action"
   pendingTransactions: "Transactions en attente"
   completeHistory: "Histoire Complète"
+
+  #conversations
+  unreadMsgs: "messages non lus"

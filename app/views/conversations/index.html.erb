@@ -6,7 +6,7 @@
       <% if @convos.length == 0 %>
           <h1><%=t :noConversations%></h1>
       <% end %>
-	    <h3><%= @unread_conversations_count %> unread messages</h3>
+	    <h3><%= @unread_conversations_count %> <%= t :unreadMsgs %></h3>
       <% @convos.each do |conversation| %>
           <% user_to_find = conversation.sender_id == @current_user.id ? conversation.recipient_id : conversation.sender_id %>
           <% user_profile = User.find(user_to_find) %>
