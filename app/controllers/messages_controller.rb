@@ -19,7 +19,7 @@ class MessagesController < ApplicationController
 
   def index
     @messages = @conversation.messages
-    @sent_by_other = @conversation.sender_id == current_user ? @conversation.recipient_id : @conversation.sender_id
+    @sent_by_other = @conversation.sender_id == current_user.id ? @conversation.recipient_id : @conversation.sender_id
     Message.mark_messages_as_read(@messages.unread_by_me(@sent_by_other))
     # if @messages.length > 5
     #   @over_5 = true

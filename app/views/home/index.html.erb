@@ -188,8 +188,8 @@
           <div class="row">
             <% if @latest_service.blank?%>
                 <div class="col-lg-9">
-                  <p><%= t :noLatestJob%>></p>
-                  <%= link_to "How it works", "#", :class => 'btn btn-primary' %>
+                  <p><%= t :noLatestJob%></p>
+                  <%= link_to "How it works", how_it_works_path, :class => 'btn btn-primary' %>
                   <br><br>
                   <p><%=t :familiarCreateService%></p>
                   <%= link_to I18n.t(:createNewService), new_service_path, :class => 'btn btn-primary' %>
