@@ -74,7 +74,7 @@
               <p><%=t :jobsCompleted%></p>
             </div>
             <div class="col-md-3 round">
-              <p> $<%=@average_wage%></p><br>
+              <p> $<%=@average_wage.round%></p><br>
               <p> <%=t :avgWageTeen%></p>
             </div>
           </div>
@@ -207,7 +207,7 @@
               <p><%=t :jobsCompleted%></p>
             </div>
             <div class="col-md-3 round">
-              <p> $<%=@average_wage%></p><br>
+              <p> $<%=@average_wage.round%></p><br>
               <p> <%=t :avgWageClient%></p>
             </div>
           </div>

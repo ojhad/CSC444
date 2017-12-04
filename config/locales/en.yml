@@ -292,3 +292,8 @@ en:
   selectUser: "Select User"
   selectUser2: "Select User to Perform Service"
   selectConfirm: "Are you sure you want to select this user?"
+  noApplicable: "Not applicable since service is either accepted,completed or unlisted."
+  viewTS: "View Timesheet"
+  submittedTS: "has submitted a timesheet for your review."
+  submittedTSTeen: "You have submitted the timesheet for this service."
+

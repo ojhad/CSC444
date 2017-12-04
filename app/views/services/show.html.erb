@@ -87,24 +87,25 @@
               <p> Congratulations! You have succesfully connected with <%= @acceptedUser.email %><p>
               <div class="services-bottom-action-buttons-container">
                 <%= link_to I18n.t(:edit), edit_service_path(@service),
-                            data: {title: 'Edit Service' ,
-                                   confirm: 'Are you sure you want to edit this service? Performing this action will unlist the service and delete all current requests.'},
+                            data: {title: t('edit') ,
+                                   confirm: t('editWarn')},
                             :class => 'btn btn-primary' %>
                 <%= button_to 'Unlist Service', unlist_service_path, method: :post,
-                              data: {title: 'Unlist Service' , confirm: 'Are you sure you want to unlist this service? Performing this action will delete all current requests.'}, :class => 'btn btn-danger' %>
+                              data: {title: t('unlist') , confirm: t('unlistWarn')}, :class => 'btn btn-danger' %>
               </div>
           <% elsif @acceptedUser.id == current_user.id %>
               <p> Congratulations! You have succesfully connected with <%= @service.user.email %><p>
               <div class="services-bottom-action-buttons-container">
-                <%= link_to 'Submit Transaction', new_user_transaction_path(@user.id), :class => 'btn btn-success' %>
+                <%= link_to t('submitTrans'), new_user_transaction_path(@user.id), :class => 'btn btn-success' %>
               </div>
           <% end %>
       <% elsif @service.status == Service::PENDING %>
           <% @acceptedUser = User.find(@service.service_users.first.user_id) %>
           <% if @service.user_id == current_user.id %>
-              <p>  <%= @acceptedUser.email %> has submitted a timesheet for your review.<p>
+              <p>  <%= @acceptedUser.email %> <%=t :submittedTS%><p>
+            <%= link_to t('viewTS'), user_transaction_path(@user.id, @service.transactions.first.id), :class => 'btn btn-default' %>
           <% elsif @acceptedUser.id == current_user.id %>
-              <p> You have submitted this service for review. <p>
+              <p> <%=t :submittedTSTeen%> <p>
           <% end %>
       <% end %>
     </div>
@@ -113,12 +114,16 @@
           <h2><%=t :availTeen%></h2>
           <br>
           <% if @teens.blank?%>
-            <%=t :noAvailTeen%>
+              <% if @service.status!=1%>
+                  <%=t :noApplicable%>
+              <%else%>
+                <%=t :noAvailTeen%>
+              <%end%>
           <%end%>
           <% @teens.each do |t|%>
               <p><%=t.first_name%> <%=t.last_name%></p>
               <p>Age: <%=t.age%></p>
-              <td><%= button_to 'View Teenager', user_path(t.id), :class => 'btn btn-default', method: :get %></td>
+              <td><%= button_to t('view'), user_path(t.id), :class => 'btn btn-default', method: :get %></td>
               <hr>
           <%end%>
         </div>
