@@ -305,7 +305,6 @@ en:
   transactionsAction: "Transactions Requiring Action"
   pendingTransactions: "Pending Transactions"
   completeHistory: "Complete History"
-<<<<<<< HEAD
 
   #conversations
   unreadMsgs: "unread messages"
