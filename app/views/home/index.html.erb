@@ -74,7 +74,7 @@
               <p><%=t :jobsCompleted%></p>
             </div>
             <div class="col-md-3 round">
-              <p> $<%=@average_wage.round%></p><br>
+              <p> $<%=@average_wage.round if @average_wage.present? %></p><br>
               <p> <%=t :avgWageTeen%></p>
             </div>
           </div>
