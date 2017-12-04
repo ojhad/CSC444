@@ -8,20 +8,18 @@
       </div>
     </div>
 <%else%>
+    <% if @service.errors.any? %>
+        <% @service.errors.full_messages.each do |message| %>
+            <div class = "alert alert-danger"><%=message %></div>
+        <% end %>
+    <% end %>
   <div class = "form-horizontal">
     <div class="sign-in-container">
       <div class="card-signIn"></div>
         <div class="card-signIn newService">
-
-        <h1 class="title"><%=t :newService%></h1>
+          <h1 class="title"><%=t :newService%></h1>
 
         <%= form_for :service, :url => services_path(current_user.id) do |f| %>
-          <% if @service.errors.any? %>
-                <% @service.errors.full_messages.each do |message| %>
-                  <div class = "alert alert-danger"><%=message %></div>
-                <% end %>
-          <% end %>
-
           <%= f.hidden_field :user_id , :value=>current_user.id %>
           <%= f.hidden_field :status, :id => "service_status_field_hidden", :value=>Service::UNLISTED %>
           <%= f.hidden_field :day, :id => "service_day_field_hidden"%>
@@ -54,7 +52,7 @@
           </div>
 
           <div class="input-container">
-            <%= f.label :charge_per_hour, I18n.t(:serviceType), class: 'control-label chargePerHour'%>
+            <%= f.label :charge_per_hour, I18n.t(:chargePerHour), class: 'control-label chargePerHour'%>
             <%= f.text_field :charge_per_hour, placeholder: I18n.t(:chargeCAD), class: "form-control" %>
           </div>
 

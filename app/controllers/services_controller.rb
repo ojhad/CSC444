@@ -122,7 +122,6 @@ AND B.start_time<='#{@service.start_time}' AND B.END_TIME>='#{@service.end_time}
       @service.country = @user.country
       @service.province = @user.province
       @service.postal_code = @user.postal_code
-      @service.save!
     end
 
 		if @service.title != "Other"
@@ -139,7 +138,6 @@ AND B.start_time<='#{@service.start_time}' AND B.END_TIME>='#{@service.end_time}
 		elsif @service.save
 			redirect_to(service_path(@service.id))
 		else
-			#redirect_back(fallback_location: root_path)
 			render :new #(new_user_service_path(@user.id))
 		end
 	end
