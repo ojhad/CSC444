@@ -441,12 +441,12 @@
                         </article>
                         <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                                 data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
-                                data-description="Add a credit card"
-                                data-locale=<%=I18n.locale%>
+                                data-description="<%=t :addCC%>"
+                                data-locale='<%=I18n.locale%>'
                                 data-email="<%=@user.email%>"
                                 data-allow-remember-me='false'
-                                data-panel-label=<%=t :addNew%>
-                                data-label=<%=t :addNew%>>
+                                data-panel-label='<%=t :addNew%>'
+                                data-label='<%=t :addNew%>'>
                         </script>
                     <% end %>
                 <%elsif @user.is_client?%>
