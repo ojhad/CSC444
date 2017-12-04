@@ -221,14 +221,17 @@ AND B.start_time<='#{@service.start_time}' AND B.END_TIME>='#{@service.end_time}
                                          user_id: @service.user_id,
 																				 notification_type: "AddRequest",
                                          read: FALSE
-			puts 'YOOOOOOOOOOOOOO'
-			puts current_user.id
-			puts @service.user_id
-			puts Conversation.all
-			puts Conversation.between(current_user.id, @service.user_id)
+
+			conversation = Conversation.between(current_user.id, @service.user_id).first
+			if conversation.blank?
+				Conversation.create sender_id: current_user.id,
+													  recipient_id: @service.user_id
+			end
+			conversation_id = Conversation.between(current_user.id, @service.user_id).first.id
+
 			Message.create body: "This is an auto generated message. Refer to your notifications for more information! #{current_user.first_name} #{current_user.last_name} has requested you for #{@service.title}!",
 										 read: FALSE,
-										 conversation_id: Conversation.between(current_user.id, @service.user_id).first.id,
+										 conversation_id: conversation_id,
 										 user_id: current_user.id
       #@service.user.notifications.create_notification(@service.user,
        # "#{current_user.first_name} #{current_user.last_name} has requested you for #{@service.title}!",
