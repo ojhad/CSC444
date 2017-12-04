@@ -44,7 +44,7 @@ class ServicesController < ApplicationController
 			$distance_filter = params[:distance].to_f
 
 			if $from_age_filter != -1 && $to_age_filter != -1
-				@services = @services.select {|s| s.min_age >= $from_age_filter && s.max_age <= $to_age_filter}
+				@services = @services.select {|s| (s.min_age..s.max_age).include?(params[:from_age].to_i) && (s.min_age..s.max_age).include?(params[:to_age].to_i)}
 			end
 			
 			@services = @services.reject {|s| s.distance > params[:distance].to_f}				
@@ -59,7 +59,7 @@ class ServicesController < ApplicationController
 				@services = @services.reject {|s| s.distance > $distance_filter}
 			end
 
-			@services = @services.select {|s| s.min_age <= params[:from_age].to_i && s.max_age >= params[:to_age].to_i}
+			@services = @services.select {|s| (s.min_age..s.max_age).include?(params[:from_age].to_i) && (s.min_age..s.max_age).include?(params[:to_age].to_i)}
 
 		end
 
