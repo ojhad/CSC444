@@ -133,7 +133,7 @@ AND B.start_time<='#{@service.start_time}' AND B.END_TIME>='#{@service.end_time}
 
 		invalid_service_state = @service.status != Service::LISTED &&
 														@service.status != Service::UNLISTED
-		has_invalid_credit_card = current_user.stripe_id.blank? && false
+		has_invalid_credit_card = current_user.stripe_id.blank?
 
 		# Check to make sure that user is not trying to feed us invalid data
 		if invalid_service_state || has_invalid_credit_card

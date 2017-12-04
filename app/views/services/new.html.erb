@@ -1,6 +1,6 @@
-<% if current_user.is_client? && current_user.stripe_id.blank? && false%>
+<% if current_user.is_client? && current_user.stripe_id.blank?%>
     <div class="sign-in-container contact-us">
-      <div class = "alert alert-danger" style ="text-align:center;"> <%=t :addCCFirst%></div>
+      <div class = "alert alert-danger" style ="text-align:center;margin-bottom:20px;"> <%=t :addCCFirst%></div>
       <div class="button-container create-service">
         <div class="col-sm-8 col-sm-offset-2 text-center">
           <%= link_to I18n.t(:go2Account), user_path(current_user.id), :class => 'btn btn-success' %>
