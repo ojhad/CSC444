@@ -40,6 +40,11 @@
 {
   overflow-y: scroll;
   height: 100%;
+  border-bottom: 0;
+}
+
+.panel-footer{
+  border-top: 0;
 }
 
 .break-long-words {
