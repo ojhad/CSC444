@@ -298,6 +298,7 @@ en:
   submittedTSTeen: "You have submitted the timesheet for this service."
   filterByDistance: "Filter by distance"
   filterByAge: "Filter by age"
+  noServiceSearch: "No services currently available"
 
   # transactions
   transactionsAction: "Transactions Requiring Action"

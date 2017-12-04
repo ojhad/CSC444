@@ -269,6 +269,7 @@ fr:
   submittedTSTeen: "Vous avez envoyé la feuille de temps pour ce service."
   filterByDistance: "Filtrer par distance"
   filterByAge: "Filtrer par âge adolescent"
+  noServiceSearch: "Aucun service actuellement disponible"
 
   # transactions
   transactionsAction: "Transactions nécessitant une action"

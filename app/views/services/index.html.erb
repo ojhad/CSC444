@@ -13,7 +13,7 @@
     </div>
 
     <% if @services.length == 0 %>
-        <p>No services currently available</p>
+        <p><%= t :noServiceSearch %></p>
     <% else %>
       <div class="container" id="ljobs">
         <% @services.each_with_index do |s, i| %>
