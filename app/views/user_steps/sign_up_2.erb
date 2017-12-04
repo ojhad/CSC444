@@ -8,24 +8,24 @@
           <h1 class="title">Personal Info</h1>
           <%= form_for @user, url: wizard_path do |f| %>
               <div class="input-container">
-                <label for="user_first_name">First Name:</label>
+                <label for="user_first_name"><%=t :firstName %>:</label>
                 <%= f.text_field :first_name, class: 'form-control'%>
               </div>
               <div class="input-container">
-                <label for="user_last_name">Last Name:</label>
+                <label for="user_last_name"><%=t :lastName %>:</label>
                 <%= f.text_field :last_name, class: 'form-control'%>
               </div>
               <div class="input-container" id='age' hidden="true">
-                <label for="user_age">Age: (You must be 13-19 years old)</label>
+                <label for="user_age"><%=t :ageRange %></label>
                 <%= f.number_field :age , :min=>13, :max=>19, class: 'form-control'%>
               </div>
               <div class="input-container" id="profile_pic">
-                <label for="user_profile_pic">Profile Picture:</label>
+                <label for="user_profile_pic"><%=t :profilePic %>:</label>
                 <%= f.file_field :profile_pic, class: 'form-control' %>
               </div>
               <div class = "button-container">
                 <%= button_tag(type: 'submit', class: "login-btn") do %>
-                    <span class="span"></span>NEXT
+                    <span class="span"></span><%=t :next %>
                 <% end %>
               </div>
 

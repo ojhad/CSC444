@@ -44,7 +44,7 @@ class ServicesController < ApplicationController
 			$distance_filter = params[:distance].to_f
 
 			if $from_age_filter != -1 && $to_age_filter != -1
-				@services = @services.select {|s| s.min_age >= $from_age_filter && s.max_age <= $to_age_filter}
+				@services = @services.select {|s| (s.min_age..s.max_age).include?(params[:from_age].to_i) && (s.min_age..s.max_age).include?(params[:to_age].to_i)}
 			end
 			
 			@services = @services.reject {|s| s.distance > params[:distance].to_f}				
@@ -59,7 +59,7 @@ class ServicesController < ApplicationController
 				@services = @services.reject {|s| s.distance > $distance_filter}
 			end
 
-			@services = @services.select {|s| s.min_age >= params[:from_age].to_i && s.max_age <= params[:to_age].to_i}
+			@services = @services.select {|s| (s.min_age..s.max_age).include?(params[:from_age].to_i) && (s.min_age..s.max_age).include?(params[:to_age].to_i)}
 
 		end
 
@@ -122,7 +122,6 @@ AND B.start_time<='#{@service.start_time}' AND B.END_TIME>='#{@service.end_time}
       @service.country = @user.country
       @service.province = @user.province
       @service.postal_code = @user.postal_code
-      @service.save!
     end
 
 		if @service.title != "Other"
@@ -137,9 +136,8 @@ AND B.start_time<='#{@service.start_time}' AND B.END_TIME>='#{@service.end_time}
 		if invalid_service_state || has_invalid_credit_card
 			render :new
 		elsif @service.save
-			redirect_to(user_path(current_user.id))
+			redirect_to(service_path(@service.id))
 		else
-			#redirect_back(fallback_location: root_path)
 			render :new #(new_user_service_path(@user.id))
 		end
 	end

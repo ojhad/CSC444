@@ -46,7 +46,7 @@
           </div>
 
           <div class="input-container">
-            <%= f.label :charge_per_hour, I18n.t(:serviceType), class: 'control-label chargePerHour'%>
+            <%= f.label :charge_per_hour, I18n.t(:chargePerHour), class: 'control-label chargePerHour'%>
             <%= f.text_field :charge_per_hour, placeholder: I18n.t(:chargeCAD), class: "form-control" %>
           </div>
 
@@ -96,11 +96,11 @@
               <%end%>
             </div>
             <div class="input-container">
-              <%= f.label :postal_code, "Postal Code", class: 'control-label'%>
+              <%= f.label :postal_code, t('postalCode'), class: 'control-label'%>
               <%= f.text_field :postal_code, class: "form-control"%>
             </div>
             <div class="input-container">
-              <%= f.label :country, "Country", class: 'control-label'%>
+              <%= f.label :country, t('country'), class: 'control-label'%>
               <%= f.text_field :country, class: "form-control"%>
             </div>
           </div>
@@ -108,7 +108,7 @@
           <!-- Set the service start date -->
           <!-- TODO: Add date format validation -->
           <div class="input-container">
-            <%= f.label :charge_per_hour, "Date and time of service", class: 'control-label'%>
+            <%= f.label :charge_per_hour, t('dateTime'), class: 'control-label'%>
             <div class='input-group date' id='datetimepicker1'>
               <input type='text' id="service_date_time_field" class="form-control date-custom" />
               <span class="input-group-addon">
@@ -126,25 +126,25 @@
           </div>
 
           <div class="input-container">
-            <%= f.label :duration, "Duration of service in hours", class: 'control-label'%>
+            <%= f.label :duration, t('durationService'), class: 'control-label'%>
             <%= f.number_field :duration, step: :any, placeholder: "e.g. 1.5" , class: 'form-control' %>
           </div>
 
           <!-- Frequency Toggle and Input Field-->
           <div class="input-container" style="padding-top:8px">
             <input class = "checkbox-inline" id = "service_freq_toggle" onclick="frequencyToggle()" type="checkbox"/>
-            <%= f.label "Reoccuring service", class: 'control-label'%>
+            <%= f.label t('recurringService'), class: 'control-label'%>
           </div>
 
           <div class="input-container" id = "service_freq_input_div" style = "display:none;" >
-            <%= f.label :frequency, "Frequency (in Days)", class: 'control-label reoccur'%>
-            <%= f.number_field :frequency, :id => "service_freq_input_field", :value => 0, class: "form-control"%>
+            <%= f.label :frequency, t('freq'), class: 'control-label reoccur'%>
+            <%= f.number_field :frequency, :id => "service_freq_input_field", class: "form-control"%>
           </div>
 
             <div class="button-container create-service">
               <div class="col-sm-8 col-sm-offset-2 text-center">
-                <%= f.submit "Save", :id => "submit_create_button", class: "btn btn-default btn-primary"%>
-                <%= f.submit "Save and List", :id => "submit_create_list_button", class: "btn btn-default btn-success"%>
+                <%= f.submit t('save'), :id => "submit_create_button", class: "btn btn-default btn-primary"%>
+                <%= f.submit t('saveList'), :id => "submit_create_list_button", class: "btn btn-default btn-success"%>
               </div>
             </div>
       <% end %>

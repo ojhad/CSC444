@@ -305,3 +305,33 @@ en:
   transactionsAction: "Transactions Requiring Action"
   pendingTransactions: "Pending Transactions"
   completeHistory: "Complete History"
+
+  #conversations
+  unreadMsgs: "unread messages"
+
+  addCC: "Add a credit card"
+  dateTime: "Date and time of service"
+  durationService: "Duration of service in hours"
+  recurringService: "Recurring service"
+  freq: "Frequency (in Days)"
+  create: "Create"
+  createList: "Create and List"
+  save: "Save"
+  saveList: "Save and List"
+
+  skill: "Skill"
+  distanceFromMe: "Distance from me"
+
+  #login page
+  password: "Password"
+  confirmPassword: "Confirm Password"
+  next: "NEXT"
+  signUpAs: "Sign up as"
+  firstName: "First Name"
+  lastName: "Last Name"
+  ageRange: "Age: (You must be 13-19 years old)"
+  profilePic: "Profile Picture"
+  homePhone: "Home Phone"
+  mobilePhone: "Mobile Phone"
+  complete: "COMPLETE"
+  goBack: "go back"
