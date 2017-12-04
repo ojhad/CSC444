@@ -263,4 +263,8 @@ fr:
   selectUser: "Sélectionner Utilisateur"
   selectUser2: "Sélectionner l'utilisateur pour effectuer le service"
   selectConfirm: "Êtes-vous sûr de vouloir sélectionner cet utilisateur?"
+  noApplicable: "Sans objet puisque le service est accepté, complété ou non."
+  viewTS: "Afficher la feuille de temps"
+  submittedTS: "a soumis une feuille de temps pour votre examen."
+  submittedTSTeen: "Vous avez envoyé la feuille de temps pour ce service."
 

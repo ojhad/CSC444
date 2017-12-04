@@ -7,8 +7,6 @@ class HomeController < ApplicationController
       @jobs_24hrs = Service.where(:created_at=> (Time.now - 24.hours)..Time.now).count;
       @completed_1week = Service.where('created_at >= ?', 1.week.ago.utc).where(status:4).count;
       @average_wage = Service.average(:charge_per_hour)
-      puts "Average is"
-      puts @average_wage
 
       if @user.is_teen?
 
