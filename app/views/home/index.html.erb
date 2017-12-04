@@ -90,14 +90,14 @@
             <%else%>
                 <div id="recommended_services" class="row">
                   <% if @recommended_services.blank?%>
-                      <div class="col-md-12" style="margin: auto;">
+                      <div class="col-md-12" style="margin: auto; text-align: center;">
                         <p><%=t :noRecServices1%></p>
                         <br>
                         <p><%=t :noRecServices2%></p>
                       </div>
                   <%else%>
                         <div class="col-md-12">
-                          <h4 class= "title-recommended-services" style="text-align: center"> <%= t :recommendedServices%></h4>
+                          <h4 class= "title-recommended-services"> <%= t :recommendedServices%></h4>
                           <hr style="margin-left: 10%;margin-right: 10%">
                         </div>
                         <div class="col-md-12">
