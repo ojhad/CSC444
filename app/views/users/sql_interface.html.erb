@@ -3,8 +3,10 @@
       <label class="sqlBoxLabel"><%= t :enterSqlQuery %></label>
       <textarea class="form-control input-lg sqlBox"></textarea>
       <button class="btn btn-default runQueryButton"><%= t :runQuery %></button><br><br>
-      <table class="queryTable">
-      </table>
+      <div id="sqlRes">
+        <table class="queryTable">
+        </table>
+      </div>
   </div>
 <% else %>
     <h1>This page is only available for Super Admins</h1>
@@ -19,13 +21,17 @@
             data: { query: $('.sqlBox').val() },
             success: function(data){
               if(data.html == "<tr></tr>"){
+                  $("#sqlRes").css('display','none');
                   $('.queryTable').html("");
                   alert("<%= t :querySuccess %>");
               }else {
+                  $("#sqlRes").css('display','inherit');
                   $('.queryTable').html(data.html)
               }
             },
             error: function(data){
+              $("#sqlRes").css('display','none');
+              $('.queryTable').html("");
               alert("<%= t :queryError %>");
             }
         });
