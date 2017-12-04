@@ -56,7 +56,7 @@
           <!-- Items to the right side of the navbar -->
           <ul class="nav navbar-nav navbar-right">
             <% if user_signed_in? %>
-                <% if !@user.blank? && @user.is_client?%>
+                <% if !@user.blank? && current_user.is_client?%>
                 <li class="dropdown">
                   <%= link_to("#", :class=>"dropdown-toggle", "data-toggle" =>"dropdown", :role => "button", "aria-expanded" => "false") do %> <i class="fa fa-cogs hidden-xs"></i> Services <span class="caret"></span>
                   <% end %>
