@@ -66,7 +66,7 @@ class ServicesController < ApplicationController
 		container = "<div class = 'container' id = 'ljobs'>"
 
 		@services.each_with_index do |s, i|
-      newCard = "<div class = 'card-container'>" << "<div class = 'card transaction-card sjobs'>"
+      newCard = "<div class = 'card-container'>" << "<div class = 'card transaction-card sjobs' data-serviceId='#{s.id}'>"
   	  cardBody = "<div class = 'card-body'>"
       
       cardBody << "<img src = '/assets/#{s.get_image_id}service.svg', width = '32', height = '32', class = 'service-image' )>"
