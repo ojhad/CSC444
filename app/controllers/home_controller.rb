@@ -50,6 +50,9 @@ class HomeController < ApplicationController
   def contact_us
   end
 
+  def how_it_works
+  end
+
   def send_email
     ContactUsMailer.contact_us_mail(params[:request_anonymous_requester_email], params[:request_description]).deliver
     redirect_to root_path

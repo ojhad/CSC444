@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   get "about", to: "home#about"
   get "terms_of_service", to: "home#terms_of_service"
   get "faq", to: "home#faq"
+  get "how_it_works", to: "home#how_it_works"
   get "contact_us", to: "home#contact_us"
   get "send_email", to: "home#send_email"
 

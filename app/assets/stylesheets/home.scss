@@ -58,6 +58,10 @@ body {
 	margin-bottom: 0px;
 }
 
+#recommended_services_title_id {
+	text-align: center;
+}
+
 .navbar {
 	border-radius: 0px;
 	margin-bottom: -1px;
@@ -197,6 +201,19 @@ body {
 
 .container-how-it-works {
 	margin-top: 8%; 
+	display: inline-block;
+}
+
+.container-how-it-works.main {
+	margin: 0 auto; 
+	margin-top: 5%;
+	margin-left: 10%;
+	margin-right: 10%;
+	display: inline-block;
+	background-color: white; 
+	border-radius: 15px; 
+	padding-bottom: 5%;
+	padding-top: 3%;
 }
 
 #title-how-it-works {
