@@ -1,4 +1,4 @@
-<% if current_user.is_client? && current_user.stripe_id.blank? && false%>
+<% if current_user.is_client? && current_user.stripe_id.blank?%>
     <div class="sign-in-container contact-us">
       <div class = "alert alert-danger" style ="text-align:center;"> <%=t :addCCFirst%></div>
       <div class="button-container create-service">
