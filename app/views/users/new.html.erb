@@ -7,15 +7,14 @@
         <%=  form_for :user, :url => url_for(:controller => 'users', :action => 'add_user') do |f| %>
           
           <div class="input-container">
-            <label class = "control-label">Choose User group: </label>
-            <%= f.radio_button :group, 0 %>
-            <%= f.label :group_teen, 'Teen', class: 'control-label' %>
-            <%= f.radio_button :group, 1 %>
-            <%= f.label :group_client, 'Client', class: 'control-label' %>
-            <%= f.radio_button :group, 3 %>
-            <%= f.label :group_admin, 'Admin', class: 'control-label' %>
-            <%= f.radio_button :group, 4 %>
-            <%= f.label :group_CSR, 'CSR', class: 'control-label' %>
+            <%= f.radio_button :group, 0, class: 'ucheckbox' %>
+            <%= f.label :group_teen, 'Teen', class: 'control-label ulabel' %>
+            <%= f.radio_button :group, 1, class: 'ucheckbox' %>
+            <%= f.label :group_client, 'Client', class: 'control-label ulabel' %>
+            <%= f.radio_button :group, 3, class: 'ucheckbox' %>
+            <%= f.label :group_admin, 'Admin', class: 'control-label ulabel' %>
+            <%= f.radio_button :group, 4, class: 'ucheckbox' %>
+            <%= f.label :group_CSR, 'CSR', class: 'control-label ulabel' %>
           </div>  
 
           <div class="input-container">
