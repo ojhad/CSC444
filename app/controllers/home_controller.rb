@@ -2,6 +2,14 @@ class HomeController < ApplicationController
   def index
     if current_user
       @user = User.find(current_user.id)
+
+      @same_city_users = User.where('lower(city)= ?', @user.city.downcase).count;
+      @jobs_24hrs = Service.where(:created_at=> (Time.now - 24.hours)..Time.now).count;
+      @completed_1week = Service.where('created_at >= ?', 1.week.ago.utc).where(status:4).count;
+      @average_wage = Service.average(:charge_per_hour)
+      puts "Average is"
+      puts @average_wage
+
       if @user.is_teen?
 
         @recommended_services = Service.find_by_sql("SELECT S.ID,S.TITLE,S.CHARGE_PER_HOUR,S.FREQUENCY,S.DESCRIPTION,S.DATE,S.START_TIME,S.END_TIME,S.DAY FROM SERVICES S JOIN
@@ -24,9 +32,7 @@ class HomeController < ApplicationController
         @user_availability =  TeenTime.where(user_id: @user.id)
         @current_services = @user.service_jobs.where(status: 2);
         @past_services = @user.service_jobs.where(status: 4);
-        @same_city_users = User.where('lower(city)= ?', @user.city.downcase).count;
-        @jobs_24hrs = Service.where(:created_at=> (Time.now - 24.hours)..Time.now).count;
-        @completed_1week = Service.where('created_at >= ?', 1.week.ago.utc).where(status:4).count;
+
 
       elsif @user.is_client?
         @latest_service = Service.where(user_id: @user.id).order('created_at DESC').limit(1)

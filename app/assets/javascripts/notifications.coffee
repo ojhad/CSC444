@@ -44,6 +44,7 @@ ready = ->
       )
     handleSuccess: (data) =>
       count = 0
+      console.log @count_checked
       @count_checked = @count_checked + 1
       currUserID = @currUser
       currUserID = $.trim(currUserID)
