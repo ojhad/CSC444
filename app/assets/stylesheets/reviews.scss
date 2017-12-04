@@ -82,8 +82,13 @@ form .stars label.star-1:hover ~ span {
   transition: width 0.5s;
 }
 form .stars span {
-  width:25;
+  width:25px;
 }
 .skillsReview{
   padding-left: 44%;
+}
+
+.average-review{
+  border-bottom: 1px solid black;
+;
 }

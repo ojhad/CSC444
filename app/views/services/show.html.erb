@@ -1,10 +1,9 @@
-<div class="container">
+<div class="container" style="margin-top: 2%; background-color: white; border-radius: 15px; padding-top: 5em; padding-left:5%; padding-right: 5%">
 
   <div class="row">
-    <div class="col-lg-2"></div>
     <div class="col-lg-8 well">
       <h1>
-        Service Details
+        <%= t :serviceDetails%>
         <%= image_tag("#{@service.get_image_id}"+"service.svg", width: "64", height:"64", class: "show-service-image") %>
       </h1>
 
@@ -13,33 +12,33 @@
       <div style='width: 300px; float: right;'>
         <div id="map" style='width: 300px; height: 300px;'></div>
       </div>
-      <p><b>Posted By:</b> <a href="/users/<%=@service.user.id%>"><%= @service.user.first_name.capitalize + ' ' + @service.user.last_name.capitalize %></a></p>
+      <p><b><%=t :postedBy%>:</b> <a href="/users/<%=@service.user.id%>"><%= @service.user.first_name.capitalize + ' ' + @service.user.last_name.capitalize %></a></p>
       <p><b>Description:</b> <%=@service.description%></p>
-      <p><b>Service skill required:</b> <%=@service.title%></p>
+      <p><b><%=t :skillReq%>:</b> <%=@service.title%></p>
       <% if @service.has_other_title? %>
-          <p><i>Skill type:</i> <%=@service.other_title%></p>
+          <p><i><%=t :skillType%>:</i> <%=@service.other_title%></p>
       <%end%>
-      <p><b>Cost:</b> $<%= @service.charge_per_hour %>/hour</p>
+      <p><b><%=t :chargePerHour%>:</b> $<%= @service.charge_per_hour %>/hour</p>
       <p><b>Date:</b> <%=@service.date%></p>
-      <p><b>Duration:</b> <%=@service.duration%> hours</p>
+      <p><b><%=t :duration%>:</b> <%=@service.duration%> hours</p>
       <hr>
-      <p><b>Location:</b> <%=@service.city.upcase%>, <%=@service.province%></p>
+      <p><b><%=t :location%>:</b> <%=@service.city.upcase%>, <%=@service.province%></p>
       <br>
       <br>
 
       <% if @service.status == Service::UNLISTED && @service.user_id == current_user.id%>
           <div class="services-bottom-action-buttons-container">
-            <%= button_to 'List Service', list_service_path, method: :post, :class => 'btn btn-success' %>
+            <%= button_to t('list'), list_service_path, method: :post, :class => 'btn btn-success' %>
           </div>
       <% elsif @service.status == Service::LISTED %>
           <!-- If the creator is viewing the service, show list of people that requested  -->
           <% if @service.user_id == current_user.id %>
-              <p><b> List of users requesting this service </b></p>
+              <p><b><%=t :listOfUsers%> </b></p>
               <table style="width:50%;text-align:center;">
                 <% if @service.service_users.size == 0%>
                     <tr>
                       <td>
-                        <p> There are currently no submitted requests for this service </p>
+                        <p> <%=t :noRequests%></p>
                       </td>
                     </tr>
                 <% else %>
@@ -50,10 +49,10 @@
                             <div><%= @requestingUser.first_name %> <%= @requestingUser.last_name %></div>
                             <div><%= @requestingUser.age %> years old</div>
                           </td>
-                          <td><%= button_to 'View User Info', user_path(@requestingUser),
+                          <td><%= button_to t('view'), user_path(@requestingUser),
                                             :class => 'btn btn-default', method: :get %></td>
                           <td>
-                            <%= link_to "Select User", select_request_service_path({:service => @service, :userId => @requestingUser.id}), method: :post, data: {title: 'Select User to Perform Service' , confirm: 'Are you sure you want to select this user?'}, :class => 'btn btn-success' %>
+                            <%= link_to t('selectUser'), select_request_service_path({:service => @service, :userId => @requestingUser.id}), method: :post, data: {title: t('selectUser2') , confirm: t('selectConfirm')}, :class => 'btn btn-success' %>
                           </td>
                         </tr>
                         <tr style=";border-bottom: 1px solid #eeeeee;">
@@ -67,11 +66,11 @@
               </table>
               <div class="services-bottom-action-buttons-container">
                 <%= link_to I18n.t(:edit), edit_service_path(@service),
-                            data: {title: 'Edit Service' ,
-                                   confirm: 'Are you sure you want to edit this service? Performing this action will unlist the service and delete all current requests.'},
+                            data: {title: t('edit') ,
+                                   confirm: t('editWarn')},
                             :class => 'btn btn-primary' %>
-                <%= button_to 'Unlist Service', unlist_service_path, method: :post,
-                              data: {title: 'Unlist Service' , confirm: 'Are you sure you want to unlist this service? Performing this action will delete all current requests.'}, :class => 'btn btn-danger' %>
+                <%= button_to t('unlistService'), unlist_service_path, method: :post,
+                              data: {title: t('unlist') , confirm: t('unlistWarn')}, :class => 'btn btn-danger' %>
               </div>
               <!-- Only render the request button if user is not of same group -->
           <% elsif @user.is_teen?%>
@@ -109,9 +108,12 @@
       <% end %>
     </div>
     <%if @user.is_client? && @service.user.id==@user.id%>
-        <div class="col-lg-4">
-          <h2>Available teenagers</h2>
+        <div class="col-lg-4" style="padding-left: 5%">
+          <h2><%=t :availTeen%></h2>
           <br>
+          <% if @teens.blank?%>
+            <%=t :noAvailTeen%>
+          <%end%>
           <% @teens.each do |t|%>
               <p><%=t.first_name%> <%=t.last_name%></p>
               <p>Age: <%=t.age%></p>
