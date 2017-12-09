@@ -9,20 +9,22 @@
           <%= form_for @user, url: wizard_path do |f| %>
               <div class="input-container">
                 <label for="user_first_name"><%=t :firstName %>:</label>
-                <%= f.text_field :first_name, class: 'form-control'%>
+                <%= f.text_field :first_name, class: 'form-control', required:'true'%>
               </div>
               <div class="input-container">
                 <label for="user_last_name"><%=t :lastName %>:</label>
-                <%= f.text_field :last_name, class: 'form-control'%>
+                <%= f.text_field :last_name, class: 'form-control',required:'true'%>
               </div>
-              <div class="input-container" id='age' hidden="true">
-                <label for="user_age"><%=t :ageRange %></label>
-                <%= f.number_field :age , :min=>13, :max=>19, class: 'form-control'%>
-              </div>
-              <div class="input-container" id="profile_pic">
-                <label for="user_profile_pic"><%=t :profilePic %>:</label>
-                <%= f.file_field :profile_pic, class: 'form-control' %>
-              </div>
+              <% if @user.is_teen?%>
+                <div class="input-container" id='age'>
+                  <label for="user_age"><%=t :ageRange %></label>
+                  <%= f.number_field :age , :min=>13, :max=>19, class: 'form-control',required:'true'%>
+                </div>
+                <div class="input-container" id="profile_pic">
+                  <label for="user_profile_pic"><%=t :profilePic %>:</label>
+                  <%= f.file_field :profile_pic, class: 'form-control',required:'true' %>
+                </div>
+              <%end%>
               <div class = "button-container">
                 <%= button_tag(type: 'submit', class: "login-btn") do %>
                     <span class="span"></span><%=t :next %>
@@ -38,6 +40,7 @@
   </div>
 </div>
 <script type="text/javascript">
+  /*
     $(document).ready(function() {
         var pp = <%= @current_user.group %>;
         switch(pp){
@@ -52,4 +55,5 @@
                 break;
         }
     })
+    */
 </script>

@@ -1,7 +1,7 @@
-<div class="container">
+<div class="container" style="margin-top: 2%; background-color: white; border-radius: 15px; padding-top: 5em; padding-left:10%; padding-right: 10%">
   <div class="row main-center">
     <div class="main-login main-center">
-      <h2>Edit <%= resource_name.to_s.humanize %></h2>
+      <h2 style="text-align: center"><%=t :editProfile%></h2>
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put , class: 'form-horizontal' }) do |f| %>
           <%= devise_error_messages! %>
           <div class="card picBar">
@@ -15,7 +15,7 @@
           </div>
 
           <div class="form-group">
-            <%= f.label :profile_pic, 'Profile Picture', class: 'control-label col-sm-2' %>
+            <%= f.label :profile_pic, t('profilePic'), class: 'control-label col-sm-2' %>
             <div class="col-sm-10">
               <%= f.file_field :profile_pic%>
             </div>
@@ -23,14 +23,14 @@
           </div>
 
           <div class="form-group">
-            <%= f.label :first_name, 'First Name' , class: 'control-label col-sm-2'%>
+            <%= f.label :first_name, t('firstName') , class: 'control-label col-sm-2'%>
             <div class="col-sm-10">
               <%= f.text_field :first_name , class: 'form-control'%>
             </div>
           </div>
 
           <div class="form-group">
-            <%= f.label :last_name, 'Last Name', class: 'control-label col-sm-2'%>
+            <%= f.label :last_name,  t('lastName'), class: 'control-label col-sm-2'%>
             <div class="col-sm-10">
               <%= f.text_field :last_name, class: 'form-control'%>
             </div>
@@ -44,9 +44,9 @@
           </div>
 
           <div class="form-group">
-            <label class="control-label col-sm-2" for="passradio" > Change password</label>
-            <label class="radio-inline"><input class='passradio' type="radio" name="passradio" value="Yes"> Yes </label>
-            <label class="radio-inline"><input class='passradio' type="radio" name="passradio" value="No"> No </label>
+            <label class="control-label col-sm-2" for="passradio" > <%=t('changePass')%></label>
+            <label class="radio-inline"><input class='passradio' type="radio" name="passradio" value="Yes"> <%= t :yess%> </label>
+            <label class="radio-inline"><input class='passradio' type="radio" name="passradio" value="No"> <%= t :noo%> </label>
 
           </div>
 
@@ -55,7 +55,7 @@
           <% end %>
 
           <div id="pass_div" class="form-group" hidden>
-            <%= f.label :password, class: 'control-label col-sm-2' %>
+            <%= f.label :password,t('password'),class: 'control-label col-sm-2' %>
             <div class="col-sm-10">
               <%= f.password_field :password, autocomplete: "off", class: 'form-control' %>
               <% if @minimum_password_length %>
@@ -72,68 +72,75 @@
           </div>
 
           <div class="form-group">
-            <%= f.label :address_1, 'Street Address',class: 'control-label col-sm-2' %>
+            <%= f.label :address_1, t('address1'),class: 'control-label col-sm-2' %>
             <div class="col-sm-10">
               <%= f.text_field :address_1, class: 'form-control' %>
             </div>
           </div>
 
           <div class="form-group">
-            <%= f.label :address_2, 'Apt/Unit/Suite',class: 'control-label col-sm-2' %>
+            <%= f.label :address_2, t('address2'),class: 'control-label col-sm-2' %>
             <div class="col-sm-10">
               <%= f.text_field :address_2, class: 'form-control' %>
             </div>
           </div>
 
           <div class="form-group">
-            <%= f.label :city, 'City',class: 'control-label col-sm-2'  %>
+            <%= f.label :city, t('city'),class: 'control-label col-sm-2'  %>
             <div class="col-sm-10">
               <%= f.text_field :city, class: 'form-control' %>
             </div>
           </div>
 
           <div class="form-group">
-            <%= f.label :province, 'Province', class:'control-label col-sm-2' %>
+            <%= f.label :province, t('province'), class:'control-label col-sm-2' %>
             <div class="col-sm-10">
-              <%= f.select :province, [ ['Alberta','AB'],['British Columbia','BC'],['Manitoba','MB'],['New Brunswich','NB'],
-                                        ['Newfoundland and Labrador','NL'],['Nova Scotia','NS'],['Ontario','ON'],['Prince Edward Island','PE'],
-                                        ['Quebec','QC'],['Saskatchewan','SK'],['Northwest Territories','NT'],
-                                        ['Nunavut','NU'],['Yukon','YT']], {:prompt => 'Select One'}, {:class => "form-control"} %>
+              <% if I18n.locale == :en %>
+                  <%= f.select :province, [ ['Alberta','AB'],['British Columbia','BC'],['Manitoba','MB'],['New Brunswich','NB'],
+                                            ['Newfoundland and Labrador','NL'],['Nova Scotia','NS'],['Ontario','ON'],['Prince Edward Island','PE'],
+                                            ['Quebec','QC'],['Saskatchewan','SK'],['Northwest Territories','NT'],
+                                            ['Nunavut','NU'],['Yukon','YT']], {:prompt => I18n.t(:selectOne)} , {:class => "form-control"}%>
+              <%else%>
+                  <%= f.select :province, [ ['Alberta','AB'],['Colombie-Britannique','BC'],['Manitoba','MB'],['Nouveau-Brunswick','NB'],
+                                            ['Terre-Neuve-et-Labrador','NL'],['Nouvelle-Écosse','NS'],['L\'Ontario','ON'],['Île-du-Prince-Édouard','PE'],
+                                            ['Québec','QC'],['Saskatchewan','SK'],['Territoires du Nord-Ouest','NT'],
+                                            ['Nunavut','NU'],['Yukon','YT']], {:prompt => I18n.t(:selectOne)} , {:class => "form-control"}%>
+              <%end%>
             </div>
 
           </div>
 
           <div class="form-group">
-            <%= f.label :postal_code, 'Postal Code', class:'control-label col-sm-2' %>
+            <%= f.label :postal_code, t('postalCode'), class:'control-label col-sm-2' %>
             <div class="col-sm-10">
               <%= f.text_field :postal_code, class: 'form-control' %>
             </div>
           </div>
 
           <div class="form-group">
-            <%= f.label :country, 'Country', class:'control-label col-sm-2' %>
+            <%= f.label :country, t('country'), class:'control-label col-sm-2' %>
             <div class="col-sm-10">
-              <%= f.text_field :country, class: 'form-control' %>
+              <%= f.text_field :country, class: 'form-control', value:'Canada',readonly:'true' %>
             </div>
           </div>
 
           <div class="form-group">
-            <%= f.label :home_number, 'Home Number', class:'control-label col-sm-2' %>
+            <%= f.label :home_number, t('homePhone'), class:'control-label col-sm-2' %>
             <div class="col-sm-10">
-              <%= f.text_field :home_number , class: 'form-control'%>
+              <%= f.number_field :home_number , class: 'form-control'%>
             </div>
           </div>
 
           <div class="form-group">
-            <%= f.label :mobile_number, 'Mobile Number' , class:'control-label col-sm-2'%>
+            <%= f.label :mobile_number, t('mobilePhone') , class:'control-label col-sm-2'%>
             <div class="col-sm-10">
-              <%= f.text_field :mobile_number, class: 'form-control' %>
+              <%= f.number_field :mobile_number, class: 'form-control' %>
             </div>
           </div>
 
           <% if @user.group==0 %>
               <div class="form-group">
-                <%= f.label :age, 'Age', class:'control-label col-sm-2' %>
+                <%= f.label :age, t('age'), class:'control-label col-sm-2' %>
                 <div class="col-sm-10">
                   <%= f.text_field :age, class: 'form-control' %>
                 </div>
@@ -143,16 +150,16 @@
           <%= f.hidden_field :group %>
 
           <div class="form-group">
-            <%= f.label :current_password, class:'control-label col-sm-2' %>
+            <%= f.label :current_password, t('currentPass') ,class:'control-label col-sm-2' %>
             <div class="col-sm-10">
-              <%= f.password_field :current_password, autocomplete: "off", class: 'form-control' %>
-              <i>(We need your current password to confirm your changes)</i>
+              <%= f.password_field :current_password, autocomplete: 'off', class: 'form-control' %>
+              <i>(<%=t :needPass%>)</i>
             </div>
           </div>
 
           <div class="form-group">
             <div class="col-sm-10 col-sm-offset-2">
-              <%= f.submit "Update",class:'btn btn-success' %> <%= link_to "Back", :back , class: 'btn btn-default'%>
+              <%= f.submit t('update'),class:'btn btn-success' %> <%= link_to t('back'), :back , class: 'btn btn-default'%>
             </div>
           </div>
       <% end %>

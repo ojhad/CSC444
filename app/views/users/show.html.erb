@@ -91,9 +91,11 @@
                     <tr>
                       <td><%=@user.address_1.capitalize()%></td>
                     </tr>
+                    <% if !@user.address_2.blank?%>
                     <tr>
                       <td><%=@user.address_2.capitalize()%></td>
                     </tr>
+                    <%end%>
                     <tr>
                       <td><%=@user.city.capitalize()%> <%=@user.province%> <%=@user.postal_code.upcase()%></td>
                     </tr>

@@ -19,32 +19,32 @@
 
           <div class="input-container">
             <%= f.label :email, 'Email', class: 'control-label' %>
-            <%= f.email_field :email, class: 'form-control' %>
+            <%= f.email_field :email, class: 'form-control',required:'true' %>
           </div>
 
           <div class="input-container">
             <%= f.label :password, 'Password', class: 'control-label'  %>
-            <%= f.password_field :password, class: 'form-control' %>
+            <%= f.password_field :password, class: 'form-control',required:'true' %>
           </div>
 
           <div class="input-container">
             <%= f.label :password_confirmation, 'Confirm password', class: 'control-label'  %>
-            <%= f.password_field :password_confirmation, class: 'form-control' %>
+            <%= f.password_field :password_confirmation, class: 'form-control',required:'true' %>
           </div>
 
           <div class="input-container">
             <%= f.label :first_name, 'First Name', class: 'control-label'  %>
-            <%= f.text_field :first_name, class: 'form-control' %>
+            <%= f.text_field :first_name, class: 'form-control',required:'true' %>
           </div>
 
           <div class="input-container">
             <%= f.label :last_name, 'Last Name', class: 'control-label'  %>
-            <%= f.text_field :last_name, class: 'form-control' %>
+            <%= f.text_field :last_name, class: 'form-control',required:'true' %>
           </div>
 
           <div class="input-container">
             <%= f.label :address_1, 'Street Address', class: 'control-label' %>
-            <%= f.text_field :address_1, class: 'form-control' %>
+            <%= f.text_field :address_1, class: 'form-control',required:'true' %>
           </div>
 
           <div class="input-container">
@@ -54,7 +54,7 @@
 
           <div class="input-container">
             <%= f.label :city, 'City', class: 'control-label' %>
-            <%= f.text_field :city, class: 'form-control' %>
+            <%= f.text_field :city, class: 'form-control',required:'true' %>
           </div>
 
           <div class="input-container">
@@ -62,32 +62,32 @@
             <%= f.select :province, [ ['Alberta','AB'],['British Columbia','BC'],['Manitoba','MB'],['New Brunswich','NB'],
                                     ['Newfoundland and Labrador','NL'],['Nova Scotia','NS'],['Ontario','ON'],['Prince Edward Island','PE'],
                                     ['Quebec','QC'],['Saskatchewan','SK'],['Northwest Territories','NT'],
-                                    ['Nunavut','NU'],['Yukon','YT']], {:prompt => 'Select One'}%>
+                                    ['Nunavut','NU'],['Yukon','YT']], {:prompt => 'Select One'} ,required:'true'%>
           </div>
 
           <div class="input-container">
             <%= f.label :postal_code, 'Postal Code', class: 'control-label'  %>
-            <%= f.text_field :postal_code, class: 'form-control' %>
+            <%= f.text_field :postal_code, class: 'form-control',required:'true' %>
           </div>
 
           <div class="input-container">
             <%= f.label :country, 'Country', class: 'control-label'  %>
-            <%= f.text_field :country, class: 'form-control' %>
+            <%= f.text_field :country, class: 'form-control', value:'Canada',readonly:'true' %>
           </div>
 
           <div class="input-container">
             <%= f.label :home_number, 'Home Number', class: 'control-label'  %>
-            <%= f.text_field :home_number, class: 'form-control' %>
+            <%= f.text_field :home_number, class: 'form-control'  %>
           </div>
 
           <div class="input-container">
             <%= f.label :mobile_number, 'Mobile Number', class: 'control-label'  %>
-            <%= f.text_field :mobile_number, class: 'form-control' %>
+            <%= f.text_field :mobile_number, class: 'form-control',required:'true' %>
           </div>
 
           <div class="input-container">
             <%= f.label :age, 'Age', class: 'control-label'  %>
-            <%= f.text_field :age, class: 'form-control' %>
+            <%= f.text_field :age, class: 'form-control' , required:'true' %>
           </div>
         
           <div class="button-container create-service">
